@@ -1,0 +1,40 @@
+Source: freeplane
+Section: editors
+Priority: extra
+Maintainer: Eric Lavarde <deb@zorglub.s.bawue.de>
+Build-Depends: cdbs, debhelper (>= 7), docbook-to-man, imagemagick, ant, openjdk-6-jdk
+Build-Depends-Indep: javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java
+Standards-Version: 3.8.3
+Homepage: http://freeplane.org/
+
+Package: freeplane
+Architecture: all
+Depends: ${misc:Depends}, openjdk-6-jre | sun-java5-jre | sun-java6-jre, javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjortho-freeplane-java (= ${binary:Version})
+Recommends: xdg-utils
+Description: A Java program to create and edit mind maps.
+ Freeplane is a free, open source software application for creating mind maps
+ (diagrams of connections between ideas), and electronic outlines.
+ .
+ New features of Freeplane include:
+ .
+  * Export to PNG, JPEG, SVG (in addition to HTML / XHTML and PDF)
+  * Find / Replace in all open maps
+  * Paste HTML as node structure
+  * Outline mode
+  * Scripting via Groovy
+  * Spell Checker
+
+Package: libjortho-freeplane-java
+Architecture: all
+Depends: ${misc:Depends}, openjdk-6-jre | sun-java5-jre | sun-java6-jre
+Provides: libjortho-java
+Description: A Java spell-checking library.
+ JOrtho (Java Orthography) is a spell-checker entirely written in Java.
+ Its dictionaries are based on the free Wiktionary project and can therefore
+ be updated for virtually any language.
+ .
+ The library works with any JTextComponent from the Swing frame work.
+ This includes JTextPane, JEditorPane and JTextArea.
+ .
+ The version packaged is based on JOrtho 0.4, slightly adapted for the needs
+ of Freeplane. See http://jortho.sourceforge.net/.

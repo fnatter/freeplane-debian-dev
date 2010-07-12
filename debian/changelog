@@ -1,0 +1,24 @@
+freeplane (1.1.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Eric Lavarde <deb@zorglub.s.bawue.de>  Sun, 04 Jul 2010 20:49:07 +0200
+
+freeplane (1.1.0-1) unstable; urgency=low
+
+  * New upstream release (stable version).
+  * Move to quilt source format.
+
+ -- Eric Lavarde <deb@zorglub.s.bawue.de>  Sat, 03 Jul 2010 14:12:19 +0200
+
+freeplane (1.0.45-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Eric Lavarde <deb@zorglub.s.bawue.de>  Thu, 10 Jun 2010 21:55:32 +0200
+
+freeplane (1.0.38-1) unstable; urgency=low
+
+  * Initial release (Closes: #566375).
+
+ -- Eric Lavarde <deb@zorglub.s.bawue.de>  Sat, 23 Jan 2010 10:47:53 +0100

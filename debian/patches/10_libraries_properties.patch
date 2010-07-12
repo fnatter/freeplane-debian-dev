@@ -1,0 +1,81 @@
+diff -Nur -x '*.orig' -x '*~' freeplane-1.0.38/freeplane/ant/ant.properties freeplane-1.0.38.new/freeplane/ant/ant.properties
+--- freeplane-1.0.38/freeplane/ant/ant.properties	2009-12-13 23:28:47.000000000 +0100
++++ freeplane-1.0.38.new/freeplane/ant/ant.properties	2010-01-23 12:11:58.000000000 +0100
+@@ -1,11 +1,11 @@
+-freeplane.ext.lib = ${workspace}/freeplane/lib
++freeplane.ext.lib = /usr/share/java
+ freeplane.dist.lib = ${workspace}/freeplane/dist/lib
+ freeplaneviewer.jar = ${freeplane.dist.lib}/freeplaneviewer.jar
+ freeplaneeditor.jar = ${freeplane.dist.lib}/freeplaneeditor.jar
+ freeplaneosgi.jar = ${freeplane.dist.lib}/freeplaneosgi.jar
+ freeplanemac.jar = ${freeplane.ext.lib}/freeplanemac.jar
+ freeplane.jars = ${freeplaneviewer.jar}:${freeplaneeditor.jar}:${freeplaneosgi.jar}:${freeplanemac.jar}
+-commons-lang.jar = ${freeplane.ext.lib}/commons-lang-2.0.jar
+-forms.jar = ${freeplane.ext.lib}/forms-1.0.5.jar
++commons-lang.jar = ${freeplane.ext.lib}/commons-lang.jar
++forms.jar = ${freeplane.ext.lib}/forms.jar
+ SimplyHTML.jar = ${freeplane.ext.lib}/SimplyHTML.jar
+-jortho.jar = ${freeplane.ext.lib}/jortho.jar
++jortho.jar = ${workspace}/JOrtho_0.4_freeplane/dist/lib/jortho-0.4+fp1.1.1.jar
+diff -Nur -x '*.orig' -x '*~' freeplane-1.0.38/freeplane_framework/ant/ant.properties freeplane-1.0.38.new/freeplane_framework/ant/ant.properties
+--- freeplane-1.0.38/freeplane_framework/ant/ant.properties	2009-12-13 23:28:47.000000000 +0100
++++ freeplane-1.0.38.new/freeplane_framework/ant/ant.properties	2010-01-23 12:11:58.000000000 +0100
+@@ -1,1 +1,1 @@
+-framework.ext.lib = ${workspace}/freeplane_framework/lib
++framework.ext.lib = /usr/share
+diff -Nur -x '*.orig' -x '*~' freeplane-1.0.38/freeplane_plugin_bugreport/ant/ant.properties freeplane-1.0.38.new/freeplane_plugin_bugreport/ant/ant.properties
+--- freeplane-1.0.38/freeplane_plugin_bugreport/ant/ant.properties	2009-12-13 23:28:47.000000000 +0100
++++ freeplane-1.0.38.new/freeplane_plugin_bugreport/ant/ant.properties	2010-01-23 12:11:58.000000000 +0100
+@@ -1 +1 @@
+-plugin.ext.lib = lib
++plugin.ext.lib = /usr/share/java
+diff -Nur -x '*.orig' -x '*~' freeplane-1.0.38/freeplane_plugin_help/ant/ant.properties freeplane-1.0.38.new/freeplane_plugin_help/ant/ant.properties
+--- freeplane-1.0.38/freeplane_plugin_help/ant/ant.properties	2009-12-13 23:28:47.000000000 +0100
++++ freeplane-1.0.38.new/freeplane_plugin_help/ant/ant.properties	2010-01-23 12:11:58.000000000 +0100
+@@ -1,2 +1,2 @@
+-plugin.ext.lib = lib
++plugin.ext.lib = /usr/share/java
+ jhall.jar = ${plugin.ext.lib}/jhall.jar
+diff -Nur -x '*.orig' -x '*~' freeplane-1.0.38/freeplane_plugin_latex/ant/ant.properties freeplane-1.0.38.new/freeplane_plugin_latex/ant/ant.properties
+--- freeplane-1.0.38/freeplane_plugin_latex/ant/ant.properties	2010-01-07 08:55:57.000000000 +0100
++++ freeplane-1.0.38.new/freeplane_plugin_latex/ant/ant.properties	2010-01-23 12:12:30.000000000 +0100
+@@ -1,2 +1,2 @@
+-plugin.ext.lib = lib
++plugin.ext.lib = /usr/share/java
+ jlatexmath.jar = ${plugin.ext.lib}/jlatexmath.jar
+diff -Nur -x '*.orig' -x '*~' freeplane-1.0.38/freeplane_plugin_script/ant/ant.properties freeplane-1.0.38.new/freeplane_plugin_script/ant/ant.properties
+--- freeplane-1.0.38/freeplane_plugin_script/ant/ant.properties	2009-12-13 23:28:47.000000000 +0100
++++ freeplane-1.0.38.new/freeplane_plugin_script/ant/ant.properties	2010-01-23 12:11:58.000000000 +0100
+@@ -1,2 +1,2 @@
+-plugin.ext.lib = lib
+-groovy.jar = ${plugin.ext.lib}/groovy-all-1.5.6.jar
++plugin.ext.lib = /usr/share/java
++groovy.jar = ${plugin.ext.lib}/groovy-all.jar
+diff -Nur -x '*.orig' -x '*~' freeplane-1.0.38/freeplane_plugin_svg/ant/ant.properties freeplane-1.0.38.new/freeplane_plugin_svg/ant/ant.properties
+--- freeplane-1.0.38/freeplane_plugin_svg/ant/ant.properties	2009-12-13 23:28:48.000000000 +0100
++++ freeplane-1.0.38.new/freeplane_plugin_svg/ant/ant.properties	2010-01-23 12:11:58.000000000 +0100
+@@ -1,12 +1,12 @@
+-plugin.ext.lib = lib
++plugin.ext.lib = /usr/share/java
+ 
+ # Batik - xml.apache.org SVG Library (batik-all.jar)
+-batik.jars = ${plugin.ext.lib}/batik-awt-util.jar:${plugin.ext.lib}/batik-bridge.jar:${plugin.ext.lib}/batik-css.jar:${plugin.ext.lib}/batik-dom.jar:${plugin.ext.lib}/batik-extension.jar:${plugin.ext.lib}/batik-ext.jar:${plugin.ext.lib}/batik-codec.jar:${plugin.ext.lib}/batik-anim.jar:${plugin.ext.lib}/batik-gui-util.jar:${plugin.ext.lib}/batik-gvt.jar:${plugin.ext.lib}/batik-parser.jar:${plugin.ext.lib}/batik-script.jar:${plugin.ext.lib}/batik-svg-dom.jar:${plugin.ext.lib}/batik-svggen.jar:${plugin.ext.lib}/batik-swing.jar:${plugin.ext.lib}/batik-transcoder.jar:${plugin.ext.lib}/batik-util.jar:${plugin.ext.lib}/batik-xml.jar
++batik.jars = ${plugin.ext.lib}/batik-all.jar
+ 
+ # Rhino - JavaScript engine written in Java
+ js.jar = ${plugin.ext.lib}/js.jar
+ # FOP - XML to PDF Translator (fop.jar)
+-pdf-transcoder.jar = ${plugin.ext.lib}/pdf-transcoder.jar
++pdf-transcoder.jar = ${plugin.ext.lib}/fop.jar
+ 
+ pdf.jars = ${pdf-transcoder.jar}
+ # Possibly also needed to work properly under Debian/Ubuntu:
+@@ -17,7 +17,7 @@
+ 
+ # Xerces2 - Validating XML parser for Java with DOM level 3 support
+ # (xercesImpl.jar and xmlParserAPIs.jar)
+-xerces.jar = ${plugin.ext.lib}/xerces_2_5_0.jar
++xerces.jar = ${plugin.ext.lib}/xercesImpl.jar
+ xml-apis-ext.jar = ${plugin.ext.lib}/xml-apis-ext.jar
+ # Xalan2 - XSL Transformations (XSLT) processor in Java
+ xml-apis.jar = ${plugin.ext.lib}/xml-apis.jar

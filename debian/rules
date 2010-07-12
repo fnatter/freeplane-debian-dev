@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+# debian/rules for Commons Fileupload (uses CDBS)
+
+#clean:: buildxml-clean
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/ant.mk
+# replaced by quilt: include /usr/share/cdbs/1/rules/simple-patchsys.mk
+
+JAVA_HOME_DIRS       := /usr/lib/jvm/java-6-openjdk
+
+DEB_ANT_BUILD_TARGET := build
+#DEB_BUILDDIR         := .
+DEB_COMPRESS_EXCLUDE := .mm .pdf
+# DEB_INSTALL_DOCS_ALL = -Xlicense
+DEB_DH_INSTALL_ARGS := -XLICENSE.txt
+
+build:
+	/usr/bin/docbook-to-man debian/freeplane.sgml > freeplane.1
+	convert freeplane_framework/script/freeplane.png freeplane.xpm
+
+clean:: 
+	-rm -f freeplane.xpm
+	-rm -f freeplane.1
+
+#buildxml-clean::
+#	-$(DEB_ANT_INVOKE) $(DEB_ANT_CLEAN_TARGET)
+
+# Get original sources directly using uscan
+get-orig-source:
+	uscan --force-download

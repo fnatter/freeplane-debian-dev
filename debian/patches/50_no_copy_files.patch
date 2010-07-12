@@ -1,0 +1,34 @@
+diff -Nur -x '*.orig' -x '*~' freeplane-1.1.0//freeplane/ant/build.xml freeplane-1.1.0.new//freeplane/ant/build.xml
+--- freeplane-1.1.0//freeplane/ant/build.xml	2010-05-17 21:54:04.000000000 +0200
++++ freeplane-1.1.0.new//freeplane/ant/build.xml	2010-07-03 14:27:55.000000000 +0200
+@@ -102,14 +102,14 @@
+ 		</jar>
+ 	</target>
+ 	
+-	<target name="dist" depends="jar, buildmac">
++	<target name="dist" depends="jar">
+ 		<!-- third party libs -->
+ 		<mkdir dir="${freeplane.dist.lib}" />
+-		<copy todir="${freeplane.dist.lib}">
++		<!-- <copy todir="${freeplane.dist.lib}">
+ 			<fileset dir="${freeplane.ext.lib}">
+ 				<include name="*.jar" />
+ 			</fileset>
+-		</copy>
++		</copy> -->
+         <mkdir dir="${dist.resources}" />
+         <copy todir="${dist.resources}">
+             <fileset dir="external-resources"/>
+diff -Nur -x '*.orig' -x '*~' freeplane-1.1.0//freeplane_framework/ant/build.xml freeplane-1.1.0.new//freeplane_framework/ant/build.xml
+--- freeplane-1.1.0//freeplane_framework/ant/build.xml	2010-06-26 17:45:43.000000000 +0200
++++ freeplane-1.1.0.new//freeplane_framework/ant/build.xml	2010-07-03 14:29:39.000000000 +0200
+@@ -48,9 +48,6 @@
+ 		<mkdir dir="${build}" />
+ 		<copy todir="${build}">
+ 			<fileset dir="${script}" />
+-			<fileset file="${framework.jar}" />
+-            <fileset file="windows-launcher/freeplane.exe" />
+-		    <fileset file="windows-launcher/freeplaneConsole.exe" />
+ 		</copy>
+ 		<chmod file="${build}/freeplane.sh" perm="ugo+rx" />
+ 		<antcall target="makePlugin" inheritall="false">

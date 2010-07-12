@@ -1,0 +1,7 @@
+freeplane for Debian
+--------------------
+
+Without installing the recommended xdg-utils, Freeplane won't be able to open
+links as it's using xdg-open to do so, and it will fail SILENTLY!
+
+ -- Eric Lavarde <deb@zorglub.s.bawue.de>  Sat, 23 Jan 2010 10:47:53 +0100

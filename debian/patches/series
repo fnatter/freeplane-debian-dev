@@ -1,0 +1,4 @@
+10_libraries_properties.patch
+15_libraries_manifest.patch
+40_no_winmac.patch
+50_no_copy_files.patch
