@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Eric Lavarde <deb@zorglub.s.bawue.de>
 Build-Depends: cdbs, debhelper (>= 7), docbook-to-man, imagemagick, ant, openjdk-6-jdk
 Build-Depends-Indep: javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java
-Standards-Version: 3.8.3
+Standards-Version: 3.9.0
 Homepage: http://freeplane.org/
 
 Package: freeplane
@@ -25,6 +25,7 @@ Description: A Java program to create and edit mind maps.
   * Spell Checker
 
 Package: libjortho-freeplane-java
+Section: java
 Architecture: all
 Depends: ${misc:Depends}, openjdk-6-jre | sun-java5-jre | sun-java6-jre
 Provides: libjortho-java
