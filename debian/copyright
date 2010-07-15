@@ -11,7 +11,7 @@ Upstream Author(s):
 Copyright:
 
     Copyright (C) 2008 Joerg Mueller, Daniel Polansky, Christian Foltin, Dimitry Polivaev
-    (and many others)
+    Volker Boerchers, Tamas Eppel (and many others)
 
 License:
 
@@ -47,3 +47,19 @@ Files: ./JOrtho_0.4_freeplane/src/com/inet/jortho/*
     Copyright (C) 2005-2008 by i-net software
     GNU Public License version 2 or later,
     see `/usr/share/common-licenses/GPL-2'.
+
+Files: ./freeplane/src/org/freeplane/features/common/time/swing/*
+    Copyright 2004 Kai Toedter * kai@toedter.com www.toedter.com 
+    License LGPL (v2 or later)
+    see `/usr/share/common-licenses/LGPL-2'.
+
+./freeplane/src/org/freeplane/features/controller/print/BrowseAction.java: * 2003 Jens Kaiser. Written by: 2003 Jens Kaiser <jens.kaiser@web.de> This
+./freeplane/src/org/freeplane/features/controller/print/PreviewDialog.java: * 2003 Jens Kaiser. Created by Dimitry Polivaev. Written by: 2003 Jens Kaiser
+./freeplane/src/org/freeplane/features/controller/print/Preview.java: * 2003 Jens Kaiser. Written by: 2003 Jens Kaiser <jens.kaiser@web.de> This
+LGPL (v2 or later)
+
+./freeplane/src/org/freeplane/core/util/XHTMLWriter.java: * XHTMLWriter -- A simple XHTML document writer (C) 2004 Richard "Shred"
+./freeplane/src/org/freeplane/core/util/FixedHTMLWriter.java: * XHTMLWriter -- A simple XHTML document writer (C) 2004 Richard "Shred"
+ * XHTMLWriter -- A simple XHTML document writer (C) 2004 Richard "Shred"
+ * Koerber http://www.shredzone.net/ This is free software. You can modify and
+ * use it at will.
