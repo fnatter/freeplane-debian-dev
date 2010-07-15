@@ -1,0 +1,11 @@
+--- a/freeplane_plugin_latex/ant/build.xml
++++ b/freeplane_plugin_latex/ant/build.xml
+@@ -33,7 +33,7 @@
+ 		<mkdir dir="${dist.osgi.dir}" />
+ 		<copy todir="${dist.osgi.dir}">
+ 			<fileset dir="${root}">
+-				<include name="lib/**"/>
++				<include name="lib/**/*.jar"/>
+ 			</fileset>
+ 		</copy>
+ 		<mkdir dir="${dist.osgi.dir}/META-INF" />
