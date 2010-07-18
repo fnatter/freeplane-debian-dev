@@ -1,0 +1,13 @@
+--- a/build.xml
++++ b/build.xml
+@@ -7,7 +7,9 @@
+ 
+ 	<target name="dist">
+ 		<ant antfile="freeplane_framework/ant/build.xml"  target="dist"
+-			inheritAll="false" />
++			inheritAll="false">
++			<property name="skip_bugreport" value="true" />
++		</ant>
+ 	</target>
+ 
+ 	<target name="clean">
