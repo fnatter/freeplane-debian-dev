@@ -44,7 +44,7 @@ manpage.1: manpage.sgml
       &dhsurname;
     </author>
     <copyright>
-      <year>2003</year>
+      <year>2010</year>
       <holder>&dhusername;</holder>
     </copyright>
     &dhdate;
@@ -57,15 +57,11 @@ manpage.1: manpage.sgml
   <refnamediv>
     <refname>&dhpackage;</refname>
 
-    <refpurpose>program to do something</refpurpose>
+    <refpurpose>Program to create, edit, print and export Mind maps.</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>
       <command>&dhpackage;</command>
-
-      <arg><option>-e <replaceable>this</replaceable></option></arg>
-
-      <arg><option>--example <replaceable>that</replaceable></option></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
   <refsect1>
@@ -86,46 +82,25 @@ manpage.1: manpage.sgml
   <refsect1>
     <title>OPTIONS</title>
 
-    <para>These programs follow the usual &gnu; command line syntax,
-      with long options starting with two dashes (`-').  A summary of
-      options is included below.  For a complete description, see the
-      <application>Info</application> files.</para>
+    <para>No options, just start the program without any parameter.
+      </para>
 
-    <variablelist>
-      <varlistentry>
-        <term><option>-h</option>
-          <option>--help</option>
-        </term>
-        <listitem>
-          <para>Show summary of options.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><option>-v</option>
-          <option>--version</option>
-        </term>
-        <listitem>
-          <para>Show version of program.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>bar (1), baz (1).</para>
+    <para>Much documentation is available from the Freeplane wiki
+    under http://freeplane.org/.</para>
 
-    <para>The programs are documented fully by <citetitle>The Rise and
-      Fall of a Fooish Bar</citetitle> available via the
-      <application>Info</application> system.</para>
   </refsect1>
+
   <refsect1>
     <title>AUTHOR</title>
 
     <para>This manual page was written by &dhusername; &dhemail; for
       the &debian; system (and may be used by others).  Permission is
       granted to copy, distribute and/or modify this document under
-      the terms of the &gnu; General Public License, Version 2 any
+      the terms of the &gnu; General Public License, Version 2 or any
       later version published by the Free Software Foundation.
     </para>
     <para>

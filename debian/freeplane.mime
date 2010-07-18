@@ -1,0 +1,1 @@
+application/x-freeplane; /usr/bin/freeplane '%s'; test=test -n "$DISPLAY"; description="Freeplane MindMap file"; textualnewlines; nametemplate=%s.mm

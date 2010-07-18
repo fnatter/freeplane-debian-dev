@@ -11,7 +11,7 @@ Upstream Author(s):
 Copyright:
 
     Copyright (C) 2008 Joerg Mueller, Daniel Polansky, Christian Foltin, Dimitry Polivaev
-    (and many others)
+    Volker Boerchers, Tamas Eppel, Eric Lavarde (and surely many others)
 
 License:
 
@@ -47,3 +47,37 @@ Files: ./JOrtho_0.4_freeplane/src/com/inet/jortho/*
     Copyright (C) 2005-2008 by i-net software
     GNU Public License version 2 or later,
     see `/usr/share/common-licenses/GPL-2'.
+
+Files: ./freeplane/src/org/freeplane/features/common/time/swing/*
+    Copyright 2004 Kai Toedter * kai@toedter.com www.toedter.com 
+    License LGPL (v2 or later)
+    see `/usr/share/common-licenses/LGPL-2'.
+
+Files:
+./freeplane/src/org/freeplane/features/controller/print/BrowseAction.java
+./freeplane/src/org/freeplane/features/controller/print/PreviewDialog.java
+./freeplane/src/org/freeplane/features/controller/print/Preview.java
+    Copyright 2003 Jens Kaiser <jens.kaiser@web.de>
+    License LGPL (v2 or later)
+    see `/usr/share/common-licenses/LGPL-2'.
+
+Files:
+./freeplane/src/org/freeplane/core/util/XHTMLWriter.java
+./freeplane/src/org/freeplane/core/util/FixedHTMLWriter.java
+    (C) 2004 Richard "Shred" Koerber http://www.shredzone.net/
+    This is free software. You can modify and use it at will.
+
+File: ./freeplane/src/org/freeplane/features/common/addins/encrypt/Base64Coding.java
+    (C) 2001, 2003, 2004, 2006 Free Software Foundation, Inc.
+    License GPLv2 or later (with classpath exception, see below)
+    see `/usr/share/common-licenses/GPL-2'.
+ * As a special exception, the copyright holders of
+ * this library give you permission to link this library with independent
+ * mapViews to produce an executable, regardless of the license terms of these
+ * independent mapViews, and to copy and distribute the resulting executable
+ * under terms of your choice, provided that you also meet, for each linked
+ * independent mapView, the terms and conditions of the license of that mapView.
+ * An independent mapView is a mapView which is not derived from or based on
+ * this library. If you modify this library, you may extend this exception to
+ * your version of the library, but you are not obligated to do so. If you do
+ * not wish to do so, delete this exception statement from your version.

@@ -1,2 +1,6 @@
 freeplane_framework/build/* usr/share/freeplane
 freeplane.xpm /usr/share/pixmaps
+
+debian/freeplane.desktop usr/share/applications
+debian/x-freeplane.desktop usr/share/mimelnk/application
+debian/freeplane.magic etc/kde3/magic
