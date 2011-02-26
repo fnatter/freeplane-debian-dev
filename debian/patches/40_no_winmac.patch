@@ -1,6 +1,6 @@
 --- a/freeplane_framework/ant/build.xml
 +++ b/freeplane_framework/ant/build.xml
-@@ -364,7 +364,7 @@
+@@ -367,7 +367,7 @@
  		</exec>
  	</target>
  

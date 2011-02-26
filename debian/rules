@@ -28,4 +28,4 @@ clean::
 
 # Get original sources directly using uscan
 get-orig-source:
-	uscan --force-download
+	uscan --force-download --rename --repack

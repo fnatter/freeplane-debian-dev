@@ -3,15 +3,15 @@ Section: editors
 Priority: extra
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
 Uploaders: Eric Lavarde <deb@zorglub.s.bawue.de>
-Build-Depends: cdbs, debhelper (>= 7), docbook-to-man, imagemagick, ant, openjdk-6-jdk
+Build-Depends: cdbs, debhelper (>= 7), docbook-to-man, imagemagick, ant, openjdk-6-jdk, quilt
 Build-Depends-Indep: javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java
-Standards-Version: 3.9.0
+Standards-Version: 3.9.1.0
 Homepage: http://freeplane.org/
 
 Package: freeplane
 Architecture: all
-Depends: ${misc:Depends}, openjdk-6-jre | sun-java5-jre | sun-java6-jre, javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjortho-freeplane-java (= ${binary:Version})
-Recommends: xdg-utils
+Depends: ${misc:Depends}, openjdk-6-jre | sun-java6-jre, javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjortho-freeplane-java (= ${binary:Version})
+Recommends: xdg-utils, java-wrappers
 Description: A Java program to create and edit mind maps.
  Freeplane is a free, open source software application for creating mind maps
  (diagrams of connections between ideas), and electronic outlines.
@@ -28,7 +28,7 @@ Description: A Java program to create and edit mind maps.
 Package: libjortho-freeplane-java
 Section: java
 Architecture: all
-Depends: ${misc:Depends}, openjdk-6-jre | sun-java5-jre | sun-java6-jre
+Depends: ${misc:Depends}, openjdk-6-jre | sun-java6-jre
 Provides: libjortho-java
 Description: A Java spell-checking library.
  JOrtho (Java Orthography) is a spell-checker entirely written in Java.

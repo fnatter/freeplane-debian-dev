@@ -1,3 +1,14 @@
+freeplane (1.1.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * uscan call in get-orig-source target with rename and repack.
+  * Bumped standard to 3.9.1.0 (no actual changes).
+  * Use java-wrappers to detect best available Java version.
+  * Removed alternative dependency on Sun Java 5.
+  * Add reportbug hook to gather more information.
+
+ -- Eric Lavarde <deb@zorglub.s.bawue.de>  Sat, 26 Feb 2011 16:13:12 +0100
+
 freeplane (1.1.1-1) unstable; urgency=low
 
   * Initial release (Closes: #566375).
