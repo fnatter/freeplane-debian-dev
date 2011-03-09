@@ -1,5 +1,8 @@
 freeplane_framework/build/* usr/share/freeplane
-freeplane.xpm /usr/share/pixmaps
+freeplane_framework/build/freeplane.svg usr/share/icons/hicolor/scalable/apps
+freeplane_framework/build/freeplane.png usr/share/icons/hicolor/32x32/apps
+freeplane_framework/build/freeplane.png usr/share/pixmaps
+freeplane.xpm usr/share/pixmaps
 
 debian/freeplane.desktop usr/share/applications
 debian/x-freeplane.desktop usr/share/mimelnk/application
