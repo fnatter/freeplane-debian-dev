@@ -1,9 +1,3 @@
-freeplane (1.1.3-2) UNRELEASED; urgency=low
-
-  * Added png and svg icons on top of default xpm one.
-
- -- Eric Lavarde <deb@zorglub.s.bawue.de>  Sat, 26 Feb 2011 16:49:02 +0100
-
 freeplane (1.1.3-1) unstable; urgency=low
 
   * New upstream release.
@@ -12,6 +6,9 @@ freeplane (1.1.3-1) unstable; urgency=low
   * Use java-wrappers to detect best available Java version.
   * Removed alternative dependency on Sun Java 5.
   * Add reportbug hook to gather more information.
+  * Added png and svg icons on top of default xpm one.
+  * Removed Update Check from menu and toolbar (Closes: #626187).
+    Note: adds a warning on the console, but that should be OK.
 
  -- Eric Lavarde <deb@zorglub.s.bawue.de>  Sat, 26 Feb 2011 16:13:12 +0100
 

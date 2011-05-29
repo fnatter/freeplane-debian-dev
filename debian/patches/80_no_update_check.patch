@@ -1,0 +1,11 @@
+--- a/freeplane/src/org/freeplane/main/application/FreeplaneStarter.java
++++ b/freeplane/src/org/freeplane/main/application/FreeplaneStarter.java
+@@ -123,7 +123,7 @@
+ 			LinkController.install(controller);
+ 			IconController.install(controller);
+ 			HelpController.install(controller);
+-			controller.addAction(new UpdateCheckAction(controller));
++			// controller.addAction(new UpdateCheckAction(controller));
+ 			controller.addAction(new NextNodeAction(controller, Direction.FORWARD));
+ 			controller.addAction(new NextNodeAction(controller, Direction.BACK));
+ 			controller.addAction(new NextNodeAction(controller, Direction.FORWARD_N_FOLD));
