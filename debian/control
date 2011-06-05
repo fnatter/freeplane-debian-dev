@@ -12,7 +12,7 @@ Package: freeplane
 Architecture: all
 Depends: ${misc:Depends}, openjdk-6-jre | sun-java6-jre, javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjortho-freeplane-java (= ${binary:Version})
 Recommends: xdg-utils, java-wrappers
-Description: A Java program to create and edit mind maps.
+Description: Java program to create and edit mind maps.
  Freeplane is a free, open source software application for creating mind maps
  (diagrams of connections between ideas), and electronic outlines.
  .
@@ -28,9 +28,9 @@ Description: A Java program to create and edit mind maps.
 Package: libjortho-freeplane-java
 Section: java
 Architecture: all
-Depends: ${misc:Depends}, openjdk-6-jre | sun-java6-jre
+Depends: ${misc:Depends}
 Provides: libjortho-java
-Description: A Java spell-checking library.
+Description: Java spell-checking library.
  JOrtho (Java Orthography) is a spell-checker entirely written in Java.
  Its dictionaries are based on the free Wiktionary project and can therefore
  be updated for virtually any language.
