@@ -7,7 +7,7 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/ant.mk
 # replaced by quilt: include /usr/share/cdbs/1/rules/simple-patchsys.mk
 
-JAVA_HOME_DIRS       := /usr/lib/jvm/java-6-openjdk
+JAVA_HOME_DIRS       := /usr/lib/jvm/default-java
 
 DEB_ANT_BUILD_TARGET := build
 #DEB_BUILDDIR         := .
