@@ -63,9 +63,9 @@
 +		if (! "${JAVA_CMD}" -version 2>&1 | grep -qe 'Java(TM)' -e OpenJDK)
  		then
  			_error "Your Java is not a derivative from Sun's code," \
- 			       "=======================================" \
- 			       "FREEMIND WILL MOST PROBABLY *NOT* WORK," \
- 			       "=======================================" \
+ 			       "========================================" \
+ 			       "FREEPLANE WILL MOST PROBABLY *NOT* WORK," \
+ 			       "========================================" \
 -			       "define JAVACMD, JAVA_BINDIR, JAVA_HOME or PATH" \
 +			       "define JAVA_CMD, JAVA_BINDIR, JAVA_HOME or PATH" \
  			       "in order to point to such a VM." \
@@ -101,7 +101,7 @@
  fi
  
  output_debug_info
-@@ -181,7 +194,7 @@
+@@ -189,7 +202,7 @@
  	defines=-Dgnu.java.awt.peer.gtk.Graphics=Graphics2D
  fi
  _debug "Calling: "\
@@ -110,7 +110,7 @@
   "-Dorg.freeplane.param1=$1"\
   "-Dorg.freeplane.param2=$2"\
   "-Dorg.freeplane.param3=$3"\
-@@ -194,7 +207,7 @@
+@@ -207,7 +220,7 @@
   -xargs "${freedir}/props.xargs"\
   -xargs "${freedir}/init.xargs"
  ( echo "${DEBUG}" | grep -qe "exit" ) && exit 0 # do not start Freeplane

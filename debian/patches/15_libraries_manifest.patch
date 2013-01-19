@@ -1,22 +1,24 @@
 --- a/freeplane/META-INF/MANIFEST.MF
 +++ b/freeplane/META-INF/MANIFEST.MF
-@@ -7,11 +7,11 @@
+@@ -7,12 +7,12 @@
   lib/freeplaneeditor.jar,
   lib/freeplanemac.jar,
   lib/freeplaneosgi.jar,
 - lib/commons-lang-2.0.jar,
-- lib/forms-1.0.5.jar,
+- lib/commons-io-2.4.jar,
+- lib/forms-1.2.1.jar,
 - lib/gnu-regexp-1.1.4.jar,
 - lib/SimplyHTML.jar,
-- lib/jortho.jar
+- lib/jortho.jar,
 + ../../../java/commons-lang.jar,
++ ../../../commons-io.jar,
 + ../../../java/forms.jar,
 + ../../../java/gnu-regexp-1.1.4.jar,
 + ../../../java/SimplyHTML.jar,
-+ ../../../java/jortho.jar
++ ../../../java/jortho.jar,
+  lib/imgscalr-lib-3.2.jar
  Bundle-Activator: org.freeplane.main.osgi.Activator
- Import-Package: org.osgi.framework
- Export-Package: org.apache.commons.lang,
+ Import-Package: org.osgi.framework,
 --- a/freeplane_plugin_help/META-INF/MANIFEST.MF
 +++ b/freeplane_plugin_help/META-INF/MANIFEST.MF
 @@ -8,5 +8,5 @@
@@ -28,22 +30,22 @@
  Export-Package: org.freeplane.plugin.help;uses:="org.freeplane.core.ui,org.freeplane.core.controller,org.osgi.framework"
 --- a/freeplane_plugin_latex/META-INF/MANIFEST.MF
 +++ b/freeplane_plugin_latex/META-INF/MANIFEST.MF
-@@ -7,5 +7,5 @@
- Import-Package: org.osgi.framework;version="1.3.0"
+@@ -9,4 +9,4 @@
  Bundle-RequiredExecutionEnvironment: J2SE-1.5
  Require-Bundle: org.freeplane.core;bundle-version="1.0.1"
--Bundle-ClassPath: lib/jlatexmath.jar,
-+Bundle-ClassPath: ../../../java/jlatexmath.jar,
-  lib/plugin.jar
+ Bundle-ClassPath: lib/plugin.jar,
+- lib/jlatexmath-0.9.7.jar
++ ../../../java/jlatexmath.jar
 --- a/freeplane_plugin_script/META-INF/MANIFEST.MF
 +++ b/freeplane_plugin_script/META-INF/MANIFEST.MF
-@@ -7,5 +7,5 @@
+@@ -7,6 +7,6 @@
  Import-Package: org.osgi.framework;version="1.3.0"
  Bundle-RequiredExecutionEnvironment: J2SE-1.5
  Require-Bundle: org.freeplane.core;bundle-version="1.0.1"
--Bundle-ClassPath: lib/groovy-all-1.5.6.jar,
+-Bundle-ClassPath: lib/groovy-all.jar,
 +Bundle-ClassPath: ../../../java/groovy-all.jar,
   lib/plugin.jar
+ Export-Package: org.freeplane.plugin.script
 --- a/freeplane_plugin_svg/META-INF/MANIFEST.MF
 +++ b/freeplane_plugin_svg/META-INF/MANIFEST.MF
 @@ -7,27 +7,14 @@

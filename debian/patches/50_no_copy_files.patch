@@ -1,6 +1,6 @@
 --- a/freeplane/ant/build.xml
 +++ b/freeplane/ant/build.xml
-@@ -116,14 +116,14 @@
+@@ -131,14 +131,14 @@
  		</jar>
  	</target>
  	
@@ -20,13 +20,14 @@
              <fileset dir="external-resources"/>
 --- a/freeplane_framework/ant/build.xml
 +++ b/freeplane_framework/ant/build.xml
-@@ -48,9 +48,6 @@
- 		<mkdir dir="${build}" />
+@@ -142,10 +142,6 @@
  		<copy todir="${build}">
  			<fileset dir="${script}" />
--			<fileset file="${framework.jar}" />
--            <fileset file="windows-launcher/freeplane.exe" />
--		    <fileset file="windows-launcher/freeplaneConsole.exe" />
+ 			<fileset file="${framework.jar}" />
+-			<fileset file="${freeplanelauncher.jar}" />
+-			<fileset file="windows-icons/freeplaneIcons.dll" />
+-			<fileset dir="launch4j" includes="*.exe" />
+-			<fileset dir="launch4j" includes="*.ini" />
  		</copy>
  		<chmod file="${build}/freeplane.sh" perm="ugo+rx" />
- 		<antcall target="makePlugin" inheritall="false">
+ 	</target>

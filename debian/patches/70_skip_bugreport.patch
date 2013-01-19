@@ -9,5 +9,5 @@
 +			<property name="skip_bugreport" value="true" />
 +		</ant>
  	</target>
- 
- 	<target name="clean">
+ 	<target name="format-translation">
+ 		<ant antfile="JOrtho_0.4_freeplane/build.xml"  target="format-translation"
