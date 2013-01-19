@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
 Uploaders: Eric Lavarde <deb@zorglub.s.bawue.de>
 Build-Depends: cdbs, debhelper (>= 7), docbook-to-man, imagemagick, ant, default-jdk, quilt
-Build-Depends-Indep: javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java
+Build-Depends-Indep: javahelp2, groovy, libcommons-lang-java, libcommons-io-java, libjgoodies-forms-java, simplyhtml (>=0.16.05), libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjsyntaxpane-java
 Standards-Version: 3.9.2.0
 Vcs-Svn: svn://svn.debian.org/svn/pkg-java/trunk/freeplane
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-java/trunk/freeplane/
@@ -12,7 +12,7 @@ Homepage: http://freeplane.org/
 
 Package: freeplane
 Architecture: all
-Depends: ${misc:Depends}, default-jre | sun-java6-jre, javahelp2, groovy, libcommons-lang-java, libjgoodies-forms-java, simplyhtml, libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjortho-freeplane-java (= ${binary:Version})
+Depends: ${misc:Depends}, default-jre | sun-java6-jre, javahelp2, groovy, libcommons-lang-java, libcommons-io-java, libjgoodies-forms-java, simplyhtml (>=0.16.05), libbatik-java, rhino, fop, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjsyntaxpane-java, libjortho-freeplane-java (= ${binary:Version})
 Recommends: xdg-utils, java-wrappers
 Description: Java program to create and edit mind maps.
  Freeplane is a free, open source software application for creating mind maps
