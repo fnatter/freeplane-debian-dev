@@ -1,6 +1,8 @@
 This work was packaged for Debian by:
 
     Eric Lavarde <deb@zorglub.s.bawue.de> on Sat, 23 Jan 2010 10:47:53 +0100
+    and
+    Felix Natter <fnatter@gmx.net> 2013
 
 It was downloaded from <http://freeplane.org/>
 
@@ -21,6 +23,7 @@ License:
 The Debian packaging is:
 
     Copyright (C) 2010 Eric Lavarde <deb@zorglub.s.bawue.de>
+    Copyright (C) 2013 Felix Natter <fnatter@gmx.net>
 
 and is licensed under the same version as the overwhelming majority of the
 software itself, i.e. GPLv2 or later.
