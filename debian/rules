@@ -27,5 +27,6 @@ clean::
 #	-$(DEB_ANT_INVOKE) $(DEB_ANT_CLEAN_TARGET)
 
 # Get original sources directly using uscan
-get-orig-source:
-	uscan --force-download --rename --repack
+# => deprecated: source is in upstream branch of git freeplane repo (see Vcs-Git: in control)
+#get-orig-source:
+#	uscan --force-download --rename --repack
