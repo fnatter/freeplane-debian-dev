@@ -1,12 +1,6 @@
-# Example watch control file for uscan
-# Rename this file to "watch" and then you can run the "uscan" command
-# to check for upstream updates and more.
-# See uscan(1) for format
-# Just check status: uscan --report-status
-
 # the uversionmangle is needed because we have release numbers like 1.2.21_04!
 # the dversionmangle is needed because we have added "+dfsg1" to the
-# upstream version!
+# upstream version for 1.2.20!
 
 # Compulsory line, this is a version 3 file
 version=3
