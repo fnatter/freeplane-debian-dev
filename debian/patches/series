@@ -7,3 +7,4 @@
 70_skip_bugreport.patch
 80_no_update_check.patch
 90_fix_jsyntaxpane_location.patch
+92_fix_old_manifest.patch
