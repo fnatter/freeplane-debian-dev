@@ -1,3 +1,4 @@
+disable update check in all menus
 --- a/freeplane/src/org/freeplane/main/application/FreeplaneStarter.java
 +++ b/freeplane/src/org/freeplane/main/application/FreeplaneStarter.java
 @@ -158,7 +158,7 @@
@@ -9,3 +10,45 @@
  			controller.addAction(new NextNodeAction(Direction.FORWARD));
  			controller.addAction(new NextNodeAction(Direction.BACK));
  			controller.addAction(new NextNodeAction(Direction.FORWARD_N_FOLD));
+--- a/freeplane/resources/xml/browsemodemenu.xml
++++ b/freeplane/resources/xml/browsemodemenu.xml
+@@ -114,9 +114,11 @@
+ 			<menu_category menu_key="main_menu_mindmaps" name="mindmaps"/>
+ 			</menu_submenu>
+ 		<menu_submenu name="help" name_ref="help">
++      <!--
+ 			<menu_category name="update">
+ 				<menu_action action="UpdateCheckAction"/>
+ 			</menu_category>			
++      -->
+ 			<menu_category name="Web resources">
+ 				<menu_action action="OpenFreeplaneSiteAction"/>
+ 				<menu_action action="AskForHelp"/>
+--- a/freeplane/resources/xml/filemodemenu.xml
++++ b/freeplane/resources/xml/filemodemenu.xml
+@@ -80,9 +80,11 @@
+ 			<menu_category menu_key="main_menu_mindmaps" name="mindmaps"/>
+ 			</menu_submenu>
+ 		<menu_submenu name="help" name_ref="help">
++      <!--
+ 			<menu_category name="update">
+ 				<menu_action action="UpdateCheckAction"/>
+ 			</menu_category>			
++      -->
+ 			<menu_category name="Web resources">
+ 				<menu_action action="OpenFreeplaneSiteAction"/>
+ 				<menu_action action="AskForHelp"/>
+--- a/freeplane/resources/xml/mindmapmodemenu.xml
++++ b/freeplane/resources/xml/mindmapmodemenu.xml
+@@ -403,9 +403,11 @@
+ 			<menu_separator />
+ 		</menu_submenu>
+ 		<menu_submenu name="help" name_ref="help">
++      <!--
+ 			<menu_category name="update">
+ 				<menu_action action="UpdateCheckAction" />
+ 			</menu_category>			
++      -->
+ 			<menu_separator />
+ 			<menu_category name="Web resources">
+ 				<menu_action action="OpenFreeplaneSiteAction" />
