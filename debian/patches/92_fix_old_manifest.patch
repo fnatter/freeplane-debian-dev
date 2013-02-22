@@ -1,7 +1,7 @@
 remove classpath, IMHO this is done using OSGi
 --- a/freeplane/META-INF/OLD_MANIFEST.MF
 +++ b/freeplane/META-INF/OLD_MANIFEST.MF
-@@ -1,11 +1,3 @@
+@@ -1,11 +1,2 @@
  Manifest-Version: 1.0
  Main-Class: org.freeplane.main.application.FreeplaneMain
 -Class-Path: ../
@@ -13,5 +13,3 @@ remove classpath, IMHO this is done using OSGi
 -  jortho.jar
 -  gnu-regexp-1.1.4.jar
 -  SimplyHTML.jar
-+Class-Path:
-\ No newline at end of file
