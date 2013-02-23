@@ -1,8 +1,7 @@
-# the uversionmangle is needed because we have release numbers like 1.2.21_04!
 # the dversionmangle is needed because we have added "+dfsg1" to the
 # upstream version for 1.2.20!
+# from Bart Martens <bartm@debian.org>  Sat, 23 Feb 2013 18:28:01 +0000
 
-# Compulsory line, this is a version 3 file
 version=3
-opts=uversionmangle=s/_/./g,dversionmangle=s/\+dfsg1// \
- http://sf.net/freeplane/freeplane_srcpure-(.*)\.tar\.gz
+opts=versionmangle=s/\+dfsg1// \
+http://sourceforge.net/projects/freeplane/files/freeplane%20stable/ .*/freeplane_srcpure-(\d.*)\.(?:tgz|tbz2|txz|tar\.(?:gz|bz2|xz)).*
