@@ -24,7 +24,7 @@
 	<icon name="/usr/share/icons/hicolor/scalable/apps/freeplane.svg" />
 	<glob pattern="*.mm" />
 	<magic priority="66">
-		<match type="string" value="&lt;map" offset="0" />
+		<match type="string" value="&lt;map version=&quot;freeplane" offset="0" />
 	</magic>
 	<sub-class-of type="text/plain" />
     </mime-type>
