@@ -3,5 +3,5 @@
 # from Bart Martens <bartm@debian.org>  Sat, 23 Feb 2013 18:28:01 +0000
 
 version=3
-opts=versionmangle=s/\+dfsg1// \
+opts=dversionmangle=s/\+dfsg1// \
 http://sourceforge.net/projects/freeplane/files/freeplane%20stable/ .*/freeplane_srcpure-(\d.*)\.(?:tgz|tbz2|txz|tar\.(?:gz|bz2|xz)).*
