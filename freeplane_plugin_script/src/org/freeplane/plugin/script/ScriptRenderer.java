@@ -19,9 +19,14 @@
  */
 package org.freeplane.plugin.script;
 
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JComponent;
+import javax.swing.JList;
+
+import org.freeplane.core.util.HtmlUtils;
 
 /**
  * @author Dimitry Polivaev
@@ -29,6 +34,26 @@ import javax.swing.DefaultListCellRenderer;
  */
 public class  ScriptRenderer extends DefaultListCellRenderer{
     private static final long serialVersionUID = 1L;
+
+	@Override
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+                                                  boolean cellHasFocus) {
+	    final JComponent renderer = (JComponent) super.getListCellRendererComponent(list, firstLine(value), index, isSelected, cellHasFocus);
+	    final String script = value.toString();
+		if(script.contains("\n")) {
+	    	renderer.setToolTipText(HtmlUtils.plainToHTML(script));
+	    }
+
+		return renderer;
+    }
+
+	private Object firstLine(Object value) {
+		if(! (value instanceof String) )
+			return value;
+		String script = ((String) value).trim();
+		return script.substring(0, Math.min(40, script.length())).trim().replaceAll("\\s+", " ");
+		
+    }
 
 	@Override
     public Dimension getPreferredSize() {
