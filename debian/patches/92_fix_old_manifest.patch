@@ -1,4 +1,4 @@
-remove classpath, IMHO this is done using OSGi
+remove classpath from _old_ MANIFEST, this is now done using the OSGi MANIFEST
 --- a/freeplane/META-INF/OLD_MANIFEST.MF
 +++ b/freeplane/META-INF/OLD_MANIFEST.MF
 @@ -1,11 +1,2 @@

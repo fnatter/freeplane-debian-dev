@@ -1,3 +1,4 @@
+don't build some mac/win stuff, don't copy third-party libraries (they're not even included in freeplane_srcpure!)
 --- a/freeplane/ant/build.xml
 +++ b/freeplane/ant/build.xml
 @@ -131,14 +131,14 @@

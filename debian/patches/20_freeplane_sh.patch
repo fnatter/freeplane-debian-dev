@@ -1,3 +1,4 @@
+JAVACMD->JAVA_CMD, use java-wrappers.sh instead of findjava if available, maybe more
 --- a/freeplane_framework/script/freeplane.sh
 +++ b/freeplane_framework/script/freeplane.sh
 @@ -5,6 +5,13 @@

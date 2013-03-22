@@ -1,3 +1,4 @@
+changes paths to dependency jars to /usr/share/java/...
 --- a/freeplane/ant/ant.properties
 +++ b/freeplane/ant/ant.properties
 @@ -1,12 +1,14 @@

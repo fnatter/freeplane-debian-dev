@@ -1,3 +1,4 @@
+remove JLaTeXMath license, it's in separate libjlatexmath-java package
 --- a/freeplane_plugin_latex/ant/build.xml
 +++ b/freeplane_plugin_latex/ant/build.xml
 @@ -33,7 +33,7 @@

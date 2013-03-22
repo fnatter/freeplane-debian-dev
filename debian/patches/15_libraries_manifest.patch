@@ -1,3 +1,4 @@
+adapts jar paths in core MANIFEST as well as plugin MANIFESTs
 --- a/freeplane/META-INF/MANIFEST.MF
 +++ b/freeplane/META-INF/MANIFEST.MF
 @@ -7,12 +7,12 @@
