@@ -1,0 +1,198 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+	"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd" [
+	
+  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
+  <!ENTITY dhfirstname "<firstname>Eric</firstname>">
+  <!ENTITY dhsurname   "<surname>Lavarde</surname>">
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY dhdate      "<date>March 25th, 2013</date>">
+  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
+       allowed: see man(7), man(1). -->
+  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
+  <!ENTITY dhemail     "<email>deb@zorglub.s.bawue.de</email>">
+  <!ENTITY dhusername  "Eric Lavarde">
+  <!ENTITY dhucpackage "<refentrytitle>FREEPLANE</refentrytitle>">
+  <!ENTITY dhpackage   "freeplane">
+
+  <!ENTITY debian      "<productname>Debian</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+  <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
+  <!ENTITY version     "1.2.23">
+]>
+
+<refentry>
+
+  <refentryinfo>
+    <address>
+      &dhemail;
+    </address>
+    <authorgroup>
+      <author>
+        &dhfirstname;
+        &dhsurname;
+        &dhemail;        
+      </author>
+      <author>
+        <firstname>Felix</firstname>
+        <surname>Natter</surname>
+        <email>fnatter@gmx.net</email>
+      </author>
+    </authorgroup>
+    <copyright>
+      <year>2013</year>
+      <holder>&dhusername; and Felix Natter</holder>
+    </copyright>
+    &dhdate;
+  </refentryinfo>
+
+  <refmeta>
+    &dhucpackage;
+    &dhsection;
+    <refmiscinfo class="source">Freeplane &version;</refmiscinfo>
+    <refmiscinfo class="manual">User Commands</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>&dhpackage;</refname>
+
+    <refpurpose>Program to create, edit, print and export Mind Maps including scripting and more.</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>freeplane</command>
+      <arg><option>-X <replaceable>menukey</replaceable></option></arg>
+      <arg><option>-S</option></arg>
+      <arg><option>-N</option></arg>
+      <arg><option>-h</option></arg>
+      <arg><option>--help</option></arg>
+      <arg><replaceable>file1</replaceable></arg>
+      <arg><replaceable>file2</replaceable></arg>
+      <arg><replaceable>...</replaceable></arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para><command>&dhpackage;</command> is a program that allows you to
+    work with mind maps including automatic/conditional styles, scripting,
+    add-ons, LaTeX, search/filtering, different export features and some
+    (see
+    http://freeplane.sourceforge.net/wiki/index.php/Home#Application_areas).</para>
+
+    <para>This manual page was written for the &debian; distribution
+      because the original program does not have a manual page.
+      Instead, it has documentation in the 
+      <application>Help</application> menu and
+      the <command>Freeplane</command> wiki
+      (http://freeplane.sourceforge.net/wiki/index.php/Main_Page).
+    </para>
+
+  </refsect1>
+  <refsect1>
+    <title>OPTIONS</title>
+
+    <variablelist>
+
+      <varlistentry>
+        <term>
+          <option>-X <replaceable>menukey</replaceable></option>
+        </term>
+        <listitem>
+          <para>execute menu item with
+          key <replaceable>menukey</replaceable>. Use devtools add-on to
+          find the menu keys</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <option>-S</option>
+        </term>
+        <listitem>
+          <para>stop after executing menu items</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <option>-N</option>
+        </term>
+        <listitem>
+          <para>set the 'nonInteractive' system property to 'true'</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <option>-h</option>
+	        <option>--help</option>
+	      </term>
+        <listitem>
+          <para>Show summary of options.</para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>You can find more detailled descriptions of all command line options and
+      environment variables as well as help for batch execution commands
+      (-X/-S/-N) in the Wiki page:
+      http://freeplane.sourceforge.net/wiki/index.php/Command-line_options
+    </para>
+
+  </refsect1>
+
+  <refsect1>
+    <title>ENVIRONMENT VARIABLES</title>
+    
+    <variablelist>
+      <varlistentry>
+        <term>JAVA_OPTS</term>
+        <listitem>
+          <para>Set Java Properties, e.g. set the freeplane user config
+            directory in Freeplane &lt;1.3.3:
+            <command>JAVA_OPTS=-Dorg.freeplane.userfpdir=$HOME/blabla freeplane</command>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>DEBUG</term>
+        <listitem>
+          <para>Start Freeplane in debug mode (if you have problems starting): 
+            <command>DEBUG=true freeplane</command></para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </refsect1>
+
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>Much documentation is available from the Freeplane wiki
+      under http://freeplane.org/.</para>
+    <para>There is an open discussion forum at
+      http://sourceforge.net/apps/phpbb/freeplane/viewforum.php?f=1, which is
+      the place to ask questions.
+    </para>    
+  </refsect1>
+
+  <refsect1>
+    <title>AUTHOR</title>
+
+    <para>This manual page was written by &dhusername; &dhemail; for
+      the &debian; system (and may be used by others).  Permission is
+      granted to copy, distribute and/or modify this document under
+      the terms of the &gnu; General Public License, Version 2 or any
+      later version published by the Free Software Foundation.
+    </para>
+    <para>
+      On Debian systems, the complete text of the GNU General Public
+      License, Version 2 can be found in /usr/share/common-licenses/GPL-2.
+    </para>
+
+  </refsect1>
+</refentry>

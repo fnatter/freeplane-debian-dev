@@ -16,7 +16,13 @@ DEB_COMPRESS_EXCLUDE := .mm .pdf
 DEB_DH_INSTALL_ARGS := -XLICENSE.txt
 
 build:
-	/usr/bin/docbook-to-man debian/freeplane.sgml > freeplane.1
+	xsltproc --nonet \
+         --param make.year.ranges 1 \
+         --param make.single.year.ranges 1 \
+         --param man.charmap.use.subset 0 \
+         http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl \
+        debian/freeplane.1.xml
+
 	convert freeplane_framework/script/freeplane.png freeplane.xpm
 
 clean:: 
