@@ -1,4 +1,4 @@
-disable update check in all menus as well as update check on startup
+disable update check in all menus as well as update check on startup (see #626187)
 --- a/freeplane/src/org/freeplane/main/application/FreeplaneStarter.java
 +++ b/freeplane/src/org/freeplane/main/application/FreeplaneStarter.java
 @@ -158,7 +158,7 @@
