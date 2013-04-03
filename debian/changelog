@@ -1,6 +1,18 @@
 freeplane (1.2.23-1) UNRELEASED; urgency=low
 
   * New upstream version.
+  * Move source repo to git
+  * Use standards version 3.9.4
+  * Use copyright-format/1.0 for debian/copyright, check with
+    "cme check dpkg-copyright"
+  * Rewrite man page, move source to XML
+  * Add better description in debian/control
+  * Add patch descriptions
+  * debian/watch: don't use sf redirector because the search is narrowed down
+    to the "freeplane stable" directory (thanks to Bart Martens <bartm@debian.org>)
+  * Fix lintian warnings
+  * Update dependencies (simplyhtml, libjsyntaxpane-java, ...)
+  * Update freedesktop "magic number" to match <map version="freeplane XXX">
 
  -- Felix Natter <fnatter@gmx.net>  Tue, 02 Apr 2013 19:59:44 +0200
 
