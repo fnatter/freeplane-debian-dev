@@ -9,7 +9,8 @@ freeplane (1.2.23-1) UNRELEASED; urgency=low
   * Add better description in debian/control
   * Add patch descriptions
   * debian/watch: don't use sf redirector because the search is narrowed down
-    to the "freeplane stable" directory (thanks to Bart Martens <bartm@debian.org>)
+    to the "freeplane stable" directory (thanks to Bart Martens
+    <bartm@debian.org>)
   * Fix lintian warnings
   * Update dependencies (simplyhtml, libjsyntaxpane-java, ...)
   * Update freedesktop "magic number" to match <map version="freeplane XXX">
