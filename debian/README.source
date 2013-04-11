@@ -1,9 +1,12 @@
 freeplane for Debian
 --------------------
 
-<this file describes information about the source package, see Debian policy
-manual section 4.14. You WILL either need to modify or delete this file>
+The latest (stable) version of freeplane can be downloaded from here:
+  http://sourceforge.net/projects/freeplane/files/freeplane%20stable/
 
-
-
-
+debian/watch uses a hack to search only the "freeplane stable" directory
+for new releases (and therefore does NOT use the usual sourceforge
+redirector). As a result of this, "uscan --[force-]download" will name the
+download 'download'.
+=> Hence the 'get-orig-source' (uscan --force-download ...) target has been
+removed from debian/rules.
