@@ -1,4 +1,4 @@
-freeplane (1.2.23-1) UNRELEASED; urgency=low
+freeplane (1.2.23-1~exp1) experimental; urgency=low
 
   * New upstream version.
   * Move source repo to git
