@@ -31,3 +31,7 @@ clean::
 
 #buildxml-clean::
 #	-$(DEB_ANT_INVOKE) $(DEB_ANT_CLEAN_TARGET)
+
+# Get original sources directly using uscan
+get-orig-source:
+	uscan --force-download --rename --repack
