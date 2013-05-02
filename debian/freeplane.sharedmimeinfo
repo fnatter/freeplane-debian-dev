@@ -24,7 +24,8 @@
 	<comment xml:lang="sl">FreeMind Miselni vzorec</comment>
 	<comment xml:lang="zh_CN">FreeMind 思维导图</comment>
 	<comment xml:lang="zh">FreeMind 心智圖</comment>
-	<icon name="/usr/share/icons/hicolor/scalable/apps/freeplane.svg" />
+	<!--<icon name="/usr/share/icons/hicolor/scalable/apps/freeplane.svg" />-->
+  <icon name="freeplane"/>
 	<glob pattern="*.mm" />
 	<!-- freemind.xml uses prority 65, and we don't want to override it! -->
 	<magic priority="60"> 
@@ -54,7 +55,8 @@
 	<comment xml:lang="sl">Freeplane Miselni vzorec</comment>
 	<comment xml:lang="zh_CN">Freeplane 思维导图</comment>
 	<comment xml:lang="zh">Freeplane 心智圖</comment>
-	<icon name="/usr/share/icons/hicolor/scalable/apps/freeplane.svg" />
+  <!--	<icon name="/usr/share/icons/hicolor/scalable/apps/freeplane.svg" /> -->
+  <icon name="freeplane"/>
 	<glob pattern="*.mm" />
 	<magic priority="66">
 		<match type="string" value="&lt;map version=&quot;freeplane" offset="0" />
