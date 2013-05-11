@@ -1,3 +1,12 @@
+freeplane (1.2.23-2) unstable; urgency=low
+
+  * register FreeMind files with Freeplane, but with a lower priority than FreeMind
+  * fix icons not being displayed in GNOME file manager
+  * don't include /etc/kde3/magic/freeplane.magic, most probably obsolete (see debian/freeplane.sharedmimeinfo)
+  * change freeplane.mime such that Freeplane is run by run-mailcap on *.mm (see the comments at the top of the file!!)
+
+ -- Felix Natter <fnatter@gmx.net>  Sat, 11 May 2013 11:18:24 +0200
+
 freeplane (1.2.23-1~exp1) experimental; urgency=low
 
   * New upstream version.
