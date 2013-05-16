@@ -7,6 +7,7 @@ freeplane (1.2.23-2) unstable; urgency=low
     most probably obsolete (see debian/freeplane.sharedmimeinfo)
   * change freeplane.mime such that Freeplane is run by run-mailcap
     on *.mm (see the comments at the top of the file!!)
+  * add link history_en.txt.gz->changelog.gz to satisfy lintian
 
  -- Felix Natter <fnatter@gmx.net>  Sat, 11 May 2013 11:18:24 +0200
 
