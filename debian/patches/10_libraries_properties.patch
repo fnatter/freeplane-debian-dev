@@ -17,7 +17,7 @@ changes paths to dependency jars to /usr/share/java/...
 +commons-lang.jar = ${freeplane.ext.lib}/commons-lang.jar
 +# TODO: upstream freeplane requires commons-io-2.4.jar, but debian only has 1.4 ?
 +commons-io.jar = ${freeplane.ext.lib}/commons-io.jar
-+forms.jar = ${freeplane.ext.lib}/forms.jar
++forms.jar = ${freeplane.ext.lib}/jgoodies-forms.jar
  SimplyHTML.jar = ${freeplane.ext.lib}/SimplyHTML.jar
 -jortho.jar = ${freeplane.ext.lib}/jortho.jar
 +jortho.jar = ${workspace}/JOrtho_0.4_freeplane/dist/lib/jortho-0.4+fp1.1.1.jar

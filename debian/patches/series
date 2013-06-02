@@ -8,3 +8,4 @@
 80_no_update_check.patch
 90_fix_jsyntaxpane_location.patch
 92_fix_old_manifest.patch
+93_jgoodies1.6.patch

@@ -1,7 +1,7 @@
 adapts jar paths in core MANIFEST as well as plugin MANIFESTs
 --- a/freeplane/META-INF/MANIFEST.MF
 +++ b/freeplane/META-INF/MANIFEST.MF
-@@ -7,12 +7,12 @@
+@@ -7,12 +7,13 @@
   lib/freeplaneeditor.jar,
   lib/freeplanemac.jar,
   lib/freeplaneosgi.jar,
@@ -13,7 +13,8 @@ adapts jar paths in core MANIFEST as well as plugin MANIFESTs
 - lib/jortho.jar,
 + ../../../java/commons-lang.jar,
 + ../../../commons-io.jar,
-+ ../../../java/forms.jar,
++ ../../../java/jgoodies-forms.jar,
++ ../../../java/jgoodies-common.jar,
 + ../../../java/gnu-regexp-1.1.4.jar,
 + ../../../java/SimplyHTML.jar,
 + ../../../java/jortho.jar,
