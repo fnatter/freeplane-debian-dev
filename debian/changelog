@@ -1,5 +1,6 @@
-freeplane (1.2.23-2) unstable; urgency=low
+freeplane (1.2.23-1) unstable; urgency=low
 
+  * Upload to unstable
   * register FreeMind files with Freeplane, but with a lower
     priority than FreeMind
   * fix icons not being displayed in GNOME file manager
