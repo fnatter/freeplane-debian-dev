@@ -12,7 +12,7 @@ adapts jar paths in core MANIFEST as well as plugin MANIFESTs
 - lib/SimplyHTML.jar,
 - lib/jortho.jar,
 + ../../../java/commons-lang.jar,
-+ ../../../commons-io.jar,
++ ../../../java/commons-io.jar,
 + ../../../java/jgoodies-forms.jar,
 + ../../../java/jgoodies-common.jar,
 + ../../../java/gnu-regexp-1.1.4.jar,
