@@ -1,19 +1,59 @@
 Source: freeplane
-Section: editors
-Priority: extra
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
 Uploaders: Felix Natter <fnatter@gmx.net>
-Build-Depends: cdbs, debhelper (>= 7), docbook-xsl, docbook-xml, xsltproc, imagemagick, ant, default-jdk, quilt
-Build-Depends-Indep: javahelp2, groovy, libcommons-lang-java, libcommons-io-java, libjgoodies-forms-java(>=1.6.0), simplyhtml (>=0.16.07), libbatik-java, librhino-java, libfop-java, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjsyntaxpane-java (>=0.9.6~r156)
+Section: editors
+Priority: extra
+Build-Depends: cdbs,
+               debhelper (>= 7),
+               docbook-xsl,
+               docbook-xml,
+               xsltproc,
+               imagemagick,
+               ant,
+               default-jdk,
+               quilt
+Build-Depends-Indep: javahelp2,
+                     groovy,
+                     libcommons-lang-java,
+                     libcommons-io-java,
+                     libjgoodies-forms-java (>= 1.6.0),
+                     simplyhtml (>= 0.16.07),
+                     libbatik-java,
+                     librhino-java,
+                     libfop-java,
+                     libxerces2-java,
+                     libxml-commons-external-java,
+                     libjaxp1.3-java,
+                     libjlatexmath-java,
+                     libknopflerfish-osgi-framework-java,
+                     libjsyntaxpane-java (>= 0.9.6~r156)
 Standards-Version: 3.9.4
-Vcs-Git: git://git.debian.org/pkg-java/freeplane.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-java/freeplane.git
+Vcs-Git: git://git.debian.org/pkg-java/freeplane.git
 Homepage: http://freeplane.org/
 
 Package: freeplane
 Architecture: all
-Depends: ${misc:Depends}, default-jre | sun-java6-jre, javahelp2, groovy, libcommons-lang-java, libcommons-io-java, libjgoodies-forms-java(>=1.6.0), simplyhtml (>=0.16.07), libbatik-java, librhino-java, libfop-java, libxerces2-java, libxml-commons-external-java, libjaxp1.3-java, libjlatexmath-java, libknopflerfish-osgi-framework-java, libjsyntaxpane-java (>=0.9.6~r156), libjortho-freeplane-java (= ${binary:Version})
-Recommends: xdg-utils, java-wrappers
+Depends: ${misc:Depends},
+         default-jre | sun-java6-jre,
+         javahelp2,
+         groovy,
+         libcommons-lang-java,
+         libcommons-io-java,
+         libjgoodies-forms-java (>= 1.6.0),
+         simplyhtml (>= 0.16.07),
+         libbatik-java,
+         librhino-java,
+         libfop-java,
+         libxerces2-java,
+         libxml-commons-external-java,
+         libjaxp1.3-java,
+         libjlatexmath-java,
+         libknopflerfish-osgi-framework-java,
+         libjsyntaxpane-java (>= 0.9.6~r156),
+         libjortho-freeplane-java (= ${binary:Version})
+Recommends: xdg-utils,
+            java-wrappers
 Description: Java program for working with Mind Maps
  Freeplane is a free and open source software application that supports
  thinking, sharing information and getting things done at work, in school
@@ -35,8 +75,8 @@ Description: Java program for working with Mind Maps
  list of applications and features.
 
 Package: libjortho-freeplane-java
-Section: java
 Architecture: all
+Section: java
 Depends: ${misc:Depends}
 Provides: libjortho-java
 Description: Java spell-checking library
