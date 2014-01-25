@@ -1,3 +1,10 @@
+freeplane (1.2.23+dfsg1-1) unstable; urgency=medium
+
+  * Fix "Sourceless file": Remove visorFreeplane.swf and flashobject.js (Closes:
+    #736106)
+
+ -- Felix Natter <fnatter@gmx.net>  Sat, 25 Jan 2014 10:29:18 +0100
+
 freeplane (1.2.23-2) unstable; urgency=low
 
   * fix path to commons-io.jar in core MANIFEST.MF
