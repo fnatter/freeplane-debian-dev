@@ -27,7 +27,7 @@ Build-Depends-Indep: javahelp2,
                      libjlatexmath-java,
                      libknopflerfish-osgi-framework-java,
                      libjsyntaxpane-java (>= 0.9.6~r156)
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-java/freeplane.git
 Vcs-Git: git://git.debian.org/pkg-java/freeplane.git
 Homepage: http://freeplane.org/
