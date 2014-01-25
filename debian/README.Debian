@@ -10,5 +10,6 @@ Changes against 1.2.x upstream version:
 - Update check disabled (in menu + on startup)
 - Automatic bug reports disabled (but problems should be indicated in the
   bottom left corner of the window)
+- flash export has been disabled (see #736106)
 
- -- Felix Natter <fnatter@gmx.net>  Sat, 23 Mar 2013 15:22:00 +0100
+ -- Felix Natter <fnatter@gmx.net>  Sat, 25 Jan 2014 10:22:00 +0100
