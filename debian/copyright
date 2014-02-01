@@ -2,6 +2,9 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Freeplane
 Source: http://freeplane.org
 Upstream-Contact: Felix Natter <fnatter@gmx.net>
+Files-Excluded:
+  freeplane/resources/flash/visorFreeplane.swf
+  freeplane/resources/flash/flashobject.js
 
 Files: *
 Copyright: 2000-2008 Joerg Mueller, Daniel Polansky, Christian Foltin, Dimitry Polivaev <dpolivaev@gmx.de>

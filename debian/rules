@@ -34,4 +34,9 @@ clean::
 
 # Get original sources directly using uscan
 get-orig-source:
+  # this will remove some upstream files, see debian/copyright
 	uscan --force-download --rename --repack
+  # hack for 1.2.23+dfsg1-1
+	if [ -e ../freeplane_1.2.23+dfsg.orig.tar.gz ]; then \
+	  mv ../freeplane_1.2.23+dfsg.orig.tar.gz ../freeplane_1.2.23+dfsg1.orig.tar.gz; \
+	fi
