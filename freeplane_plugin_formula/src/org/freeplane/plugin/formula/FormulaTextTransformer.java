@@ -1,16 +1,17 @@
 package org.freeplane.plugin.formula;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JEditorPane;
 
+import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.components.JRestrictedSizeScrollPane;
 import org.freeplane.core.util.HtmlUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.format.FormattedFormula;
 import org.freeplane.features.format.FormattedObject;
-import org.freeplane.features.format.PatternFormat;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.text.AbstractContentTransformer;
 import org.freeplane.features.text.TextController;
@@ -75,6 +76,11 @@ class FormulaTextTransformer extends AbstractContentTransformer implements IEdit
 			final EditNodeDialog editNodeDialog = new FormulaEditor(node, text, firstKeyEvent, editControl, false, textEditor);
 			editNodeDialog.setTitle(TextUtils.getText("formula_editor"));
 			textEditor.setContentType("text/groovy");
+
+			final String fontName = ResourceController.getResourceController().getProperty(FormulaEditor.GROOVY_EDITOR_FONT);
+			final int fontSize = ResourceController.getResourceController().getIntProperty(FormulaEditor.GROOVY_EDITOR_FONT_SIZE);
+			textEditor.setFont(new Font(fontName, Font.PLAIN, fontSize));
+
 			return editNodeDialog;
 		}
 		return null;

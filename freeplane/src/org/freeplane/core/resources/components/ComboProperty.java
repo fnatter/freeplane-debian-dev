@@ -20,7 +20,6 @@
 package org.freeplane.core.resources.components;
 
 import java.awt.Component;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -80,6 +79,10 @@ public class ComboProperty extends PropertyBean implements IPropertyControl, Act
 		layout(builder, mComboBox);
 	}
 
+	public Vector<String> getPossibleValues() {
+		return possibleValues;
+	}
+
 	public void setEnabled(final boolean pEnabled) {
 		mComboBox.setEnabled(pEnabled);
 	}
@@ -93,7 +96,7 @@ public class ComboProperty extends PropertyBean implements IPropertyControl, Act
 			mComboBox.setSelectedItem(value);
 		}
 		else{
-			LogUtils.severe("Can't set the value:" + value + " into the combo box " + getName() + "/" + getLabel());
+			LogUtils.severe("Can't set the value:" + value + " into the combo box " + getName() + " containing values " + possibleValues);
 			if (mComboBox.getModel().getSize() > 0) {
 				mComboBox.setSelectedIndex(0);
 			}
@@ -130,6 +133,6 @@ public class ComboProperty extends PropertyBean implements IPropertyControl, Act
 	public boolean isEditable() {
 	    return mComboBox.isEditable();
     }
-	
-	
+
+
 }

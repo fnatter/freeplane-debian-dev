@@ -8,6 +8,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.Icon;
@@ -137,27 +138,33 @@ public interface Proxy {
      *   node["attribute name"] = "a value"
      *   assert node["attribute name"] == "a value"
      *   assert node.attributes.getFirst("attribute name") == "a value" // the same
+     *
      *   // == numbers and others
      *   // converts numbers and other stuff with toString()
      *   node["a number"] = 1.2
      *   assert node["a number"].text == "1.2"
      *   assert node["a number"].num == 1.2d
-     *   // == dates
+     *
+     *     *   // == dates
      *   def date = new Date()
      *   node["a date"] = date
      *   assert node["a date"].object.getClass().simpleName == "FormattedDate"
      *   assert node["a date"].date == format(date)
+     *
      *   // == enforce formats on attribute values
      *   node["another date"] = format(date, 'yyyy|MM|dd')
      *   assert node["another date"].date == format(date, 'yyyy|MM|dd')
+     *
      *   // change the date while keeping the silly format
      *   def index = node.attributes.findAttribute("another date")
      *   node.attributes.set(index, new Date(0L))
+     *
      *   // == URIs
      *   def uri = new URI("http://www.freeplane.org")
      *   node["uri"] = uri
      *   assert node["uri"].object.getClass().simpleName == "URI"
      *   assert node["uri"].object == uri
+     *
      *   // == remove an attribute
      *   node["removed attribute"] = "to be removed"
      *   assert node["removed attribute"] == "to be removed"
@@ -201,12 +208,70 @@ public interface Proxy {
 		/** removes all attributes.
 		 * @since 1.2 */
 		void clear();
+
+		/** allows application of Groovy collection methods like each(), collect(), ...
+		 * <pre>
+		 *   def keyList = node.attributes.collect { it.key }
+         *   def values = node.attributes.collect { it.value }
+         *   node.attributes.each {
+         *       if (it.key =~ /.*day/)
+         *           it.value += ' days'
+         *   }
+		 * </pre>
+		 * @since 1.3.2 */
+		Iterator<java.util.Map.Entry<String, Object>> iterator();
 	}
 
-	/** Graphical connector between nodes:<code>node.connectorsIn</code> / <code>node.connectorsOut</code>
+    /** Here are four ways to enable a cloud on the current node and switch it off again:
+     * <pre>
+     *   node.cloud.enabled = true
+     *   node.cloud.enabled = false 
+     *   
+     *   node.cloud.shape = 'ROUND_RECT' // either 'ARC', 'STAR', 'RECT' or 'ROUND_RECT'
+     *   node.cloud.shape = null
+     *   
+     *   node.cloud.color = java.awt.Color.YELLOW
+     *   node.cloud.color = null
+     *   
+     *   node.cloud.colorCode = '#00FF66'
+     *   node.cloud.color = null
+     * </pre>
+     * @since 1.3 */
+    interface Cloud {
+        /**  @since 1.3 */
+        boolean getEnabled();
+        /**  @since 1.3 */
+        void setEnabled(boolean enable);
+
+        /** @return either null (if cloud is not enabled), "ARC", "STAR", "RECT" or "ROUND_RECT".
+         *  @since 1.3 */
+        String getShape();
+        /** @param shape use "ARC", "STAR", "RECT" or "ROUND_RECT". null removes the cloud
+         *  @since 1.3 */
+        void setShape(String shape);
+
+        /** @return either null (if cloud is not enabled) or the current cloud color.
+         * @since 1.3 */
+        Color getColor();
+        /** @since 1.3 */
+        void setColor(Color color);
+
+        /** @return either null (if cloud is not enabled) or a HTML color spec.
+         *  @since 1.3 */
+        String getColorCode();
+        /** @param rgbString a HTML color spec like #ff0000 (red) or #222222 (darkgray).
+         *  @since 1.3 */
+        void setColorCode(String rgbString);
+    }
+    
+    /** Graphical connector between nodes:<code>node.connectorsIn</code> / <code>node.connectorsOut</code>
 	 * - read-only. */
 	interface ConnectorRO {
-		Color getColor();
+        /** returns one of LINE, LINEAR_PATH, CUBIC_CURVE, EDGE_LIKE.
+         *  @since 1.3 */
+	    String getShape();
+
+	    Color getColor();
 
 		String getColorCode();
 
@@ -233,12 +298,24 @@ public interface Proxy {
 		String getTargetLabel();
 
 		boolean simulatesEdge();
+
+		/** returns a Point.
+		 * @since 1.3.3 */
+		List<Integer> getStartInclination();
+		
+		/** returns a Point.
+		 * @since 1.3.3 */
+		List<Integer> getEndInclination();
 	}
 
 	/** Graphical connector between nodes:<code>node.connectorsIn</code> / <code>node.connectorsOut</code>
 	 * - read-write. */
 	interface Connector extends ConnectorRO {
-		void setColor(Color color);
+        /** @param shape one of LINE, LINEAR_PATH, CUBIC_CURVE, EDGE_LIKE.
+         *  @since 1.3 */
+        void setShape(String shape);
+
+        void setColor(Color color);
 
 		/** @param rgbString a HTML color spec like #ff0000 (red) or #222222 (darkgray).
 		 *  @since 1.2 */
@@ -263,9 +340,13 @@ public interface Proxy {
 		void setStartArrow(ArrowType arrowType);
 
 		void setTargetLabel(String label);
+
+        /** startPoint, endPoint: list of two integers representing a Point.
+         * @since 1.3.3 */
+        void setInclination(final List<Integer> startPoint, final List<Integer> endPoint);
 	}
 
-	/** Access to global state: <code>c</code> - read-only. */
+	/** Access to global state: in scripts, this is available as global variable <code>c</code> - read-only. */
 	interface ControllerRO {
 		/** if multiple nodes are selected returns one (arbitrarily chosen)
 		 * selected node or the selected node for a single node selection. */
@@ -366,9 +447,21 @@ public interface Proxy {
 		/** returns false if the system 'nonInteractive' is set. This can be used in actions to not open dialogs etc.
 		 * @since 1.2 */
 		boolean isInteractive();
+
+		List<String> getExportTypeDescriptions();
+
+        /** exports map to destination file, example:
+         * <pre>
+         *   println c.getExportTypeDescriptions.join('\n')
+         *   boolean overwriteExistingFile = true
+         *   c.export(node.map, new File('/tmp/t.png'), 'Portable Network Graphic (PNG) (.png)', overwriteExistingFile)
+         * </pre>
+         * @param exportTypeDescription Use {@link #getExportTypeDescriptions()} to look up available exportTypes
+         * @since 1.3.5 */
+        void export(Map map, File destinationFile, String exportTypeDescription, boolean overwriteExisting);
 	}
 
-	/** Access to global state: <code>c</code> - read-write. */
+	/** Access to global state: in scripts, this is available as global variable <code>c</code> - read-write. */
 	interface Controller extends ControllerRO {
 		void centerOnNode(Node center);
 
@@ -379,7 +472,7 @@ public interface Proxy {
 		/** opens the appropriate popup text editor. Does not block until edit has finished.
 		 * @since 1.2.2 */
 		void editInPopup(Node node);
-
+		
 		void select(Node toSelect);
 
 		/** selects branchRoot and all children */
@@ -476,8 +569,14 @@ public interface Proxy {
 
 	/** External object: <code>node.externalObject</code> - read-write. */
 	interface ExternalObject extends ExternalObjectRO {
+        /** setting null uri means remove external object.
+         * Starting with Freeplane 1.2.23 there is an additional setUri(Object) method that also accepts File,
+         * URI and URL arguments.
+         * @since 1.2 */
+		void setUri(String target);
+		
 		/** setting null uri means remove external object. */
-		void setUri(String uri);
+		void setFile(File target);
 		
 		/** set to 1.0 to set it to 100%. If the node has no object assigned this method does nothing. */
 		void setZoom(float zoom);
@@ -547,11 +646,18 @@ public interface Proxy {
 
 		/** returns a read-only list of the names of the icons the node has. Think twice before you use this method
 		 * since it leads to ugly code, e.g. use <code>node.icons.first</code> or <code>node.icons[0]</code> instead of
-		 * <code>node.icons.icons[0]</code>. */
+		 * <code>node.icons.icons[0]</code>. Perhaps you could also use iteration over icons, see. */
 		List<String> getIcons();
 		
 		/** returns a list of the urls of the icons the node has. */
 		List<URL> getUrls();
+
+        /** allows application of Groovy collection methods like each(), collect(), ...
+         * <pre>
+         *   def freeIcons = node.icons.findAll { it.startsWith('free') }
+         * </pre>
+         * @since 1.3.2 */
+        Iterator<String> iterator();
 	}
 
 	/** Node's icons: <code>node.icons</code> - read-write. */
@@ -577,6 +683,10 @@ public interface Proxy {
 
 		/** @deprecated since 1.2 - use {@link #remove(String)} instead. */
 		boolean removeIcon(String name);
+		
+		/** removes all icons.
+		 * @since 1.2 */
+		void clear();
 	}
 
 	/** Node's link: <code>node.link</code> - read-only.
@@ -641,10 +751,11 @@ public interface Proxy {
 		/** @deprecated since 1.2 - use {@link #getRoot()} instead. */
 		Node getRootNode();
 
-		/** returns the node if the map contains it or null otherwise. */
+		/** get node by id.
+		 * @return the node if the map contains it or null otherwise. */
 		Node node(String id);
 
-		/** returns the physical location of the map if available or null otherwise. */
+		/** returns the filenname of the map as a java.io.File object if available or null otherwise. */
 		File getFile();
 
 		/** returns the title of the MapView.
@@ -708,7 +819,7 @@ public interface Proxy {
 		 * // equivalent:
 		 * node.map.filter = { it.text.contains("todo") }
 		 * 
-		 * // show anchestors of matching nodes
+		 * // show ancestors of matching nodes
 		 * node.map.filter(true, false){ it.text.contains("todo") }
 		 * // equivalent:
 		 * node.map.setFilter(true, false, { it.text.contains("todo") })
@@ -728,16 +839,16 @@ public interface Proxy {
 		 * @since 1.2 */
 		public void setFilter(final Closure<Boolean> closure);
 		
-		/** With {@link #filter(Closure)} neither anchestors not descendants of the visible nodes are shown. Use this
+		/** With {@link #filter(Closure)} neither ancestors not descendants of the visible nodes are shown. Use this
 		 * method to control these options.
 		 * @see #filter(Closure)
 		 * @since 1.2 */
-		public void filter(final boolean showAnchestors, final boolean showDescendants, final Closure<Boolean> closure);
+		public void filter(final boolean showAncestors, final boolean showDescendants, final Closure<Boolean> closure);
 
 		/** alias for {@link #setFilter(boolean, boolean, Closure)}
 		 * @see #filter(Closure)
 		 * @since 1.2 */
-		public void setFilter(final boolean showAnchestors, final boolean showDescendants, final Closure<Boolean> closure);
+		public void setFilter(final boolean showAncestors, final boolean showDescendants, final Closure<Boolean> closure);
 
 		/** reinstalls the previously undone filter if there is any.
 		 * Note: undo/redo for filters is separate to the undo/redo for other map state.
@@ -748,6 +859,10 @@ public interface Proxy {
 		 * Note: undo/redo for filters is separate to the undo/redo for other map state.
 		 *  @since 1.2 */
 		public void undoFilter();
+
+		/** returns an accessor to the map specific storage. The value is never null
+		 *  @since 1.3.6 */
+		public Proxy.Properties getStorage();
 	}
 
 	/** The currently selected node: <code>node</code> - read-only. */
@@ -766,13 +881,21 @@ public interface Proxy {
 		 *   assert val.num == new Long(12)
 		 *   // or use it just like a string
 		 *   assert val.startsWith("1")
+		 *   // check for availability of an attribute this way:
+		 *   if (node["unknown attribute"])
+		 *      // surprise: the node has an attribute with key "unknown attribute"
 		 * </pre>
 		 * @throws ExecuteScriptException 
 		 * @since 1.2
 		 */
 		Convertible getAt(String attributeName);
 
-		/** returns the index (0..) of this node in the (by Y coordinate sorted)
+        /**
+         *  @since 1.2
+         */
+		Cloud getCloud();
+
+        /** returns the index (0..) of this node in the (by Y coordinate sorted)
 		 * list of this node's children. Returns -1 if childNode is not a child
 		 * of this node. */
 		int getChildPosition(Node childNode);
@@ -788,7 +911,14 @@ public interface Proxy {
 		 * @since 1.2 */
 		String getDetailsText();
 
-		/** returns the text of the details as a Convertible like {@link #getNote()} for notes.
+		/** returns the text of the details as a Convertible like {@link #getNote()} for notes:
+		 * <ul>
+		 * <li>node.details.to.plain plain text of the node, possibly after formula evaluation
+		 * <li>node.details.plain the same.
+		 * <li>node.details.string the same.
+		 * <li>node.details.html the raw html text. No formula evaluation is applied.
+		 * <li>node.details.text the same.
+		 * </ul>
 		 * @since 1.2 */
 		Convertible getDetails();
 
@@ -818,10 +948,16 @@ public interface Proxy {
 		 * current filter are counted. */
 		int getNodeLevel(boolean countHidden);
 
-		/**
-		 * Returns a Convertible object for the plain not text. Convertibles behave like Strings in most respects.
+		/** returns the text of the details as a Convertible. Convertibles behave like Strings in most respects.
 		 * Additionally String methods are overridden to handle Convertible arguments as if the argument were the
 		 * result of Convertible.getText().
+         * <ul>
+         * <li>node.note.to.plain plain text of the node, possibly after formula evaluation
+         * <li>node.note.plain the same.
+         * <li>node.note.text the same.
+         * <li>node.note.html the raw html text. No formula evaluation is applied.
+         * <li>node.note.string the same.
+         * </ul>
 		 * @return Convertible getString(), getText() and toString() will return plain text instead of the HTML.
 		 *         Use {@link #getNoteText()} to get the HTML text.
 		 * @throws ExecuteScriptException 
@@ -838,6 +974,13 @@ public interface Proxy {
 
 		/** @deprecated since 1.2 - use {@link #getParent()} instead. */
 		Node getParentNode();
+
+        /** a list of all nodes starting from this node upto (and including) the root node.
+         * <pre>
+         *   def path = pathToRoot.collect{ it.plainText }.join('.')
+         * </pre>
+         * @since 1.3.3 */
+        List<Node> getPathToRoot();
 
         /** returns the next node with respect to this node in breadth-first order.
          * Returns null if this node is the only one in the map. */
@@ -966,6 +1109,16 @@ public interface Proxy {
 		Date getLastModifiedAt();
 
 		Date getCreatedAt();
+
+        /**@since 1.3.7 */
+		int getHorizontalShift();
+
+        /**@since 1.3.7 */
+		int getVerticalShift();
+
+        /**@since 1.3.7 */
+		int getMinimalDistanceBetweenChildren();
+
 	}
 
 	/** The currently selected node: <code>node</code> - read-write. */
@@ -1026,6 +1179,9 @@ public interface Proxy {
 		 */
 		void setDetails(Object details);
 
+        /** Sets the raw (HTML) note text. */
+        void setDetailsText(String html);
+
 		/** use node.hideDetails = true/false to control visibility of details.
 		 * @since 1.2 */
 		void setHideDetails(boolean hide);
@@ -1079,8 +1235,8 @@ public interface Proxy {
 		 */
 		void setNote(Object value);
 
-		/** @deprecated since 1.2 - use {@link #setNote(Object)} instead. */
-		void setNoteText(String text);
+		/** Sets the raw (HTML) note text. */
+		void setNoteText(String html);
 
 		/** If <code>value</code> is a String the node object is set to it verbatim. For all other argument types it's
 		 * an alias for {@link #setObject(Object)}.
@@ -1212,6 +1368,35 @@ public interface Proxy {
 		void setAttributes(java.util.Map<String, Object> attributes);
 
 		void setLeft(boolean isLeft);
+
+        /** Returns true if the node is password protected, no matter if currently accessible (password entered) or not.
+         * @since 1.3.6 */
+		boolean hasEncryption();
+        
+        /** decrypts a node and remove the password protection.
+         * @since 1.3.6 */
+        void removeEncryption(String password);
+		
+		/** Returns true if the node has password protection and is currently unaccessible (password has to be entered).
+		 * @since 1.3.6 */
+		boolean isEncrypted();
+		
+		/** encrypts a node. If the node has child nodes the branch is folded.
+		 * @since 1.3.6 */
+		void encrypt(String password);
+
+		/** decrypts a node without removing the encryption.
+         * @since 1.3.6 */
+		void decrypt(String password);
+
+        /**@since 1.3.7 */
+    	void setHorizontalShift(final int horizontalShift);
+
+        /**@since 1.3.7 */
+    	void setVerticalShift(final int verticalShift);
+
+        /**@since 1.3.7 */
+    	void setMinimalDistanceBetweenChildren(final int minimalDistanceBetweenChildren);
 	}
 
 	/** Node's style: <code>node.style</code> - read-only. */
@@ -1252,6 +1437,9 @@ public interface Proxy {
         
         /** @since 1.2.20 */
         int getMaxNodeWidth();
+
+        /** @since 1.3.8 */
+        boolean isNumberingEnabled();
 	}
 
 	/** Node's style: <code>node.style</code> - read-write. */
@@ -1284,7 +1472,7 @@ public interface Proxy {
 		 *  @since 1.2 */
 		void setTextColorCode(String rgbString);
 
-        /** @param sets the floating style for the node (aka "free node"). Should normally only applied to direct
+        /** sets the floating style for the node (aka "free node"). Should normally only be applied to direct
          *  children of the root node.
          *  @since 1.2 */
         void setFloating(boolean floating);
@@ -1294,7 +1482,32 @@ public interface Proxy {
         
         /** @since 1.2.20 */
         void setMaxNodeWidth(int width);
+
+        /** @since 1.3.8 */
+        void setNumberingEnabled(boolean enabled);
 	}
+
+    public interface Properties {
+        /** Provides map-like access to properties. Note that the returned type is a
+         * {@link Convertible}, not a String as in the basic storage. Nevertheless it behaves like a String in almost
+         * all respects, that is, in Groovy scripts it understands all String methods like lenght(), matches() etc.
+         * <br>
+         * Note that unlike Attributes.getAt() this method will return <em>null</em> if the property is not set!
+         * @since 1.3.6 */
+        Convertible getAt(String key);
+
+        /**
+         * Allows to set and to change properties.
+         * @param value An object for conversion to String. Works well for all types that {@link Convertible}
+         *        handles, particularly {@link Convertible}s itself. Use null to unset an attribute.
+         * @return the new value
+         * @since 1.3.6 */
+        Convertible putAt(String key, Object value);
+
+        /** returns the names of all attributes.
+         * @since 1.3.6 */
+        java.util.Set<String> keySet();
+    }
 
 	/** Reminder: <code>node.reminder</code> - read-only.
 	 * <pre>

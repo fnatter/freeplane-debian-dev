@@ -27,6 +27,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.Icon;
+
 import org.freeplane.core.extension.IExtension;
 import org.freeplane.core.io.ReadManager;
 import org.freeplane.core.io.WriteManager;
@@ -53,6 +55,7 @@ import org.freeplane.features.styles.MapStyleModel;
  * @author Dimitry Polivaev
  */
 public class TextController implements IExtension {
+	public static final String DETAILS_HIDDEN = "DETAILS_HIDDEN";
 	public static final String FILTER_NODE = "filter_node";
 	public static final String FILTER_ANYTEXT = "filter_any_text";
 	public static final String FILTER_NOTE = "filter_note";
@@ -150,6 +153,18 @@ public class TextController implements IExtension {
 		else
 			return object;
 	}
+	
+	public Icon getIcon(Object object, final NodeModel nodeModel, Object extension){
+		if(object instanceof HighlightedTransformedObject){
+			return getIcon(((HighlightedTransformedObject)object).getObject(), nodeModel, extension);
+		}
+		for (IContentTransformer textTransformer : getTextTransformers()) {
+			Icon icon = textTransformer.getIcon(this, object, nodeModel, extension);
+			if( icon != null)
+				return icon;
+		}
+		return null;
+	}
 
 	public boolean isTextFormattingDisabled(final NodeModel nodeModel) {
 		return PatternFormat.IDENTITY_PATTERN.equals(getNodeFormat(nodeModel));
@@ -225,7 +240,7 @@ public class TextController implements IExtension {
 		}
 		details.setHidden(isHidden);
 		node.addExtension(details);
-		Controller.getCurrentModeController().getMapController().nodeChanged(node, "DETAILS_HIDDEN", ! isHidden, isHidden);    
+		Controller.getCurrentModeController().getMapController().nodeChanged(node, DETAILS_HIDDEN, ! isHidden, isHidden);    
 	}
 
 	private void registerDetailsTooltip() {
@@ -354,4 +369,8 @@ public class TextController implements IExtension {
 		}
 		return false;
     }
+	public ModeController getModeController() {
+    	return modeController;
+    }
+
 }

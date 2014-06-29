@@ -39,6 +39,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URI;
+
 import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.Icon;
@@ -59,9 +60,9 @@ import javax.swing.text.DefaultEditorKit.PasteAction;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.NavigationFilter;
+import javax.swing.text.Position.Bias;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
-import javax.swing.text.Position.Bias;
 import javax.swing.text.StyledEditorKit.BoldAction;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 import javax.swing.text.StyledEditorKit.ItalicAction;
@@ -90,7 +91,6 @@ import org.freeplane.features.text.mindmapmode.EventBuffer;
 import org.freeplane.features.text.mindmapmode.MTextController;
 import org.freeplane.features.ui.IMapViewChangeListener;
 import org.freeplane.features.ui.IMapViewManager;
-import org.freeplane.features.ui.ViewController;
 import org.freeplane.features.url.UrlManager;
 import org.freeplane.view.swing.map.MainView;
 import org.freeplane.view.swing.map.MapView;
@@ -496,9 +496,14 @@ public class EditNodeTextField extends EditNodeBase {
 			nodeView.update();
 		if(nodeView.isRoot() && parent instanceof MainView)
 		    parent.setHorizontalAlignment(JLabel.CENTER);
+		final Dimension textFieldSize = textfield.getSize();
+		final Point textFieldCoordinate = new Point();
+		final MapView mapView = nodeView.getMap();
+		UITools.convertPointToAncestor(textfield, textFieldCoordinate, mapView);
 		textfield.getParent().remove(textfield);
 		parent.revalidate();
 		parent.repaint();
+		mapView.repaint(textFieldCoordinate.x, textFieldCoordinate.y, textFieldSize.width, textFieldSize.height);
 		textfield = null;
 	}
 
@@ -548,7 +553,7 @@ public class EditNodeTextField extends EditNodeBase {
     @Override
 	public void show(final RootPaneContainer frame) {
 		final ModeController modeController = Controller.getCurrentModeController();
-		final ViewController viewController = modeController.getController().getViewController();
+		final IMapViewManager viewController = modeController.getController().getMapViewManager();
 		final MTextController textController = (MTextController) TextController.getController(modeController);
 		nodeView = (NodeView) SwingUtilities.getAncestorOfClass(NodeView.class, parent);
 		font = parent.getFont();
@@ -623,7 +628,7 @@ public class EditNodeTextField extends EditNodeBase {
 		final StyleSheet styleSheet = document.getStyleSheet();
 		styleSheet.addRule(ruleBuilder.toString());
 		textfield.setText(text);
-		final MapView mapView = (MapView) viewController.getMapView();
+		final MapView mapView = (MapView) viewController.getMapViewComponent();
 		if(! mapView.isValid())
 			mapView.validate();
 		final NodeStyleController nsc = NodeStyleController.getController(modeController);

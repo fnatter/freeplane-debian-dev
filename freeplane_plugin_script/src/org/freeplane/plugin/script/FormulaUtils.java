@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.freeplane.core.util.HtmlUtils;
+import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
@@ -18,7 +19,7 @@ public class FormulaUtils {
 	// dependency data. It has to be tested but it should "only" lead to some missing updates.
 	private static final boolean ENABLE_CACHING = !Controller.getCurrentController().getResourceController()
 	    .getBooleanProperty("formula_disable_caching");
-    private static final boolean DEBUG_FORMULA_EVALUATION = false;
+    static final boolean DEBUG_FORMULA_EVALUATION = false;
 
 	/** evaluate text as a script if it starts with '='.
 	 * @return the evaluation result for script and the original text otherwise 
@@ -33,8 +34,18 @@ public class FormulaUtils {
 		}
 	}
 
+    public static Object safeEvalIfScript(final NodeModel nodeModel, ScriptContext scriptContext, String text) {
+        try {
+            return evalIfScript(nodeModel, scriptContext, text);
+        }
+        catch (Exception e) {
+            LogUtils.info("could not interpret as a formula (ignored): " + text + " due to " + e.getMessage());
+            return text;
+        }
+    }
+
 	public static boolean containsFormula(final String text) {
-	    return text != null && text.length() > 1 && text.charAt(0) == '=';
+	    return text != null && text.length() > 2 && text.charAt(0) == '=' && text.charAt(1) != '=';
     }
 
 	public static boolean containsFormulaCheckHTML(String text) {
@@ -149,5 +160,4 @@ public class FormulaUtils {
 		map.removeExtension(FormulaCache.class);
 		map.removeExtension(EvaluationDependencies.class);
 	}
-
 }
