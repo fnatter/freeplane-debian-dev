@@ -65,6 +65,7 @@ import org.freeplane.core.util.Compat;
 import org.freeplane.core.util.FileUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
+import org.freeplane.core.util.XsltPipeReaderFactory;
 import org.freeplane.features.link.LinkController;
 import org.freeplane.features.map.MapChangeEvent;
 import org.freeplane.features.map.MapController;
@@ -78,6 +79,9 @@ import org.freeplane.features.mode.ModeController;
 import org.freeplane.features.mode.mindmapmode.MModeController;
 import org.freeplane.features.text.TextController;
 import org.freeplane.features.ui.IMapViewChangeListener;
+import org.freeplane.features.url.IMapInputStreamConverter;
+import org.freeplane.features.url.MapConversionException;
+import org.freeplane.features.url.MapVersionInterpreter;
 import org.freeplane.features.url.UrlManager;
 import org.freeplane.n3.nanoxml.XMLException;
 import org.freeplane.n3.nanoxml.XMLParseException;
@@ -133,7 +137,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 					final String name = f.getName();
 					return pattern.matcher(name).matches() && f.isFile()
 					        // && (f.lastModified() > (file.lastModified() - DEBUG_OFFSET) || name.endsWith(BACKUP_EXTENSION))
-							&&(mode == AlternativeFileMode.ALL || f.lastModified() > (file.lastModified() - DEBUG_OFFSET)); 
+							&&(mode == AlternativeFileMode.ALL || f.lastModified() > (file.lastModified() - DEBUG_OFFSET));
 				}
 			});
 			return fileList;
@@ -222,6 +226,11 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 
 	public MFileManager() {
 		super();
+	}
+
+	@Override
+    protected void init() {
+		super.init();
 		createActions();
 		createPreferences();
 		if (ResourceController.getResourceController().getBooleanProperty("single_backup_directory")) {
@@ -289,7 +298,8 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 		return filefilter;
 	};
 
-	protected JComponent createDirectorySelector(final JFileChooser chooser) {
+	@Override
+    protected JComponent createDirectorySelector(final JFileChooser chooser) {
 		final JComboBox box = new JComboBox();
 		box.setEditable(false);
 		final File dir = getLastCurrentDir() != null ? getLastCurrentDir() : chooser.getCurrentDirectory();
@@ -342,9 +352,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 	public URI getLinkByFileChooser(final MapModel map) {
 		JFileChooser chooser = null;
         final File file = map.getFile();
-        final boolean useRelativeUri = ResourceController.getResourceController().getProperty("links")
-            .equals("relative");
-        if (file == null && useRelativeUri) {
+        if (file == null && LinkController.getLinkType() == LinkController.LINK_RELATIVE_TO_MINDMAP) {
         	JOptionPane.showMessageDialog(Controller.getCurrentController().getViewController().getContentPane(),
         	    TextUtils.getText("not_saved_for_link_error"), "Freeplane", JOptionPane.WARNING_MESSAGE);
         	return null;
@@ -357,7 +365,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
         }
         chooser.setAcceptAllFileFilterUsed(true);
         chooser.setFileFilter(chooser.getAcceptAllFileFilter());
-        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); 
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         final int returnVal = chooser.showOpenDialog(Controller.getCurrentController().getViewController()
             .getContentPane());
         if (returnVal != JFileChooser.APPROVE_OPTION) {
@@ -365,10 +373,8 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
         }
         final File input = chooser.getSelectedFile();
         setLastCurrentDir(input.getParentFile());
-        if (useRelativeUri) {
-        	return LinkController.toRelativeURI(file, input);
-        }
-        return input.toURI();
+
+        return LinkController.toLinkTypeDependantURI(file, input);
 	}
 
 	/**@deprecated -- use MapIO*/
@@ -401,9 +407,11 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
         	map.setReadOnly(true);
         }
 		if (file.length() != 0) {
+			//DOCEAR - fixed: set the file for the map before parsing the xml, necessary for some events
+			setFile(map, file);
         	NodeModel root = loadTree(map, file);
         	assert(map.getRootNode() == root);
-        	setFile(map, file);
+
         }
 		if(map.getRootNode() == null)
 			map.createNewRoot();
@@ -462,7 +470,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 	}
 
 	private NodeModel loadTreeImpl(final MapModel map, final File f) throws FileNotFoundException, IOException,
-	        XMLException {
+	        XMLException, MapConversionException {
 		final BufferedInputStream file = new BufferedInputStream(new FileInputStream(f));
 		int versionInfoLength = 1000;
 		final byte[] buffer = new byte[versionInfoLength];
@@ -472,6 +480,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 		final InputStream sequencedInput = new SequenceInputStream(readBytes, file);
 		Reader reader = null;
 		MapVersionInterpreter versionInterpreter = MapVersionInterpreter.getVersionInterpreter(mapStart);
+		map.addExtension(versionInterpreter);
 		if(versionInterpreter.anotherDialect){
 			String message = versionInterpreter.getDialectInfo(f.getAbsolutePath());
 			UITools.showMessage(message, JOptionPane.WARNING_MESSAGE);
@@ -480,16 +489,18 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 			final int showResult = OptionalDontShowMeAgainDialog.show("really_convert_to_current_version",
 			    "confirmation", MMapController.RESOURCES_CONVERT_TO_CURRENT_VERSION,
 			    OptionalDontShowMeAgainDialog.ONLY_OK_SELECTION_IS_STORED);
-			if (showResult != JOptionPane.OK_OPTION) {
-				reader = UrlManager.getActualReader(sequencedInput);
+			IMapInputStreamConverter isConverter = versionInterpreter.getMapInputStreamConverter();
+			if (showResult != JOptionPane.OK_OPTION || isConverter == null) {
+				reader = new XsltPipeReaderFactory().getActualReader(sequencedInput);
 			}
 			else {
 				sequencedInput.close();
-				reader = UrlManager.getUpdateReader(f, FREEPLANE_VERSION_UPDATER_XSLT);
+				//reader = UrlManager.getUpdateReader(f, FREEPLANE_VERSION_UPDATER_XSLT);
+				reader = isConverter.getConvertedStream(f);
 			}
 		}
 		else
-			reader = UrlManager.getActualReader(sequencedInput);
+			reader = new XsltPipeReaderFactory().getActualReader(sequencedInput);
 		try {
 			return Controller.getCurrentModeController().getMapController().getMapReader()
 			    .createNodeTreeFromXml(map, reader, Mode.FILE);
@@ -521,8 +532,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 	public void open() {
 		final JFileChooser chooser = getFileChooser(false);
 		chooser.setMultiSelectionEnabled(true);
-		final int returnVal = chooser
-		    .showOpenDialog(Controller.getCurrentController().getViewController().getMapView());
+		final int returnVal = chooser.showOpenDialog(Controller.getCurrentController().getMapViewManager().getMapViewComponent());
 		if (returnVal != JFileChooser.APPROVE_OPTION) {
 			return;
 		}
@@ -539,7 +549,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 				break;
 			}
 		}
-		Controller.getCurrentController().getViewController().setTitle();
+		Controller.getCurrentController().getMapViewManager().setTitle();
 	}
 
 	/**@deprecated -- use MMapIO*/
@@ -555,7 +565,8 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 		return map;
 	}
 
-	public File defaultTemplateFile() {
+	@Override
+    public File defaultTemplateFile() {
 		final String userDefinedTemplateFile = getStandardTemplateName();
 		final File absolute = new File(userDefinedTemplateFile);
 		if(absolute.isAbsolute() && absolute.exists() && ! absolute.isDirectory()){
@@ -594,8 +605,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 		else if (startFile.isDirectory()) {
 			final JFileChooser chooser = getFileChooser(true);
 			chooser.setCurrentDirectory(startFile);
-			final int returnVal = chooser.showOpenDialog(Controller.getCurrentController().getViewController()
-			    .getMapView());
+			final int returnVal = chooser.showOpenDialog(Controller.getCurrentController().getMapViewManager().getMapViewComponent());
 			if (returnVal != JFileChooser.APPROVE_OPTION) {
 				return null;
 			}
@@ -632,14 +642,14 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 		final File userTemplates = defaultUserTemplateDir();
 		chooser.setCurrentDirectory(userTemplates);
 		final int returnVal = chooser
-		    .showOpenDialog(Controller.getCurrentController().getViewController().getMapView());
+		    .showOpenDialog(Controller.getCurrentController().getMapViewManager().getMapViewComponent());
 		if (returnVal != JFileChooser.APPROVE_OPTION) {
 			return;
 		}
 		File file = chooser.getSelectedFile();
 		if (file.exists()) {
 			final int overwriteMap = JOptionPane.showConfirmDialog(Controller.getCurrentController()
-			    .getViewController().getMapView(), TextUtils.getText("map_already_exists"), "Freeplane",
+			    .getMapViewManager().getMapViewComponent(), TextUtils.getText("map_already_exists"), "Freeplane",
 			    JOptionPane.YES_NO_OPTION);
 			if (overwriteMap != JOptionPane.YES_OPTION) {
 				return;
@@ -711,7 +721,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 		}
 		chooser.setDialogTitle(TextUtils.getText("SaveAsAction.text"));
 		final int returnVal = chooser
-		    .showSaveDialog(Controller.getCurrentController().getViewController().getMapView());
+		    .showSaveDialog(Controller.getCurrentController().getMapViewManager().getMapViewComponent());
 		if (returnVal != JFileChooser.APPROVE_OPTION) {
 			return false;
 		}
@@ -724,7 +734,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 		}
 		if (f.exists()) {
 			final int overwriteMap = JOptionPane.showConfirmDialog(Controller.getCurrentController()
-			    .getViewController().getMapView(), TextUtils.getText("map_already_exists"), "Freeplane",
+			    .getMapViewManager().getMapViewComponent(), TextUtils.getText("map_already_exists"), "Freeplane",
 			    JOptionPane.YES_NO_OPTION);
 			if (overwriteMap != JOptionPane.YES_OPTION) {
 				return false;
@@ -786,19 +796,28 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 	@Deprecated
 	public void writeToFile(final MapModel map, final File file) throws FileNotFoundException, IOException {
 		final FileOutputStream out = new FileOutputStream(file);
-		final FileLock lock = out.getChannel().tryLock();
-		if (lock == null) {
-			throw new IOException("can not obtain file lock for " + file);
-		}
-		try {
+		FileLock lock = null;
+		try{
+			boolean lockedByOtherApplication = false;
+			try {
+				lock = out.getChannel().tryLock();
+				lockedByOtherApplication = lock == null;
+			}
+			catch (Exception e) {
+				LogUtils.warn(e.getMessage());
+			}
+			if (lockedByOtherApplication) {
+				throw new IOException("can not obtain file lock for " + file);
+			}
 			final BufferedWriter fileout = new BufferedWriter(new OutputStreamWriter(out));
 			Controller.getCurrentModeController().getMapController().getMapWriter()
-			    .writeMapAsXml(map, fileout, Mode.FILE, true, false);
+			.writeMapAsXml(map, fileout, Mode.FILE, true, false);
 		}
-		finally {
-			if (lock.isValid()) {
-				lock.release();
-			}
+		finally{
+			if (lock != null && lock.isValid())
+	            lock.release();
+			if(out != null)
+				out.close();
 		}
 	}
 
@@ -820,7 +839,7 @@ public class MFileManager extends UrlManager implements IMapViewChangeListener {
 	 * @throws Exception
 	 *             , when the locking failed for other reasons than that the
 	 *             file is being edited.
-	 *             
+	 *
 	 * @deprecated -- use MMapIO
 	 */
 	@Deprecated

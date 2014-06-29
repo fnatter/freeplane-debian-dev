@@ -25,23 +25,24 @@ import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.LayoutManager;
-import java.awt.dnd.DropTarget;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
+
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.KeyStroke;
 import javax.swing.RootPaneContainer;
+
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.components.FreeplaneMenuBar;
 import org.freeplane.core.ui.components.UITools;
@@ -49,13 +50,11 @@ import org.freeplane.core.util.Compat;
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
+import org.freeplane.features.ui.FrameController;
 import org.freeplane.features.ui.IMapViewManager;
-import org.freeplane.features.ui.ViewController;
-import org.freeplane.features.url.mindmapmode.FileOpener;
-import org.freeplane.view.swing.ui.DefaultMapMouseListener;
+import org.freeplane.view.swing.map.MapView;
 
-class ApplicationViewController extends ViewController {
-	public static final String RESOURCES_USE_TABBED_PANE = "use_tabbed_pane";
+class ApplicationViewController extends FrameController {
 	private static final String SPLIT_PANE_LAST_LEFT_POSITION = "split_pane_last_left_position";
 	private static final String SPLIT_PANE_LAST_POSITION = "split_pane_last_position";
 	private static final String SPLIT_PANE_LAST_RIGHT_POSITION = "split_pane_last_right_position";
@@ -74,7 +73,8 @@ class ApplicationViewController extends ViewController {
 	final private NavigationNextMapAction navigationNextMap;
 	final private NavigationPreviousMapAction navigationPreviousMap;
 	final private ResourceController resourceController;
-
+	private JComponent mapPane;
+	private MapViewDockingWindows mapViewWindows;
 	@SuppressWarnings("serial")
     public ApplicationViewController( Controller controller, final IMapViewManager mapViewController,
 	                                 final JFrame frame) {
@@ -89,14 +89,6 @@ class ApplicationViewController extends ViewController {
 		getContentPane().setLayout(new BorderLayout());
 		// --- Set Note Window Location ---
 		mLocationPreferenceValue = resourceController.getProperty("note_location", "bottom");
-		if (ResourceController.getResourceController().getBooleanProperty("no_scrollbar")) {
-			getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-			getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		}
-		else {
-			getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		}
 		// disable all hotkeys for JSplitPane
 		mSplitPane = new JSplitPane(){
 			@Override
@@ -105,25 +97,19 @@ class ApplicationViewController extends ViewController {
 			}
 		};
 		setSplitPaneLayoutManager();
-		final JScrollPane contentComponent = getScrollPane();
-		mSplitPane.setLeftComponent(contentComponent);
+		final Component contentPane;
+		mapViewWindows = new MapViewDockingWindows();
+		contentPane = mapViewWindows.getMapPane();
+		getContentPane().add(contentPane, BorderLayout.CENTER);
+		mapPane = mapViewWindows.getMapPane();
+		getContentPane().add(mSplitPane, BorderLayout.CENTER);
+		mSplitPane.setLeftComponent(mapPane);
 		mSplitPane.setRightComponent(null);
-		final boolean shouldUseTabbedPane = ResourceController.getResourceController().getBooleanProperty(
-		    ApplicationViewController.RESOURCES_USE_TABBED_PANE);
-		if (shouldUseTabbedPane) {
-			new MapViewTabs(this, mSplitPane);
-		}
-		else {
-			getContentPane().add(mSplitPane, BorderLayout.CENTER);
-			final FileOpener fileOpener = new FileOpener();
-			new DropTarget(mSplitPane, fileOpener);
-			mSplitPane.addMouseListener(new DefaultMapMouseListener());
-		}
 		initFrame(frame);
 	}
 
 	/**
-	 * Called from the Controller, when the Location of the Note Window is changed on the Menu->View->Note Window Location 
+	 * Called from the Controller, when the Location of the Note Window is changed on the Menu->View->Note Window Location
 	 */
 	@Override
 	public void changeNoteWindowLocation() {
@@ -175,13 +161,12 @@ class ApplicationViewController extends ViewController {
 		// --- Devider position variables --
 		int splitPanePosition = -1;
 		int lastSplitPanePosition = -1;
-		final JScrollPane scrollPane = getScrollPane();
-		scrollPane.setVisible(true);
+		mapPane.setVisible(true);
 		mSplitPane.setLeftComponent(null);
 		mSplitPane.setRightComponent(null);
 		if ("right".equals(mLocationPreferenceValue)) {
 			mSplitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-			mSplitPane.setLeftComponent(scrollPane);
+			mSplitPane.setLeftComponent(mapPane);
 			mSplitPane.setRightComponent(pMindMapComponent);
 			splitPanePosition = resourceController.getIntProperty(SPLIT_PANE_RIGHT_POSITION, -1);
 			lastSplitPanePosition = resourceController.getIntProperty(SPLIT_PANE_LAST_RIGHT_POSITION, -1);
@@ -189,20 +174,20 @@ class ApplicationViewController extends ViewController {
 		else if ("left".equals(mLocationPreferenceValue)) {
 			mSplitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 			mSplitPane.setLeftComponent(pMindMapComponent);
-			mSplitPane.setRightComponent(scrollPane);
+			mSplitPane.setRightComponent(mapPane);
 			splitPanePosition = resourceController.getIntProperty(SPLIT_PANE_LEFT_POSITION, -1);
 			lastSplitPanePosition = resourceController.getIntProperty(SPLIT_PANE_LAST_LEFT_POSITION, -1);
 		}
 		else if ("top".equals(mLocationPreferenceValue)) {
 			mSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 			mSplitPane.setLeftComponent(pMindMapComponent);
-			mSplitPane.setRightComponent(scrollPane);
+			mSplitPane.setRightComponent(mapPane);
 			splitPanePosition = resourceController.getIntProperty(SPLIT_PANE_TOP_POSITION, -1);
 			lastSplitPanePosition = resourceController.getIntProperty(SPLIT_PANE_LAST_TOP_POSITION, -1);
 		}
 		else if ("bottom".equals(mLocationPreferenceValue)) {
 			mSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-			mSplitPane.setLeftComponent(scrollPane);
+			mSplitPane.setLeftComponent(mapPane);
 			mSplitPane.setRightComponent(pMindMapComponent);
 			splitPanePosition = resourceController.getIntProperty(SPLIT_PANE_POSITION, -1);
 			lastSplitPanePosition = resourceController.getIntProperty(SPLIT_PANE_LAST_POSITION, -1);
@@ -256,7 +241,7 @@ class ApplicationViewController extends ViewController {
                     if(scheme.equals("smb")){
                         uriString = Compat.smbUri2unc(uri);
                     }
-					if (System.getProperty("os.name").startsWith("Windows 2000")) 
+					if (System.getProperty("os.name").startsWith("Windows 2000"))
 						command = new String[] { "rundll32", "shell32.dll,ShellExec_RunDLL", uriString };
 					else
 	                    command = new String[] { "rundll32", "url.dll,FileProtocolHandler", uriString };
@@ -322,7 +307,13 @@ class ApplicationViewController extends ViewController {
 	 */
 	@Override
 	public void openDocument(final URL url) throws Exception {
-		final URI uri = new URI(url.getProtocol(), url.getHost(), url.getPath(), url.getQuery(), url.getRef());
+		URI uri = null;
+		try {
+			uri = url.toURI();
+		}
+		catch (URISyntaxException e) {
+			uri = new URI(url.getProtocol(), url.getHost(), url.getPath(), url.getQuery(), url.getRef());
+		}
 		openDocument(uri);
 	}
 
@@ -338,11 +329,10 @@ class ApplicationViewController extends ViewController {
 	@Override
 	public void removeSplitPane() {
 		saveSplitPanePosition();
-		final JScrollPane scrollPane = getScrollPane();
 		mMindMapComponent = null;
 		mSplitPane.setLeftComponent(null);
 		mSplitPane.setRightComponent(null);
-		mSplitPane.setLeftComponent(scrollPane);
+		mSplitPane.setLeftComponent(mapPane);
 		setSplitPaneLayoutManager();
 		final Controller controller = Controller.getCurrentModeController().getController();
 		final IMapSelection selection = controller.getSelection();
@@ -352,7 +342,7 @@ class ApplicationViewController extends ViewController {
 		final NodeModel node = selection.getSelected();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				final Component component = controller.getViewController().getComponent(node);
+				final Component component = controller.getMapViewManager().getComponent(node);
 				if (component != null) {
 					component.requestFocus();
 				}
@@ -371,7 +361,6 @@ class ApplicationViewController extends ViewController {
 	@Override
 	public void saveProperties() {
 		saveSplitPanePosition();
-		resourceController.setProperty("map_view_zoom", Float.toString(getZoom()));
 		if (!isFullScreenEnabled()) {
 			final int winState = frame.getExtendedState() & ~Frame.ICONIFIED;
 			if (JFrame.MAXIMIZED_BOTH != (winState & JFrame.MAXIMIZED_BOTH)) {
@@ -382,6 +371,7 @@ class ApplicationViewController extends ViewController {
 			}
 			resourceController.setProperty("appwindow_state", String.valueOf(winState));
 		}
+		mapViewWindows.saveLayout();
 	}
 
 	private void saveSplitPanePosition() {
@@ -416,8 +406,9 @@ class ApplicationViewController extends ViewController {
 	 * @see freeplane.main.FreeplaneMain#setTitle(java.lang.String)
 	 */
 	@Override
-	public void setTitle(final String title) {
-		frame.setTitle(title);
+	public void setTitle(final String frameTitle) {
+		frame.setTitle(frameTitle);
+		mapViewWindows.setTitle();
 	}
 
 	@Override
@@ -433,13 +424,13 @@ class ApplicationViewController extends ViewController {
 	}
 
 	@Override
-	protected void viewNumberChanged(final int number) {
+    public void viewNumberChanged(final int number) {
 		navigationPreviousMap.setEnabled(number > 1);
 		navigationNextMap.setEnabled(number > 1);
 	}
 
 	public void initFrame(final JFrame frame) {
-		// Preserve the existing icon image under Mac OS X 
+		// Preserve the existing icon image under Mac OS X
 		if (!Compat.isMacOsX()) {
 			final ImageIcon mWindowIcon;
 			if (Compat.isLowerJdk(Compat.VERSION_1_6_0)) {
@@ -448,7 +439,7 @@ class ApplicationViewController extends ViewController {
 			}
 			else {
 				mWindowIcon = new ImageIcon(ResourceController.getResourceController().getResource(
-				    "/images/Freeplane_frame_icon_32x32.png"));
+				    "/images/Freeplane_frame_icon_64x64.png"));
 			}
 			frame.setIconImage(mWindowIcon.getImage());
 		}
@@ -475,5 +466,14 @@ class ApplicationViewController extends ViewController {
 		win_state = ((win_state & Frame.ICONIFIED) != 0) ? Frame.NORMAL : win_state;
 		frame.setExtendedState(win_state);
 	}
+
+	public void openMapsOnStart() {
+	    mapViewWindows.loadLayout();
+    }
+
+	public void focusTo(MapView currentMapView) {
+	    mapViewWindows.focusMapViewLater(currentMapView);
+
+    }
 
 }

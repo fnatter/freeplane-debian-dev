@@ -22,6 +22,7 @@ package org.freeplane.plugin.script;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -50,8 +51,12 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
+import jsyntaxpane.actions.ActionUtils;
+
+import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.MenuBuilder;
 import org.freeplane.core.ui.UIBuilder;
 import org.freeplane.core.ui.components.BlindIcon;
@@ -59,11 +64,15 @@ import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.mode.Controller;
-import org.freeplane.plugin.script.ScriptingEngine.IErrorHandler;
+import org.freeplane.plugin.script.IFreeplaneScriptErrorHandler;
 
 /**
  */
 class ScriptEditorPanel extends JDialog {
+
+	static final String GROOVY_EDITOR_FONT = "groovy_editor_font";
+	static final String GROOVY_EDITOR_FONT_SIZE = "groovy_editor_font_size";
+
 	private static final String internalCharset = "UTF-16BE";
 
 	final private class CancelAction extends AbstractAction {
@@ -108,7 +117,7 @@ class ScriptEditorPanel extends JDialog {
 
 		void endDialog(boolean pIsCanceled);
 
-		Object executeScript(int pIndex, PrintStream outStream, IErrorHandler pErrorHandler);
+		Object executeScript(int pIndex, PrintStream outStream, IFreeplaneScriptErrorHandler pErrorHandler);
 
 		int getAmountOfScripts();
 
@@ -196,6 +205,8 @@ class ScriptEditorPanel extends JDialog {
 						getErrorHandler());
                 }
                 catch (Throwable e2) {
+				// make sure the complete stack trace is logged!
+				LogUtils.warn(e2);
         			Throwable cause = e2.getCause();
 					String causeMessage = "";
 					if(cause != null && cause.getMessage()!= null)
@@ -333,6 +344,11 @@ class ScriptEditorPanel extends JDialog {
 		mCentralUpperPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mScriptList, new JScrollPane(mScriptTextField));
 		try {
 			editorPane.setContentType("text/groovy");
+
+			final String fontName = ResourceController.getResourceController().getProperty(GROOVY_EDITOR_FONT);
+			final int fontSize = ResourceController.getResourceController().getIntProperty(GROOVY_EDITOR_FONT_SIZE);
+			editorPane.setFont(new Font(fontName, Font.PLAIN, fontSize));
+
 		} catch (Exception e) {
 			LogUtils.warn(e);
 			editorPane.setContentType("text/plain");
@@ -351,9 +367,14 @@ class ScriptEditorPanel extends JDialog {
 		mScriptTextField.addCaretListener(new CaretListener() {
 			public void caretUpdate(final CaretEvent arg0) {
 				final int caretPosition = mScriptTextField.getCaretPosition();
-				final int lineOfOffset = JSyntaxPaneProxy.getLineOfOffset(mScriptTextField, caretPosition);
-				mStatus.setText("Line: " + (lineOfOffset + 1) + ", Column: "
-					+ (caretPosition - JSyntaxPaneProxy.getLineOfOffset(mScriptTextField, lineOfOffset) + 1));
+				try {
+	                final int lineOfOffset = ActionUtils.getLineNumber(mScriptTextField, caretPosition);
+	                mStatus.setText("Line: " + (lineOfOffset + 1) + ", Column: "
+	                	+ (caretPosition - ActionUtils.getLineNumber(mScriptTextField, lineOfOffset) + 1));
+                }
+                catch (Exception e) {
+	                e.printStackTrace();
+                }
 			}
 		});
 		updateFields();
@@ -417,10 +438,10 @@ class ScriptEditorPanel extends JDialog {
 		mScriptModel.endDialog(pIsCanceled);
 	}
 
-	IErrorHandler getErrorHandler() {
-		return new IErrorHandler() {
+	IFreeplaneScriptErrorHandler getErrorHandler() {
+		return new IFreeplaneScriptErrorHandler() {
 			public void gotoLine(final int pLineNumber) {
-				JSyntaxPaneProxy.gotoPosition(mScriptTextField, pLineNumber, 1);
+				ActionUtils.setCaretPosition(mScriptTextField, pLineNumber, 1);
 			}
 		};
 	}

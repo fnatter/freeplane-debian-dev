@@ -11,17 +11,19 @@
 ; Predrag Cuklin 18/06/2009 - Universial Version
 ;****************************************************************************
 
-#define MyVersion "1.2.23"
+#define MyVersion "1.3.11"
+#define MyStatus ""
 #define MyAppName "Freeplane"
 #define MyAppPublisher "Open source"
 #define MyAppURL "http://sourceforge.net/projects/freeplane/"
 #define MyAppExeName "freeplane.exe"
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{D3941722-C4DD-4509-88C4-0E87F675A859}
-AppCopyright=Copyright © 2000-2012 Freeplane team and others
+AppCopyright=Copyright © 2000-2014 Freeplane team and others
 AppName={#MyAppName}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
@@ -31,7 +33,11 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 ArchitecturesInstallIn64BitMode=x64 ia64
 OutputDir=..\dist
-OutputBaseFilename=Freeplane-Setup-{#MyVersion}
+#if MyStatus == ""
+  OutputBaseFilename=Freeplane-Setup-{#MyVersion}
+#else
+  OutputBaseFilename=Freeplane-Setup-{#MyVersion}-{#MyStatus}
+#endif
 SetupIconFile=Setup.ico
 VersionInfoDescription=Free mind mapping software. Fast. Simple. Streamlined.
 ChangesAssociations=true
@@ -41,7 +47,11 @@ ShowTasksTreeLines=true
 WindowVisible=true
 WizardSmallImageFile=Freeplane_bee.bmp
 WizardImageStretch=false
-AppVersion={#MyVersion}
+#if MyStatus == ""
+  AppVersion={#MyVersion}
+#else
+  AppVersion={#MyVersion}{#MyStatus}
+#endif
 UninstallDisplayIcon={app}\freeplane.exe
 UninstallDisplayName=Freeplane
 DiskSpanning=false
@@ -87,10 +97,14 @@ Root: "HKCR"; Subkey: ".mm"; Flags: deletekey; Tasks: associate
 Root: "HKLM"; Subkey: "SOFTWARE\Classes\.mm"; Flags: deletekey; Tasks: associate
 Root: "HKCU"; Subkey: "Software\Classes\Applications\freeplane.exe"; Flags: deletekey; Tasks: associate
 Root: "HKCU"; Subkey: "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.mm"; Flags: deletekey; Tasks: associate
-Root: "HKCR"; Subkey: ".mm"; ValueType: string; ValueData: "Freeplane"; Flags: uninsdeletekey; Tasks: associate
-Root: "HKCR"; Subkey: "Freeplane"; ValueType: string; ValueData: "Freeplane mind map"; Flags: uninsdeletekey; Tasks: associate
-Root: "HKCR"; Subkey: "Freeplane\Shell\Open\Command"; ValueType: string; ValueData: """{app}\freeplane.exe"" ""%1"""; Flags: uninsdeletevalue; Tasks: associate
-Root: "HKCR"; Subkey: "Freeplane\DefaultIcon"; ValueType: string; ValueData: "{app}\freeplaneIcons.dll,0"; Flags: uninsdeletevalue; Tasks: associate
+Root: "HKCR"; Subkey: ".mm"; ValueType: string; ValueData: "FreeplaneApplication"; Flags: uninsdeletekey; Tasks: associate
+Root: "HKCR"; Subkey: "freeplane"; ValueType: string; ValueData: "URL:Freeplane protocol"; Flags: uninsdeletekey; Tasks: associate
+Root: "HKCR"; Subkey: "freeplane"; ValueType: string; ValueName: "URL Protocol"; Flags: uninsdeletekey; Tasks: associate
+Root: "HKCR"; Subkey: "freeplane\Shell\Open\Command"; ValueType: string; ValueData: """{app}\freeplane.exe"" ""%1"""; Flags: uninsdeletevalue; Tasks: associate
+Root: "HKCR"; Subkey: "freeplane\DefaultIcon"; ValueType: string; ValueData: "{app}\freeplaneIcons.dll,0"; Flags: uninsdeletevalue; Tasks: associate
+Root: "HKCR"; Subkey: "FreeplaneApplication"; ValueType: string; ValueData: "Freeplane mind map"; Flags: uninsdeletekey; Tasks: associate
+Root: "HKCR"; Subkey: "FreeplaneApplication\Shell\Open\Command"; ValueType: string; ValueData: """{app}\freeplane.exe"" ""%1"""; Flags: uninsdeletevalue; Tasks: associate
+Root: "HKCR"; Subkey: "FreeplaneApplication\DefaultIcon"; ValueType: string; ValueData: "{app}\freeplaneIcons.dll,0"; Flags: uninsdeletevalue; Tasks: associate
 
 [InstallDelete]
 Name: {app}\core; Type: filesandordirs

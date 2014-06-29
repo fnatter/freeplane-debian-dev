@@ -12,6 +12,7 @@ import java.awt.Component;
 import java.awt.Dimension
 import java.awt.FlowLayout
 import java.awt.Toolkit
+import java.awt.event.KeyEvent
 import java.util.zip.ZipInputStream
 
 import javax.swing.BoxLayout
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane
 import javax.swing.KeyStroke
 import javax.swing.tree.DefaultMutableTreeNode
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils
 import org.freeplane.core.resources.ResourceController
 import org.freeplane.core.ui.MenuBuilder
@@ -31,6 +33,7 @@ import org.freeplane.features.mode.Controller
 import org.freeplane.main.addons.AddOnProperties
 import org.freeplane.main.addons.AddOnsController
 import org.freeplane.plugin.script.ExecuteScriptAction
+import org.freeplane.plugin.script.ScriptResources;
 import org.freeplane.plugin.script.ScriptingEngine
 import org.freeplane.plugin.script.ScriptingPermissions
 import org.freeplane.plugin.script.addons.AddOnDetailsPanel
@@ -50,6 +53,9 @@ configMap = [:]
 //
 // == methods ==
 //
+def debugPrintln(String message) {
+    // println message
+}
 
 def terminate(String message) {
 	throw new Exception(textUtils.getText('addons.installer.canceled') + ': ' + message)
@@ -99,7 +105,7 @@ def parseProperties(Map childNodeMap) {
 	mapStructureAssert( ! missingProperties, textUtils.format('addons.installer.missing.properties', missingProperties))
 	configMap[property]['homepage'] = propertyNode.link.text ?
 		propertyNode.link.uri.toURL() : new URL(expandVariables(addonsUrl + '/${name}'))
-	println property + ': ' + configMap[property]
+    debugPrintln property + ': ' + configMap[property]
 }
 
 def checkFreeplaneVersion(Map configMap) {
@@ -128,14 +134,14 @@ def parseDescription(Map childNodeMap) {
 	def property = 'description'
 	Proxy.Node propertyNode = childNodeMap[property]
 	configMap[property] = theOnlyChild(propertyNode).text
-	println property + ': ' + configMap[property]
+	debugPrintln property + ': ' + configMap[property]
 }
 
 def parseLicence(Map childNodeMap) {
 	def property = 'license'
 	Proxy.Node propertyNode = childNodeMap[property]
 	configMap[property] = theOnlyChild(propertyNode).text
-	println property + ': ' + configMap[property]
+	debugPrintln property + ': ' + configMap[property]
 }
 
 def parseTranslations(Map childNodeMap) {
@@ -155,14 +161,14 @@ def parseTranslations(Map childNodeMap) {
 		return map
 	}
 	configMap[property] = translationsMap
-	println property + ': ' + configMap[property]
+	debugPrintln property + ': ' + configMap[property]
 }
 
 def parsePreferencesXml(Map childNodeMap) {
 	def property = 'preferences.xml'
 	Proxy.Node propertyNode = childNodeMap[property]
 	configMap[property] = propertyNode.isLeaf() ? null : propertyNode.children[0].text
-	println property + ': ' + configMap[property]
+	debugPrintln property + ': ' + configMap[property]
 }
 
 def parseDefaultProperties(Map childNodeMap) {
@@ -172,14 +178,26 @@ def parseDefaultProperties(Map childNodeMap) {
 		map[expandVariables(k)] = expandVariables(v)
 		return map
 	}
-	println property + ': ' + configMap[property]
+	debugPrintln property + ': ' + configMap[property]
 }
 
 def parseZips(Map childNodeMap) {
 	def property = 'zips'
 	Proxy.Node propertyNode = childNodeMap[property]
 	configMap[property] = propertyNode.children.collect{ ensureNoHtml(theOnlyChild(it)).binary }
-	println property + ': ' + configMap[property].dump()
+	debugPrintln property + ': ' + configMap[property].dump()
+}
+
+def parseLib(Map childNodeMap) {
+	def property = 'lib'
+	Proxy.Node propertyNode = childNodeMap[property]
+	if (!propertyNode)
+		return
+	configMap[property] = propertyNode.children.inject([:]){ map, child ->
+		map[child.plainText] = ensureNoHtml(theOnlyChild(child)).binary
+		return map
+	}
+	debugPrintln property + ': ' + configMap[property].dump()
 }
 
 def parseImages(Map childNodeMap) {
@@ -191,7 +209,7 @@ def parseImages(Map childNodeMap) {
         map[child.plainText] = ensureNoHtml(theOnlyChild(child)).binary
         return map
     }
-    println property + ': ' + configMap[property].dump()
+    debugPrintln property + ': ' + configMap[property].dump()
 }
 
 def installZips() {
@@ -219,6 +237,19 @@ def installImages() {
     }
 }
 
+def installLib() {
+	File destDir = new File(privateAddonDir(), 'lib')
+	destDir.mkdirs()
+	configMap['lib'].each{ filename, libData ->
+		try {
+			new File(destDir, expandVariables(filename)).bytes = libData
+		} catch (Exception e) {
+			e.printStackTrace()
+			installationAssert(false, e.message);
+		}
+	}
+}
+
 void unpack(File destDir, byte[] zipData) {
     mapStructureAssert(zipData, textUtils.getText('addons.installer.no.zipdata'))
 	ZipInputStream result = new ZipInputStream(new ByteArrayInputStream(zipData))
@@ -241,14 +272,17 @@ void unpack(File destDir, byte[] zipData) {
 	}
 }
 
-/** ensures that parent has exactly one non-HTML child node. */
+/** ensures that 'parent' has exactly one child node. */
 Proxy.Node theOnlyChild(Proxy.Node parent) {
+    if (parent.children.size() != 1)
+        logger.warn(StringUtils.abbreviate(parent.plainText, 32), new RuntimeException("dummy"))
 	mapStructureAssert(parent.children.size() == 1,
-		textUtils.format('addons.installer.one.child.expected', parent.plainText, parent.children.size()))
+		textUtils.format('addons.installer.one.child.expected',
+            StringUtils.abbreviate(parent.plainText, 32), parent.children.size()))
 	return parent.children.first()
 }
 
-/** ensures that parent has exactly one non-HTML child node. */
+/** ensures that 'first' has non-HTML text. */
 Proxy.Node ensureNoHtml(Proxy.Node first) {
 	mapStructureAssert( ! htmlUtils.isHtmlNode(first.text), textUtils.getText('addons.installer.html.script'))
 	return first
@@ -260,7 +294,6 @@ def parseScripts(Map childNodeMap) {
 	configMap[property] = propertyNode.children.inject([]){ scripts, scriptNode ->
 		def script = new ScriptAddOnProperties.Script()
 		script.name = expandVariables(scriptNode.plainText)
-		script.file = new File(ScriptingEngine.getUserScriptDir(), script.name)
 		script.scriptBody = ensureNoHtml(theOnlyChild(scriptNode)).text
 		mapStructureAssert( ! htmlUtils.isHtmlNode(script.scriptBody), textUtils.getText('addons.installer.html.script'))
 		scriptNode.attributes.map.each { k,v ->
@@ -270,7 +303,7 @@ def parseScripts(Map childNodeMap) {
 				script[k] = expandVariables(v)
 		}
 		script.permissions = parsePermissions(scriptNode, script.name)
-		mapStructureAssert(script.name.endsWith('.groovy'), textUtils.format('addons.installer.groovy.script.name', script.name))
+		mapStructureAssert(script.name.matches('.*\\.\\w+'), textUtils.format('addons.installer.script.name.suffix', script.name))
 		mapStructureAssert(script.menuTitleKey, textUtils.format('addons.installer.script.no.menutitle', script))
 		mapStructureAssert(script.menuLocation, textUtils.format('addons.installer.script.no.menulocation', script))
 		mapStructureAssert(script.executionMode, textUtils.format('addons.installer.script.no.execution_mode', script))
@@ -279,7 +312,7 @@ def parseScripts(Map childNodeMap) {
 		return scripts
 	}
 //	mapStructureAssert(configMap[property], textUtils.getText('addons.installer.no.scripts'))
-	println property + ': ' + configMap[property].dump()
+	debugPrintln property + ': ' + configMap[property].dump()
 }
 
 void createKeyboardShortcut(ScriptAddOnProperties.Script script) {
@@ -315,7 +348,7 @@ void createKeyboardShortcut(ScriptAddOnProperties.Script script) {
 			}
 		}
 	}
-	println "set keyboardShortcut $shortcutKey to $newShortcut"
+	debugPrintln "set keyboardShortcut $shortcutKey to $newShortcut"
 	ResourceController.getResourceController().setProperty(shortcutKey, newShortcut)
 }
 
@@ -360,7 +393,7 @@ def parseDeinstallationRules(Map childNodeMap) {
 	]
 	def unknownDeinstallationRules = attribs.names.findAll{ k -> ! knownDeinstallationRules.contains(k) }
 	mapStructureAssert( ! unknownDeinstallationRules, textUtils.format('addons.installer.unknown.deinstallation.rules', unknownDeinstallationRules))
-	println property + ': ' + configMap[property]
+	debugPrintln property + ': ' + configMap[property]
 }
 
 def handlePermissions() {
@@ -377,22 +410,21 @@ def handlePermissions() {
 	}
 }
 
-def scriptDir() {
-	File dir = new File(installationbase, 'scripts')
-	installationAssert(dir.exists(), null)
-	return dir
-}
-
 def addOnDir() {
 	File dir = new File(installationbase, 'addons')
 	installationAssert(dir.exists(), null)
 	return dir
 }
 
-def createScripts() {
-	List<ScriptAddOnProperties.Script> scripts = configMap['scripts']
-	scripts.each { script -> 
-		File file = script.file
+def privateAddonDir() {
+	new File(addOnDir(), configMap['properties']['name'])
+}
+
+def installScripts() {
+	File destDir = new File(privateAddonDir(), 'scripts')
+	destDir.mkdirs()
+	configMap['scripts'].each { script ->
+		File file = new File(destDir, script.name)
 		try {
 			file.text = script.scriptBody
 		}
@@ -404,10 +436,10 @@ def createScripts() {
 	}
 }
 
-def expandVariables(String string) {
+def expandVariables(Object o) {
 	Map variableMap = configMap['properties']
 	// expands strings like "${name}.groovy"
-	string.replaceAll(/\$\{([^}]+)\}/, { match, key -> variableMap[key] ? variableMap[key] : match })
+	String.valueOf(o).replaceAll(/\$\{([^}]+)\}/, { match, key -> variableMap[key] ? variableMap[key] : match })
 }
 
 AddOnProperties parse() {
@@ -421,9 +453,10 @@ AddOnProperties parse() {
 		'zips',
 		'deinstall',
 		'images',
+		'lib',
 	]
-	Map<String, Proxy.Node> childNodeMap = propertyNames.inject([:]) { map, key ->
-		map[key] = node.map.root.find{ it.plainText == key }[0]
+	Map<String, Proxy.Node> childNodeMap = node.map.root.children.inject([:]) { map, child ->
+		map[child.plainText] = child
 		return map
 	}
 	def Map<String, Proxy.Node> missingChildNodes = childNodeMap.findAll{ k,v->
@@ -431,6 +464,7 @@ AddOnProperties parse() {
 	}
     // note: images came after the first beta
     missingChildNodes.remove('images')
+	missingChildNodes.remove('lib')
 	mapStructureAssert( ! missingChildNodes, textUtils.format('addons.installer.missing.child.nodes', missingChildNodes.keySet()))
 
 	parseProperties(childNodeMap)
@@ -443,6 +477,7 @@ AddOnProperties parse() {
 	parseScripts(childNodeMap)
 	parseZips(childNodeMap)
 	parseImages(childNodeMap)
+	parseLib(childNodeMap)
 	parseDeinstallationRules(childNodeMap)
 
 	def addOn = new ScriptAddOnProperties(configMap['properties']['name'])
@@ -459,6 +494,7 @@ AddOnProperties parse() {
 	addOn.defaultProperties = configMap['default.properties']
 	addOn.deinstallationRules = configMap['deinstall']
     addOn.images = configMap['images'] ? configMap['images'].keySet() : []
+	addOn.lib = configMap['lib'] ? configMap['lib'].keySet() : []
 	addOn.scripts = configMap['scripts']
 
 	return addOn
@@ -469,7 +505,7 @@ boolean confirmInstall(ScriptAddOnProperties addOn, ScriptAddOnProperties instal
 	def dialogPrefSize = new Dimension((int) screenSize.getWidth() * 3 / 5, (int) screenSize.getHeight() * 1 / 2);
 	def warning = textUtils.removeTranslateComment(textUtils.getText('addons.installer.warning'))
 	def addOnDetailsPanel = new AddOnDetailsPanel(addOn, warning)
-	addOnDetailsPanel.maxWidth = 600
+	addOnDetailsPanel.maxWidth = 500
 	def installButtonText = installedAddOn ? textUtils.format('addons.installer.update', installedAddOn.version)
 		: textUtils.getText('addons.installer.install')
 
@@ -480,9 +516,15 @@ boolean confirmInstall(ScriptAddOnProperties addOn, ScriptAddOnProperties instal
 						locationRelativeTo:ui.frame, owner:ui.frame, pack:true, preferredSize:dialogPrefSize) {
 		scrollPane() {
 			panel() {
+				panel(alignmentX:0.05) {
+					flowLayout(alignment:FlowLayout.LEFT)
+					button(action: action(name: textUtils.getText('cancel'), mnemonic: 'C', closure: {dispose()}))
+					defaultButton = button(id:'defBtn', action: action(name: installButtonText,
+						mnemonic: 'I', defaultButton:true, selected:true, closure: {vars.ok = true; dispose()}))
+				}
 				boxLayout(axis:BoxLayout.Y_AXIS)
 				widget(addOnDetailsPanel)
-				panel(alignmentX:0f) {
+				panel(alignmentX:0.05) {
 					flowLayout(alignment:FlowLayout.RIGHT)
 					button(action: action(name: textUtils.getText('cancel'), mnemonic: 'C', closure: {dispose()}))
 					defaultButton = button(id:'defBtn', action: action(name: installButtonText,
@@ -512,9 +554,10 @@ boolean confirmInstall(ScriptAddOnProperties addOn, ScriptAddOnProperties instal
 }
 
 def install(AddOnProperties addOn) {
-	createScripts()
+	installScripts()
 	installZips()
 	installImages()
+	installLib()
 	new File(addOnDir(), expandVariables('${name}.script.xml')).text = addOn.toXmlString()
 }
 

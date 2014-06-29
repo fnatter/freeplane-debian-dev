@@ -39,6 +39,7 @@ public class AddOnsController {
 	private static AddOnsController addOnsController;
 	private List<AddOnProperties> installedAddOns = new ArrayList<AddOnProperties>();
 	private boolean autoInstall;
+    public static final String LATEST_VERSION_FILE = "version.properties";
 
 	public AddOnsController() {
 		createAddOnsDirIfNecessary();
@@ -90,7 +91,7 @@ public class AddOnsController {
 	}
 
 	public List<AddOnProperties> getInstalledAddOns() {
-		return Collections.unmodifiableList(installedAddOns);
+		return Collections.unmodifiableList(new ArrayList<AddOnProperties>(installedAddOns));
 	}
 
 	public void registerInstalledAddOn(final AddOnProperties addOn) {

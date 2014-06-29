@@ -7,7 +7,7 @@
  * modify it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * FormatTranslation.java is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -35,7 +35,7 @@ import org.apache.tools.ant.Task;
  *      and [auto] are removed in favor of normal entries.
  * <li> newline style is changed to &lt;eolStyle&gt;.
  * </ol>
- * 
+ *
  * Attributes:
  * <ul>
  * <li> dir: the input directory (default: ".")
@@ -45,7 +45,7 @@ import org.apache.tools.ant.Task;
  * <li> excludes: wildcard pattern, overrules includes (default: no excludes).
  * <li> eolStyle: unix|mac|windows (default: platform default).
  * </ul>
- * 
+ *
  * Build messages:
  * <table border=1>
  * <tr><th>Message</th><th>Action</th><th>Description</th></tr>
@@ -71,7 +71,8 @@ import org.apache.tools.ant.Task;
  */
 public class FormatTranslation extends Task {
 	static Comparator<String> KEY_COMPARATOR = new Comparator<String>() {
-		public int compare(String s1, String s2) {
+		@Override
+        public int compare(String s1, String s2) {
 			int n1 = s1.length(), n2 = s2.length();
 			for (int i1 = 0, i2 = 0; i1 < n1 && i2 < n2; i1++, i2++) {
 				char c1 = s1.charAt(i1);
@@ -106,11 +107,12 @@ public class FormatTranslation extends Task {
 	private File outputDir;
 	private boolean writeIfUnchanged = false;
 	private File inputDir = new File(".");
-	private ArrayList<Pattern> includePatterns = new ArrayList<Pattern>();
-	private ArrayList<Pattern> excludePatterns = new ArrayList<Pattern>();
+	private final ArrayList<Pattern> includePatterns = new ArrayList<Pattern>();
+	private final ArrayList<Pattern> excludePatterns = new ArrayList<Pattern>();
 	private String lineSeparator = System.getProperty("line.separator");
 
-	public void execute() {
+	@Override
+    public void execute() {
 		final int countFormatted = executeImpl(false);
 		log(inputDir + ": formatted " + countFormatted + " file" + (countFormatted == 1 ? "" : "s"));
 	}
@@ -132,8 +134,35 @@ public class FormatTranslation extends Task {
 		for (String arg : argc) {
 			inputFiles[i++] = new File(arg);
 		}
-		new FormatTranslation().process(inputFiles, false);
+		new FormatTranslation().configureFromDefines().process(inputFiles, false);
 	}
+
+	private FormatTranslation configureFromDefines() {
+		final String eolStyle = getConfigurationProperty("eolStyle");
+		if(eolStyle != null)
+			setEolStyle(eolStyle);
+		final String dir = getConfigurationProperty("dir");
+		if(dir != null)
+			setDir(dir);
+		final String includes = getConfigurationProperty("includes");
+		if(includes != null)
+			setIncludes(includes);
+		final String excludes = getConfigurationProperty("excludes");
+		if(excludes != null)
+			setExcludes(excludes);
+		final String outputDir = getConfigurationProperty("outputdir");
+		if(outputDir != null)
+			setOutputDir(outputDir);
+		final String writeIfUnchanged = getConfigurationProperty("writeIfUnchanged");
+		if(writeIfUnchanged != null)
+			setWriteIfUnchanged(Boolean.parseBoolean(writeIfUnchanged));
+	    return this;
+    }
+
+	protected String getConfigurationProperty(String key) {
+	    String propertyName = getClass().getName() + "." + key;
+		return System.getProperty(propertyName, null);
+    }
 
 	private int process(File[] inputFiles, boolean checkOnly) {
 		try {
@@ -156,7 +185,11 @@ public class FormatTranslation extends Task {
 						    Project.MSG_DEBUG);
 				}
 				if (!checkOnly && (formattingRequired || writeIfUnchanged)) {
-					File outputFile = new File(outputDir, inputFile.getName());
+					File outputFile;
+					if (outputDir != null)
+						outputFile = new File(outputDir, inputFile.getName());
+					else
+						outputFile = inputFile;
 					TaskUtils.writeFile(outputFile, sortedLines, lineSeparator);
 				}
 			}
@@ -192,7 +225,8 @@ public class FormatTranslation extends Task {
 		for (final String line : lines) {
 			if (line.indexOf('#') == 0 || line.matches("\\s*"))
 				continue;
-			final String[] keyValue = line.split("\\s*=\\s*", 2);
+			final String standardUnicodeLine = convertUnicodeCharacterRepresentation(line);
+			final String[] keyValue = standardUnicodeLine.split("\\s*=\\s*", 2);
 			if (keyValue.length != 2 || keyValue[0].length() == 0) {
 				// broken line: no '=' sign or empty key (we had " = ======")
 				warn(filename + ": no key/val: " + line);
@@ -316,4 +350,20 @@ public class FormatTranslation extends Task {
 		else
 			throw new BuildException("unknown eolStyle, known: unix|win|mac");
 	}
+
+	public String convertUnicodeCharacterRepresentation(String input) {
+		if(! (input.contains("\\\\u") || input.contains("\\\\U")))
+			return input;
+		final char[] chars = input.toCharArray();
+		for (int offset = 0; 6 + offset < chars.length;  offset++) {
+	        if (chars[offset] == '\\' && (chars[offset+1] == 'u' || chars[offset+1] == 'U')) {
+	        	chars[offset+1] = 'u';
+	        	for(int i = 2; i < 6; i++){
+	        		chars[offset+i] = Character.toUpperCase(chars[offset+i]);
+	        	}
+	        	offset+=5;
+	        }
+        }
+		return new String(chars);
+    }
 }
