@@ -57,7 +57,7 @@ fix code for libjgoodies-forms-java 1.3->1.6 transition
  	private boolean validate() {
 --- a/freeplane/src/org/freeplane/features/styles/mindmapmode/StyleEditorPanel.java
 +++ b/freeplane/src/org/freeplane/features/styles/mindmapmode/StyleEditorPanel.java
-@@ -747,7 +747,7 @@
+@@ -761,7 +761,7 @@
  		final String form = "right:max(20dlu;p), 2dlu, p, 1dlu,right:max(20dlu;p), 4dlu, 80dlu, 7dlu";
  		final FormLayout rightLayout = new FormLayout(form, "");
  		final DefaultFormBuilder rightBuilder = new DefaultFormBuilder(rightLayout);
@@ -102,7 +102,7 @@ fix code for libjgoodies-forms-java 1.3->1.6 transition
  import com.jgoodies.forms.layout.ColumnSpec;
  import com.jgoodies.forms.layout.FormLayout;
  import com.jgoodies.forms.layout.RowSpec;
-@@ -41,16 +41,16 @@
+@@ -41,18 +41,18 @@
  	public AddOnDetailsPanel(final AddOnProperties addOn, final String warning) {
  		this.warning = warning;
  		setLayout(new FormLayout(new ColumnSpec[] {
@@ -118,6 +118,10 @@ fix code for libjgoodies-forms-java 1.3->1.6 transition
 -				FormFactory.DEFAULT_ROWSPEC,
 -				FormFactory.RELATED_GAP_ROWSPEC,
 -				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
 +				FormSpecs.RELATED_GAP_ROWSPEC,
 +				FormSpecs.DEFAULT_ROWSPEC,
 +				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -125,8 +129,8 @@ fix code for libjgoodies-forms-java 1.3->1.6 transition
 +				FormSpecs.RELATED_GAP_ROWSPEC,
 +				FormSpecs.DEFAULT_ROWSPEC,
  				RowSpec.decode("top:default:grow"),}));
- 		
- 		JLabel imageLabel = createImageLabel(addOn);
+ 		if (warning != null) {
+ 			JLabel warningLabel = createWarningLabel(addOn);
 --- a/freeplane_plugin_script/src/org/freeplane/plugin/script/addons/AddOnInstallerPanel.java
 +++ b/freeplane_plugin_script/src/org/freeplane/plugin/script/addons/AddOnInstallerPanel.java
 @@ -43,7 +43,7 @@
@@ -167,22 +171,286 @@ fix code for libjgoodies-forms-java 1.3->1.6 transition
  		//
  		// Search
  		//
---- a/freeplane/src/org/freeplane/core/resources/components/KeyProperty.java
-+++ b/freeplane/src/org/freeplane/core/resources/components/KeyProperty.java
-@@ -32,6 +32,7 @@
+--- a/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/FileExistsDialogPanel.java
++++ b/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/FileExistsDialogPanel.java
+@@ -10,7 +10,7 @@
  
- import com.jgoodies.forms.builder.DefaultFormBuilder;
+ import org.freeplane.core.util.TextUtils;
+ 
+-import com.jgoodies.forms.factories.FormFactory;
++import com.jgoodies.forms.layout.FormSpecs;
+ import com.jgoodies.forms.layout.ColumnSpec;
+ import com.jgoodies.forms.layout.FormLayout;
  import com.jgoodies.forms.layout.RowSpec;
-+import com.jgoodies.forms.layout.Sizes;
+@@ -26,13 +26,13 @@
+ 		}
+ 		
+ 		setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.RELATED_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
+ 				ColumnSpec.decode("default:grow"),},
+ 			new RowSpec[] {
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:default:grow"),
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,}));
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,}));
+ 		
+ 		JLabel lblNewLabel = new JLabel(TextUtils.format(message, targetFile.getName(), targetFile.getParent()));
+ 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+--- a/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/ImportProjectDialogPanel.java
++++ b/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/ImportProjectDialogPanel.java
+@@ -41,7 +41,7 @@
+ import org.freeplane.plugin.workspace.model.project.ProjectLoader;
+ import org.freeplane.plugin.workspace.nodes.ProjectRootNode;
+ 
+-import com.jgoodies.forms.factories.FormFactory;
++import com.jgoodies.forms.layout.FormSpecs;
+ import com.jgoodies.forms.layout.ColumnSpec;
+ import com.jgoodies.forms.layout.FormLayout;
+ import com.jgoodies.forms.layout.RowSpec;
+@@ -66,33 +66,33 @@
+ 	public ImportProjectDialogPanel() {
+ 		setPreferredSize(new Dimension(400, 180));
+ 		setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
+ 				ColumnSpec.decode("max(100dlu;min):grow"),
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,},
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,},
+ 			new RowSpec[] {
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:max(50dlu;pref)"),
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:default"),
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,}));
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,}));
+ 		
+ 		JPanel panel = new JPanel();
+ 		panel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+ 		panel.setBackground(Color.WHITE);
+ 		add(panel, "1, 1, 8, 2, fill, fill");
+ 		panel.setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.RELATED_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
+ 				ColumnSpec.decode("default:grow"),},
+ 			new RowSpec[] {
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:default:grow"),}));
+ 		
+ 		JLabel lblNewLabel = new JLabel(TextUtils.getText(ImportProjectDialogPanel.class.getSimpleName().toLowerCase(Locale.ENGLISH)+".help"));
+--- a/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/NewDirectoryDialogPanel.java
++++ b/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/NewDirectoryDialogPanel.java
+@@ -11,7 +11,7 @@
+ import javax.swing.JTextField;
+ import com.jgoodies.forms.layout.FormLayout;
+ import com.jgoodies.forms.layout.ColumnSpec;
+-import com.jgoodies.forms.factories.FormFactory;
++import com.jgoodies.forms.layout.FormSpecs;
+ import com.jgoodies.forms.layout.RowSpec;
  
  /**
-  * @author Dimitry Polivaev
-@@ -77,7 +78,7 @@
- 		String tooltip = TextUtils.getOptionalText(getDescription());
- 		label.setToolTipText(tooltip);
- 		if (KeyProperty.rowSpec == null) {
--			KeyProperty.rowSpec = new RowSpec("fill:20dlu");
-+        KeyProperty.rowSpec = new RowSpec(RowSpec.FILL, Sizes.dluX(20), 0.0);
- 		}
- 		if (3 < builder.getColumn()) {
- 			builder.appendRelatedComponentsGapRow();
+@@ -30,18 +30,18 @@
+ 	public NewDirectoryDialogPanel(String parentPath) {
+ 		setMinimumSize(new Dimension(240,120));
+ 		setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
+ 				ColumnSpec.decode("36px"),
+-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
++				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+ 				ColumnSpec.decode("86px:grow"),
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,},
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,},
+ 			new RowSpec[] {
+-				FormFactory.LINE_GAP_ROWSPEC,
++				FormSpecs.LINE_GAP_ROWSPEC,
+ 				RowSpec.decode("20px"),
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,}));
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,}));
+ 		
+ 		JLabel lblIn = new JLabel("In:");
+ 		add(lblIn, "3, 2, right, center");
+--- a/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/NewProjectDialogPanel.java
++++ b/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/NewProjectDialogPanel.java
+@@ -29,7 +29,7 @@
+ import org.freeplane.plugin.workspace.WorkspaceController;
+ import org.freeplane.plugin.workspace.model.project.AWorkspaceProject;
+ 
+-import com.jgoodies.forms.factories.FormFactory;
++import com.jgoodies.forms.layout.FormSpecs;
+ import com.jgoodies.forms.layout.ColumnSpec;
+ import com.jgoodies.forms.layout.FormLayout;
+ import com.jgoodies.forms.layout.RowSpec;
+@@ -46,22 +46,22 @@
+ 	public NewProjectDialogPanel() {
+ 		setPreferredSize(new Dimension(400, 160));
+ 		setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
+ 				ColumnSpec.decode("max(100dlu;min):grow"),
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,},
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,},
+ 			new RowSpec[] {
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:max(30dlu;pref)"),
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:default"),
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:default"),}));
+ 		
+ 		JPanel panel = new JPanel();
+@@ -69,10 +69,10 @@
+ 		panel.setBackground(Color.WHITE);
+ 		add(panel, "1, 1, 8, 2, fill, fill");
+ 		panel.setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.RELATED_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
+ 				ColumnSpec.decode("default:grow"),},
+ 			new RowSpec[] {
+-				FormFactory.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
+ 				RowSpec.decode("fill:default:grow"),}));
+ 		
+ 		JLabel lblNewLabel = new JLabel(TextUtils.getText(NewProjectDialogPanel.class.getSimpleName().toLowerCase(Locale.ENGLISH)+".help"));
+--- a/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/NodeRenameDialogPanel.java
++++ b/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/NodeRenameDialogPanel.java
+@@ -10,7 +10,7 @@
+ import javax.swing.JPanel;
+ import javax.swing.JTextField;
+ 
+-import com.jgoodies.forms.factories.FormFactory;
++import com.jgoodies.forms.layout.FormSpecs;
+ import com.jgoodies.forms.layout.ColumnSpec;
+ import com.jgoodies.forms.layout.FormLayout;
+ import com.jgoodies.forms.layout.RowSpec;
+@@ -35,18 +35,18 @@
+ 	public NodeRenameDialogPanel(String oldName, boolean isMutableNode) {
+ 		setMinimumSize(new Dimension(240,120));
+ 		setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
+ 				ColumnSpec.decode("36px"),
+-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
++				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+ 				ColumnSpec.decode("86px:grow"),
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,},
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,},
+ 			new RowSpec[] {
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,}));
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,}));
+ 		
+ 		JLabel lblName = new JLabel("name:");
+ 		add(lblName, "3, 2, right, default");
+--- a/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/WorkspaceNewFolderPanel.java
++++ b/freeplane_plugin_workspace/src/org/freeplane/plugin/workspace/components/dialog/WorkspaceNewFolderPanel.java
+@@ -25,7 +25,7 @@
+ import org.freeplane.plugin.workspace.WorkspaceController;
+ import org.freeplane.plugin.workspace.model.AWorkspaceTreeNode;
+ 
+-import com.jgoodies.forms.factories.FormFactory;
++import com.jgoodies.forms.layout.FormSpecs;
+ import com.jgoodies.forms.layout.ColumnSpec;
+ import com.jgoodies.forms.layout.FormLayout;
+ import com.jgoodies.forms.layout.RowSpec;
+@@ -60,27 +60,27 @@
+ 		setMinimumSize(new Dimension(320, 160));
+ 		setPreferredSize(new Dimension(320, 160));
+ 		setLayout(new FormLayout(new ColumnSpec[] {
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+ 				ColumnSpec.decode("default:grow"),
+-				FormFactory.RELATED_GAP_COLSPEC,
+-				FormFactory.DEFAULT_COLSPEC,
+-				FormFactory.RELATED_GAP_COLSPEC,},
++				FormSpecs.RELATED_GAP_COLSPEC,
++				FormSpecs.DEFAULT_COLSPEC,
++				FormSpecs.RELATED_GAP_COLSPEC,},
+ 			new RowSpec[] {
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.RELATED_GAP_ROWSPEC,
+-				FormFactory.DEFAULT_ROWSPEC,}));
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.RELATED_GAP_ROWSPEC,
++				FormSpecs.DEFAULT_ROWSPEC,}));
+ 		
+ 		JLabel lblPath = new JLabel(TextUtils.getText("workspace.action.node.new.folder.dialog.parent.label"));
+ 		lblPath.setHorizontalAlignment(SwingConstants.RIGHT);

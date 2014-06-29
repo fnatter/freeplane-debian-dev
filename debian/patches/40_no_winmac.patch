@@ -1,7 +1,7 @@
 don't build windows/mac installers
 --- a/freeplane_framework/ant/build.xml
 +++ b/freeplane_framework/ant/build.xml
-@@ -467,7 +467,7 @@
+@@ -488,7 +488,7 @@
  		</checksum>
  	</target>
  

@@ -73,7 +73,7 @@ JAVACMD->JAVA_CMD, use java-wrappers.sh instead of findjava if available, maybe 
  		return 1
  	fi
  }
-@@ -110,9 +117,16 @@
+@@ -119,9 +126,16 @@
  _source /etc/freeplane/freeplanerc
  _source "${userfpdir}/freeplanerc"
  
@@ -93,8 +93,8 @@ JAVACMD->JAVA_CMD, use java-wrappers.sh instead of findjava if available, maybe 
  fi
  
  output_debug_info
-@@ -158,7 +172,7 @@
- fi
+@@ -174,7 +188,7 @@
+ #JAVA_OPTS="-Dorg.freeplane.nosplash=true $JAVA_OPTS"
  
  _debug "Calling: "\
 -"${JAVACMD}" -Xmx512m\
@@ -102,7 +102,7 @@ JAVACMD->JAVA_CMD, use java-wrappers.sh instead of findjava if available, maybe 
   "-Dorg.freeplane.param1=$1"\
   "-Dorg.freeplane.param2=$2"\
   "-Dorg.freeplane.param3=$3"\
-@@ -178,7 +192,7 @@
+@@ -196,7 +210,7 @@
  ( echo "${DEBUG}" | grep -qe "exit" ) && exit 0 # do not start Freeplane
  
  # now actually launch Freeplane
