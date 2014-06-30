@@ -1,7 +1,11 @@
 freeplane (1.3.11-1) UNRELEASED; urgency=medium
 
-  * New upstream version.
-  * Fix "Export to pdf is broken" (Closes: #730735)
+  * New upstream version (Closes: #730735)
+  * Add new (mime type) icons in several resolutions
+  * Update copyright for new splash + icons
+  * Update man page
+  * add source + license for deployJava.js
+  * Upload to unstable
 
  -- Felix Natter <fnatter@gmx.net>  Sun, 29 Jun 2014 18:11:09 +0200
 
