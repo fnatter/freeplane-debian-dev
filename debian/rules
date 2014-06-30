@@ -24,19 +24,22 @@ build:
         debian/freeplane.1.xml
 
 	convert freeplane_framework/script/freeplane.png freeplane.xpm
+	mkdir 48x48
+	convert -background none -geometry !48x48 freeplane_framework/script/freeplane.svg 48x48/freeplane.png
+	mkdir 64x64
+	convert -background none -geometry !64x64 freeplane_framework/script/freeplane.svg 64x64/freeplane.png
+	mkdir 128x128
+	convert -background none -geometry !128x128 freeplane_framework/script/freeplane.svg 128x128/freeplane.png
 
 clean:: 
-	-rm -f freeplane.xpm
-	-rm -f freeplane.1
+# directories cannot be removed via debian/clean
+	if [ -d 48x48 ]; then rmdir 48x48; fi
+	if [ -d 64x64 ]; then rmdir 64x64; fi
+	if [ -d 128x128 ]; then rmdir 128x128; fi
 
 #buildxml-clean::
 #	-$(DEB_ANT_INVOKE) $(DEB_ANT_CLEAN_TARGET)
 
 # Get original sources directly using uscan
 get-orig-source:
-  # this will remove some upstream files, see debian/copyright
 	uscan --force-download --rename --repack
-  # hack for 1.2.23+dfsg1-1
-	if [ -e ../freeplane_1.2.23+dfsg.orig.tar.gz ]; then \
-	  mv ../freeplane_1.2.23+dfsg.orig.tar.gz ../freeplane_1.2.23+dfsg1.orig.tar.gz; \
-	fi
