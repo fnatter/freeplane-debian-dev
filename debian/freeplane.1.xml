@@ -228,6 +228,19 @@
         </listitem>
       </varlistentry>
       <varlistentry>
+        <term>Scripting and Add-on improvements</term>
+        <listitem>
+          <para>
+            See the list of available add-ons:
+            http://freeplane.sourceforge.net/wiki/index.php/Add-ons
+          </para>
+          <para>
+            If you want help developing add-ons, post in the forum:
+            http://www.freeplane.org/discussion
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
         <term>Many more improvements...</term>
         <listitem>
           <para>Please see the changelog at /usr/share/doc/freeplane/changelog.gz.</para>
@@ -251,7 +264,7 @@
         <para>The Debian package does not include the <emphasis>signed</emphasis> applet code.
         That's why <ulink url="http://www.duckware.com/tech/java-security-clusterfuck.html">most applets won't run</ulink> after creating an applet export from the Debian package.
         You can ask for the signed applet in the open discussion forum: 
-        http://sourceforge.net/apps/phpbb/freeplane/viewforum.php?f=1
+        http://www.freeplane.org/discussion
         </para>
       </listitem>
       <listitem>
@@ -260,7 +273,7 @@
         (among them the flash compiler package maintainer)
         prefer free technologies. You can ask for the
         'freeplane-flash-browser' deb in the open discussion forum:
-        http://sourceforge.net/apps/phpbb/freeplane/viewforum.php?f=1
+        http://www.freeplane.org/discussion
         </para>
       </listitem>
     </itemizedlist>
@@ -271,15 +284,19 @@
     <title>SEE ALSO</title>
 
     <para>Much documentation is available from the Freeplane wiki
-      under http://freeplane.org/.</para>
+      under http://www.freeplane.org/.</para>
     <para>There is an open discussion forum at
-      http://sourceforge.net/apps/phpbb/freeplane/viewforum.php?f=1, which is
+      http://www.freeplane.org/discussion, which is
       the place to ask questions.
-    </para>    
+    </para>
+    <para>
+      Report bugs here:
+      http://www.freeplane.org/bugs and feature requests here:
+      http://www.freeplane.org/requests
+    </para>
     <para>
       If you want to contribute to the Freeplane project, join us at
-      http://freeplane-developer.996969.n3.nabble.com/
-      !!
+      http://freeplane-developer.996969.n3.nabble.com/ !!
     </para>
   </refsect1>
 
