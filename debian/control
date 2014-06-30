@@ -9,12 +9,14 @@ Build-Depends: cdbs,
                docbook-xml,
                xsltproc,
                imagemagick,
+               librsvg2-bin,
                ant,
                default-jdk,
-               quilt
+               quilt,
+               jflex
 Build-Depends-Indep: javahelp2,
                      groovy,
-                     libcommons-lang-java,
+                     libcommons-lang-java (>= 2.6),
                      libcommons-io-java,
                      libjgoodies-forms-java (>= 1.6.0),
                      simplyhtml (>= 0.16.07),
@@ -24,21 +26,24 @@ Build-Depends-Indep: javahelp2,
                      libxerces2-java,
                      libxml-commons-external-java,
                      libjaxp1.3-java,
-                     libjlatexmath-java,
+                     libjlatexmath-java (>= 1.0.2),
                      libknopflerfish-osgi-framework-java,
-                     libjsyntaxpane-java (>= 0.9.6~r156)
+                     libjsyntaxpane-java (>= 0.9.6~r156),
+                     libcommons-codec-java (>= 1.7),
+                     libidw-java,
+                     jmapviewer
 Standards-Version: 3.9.5
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-java/freeplane.git
-Vcs-Git: git://git.debian.org/pkg-java/freeplane.git
+Vcs-Git: git://anonscm.debian.org/pkg-java/freeplane.git
 Homepage: http://freeplane.org/
 
 Package: freeplane
 Architecture: all
 Depends: ${misc:Depends},
-         default-jre | sun-java6-jre,
+         default-jre,
          javahelp2,
          groovy,
-         libcommons-lang-java,
+         libcommons-lang-java (>= 2.6),
          libcommons-io-java,
          libjgoodies-forms-java (>= 1.6.0),
          simplyhtml (>= 0.16.07),
@@ -48,9 +53,12 @@ Depends: ${misc:Depends},
          libxerces2-java,
          libxml-commons-external-java,
          libjaxp1.3-java,
-         libjlatexmath-java,
+         libjlatexmath-java (>= 1.0.2),
          libknopflerfish-osgi-framework-java,
          libjsyntaxpane-java (>= 0.9.6~r156),
+         libcommons-codec-java (>= 1.7),
+         libidw-java,
+         jmapviewer,
          libjortho-freeplane-java (= ${binary:Version})
 Recommends: xdg-utils,
             java-wrappers
