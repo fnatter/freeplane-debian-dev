@@ -7,7 +7,7 @@
   <!ENTITY dhfirstname "<firstname>Eric</firstname>">
   <!ENTITY dhsurname   "<surname>Lavarde</surname>">
   <!-- Please adjust the date whenever revising the manpage. -->
-  <!ENTITY dhdate      "<date>April, 13th, 2014</date>">
+  <!ENTITY dhdate      "<date>July, 3rd, 2014</date>">
   <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
        allowed: see man(7), man(1). -->
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
@@ -235,7 +235,7 @@
             http://freeplane.sourceforge.net/wiki/index.php/Add-ons
           </para>
           <para>
-            If you want help developing add-ons, post in the forum:
+            If you want to get started developing add-ons, post in the forum:
             http://www.freeplane.org/discussion
           </para>
         </listitem>
@@ -259,6 +259,12 @@
         i.e. distortions when scrolling horizontally or
         vertically. Possible workarounds are described on a wiki page:
         http://freeplane.sourceforge.net/wiki/index.php/Rendering_Issues</para>
+      </listitem>
+      <listitem>
+        <para>
+          Sometimes keypresses get lost when running ibus-daemon:
+          https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=714524
+        </para>
       </listitem>
       <listitem>
         <para>The Debian package does not include the <emphasis>signed</emphasis> applet code.
