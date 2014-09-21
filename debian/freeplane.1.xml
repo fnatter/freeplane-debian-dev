@@ -7,7 +7,7 @@
   <!ENTITY dhfirstname "<firstname>Eric</firstname>">
   <!ENTITY dhsurname   "<surname>Lavarde</surname>">
   <!-- Please adjust the date whenever revising the manpage. -->
-  <!ENTITY dhdate      "<date>July, 3rd, 2014</date>">
+  <!ENTITY dhdate      "<date>September, 21st, 2014</date>">
   <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
        allowed: see man(7), man(1). -->
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
@@ -19,7 +19,7 @@
   <!ENTITY debian      "<productname>Debian</productname>">
   <!ENTITY gnu         "<acronym>GNU</acronym>">
   <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
-  <!ENTITY version     "1.3.11">
+  <!ENTITY version     "1.3.12">
 ]>
 
 <refentry>
