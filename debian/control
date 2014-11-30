@@ -32,7 +32,7 @@ Build-Depends-Indep: javahelp2,
                      libcommons-codec-java (>= 1.7),
                      libidw-java,
                      jmapviewer
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-java/freeplane.git
 Vcs-Git: git://anonscm.debian.org/pkg-java/freeplane.git
 Homepage: http://freeplane.org/
@@ -40,7 +40,7 @@ Homepage: http://freeplane.org/
 Package: freeplane
 Architecture: all
 Depends: ${misc:Depends},
-         default-jre,
+         default-jre | java6-runtime,
          javahelp2,
          groovy,
          libcommons-lang-java (>= 2.6),
