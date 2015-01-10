@@ -40,7 +40,7 @@ Homepage: http://freeplane.org/
 Package: freeplane
 Architecture: all
 Depends: ${misc:Depends},
-         default-jre | java6-runtime,
+         default-jre | java7-runtime,
          javahelp2,
          groovy,
          libcommons-lang-java (>= 2.6),
