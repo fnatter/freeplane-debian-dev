@@ -86,8 +86,8 @@ Files: ./freeplane_framework/script/freeplane.svg
        ./freeplane/resources/images/Freeplane_frame_icon_64x64.png
        ./freeplane/resources/images/freeplane_app_128x128.png
        ./freeplane_framework/windows-icons/Freeplane_doc.ico
-       ./freeplane_framework/mac-jarbundler/freeplane.icns
-       ./freeplane_framework/mac-jarbundler/freeplanedoc.icns
+       ./freeplane_framework/mac-appbundler/freeplane.icns
+       ./freeplane_framework/mac-appbundler/freeplanedoc.icns
 Copyright: 2013-2014 Robert Gibson
 License: CC-BY-SA-3.0
  THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
