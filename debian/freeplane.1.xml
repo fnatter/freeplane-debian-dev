@@ -7,7 +7,7 @@
   <!ENTITY dhfirstname "<firstname>Eric</firstname>">
   <!ENTITY dhsurname   "<surname>Lavarde</surname>">
   <!-- Please adjust the date whenever revising the manpage. -->
-  <!ENTITY dhdate      "<date>September, 21st, 2014</date>">
+  <!ENTITY dhdate      "<date>March, 28th, 2015</date>">
   <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
        allowed: see man(7), man(1). -->
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
@@ -19,7 +19,7 @@
   <!ENTITY debian      "<productname>Debian</productname>">
   <!ENTITY gnu         "<acronym>GNU</acronym>">
   <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
-  <!ENTITY version     "1.3.12">
+  <!ENTITY version     "1.3.15">
 ]>
 
 <refentry>
@@ -41,7 +41,7 @@
       </author>
     </authorgroup>
     <copyright>
-      <year>2014</year>
+      <year>2015</year>
       <holder>&dhusername; and Felix Natter</holder>
     </copyright>
     &dhdate;
@@ -302,7 +302,7 @@
     </para>
     <para>
       If you want to contribute to the Freeplane project, join us at
-      http://freeplane-developer.996969.n3.nabble.com/ !!
+      http://freeplane-developer.996969.n3.nabble.com/ !
     </para>
   </refsect1>
 
