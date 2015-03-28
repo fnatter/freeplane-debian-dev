@@ -51,7 +51,7 @@ adapts jar paths in core MANIFEST as well as plugin MANIFESTs
 - lib/jsyntaxpane.jar,
 - lib/groovy-all.jar
 + ../../../java/jsyntaxpane.jar,
-+ ../../../java/groovy-all.jar
++ ../../../java/groovy-all-2.x.jar
  Export-Package: jsyntaxpane,
   jsyntaxpane.actions,
   jsyntaxpane.actions.gui,
