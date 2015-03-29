@@ -1,0 +1,22 @@
+Description: Fix behavior of freeplane.sh (/usr/bin/freeplane)
+ when mind map files with spaces are passed
+Author: Felix Natter <fnatter@gmx.net>
+Applied-Upstream: 1.3/1.4, https://github.com/freeplane/freeplane/commit/762a0710eef7b7fe4fb7fc0b7584cdc01ba92da9
+Last-Update: 2015-03-29
+--- a/freeplane_framework/script/freeplane.sh
++++ b/freeplane_framework/script/freeplane.sh
+@@ -195,7 +195,7 @@
+  $JAVA_OPTS\
+  $xdockname\
+  -jar "${freedir}/freeplanelauncher.jar"\
+- $*
++ "$@"
+ ( echo "${DEBUG}" | grep -qe "exit" ) && exit 0 # do not start Freeplane
+ 
+ # now actually launch Freeplane
+@@ -206,4 +206,4 @@
+  $JAVA_OPTS\
+  $xdockname\
+  -jar "${freedir}/freeplanelauncher.jar"\
+- $*
++ "$@"
