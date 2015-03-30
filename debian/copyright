@@ -5,8 +5,8 @@ Upstream-Contact: Felix Natter <fnatter@gmx.net>
 
 Files: *
 Copyright: 2000-2008 Joerg Mueller, Daniel Polansky, Christian Foltin, Dimitry Polivaev <dpolivaev@gmx.de>
-           2008-2013 Dimitry Polivaev <dpolivaev@gmx.de>, Volker Börchers <boercher@web.de>
-           2008-2013 Others
+           2008-2015 Dimitry Polivaev <dpolivaev@gmx.de>, Volker Börchers <boercher@web.de>, Felix Natter <fnatter@gmx.net>
+           2008-2015 Others
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ License: GPL-2+
  
 Files: debian/*
 Copyright: 2010-2012 Eric Lavarde <deb@zorglub.s.bawue.de>
-           2013-2014 Felix Natter <fnatter@gmx.net>
+           2013-2015 Felix Natter <fnatter@gmx.net>
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
