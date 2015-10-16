@@ -4,7 +4,7 @@ Uploaders: Felix Natter <fnatter@gmx.net>
 Section: editors
 Priority: extra
 Build-Depends: cdbs,
-               debhelper (>= 7),
+               debhelper (>= 9),
                docbook-xsl,
                docbook-xml,
                xsltproc,

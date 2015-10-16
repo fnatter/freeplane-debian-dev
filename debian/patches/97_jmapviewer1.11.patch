@@ -1,3 +1,8 @@
+Description: Fixes for incompatibilities in JMapViewer 1.11
+Author: Felix Natter
+Applied-Upstream: https://github.com/freeplane/freeplane/commit/808193bce07cc99bc65fc647f369d780d1cb7049
+Reviewed-by: <name and email of a reviewer, optional>
+Last-Update: 2015-10-15
 --- a/freeplane_plugin_openmaps/src/org/freeplane/plugin/openmaps/LocationChoosenListener.java
 +++ b/freeplane_plugin_openmaps/src/org/freeplane/plugin/openmaps/LocationChoosenListener.java
 @@ -1,10 +1,11 @@
