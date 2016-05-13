@@ -55,9 +55,8 @@ changes paths to dependency jars to /usr/share/java/...
 +++ b/freeplane_plugin_script/ant/ant.properties
 @@ -1,3 +1,3 @@
 -plugin.ext.lib = lib
--groovy.jar = ${plugin.ext.lib}/groovy-all.jar
 +plugin.ext.lib = /usr/share/java
-+groovy.jar = ${plugin.ext.lib}/groovy-all-2.x.jar
+ groovy.jar = ${plugin.ext.lib}/groovy-all.jar
  jsyntaxpane.jar = ${plugin.ext.lib}/jsyntaxpane.jar
 --- a/freeplane_plugin_svg/ant/ant.properties
 +++ b/freeplane_plugin_svg/ant/ant.properties
