@@ -32,7 +32,7 @@ Build-Depends-Indep: javahelp2,
                      libcommons-codec-java (>= 1.7),
                      libidw-java,
                      jmapviewer (>= 1.11)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-java/freeplane.git
 Vcs-Git: git://anonscm.debian.org/pkg-java/freeplane.git
 Homepage: http://freeplane.org/
