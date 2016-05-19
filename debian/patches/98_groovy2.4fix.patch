@@ -1,0 +1,16 @@
+Description: Fix operator ambiguity in addon install script
+Author: Gergely Papp <gergely.papp@itworks.hu>
+Applied-Upstream: https://github.com/freeplane/freeplane/commit/1762d5b8a90cf900ed954d4444087e50efa06c07
+Reviewed-by: Felix Natter <fnatter@gmx.net>
+Last-Update: 2016-05-19
+--- a/freeplane_plugin_script/scripts/installScriptAddOn.groovy
++++ b/freeplane_plugin_script/scripts/installScriptAddOn.groovy
+@@ -502,7 +502,7 @@
+ 
+ boolean confirmInstall(ScriptAddOnProperties addOn, ScriptAddOnProperties installedAddOn) {
+ 	def screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+-	def dialogPrefSize = new Dimension((int) screenSize.getWidth() * 3 / 5, (int) screenSize.getHeight() * 1 / 2);
++	def dialogPrefSize = new Dimension((int) (screenSize.getWidth() * 3 / 5), (int) (screenSize.getHeight() * 1 / 2));
+ 	def warning = textUtils.removeTranslateComment(textUtils.getText('addons.installer.warning'))
+ 	def addOnDetailsPanel = new AddOnDetailsPanel(addOn, warning)
+ 	addOnDetailsPanel.maxWidth = 500
