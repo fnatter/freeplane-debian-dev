@@ -3,14 +3,13 @@ Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.or
 Uploaders: Felix Natter <fnatter@gmx.net>
 Section: editors
 Priority: extra
-Build-Depends: cdbs,
-               debhelper (>= 9),
+Build-Depends: debhelper (>= 9),
                docbook-xsl,
                docbook-xml,
                xsltproc,
                imagemagick,
                librsvg2-bin,
-               ant,
+               gradle,
                default-jdk,
                quilt,
                jflex
@@ -19,7 +18,7 @@ Build-Depends-Indep: javahelp2,
                      libcommons-lang-java (>= 2.6),
                      libcommons-io-java,
                      libjgoodies-forms-java (>= 1.6.0),
-                     simplyhtml (>= 0.16.07),
+                     simplyhtml (>= 0.16.17),
                      libbatik-java,
                      librhino-java,
                      libfop-java,
@@ -31,10 +30,12 @@ Build-Depends-Indep: javahelp2,
                      libjsyntaxpane-java (>= 0.9.6~r156),
                      libcommons-codec-java (>= 1.7),
                      libidw-java,
-                     jmapviewer (>= 1.11)
+                     jmapviewer (>= 1.11),
+                     libmnemonicsetter-java (>= 0.5),
+                     gradle-debian-helper
 Standards-Version: 3.9.8
-Vcs-Git: https://anonscm.debian.org/git/pkg-java/freeplane.git
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-java/freeplane.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-java/freeplane.git
 Homepage: http://freeplane.org/
 
 Package: freeplane
@@ -46,7 +47,7 @@ Depends: ${misc:Depends},
          libcommons-lang-java (>= 2.6),
          libcommons-io-java,
          libjgoodies-forms-java (>= 1.6.0),
-         simplyhtml (>= 0.16.07),
+         simplyhtml (>= 0.16.17),
          libbatik-java,
          librhino-java,
          libfop-java,
@@ -59,9 +60,13 @@ Depends: ${misc:Depends},
          libcommons-codec-java (>= 1.7),
          libidw-java,
          jmapviewer (>= 1.11),
-         libjortho-freeplane-java (= ${binary:Version})
+         libmnemonicsetter-java (>= 0.5)
 Recommends: xdg-utils,
             java-wrappers
+Provides: libjortho-freeplane-java
+Conflicts: libjortho-freeplane-java
+Replaces: libjortho-freeplane-java
+Suggests: freeplane-scripting-api
 Description: Java program for working with Mind Maps
  Freeplane is a free and open source software application that supports
  thinking, sharing information and getting things done at work, in school
@@ -82,18 +87,18 @@ Description: Java program for working with Mind Maps
  See http://freeplane.sourceforge.net/wiki/index.php/Main_Page for a full
  list of applications and features.
 
-Package: libjortho-freeplane-java
+Package: freeplane-scripting-api
+Section: doc
 Architecture: all
-Section: java
-Depends: ${misc:Depends}
-Provides: libjortho-java
-Description: Java spell-checking library
- JOrtho (Java Orthography) is a spell-checker entirely written in Java.
- Its dictionaries are based on the free Wiktionary project and can therefore
- be updated for virtually any language.
+Depends: ${java:Depends}, ${misc:Depends}
+Recommends: ${java:Recommends}
+Suggests: default-jdk-doc, freeplane
+Description: Java program for working with Mind Maps (groovy scripting API)
+ Freeplane is a free and open source software application that supports
+ thinking, sharing information and getting things done at work, in school
+ and at home. The core of the software is tools for mind mapping (also
+ known as concept mapping or information mapping) and using mapped
+ information.
  .
- The library works with any JTextComponent from the Swing frame work.
- This includes JTextPane, JEditorPane and JTextArea.
- .
- The version packaged is based on JOrtho 0.4, slightly adapted for the needs
- of Freeplane. See http://jortho.sourceforge.net/.
+ This package contains the API documentation for Freeplane's groovy
+ scripting interface.
