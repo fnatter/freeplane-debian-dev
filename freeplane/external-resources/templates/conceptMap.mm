@@ -1,6 +1,6 @@
-<map version="0.9.0">
+<map version="freeplane 1.5.3">
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
-<node TEXT="New Concept Map">
+<node TEXT="New Concept Map" STYLE="oval">
 <hook NAME="MapStyle" max_node_width="600">
     <conditional_styles>
         <conditional_style ACTIVE="true" LOCALIZED_STYLE_REF="styles.connection">
@@ -17,13 +17,13 @@
         </conditional_style>
     </conditional_styles>
 	<map_styles>
-		<stylenode LOCALIZED_TEXT="styles.root_node">
+		<stylenode LOCALIZED_TEXT="styles.root_node" STYLE="circle" >
 		<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="right">
 		<stylenode LOCALIZED_TEXT="default" COLOR="#000000" STYLE="fork">
 		<font NAME="Arial" SIZE="10" BOLD="false" ITALIC="false"/>
 		</stylenode>
 		<stylenode LOCALIZED_TEXT="defaultstyle.details"/>
-		<stylenode LOCALIZED_TEXT="defaultstyle.note"/>
+		<stylenode LOCALIZED_TEXT="defaultstyle.note" COLOR="#000000" BACKGROUND_COLOR="#ffffff" TEXT_ALIGN="LEFT" />
 		<stylenode LOCALIZED_TEXT="defaultstyle.floating">
 		<edge STYLE="hide_edge"/>
 		<cloud COLOR="#f0f0f0" SHAPE="ROUND_RECT"/>
@@ -44,7 +44,7 @@
 		</stylenode>
 		</stylenode>
 		<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="right">
-		<stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#000000">
+		<stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#000000" STYLE="oval">
 		<font SIZE="18"/>
 		</stylenode>
 		<stylenode LOCALIZED_TEXT="AutomaticLayout.level,1" COLOR="#0033ff">
