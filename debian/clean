@@ -1,6 +1,14 @@
-freeplane_plugin_script/src-jsyntaxpane/jsyntaxpane/lexers/LaTeXLexer.java
+freeplane_plugin_jsyntaxpane/src/main/java/jsyntaxpane/lexers/LaTeXLexer.java
 freeplane.1
 freeplane.xpm
 48x48/freeplane.png
 64x64/freeplane.png
 128x128/freeplane.png
+freeplane/META-INF/MANIFEST.MF
+freeplane_plugin_bugreport/META-INF/MANIFEST.MF
+freeplane_plugin_formula/META-INF/MANIFEST.MF
+freeplane_plugin_jsyntaxpane/META-INF/MANIFEST.MF
+freeplane_plugin_latex/META-INF/MANIFEST.MF
+freeplane_plugin_openmaps/META-INF/MANIFEST.MF
+freeplane_plugin_script/META-INF/MANIFEST.MF
+freeplane_plugin_svg/META-INF/MANIFEST.MF

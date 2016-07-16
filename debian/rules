@@ -1,21 +1,18 @@
 #!/usr/bin/make -f
-# debian/rules for Commons Fileupload (uses CDBS)
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#DH_VERBOSE = 1
 
-#clean:: buildxml-clean
-
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/ant.mk
-# replaced by quilt: include /usr/share/cdbs/1/rules/simple-patchsys.mk
-
-JAVA_HOME_DIRS       := /usr/lib/jvm/default-java
-
-DEB_ANT_BUILD_TARGET := build
-#DEB_BUILDDIR         := .
 DEB_COMPRESS_EXCLUDE := .mm .pdf
-# DEB_INSTALL_DOCS_ALL = -Xlicense
-DEB_DH_INSTALL_ARGS := -XLICENSE.txt
+#DEB_DH_INSTALL_ARGS := -XLICENSE.txt
 
-build:
+
+%:
+	dh $@ --buildsystem=gradle
+
+override_dh_auto_build:
+	dh_auto_build -- build -x test -x check_translation
+
 	xsltproc --nonet \
          --param make.year.ranges 1 \
          --param make.single.year.ranges 1 \
@@ -31,15 +28,19 @@ build:
 	mkdir 128x128
 	convert -background none -geometry !128x128 freeplane_framework/script/freeplane.svg 128x128/freeplane.png
 
-clean:: 
+	mv BUILD/doc/api API
+	mv BUILD/doc DOC
+
+override_dh_clean:
+	dh_clean
 # directories cannot be removed via debian/clean
+	rm -rf BUILD/
+	rm -rf API/
+	rm -rf DOC/
 	if [ -d 48x48 ]; then rmdir 48x48; fi
 	if [ -d 64x64 ]; then rmdir 64x64; fi
 	if [ -d 128x128 ]; then rmdir 128x128; fi
 
-#buildxml-clean::
-#	-$(DEB_ANT_INVOKE) $(DEB_ANT_CLEAN_TARGET)
 
-# Get original sources directly using uscan
 get-orig-source:
 	uscan --force-download --rename --repack
