@@ -1,0 +1,10 @@
+Document: freeplane-scripting-api
+Title: Javadoc for the freeplane scripting API
+Author: Freeplane Team
+Abstract: This is the API Javadoc provided for the
+ groovy scripting API of the freeplane package
+Section: Programming
+
+Format: HTML
+Index: /usr/share/doc/freeplane-scripting-api/api/index.html
+Files: /usr/share/doc/freeplane-scripting-api/api/*
