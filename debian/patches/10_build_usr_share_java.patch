@@ -1,0 +1,271 @@
+Description: change dependencies to /usr/share/java, where necessary,
+  do not copy all dependencies to build/libs (eclipse hack);
+  dop not copy debian jars to /usr/share/freeplane/**;
+  copy only plugin-${project.version}.jar for plugins;
+  externalize debian jars with a relative path in OSGi MANIFEST.MFs
+  see README.source for an explanation of the (changes to the) build system
+Author: Felix Natter <fnatter@gmx.net>
+Forwarded: not-needed
+Last-Update: 2016-02-04
+--- a/build.gradle
++++ b/build.gradle
+@@ -7,30 +7,46 @@
+     ext.globalBuild = rootDir.path + '/BUILD'
+ 
+     repositories {
+-		maven { url "http://dl.bintray.com/freeplane/freeplane" } 
+-        // this is necessary to grab both binary and source jars
+-        // for local (git) dependencies
+-        flatDir name: 'localGitDepsRepository',
+-                dirs: [rootDir.path + "/freeplane/lib",
+-                       rootDir.path + "/freeplane_plugin_jsyntaxpane/lib",
+-                       rootDir.path + "/freeplane_plugin_svg/lib"]
++        flatDir name: '/usr/share/java', dir: '/usr/share/java'
+     }
+ 
+ }
+ 
++def isDebianJar(File jar) {
++    def ret = jar.path.startsWith("/usr/share/java/") ||
++              jar.path.startsWith("/usr/share/maven-repo/")
++    return ret;
++}
++
++def relpath(File basePath, File targetPath) {
++    def relPath = ""
++    // targetPath is either '/usr/share/java/**' or '/usr/share/maven-repo/**'!
++    def commonPrefix = '/usr/share'
++    def parent = basePath
++    while (parent.path != commonPrefix) {
++        parent = parent.parentFile
++        relPath += '../'
++    }
++    def targetPathRel = targetPath.path.replaceFirst(/^${commonPrefix}/, '').substring(1)
++    relPath += targetPathRel
++}
++
++
+ // this is used for (linux) packages, where the dependencies
+ // live on the file system (/usr/share/java/*.jar on Debian):
+ def externalizeJar(File jar) {
+-    // do not externalize, jars are copied over to /BUILD
+-    // in development workflow!
+-    return "lib/${jar.name}"
++    final BUNDLE_PATH = "/usr/share/freeplane/core/org.freeplane.core/"
++    if (isDebianJar(jar)) {
++        return relpath(new File(BUNDLE_PATH), jar)
++    } else {
++        return "lib/${jar.name}"
++    }
+ }
+ 
+ // this is overridden in linux packages where this might be named
+ // knopflerfish-framework.jar
+ def isKnopflerfishJar(fileName) {
+-    return fileName.startsWith('framework-') &&
+-           fileName.endsWith('.jar');
++    return fileName == 'knopflerfish-framework.jar'
+ }
+ 
+ def filterAndExternalizePluginDependencies(runtime_files) {
+@@ -76,12 +92,6 @@
+       failOnError = false  
+     }
+ 
+-    repositories {
+-       maven  {
+-        url "http://repo1.maven.org/maven2"
+-       }
+-    }
+-
+     dependencies {
+         testCompile group: 'junit', name: 'junit', version: '4.11'
+     }
+@@ -103,14 +113,10 @@
+ // OSGi projects (/plugin/, freeplane) need this for compilation (e.g. resolve Bundle),
+ // and freeplane_framework needs to copy it to BUILD/framework.jar
+ configure(subprojects.findAll {it.name =~ /plugin/ || it.name =~ /^freeplane$/ || it.name =~ /^freeplane_framework$/}){
+-    repositories {
+-        maven {
+-            url 'http://www.knopflerfish.org/maven2/'
+-        }
+-    }
+ 
+     dependencies {
+-        compile group: 'org.knopflerfish', name:'framework', version: '7.1.2'
++        //compile group: 'org.knopflerfish', name:'framework', version: '7.1.2'
++	compile ':knopflerfish-framework'
+     }
+ }
+ 
+@@ -123,11 +129,13 @@
+     else
+        ext.pluginid = project.name.replace("freeplane_plugin_", "org.freeplane.plugin.")
+ 
+-    task copyDeps(type: Copy) {
+-        from project.configurations.runtime
+-        into "$buildDir/libs"
+-    }
+-    jar.dependsOn copyDeps
++    // this is a hack for eclipse which does not allow to export jars
++    // outside of the project directory!
++    //task copyDeps(type: Copy) {
++    //    from project.configurations.runtime
++    //    into "$buildDir/libs"
++    //}
++    //jar.dependsOn copyDeps
+ 
+     task filterOSGiManifestForEclipse(type: Copy) {
+         from('build/tmp/jar/MANIFEST.MF') {
+@@ -179,18 +187,11 @@
+ configure(subprojects.findAll {it.name =~ /plugin/ }) {
+ 
+     task copyOSGiJars(type: Copy) {
+-        from ("$buildDir/libs") {
+-            include("*.jar")
+-            // TODO: this is redundant with regard to 'filterPluginDeps' (see above)!
+-            exclude('framework-*.jar')
+-            exclude('knopflerfish-framework*.jar')
+-            exclude('freeplane-' + project.version + '.jar')
+-            exclude('freeplane_plugin_*-' + project.version + '.jar')
+-        }
+-        from ('lib') {
+-            include("*.jar")
+-            exclude('*-sources.jar')
+-        }
++
++	from ("$buildDir/libs") {
++	    include("plugin-${project.version}.jar")
++	}
++
+         into(globalBuild + '/plugins/' + pluginid + '/lib/')
+     }
+ 
+--- a/freeplane/build.gradle
++++ b/freeplane/build.gradle
+@@ -13,19 +13,18 @@
+             'commons-io:commons-io:2.4',
+             'commons-codec:commons-codec:1.7',
+             'com.jgoodies:jgoodies-forms:1.6.0',
+-            'com.jgoodies:jgoodies-common:1.4.0'
++            //'com.jgoodies:jgoodies-common:1.4.0',
++	    ':idw'
+ 
+ 	compile  ('com.lightdev.app.shtm.simplyhtml:SimplyHTML:0.16.17') {
+ 		exclude module: 'javahelp'
+ 		exclude module: 'mnemonicsetter'
+ 	}
+     
+-    testCompile 'junit:junit:4.12',
+-                'org.hamcrest:hamcrest-all:1.3',
+-                'org.mockito:mockito-all:1.10.19'        
++    //testCompile 'junit:junit:4.12',
++    //            'org.hamcrest:hamcrest-all:1.3',
++    //            'org.mockito:mockito-all:1.10.19'
+ 
+-    // from flatDir "localGitDepsRepository":
+-    compile ':idw-gpl-1.6.1'
+ }
+ 
+ sourceSets {
+@@ -179,16 +178,17 @@
+ }
+ 
+ task copyOSGiJars(type: Copy) {
+-     from ("$buildDir/libs") {
+-          include("*.jar")
+-		  exclude('framework-*.jar')
+-		  exclude('freeplane-*.jar')
+-		  exclude('mnemonicsetter-*.jar')
+-		  
++     from (configurations.runtime.files) {
++	 // do not copy debian jars!
++         exclude {
++             FileTreeElement jarFileTreeElement ->
++	       isDebianJar(jarFileTreeElement.file)
++         }
+      }
+-     from ('lib') {
+-          include("*.jar")
+-          exclude('*-sources.jar')
++     from ("$buildDir/libs") {
++         include("*.jar")
++         exclude('framework-*.jar')
++	 exclude('freeplane-*.jar')
+      }
+      into(globalBuild + '/core/' + pluginid + '/lib/')
+ }
+@@ -301,7 +301,7 @@
+ jar.dependsOn viewerJar
+ jar.dependsOn editorJar
+ jar.dependsOn osgiJar
+-jar.dependsOn copyDeps
++//jar.dependsOn copyDeps
+ build.dependsOn copyOSGiJars
+ build.dependsOn copyOSGiManifest
+ build.dependsOn copyExternalResources
+--- a/freeplane_plugin_jsyntaxpane/build.gradle
++++ b/freeplane_plugin_jsyntaxpane/build.gradle
+@@ -2,7 +2,8 @@
+     compile project(':freeplane')
+ 
+     // from flatDir "localGitDepsRepository":
+-    compile ':jsyntaxpane-0.9.6~r156-5' // from the Debian "libjsyntaxpane-java" package
++    //compile ':jsyntaxpane-0.9.6~r156-5' // from the Debian "libjsyntaxpane-java" package
++    compile ':jsyntaxpane'
+ }
+ 
+ jar {
+--- a/freeplane_plugin_latex/build.gradle
++++ b/freeplane_plugin_latex/build.gradle
+@@ -1,7 +1,8 @@
+ dependencies {
+     compile project(':freeplane')
+     compile project(':freeplane_plugin_jsyntaxpane')
+-    compile group: 'org.scilab.forge', name: 'jlatexmath', version:'1.0.2'
++    //compile group: 'org.scilab.forge', name: 'jlatexmath', version:'1.0.2'
++    compile ':jlatexmath'
+ }
+ 
+ jar {
+--- a/freeplane_plugin_openmaps/build.gradle
++++ b/freeplane_plugin_openmaps/build.gradle
+@@ -8,7 +8,8 @@
+ dependencies {
+     compile project(':freeplane')
+ 
+-    compile 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
++    //compile 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
++    compile ':jmapviewer'
+ }
+ 
+ jar {
+--- a/freeplane_plugin_svg/build.gradle
++++ b/freeplane_plugin_svg/build.gradle
+@@ -20,11 +20,13 @@
+             'org.apache.xmlgraphics:batik-util:1.7',
+             'org.apache.xmlgraphics:batik-xml:1.7',
+ 
+-            'org.mozilla:rhino:1.7R4', // "js.jar"/librhino-java
++            //'org.mozilla:rhino:1.7R4', // "js.jar"/librhino-java
++	    'rhino:js:1.7R4',
+ 
+             // cannot pull this due to broken "avalon" dependency
+             // (replaced by ./lib/pdf-transcoder.jar below):
+             //'org.apache.xmlgraphics:fop:1.1', // "fop.jar"/libfop-java
++	    ':fop',
+ 
+             // libxml-commons-external-java 1.4.01
+             //WRONG: 'org.apache.xmlgraphics:xmlgraphics-commons:1.4'
+@@ -34,10 +36,8 @@
+             // need to fix javax.xml.parsers.FactoryConfigurationError:
+             // Provider org.apache.xerces.jaxp.SAXParserFactoryImpl not found
+             // when starting from elipse:
++	    // libxerces2-java:
+             'xerces:xercesImpl:2.11.0'
+-
+-    // from flatDir "localGitDepsRepository":
+-    compile ':pdf-transcoder-1.0' // "fop.jar"/libfop-java
+ }
+ 
+ jar {

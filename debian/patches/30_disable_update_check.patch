@@ -1,0 +1,26 @@
+Description: Disable update check (automatically and in menu)
+Author: Felix Natter <fnatter@gmx.net>
+Forwarded: not-needed
+Last-Update: 2016-02-04
+--- a/freeplane/viewer-resources/freeplane.properties
++++ b/freeplane/viewer-resources/freeplane.properties
+@@ -180,7 +180,7 @@
+ browsemode_initial_map=map.mm
+ bugTrackerLocation=http\://www.freeplane.org/bugs
+ center_selected_node=false
+-check_updates_automatically=true
++check_updates_automatically=false
+ compare_as_number=true
+ connector_alpha=200
+ connector_shape=CUBIC_CURVE
+--- a/freeplane/external-resources/xml/mindmapmodemenu.xml
++++ b/freeplane/external-resources/xml/mindmapmodemenu.xml
+@@ -463,7 +463,7 @@
+ 			<Entry builder="separator" />
+ 		</Entry>
+ 		<Entry name="help">
+-			<Entry name="UpdateCheckAction" />
++			<!--<Entry name="UpdateCheckAction" />-->
+ 			<Entry builder="separator" />
+ 			<Entry name="web_resources">
+ 				<Entry name="OpenFreeplaneSiteAction" />
