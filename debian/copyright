@@ -5,48 +5,14 @@ Upstream-Contact: Felix Natter <fnatter@gmx.net>
 
 Files: *
 Copyright: 2000-2008 Joerg Mueller, Daniel Polansky, Christian Foltin, Dimitry Polivaev <dpolivaev@gmx.de>
-           2008-2015 Dimitry Polivaev <dpolivaev@gmx.de>, Volker Börchers <boercher@web.de>, Felix Natter <fnatter@gmx.net>
-           2008-2015 Others
+           2008-2016 Dimitry Polivaev <dpolivaev@gmx.de>, Volker Börchers <boercher@web.de>, Felix Natter <fnatter@gmx.net>
+           2008-2016 Others
 License: GPL-2+
  
 Files: debian/*
 Copyright: 2010-2012 Eric Lavarde <deb@zorglub.s.bawue.de>
-           2013-2015 Felix Natter <fnatter@gmx.net>
+           2013-2016 Felix Natter <fnatter@gmx.net>
 License: GPL-2+
-
-Files: freeplane/resources/html/deployJava.js
-       freeplane/resources/html/deployJava.txt
-Copyright: Copyright (c) 2006, 2012, Oracle and/or its affiliates. All rights reserved.
-License: BSD-3-clause
- Copyright (c) 2006, 2012, Oracle and/or its affiliates. All rights reserved.
- ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- .
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions
- are met:
- .
-   - Redistributions of source code must retain the above copyright
-     notice, this list of conditions and the following disclaimer.
- .
-   - Redistributions in binary form must reproduce the above copyright
-     notice, this list of conditions and the following disclaimer in the
-     documentation and/or other materials provided with the distribution.
- .
-   - Neither the name of Oracle nor the names of its
-     contributors may be used to endorse or promote products derived
-     from this software without specific prior written permission.
- .
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Files: ./freeplane_framework/script/freeplane.svg
        ./freeplane_framework/script/freeplane.png
@@ -59,6 +25,122 @@ Files: ./freeplane_framework/script/freeplane.svg
        ./freeplane_framework/mac-appbundler/freeplane.icns
        ./freeplane_framework/mac-appbundler/freeplanedoc.icns
 Copyright: 2013-2014 Robert Gibson
+License: CC-BY-SA-3.0
+
+Files: ./freeplane/src/main/java/org/freeplane/n3/nanoxml/*
+Copyright: 2000-2002 Marc De Scheemaecker
+License: NanoXML2
+ This file is part of NanoXML 2 for Java.
+ Copyright (C) 2000-2002 Marc De Scheemaecker, All Rights Reserved. This
+ software is provided 'as-is', without any express or implied warranty. In no
+ event will the authors be held liable for any damages arising from the use of
+ this software. Permission is granted to anyone to use this software for any
+ purpose, including commercial applications, and to alter it and redistribute
+ it freely, subject to the following restrictions: 1. The origin of this
+ software must not be misrepresented; you must not claim that you wrote the
+ original software. If you use this software in a product, an acknowledgment
+ in the product documentation would be appreciated but is not required. 2.
+ Altered source versions must be plainly marked as such, and must not be
+ misrepresented as being the original software. 3. This notice may not be
+ removed or altered from any source distribution.
+
+Files: ./JOrtho_0.4_freeplane/src/main/java/com/inet/jortho/*
+       ./JOrtho_0.4_freeplane/src/test/java/com/inet/*
+Copyright: 2005-2008 i-net software
+License: GPL-2+
+
+Files: ./freeplane/src/main/java/org/freeplane/core/ui/components/calendar/*
+Copyright: 2004 Kai Toedter <kai@toedter.com>
+License: LGPL-2+
+
+Files: ./freeplane/src/main/java/org/freeplane/features/print/BrowseAction.java
+       ./freeplane/src/main/java/org/freeplane/features/print/PreviewDialog.java
+       ./freeplane/src/main/java/org/freeplane/features/print/Preview.java
+Copyright: 2003 Jens Kaiser <jens.kaiser@web.de>
+License: LGPL-2+
+
+Files: ./freeplane/src/main/java/org/freeplane/core/util/XHTMLWriter.java
+       ./freeplane/src/main/java/org/freeplane/core/util/FixedHTMLWriter.java
+Copyright: 2004 Richard "Shred" Koerber
+License: public-domain
+ This is free software. You can modify and use it at will.
+
+Files: ./freeplane/src/main/java/org/freeplane/features/encrypt/Base64Coding.java
+Copyright: 2001, 2003, 2004, 2006 Free Software Foundation, Inc.
+License: GPL-2+ with classpath exception
+ see `/usr/share/common-licenses/GPL-2'.
+ .
+ Linking this library statically or dynamically with other modules is
+ making a combined work based on this library. Thus, the terms and
+ conditions of the GNU General Public License cover the whole
+ combination.
+ .
+ As a special exception, the copyright holders of this library give
+ you permission to link this library with independent modules to
+ produce an executable, regardless of the license terms of these
+ independent modules, and to copy and distribute the resulting
+ executable under terms of your choice, provided that you also meet,
+ for each linked independent module, the terms and conditions of the
+ license of that module. An independent module is a module which is
+ not derived from or based on this library. If you modify this
+ library, you may extend this exception to your version of the
+ library, but you are not obligated to do so. If you do not wish to
+ do so, delete this exception statement from your version.
+
+Files: ./freeplane/src/main/java/com/thebuzzmedia/imgscalr/*
+Copyright: 2011 The Buzz Media, LLC
+License: Apache-2
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+     http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ See `/usr/share/common-licenses/Apache-2.0'.
+
+Files: ./freeplane/src/main/java/org/freeplane/features/clipboard/HtmlSelection.java
+Copyright: Stackoverflow posting
+License: CC-BY-SA-3.0
+
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License: LGPL-2+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+ .
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the
+ Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301, USA.
+ See `/usr/share/common-licenses/LGPL-2'.
+
 License: CC-BY-SA-3.0
  THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE
  COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY
@@ -424,112 +506,3 @@ License: CC-BY-SA-3.0
  does not form part of the License.
  .
  Creative Commons may be contacted at http://creativecommons.org/.
-
-Files: ./freeplane/src/org/freeplane/n3/nanoxml/*
-Copyright: 2000-2002 Marc De Scheemaecker
-License: NanoXML2
- This file is part of NanoXML 2 for Java.
- Copyright (C) 2000-2002 Marc De Scheemaecker, All Rights Reserved. This
- software is provided 'as-is', without any express or implied warranty. In no
- event will the authors be held liable for any damages arising from the use of
- this software. Permission is granted to anyone to use this software for any
- purpose, including commercial applications, and to alter it and redistribute
- it freely, subject to the following restrictions: 1. The origin of this
- software must not be misrepresented; you must not claim that you wrote the
- original software. If you use this software in a product, an acknowledgment
- in the product documentation would be appreciated but is not required. 2.
- Altered source versions must be plainly marked as such, and must not be
- misrepresented as being the original software. 3. This notice may not be
- removed or altered from any source distribution.
-
-Files: ./JOrtho_0.4_freeplane/src/com/inet/jortho/*
-Copyright: 2005-2008 i-net software
-License: GPL-2+
-
-Files: ./freeplane/src/org/freeplane/core/ui/components/calendar/*
-Copyright: 2004 Kai Toedter <kai@toedter.com>
-License: LGPL-2+
-
-Files: ./freeplane/src/org/freeplane/features/print/BrowseAction.java
-       ./freeplane/src/org/freeplane/features/print/PreviewDialog.java
-       ./freeplane/src/org/freeplane/features/print/Preview.java
-Copyright: 2003 Jens Kaiser <jens.kaiser@web.de>
-License: LGPL-2+
-
-Files: ./freeplane/src/org/freeplane/core/util/XHTMLWriter.java
-       ./freeplane/src/org/freeplane/core/util/FixedHTMLWriter.java
-Copyright: 2004 Richard "Shred" Koerber
-License: public-domain
- This is free software. You can modify and use it at will.
-
-Files: ./freeplane/src/org/freeplane/features/encrypt/Base64Coding.java
-Copyright: 2001, 2003, 2004, 2006 Free Software Foundation, Inc.
-License: GPL-2+ with classpath exception
- see `/usr/share/common-licenses/GPL-2'.
- .
- Linking this library statically or dynamically with other modules is
- making a combined work based on this library. Thus, the terms and
- conditions of the GNU General Public License cover the whole
- combination.
- .
- As a special exception, the copyright holders of this library give
- you permission to link this library with independent modules to
- produce an executable, regardless of the license terms of these
- independent modules, and to copy and distribute the resulting
- executable under terms of your choice, provided that you also meet,
- for each linked independent module, the terms and conditions of the
- license of that module. An independent module is a module which is
- not derived from or based on this library. If you modify this
- library, you may extend this exception to your version of the
- library, but you are not obligated to do so. If you do not wish to
- do so, delete this exception statement from your version.
-
-Files: ./freeplane/src/com/thebuzzmedia/imgscalr/*
-Copyright: 2011 The Buzz Media, LLC
-License: Apache-2
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
- .
-     http://www.apache.org/licenses/LICENSE-2.0
- .
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- See `/usr/share/common-licenses/Apache-2.0'.
-
-License: GPL-2+
- This package is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
- .
- This package is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- .
- You should have received a copy of the GNU General Public License
- along with this program. If not, see <http://www.gnu.org/licenses/>
- .
- On Debian systems, the complete text of the GNU General
- Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
-
-License: LGPL-2+
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Library General Public
- License as published by the Free Software Foundation; either
- version 2 of the License, or (at your option) any later version.
- .
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Library General Public License for more details.
- .
- You should have received a copy of the GNU Library General Public
- License along with this library; if not, write to the
- Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- Boston, MA  02110-1301, USA.
- See `/usr/share/common-licenses/LGPL-2'.
