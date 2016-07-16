@@ -1,0 +1,4 @@
+# this is a workaround for a bug in knopflerfish-osgi
+freeplane binary: package-contains-empty-directory usr/share/freeplane/fwdir/condperm/
+# this is a workaround for a bug in knopflerfish-osgi
+freeplane binary: package-contains-empty-directory usr/share/freeplane/fwdir/perms/
