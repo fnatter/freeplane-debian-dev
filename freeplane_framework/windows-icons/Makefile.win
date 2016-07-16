@@ -1,0 +1,33 @@
+# Project: freeplaneIcons
+# Makefile created by Dev-C++ 5.5.3
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = freeplaneIcons_private.res
+OBJ      = $(RES)
+LINKOBJ  = $(RES)
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/mingw32/lib" -static-libstdc++ -static-libgcc --no-export-all-symbols --add-stdcall-alias 
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.7.2/include/c++"
+BIN      = freeplaneIcons.dll
+CXXFLAGS = $(CXXINCS) -DBUILDING_DLL=1
+CFLAGS   = $(INCS) -DBUILDING_DLL=1
+RM       = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+DLLWRAP   = dllwrap.exe
+DEFFILE   = libfreeplaneIcons.def
+STATICLIB = libfreeplaneIcons.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --driver-name c++ --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+freeplaneIcons_private.res: freeplaneIcons_private.rc MMIcon.rc 
+	$(WINDRES) -i freeplaneIcons_private.rc --input-format=rc -o freeplaneIcons_private.res -O coff 

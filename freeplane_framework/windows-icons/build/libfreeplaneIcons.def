@@ -1,0 +1,2 @@
+; c:\Dev-Cpp\MinGW64\bin\dlltool --base-file C:\Users\Dimitry\AppData\Local\Temp\cca07348.base --output-exp freeplaneIcons.exp --dllname freeplaneIcons.dll --output-def build/libfreeplaneIcons.def --exclude-symbol=DllMainCRTStartup --def C:\Users\Dimitry\AppData\Local\Temp\cca07348.def
+EXPORTS

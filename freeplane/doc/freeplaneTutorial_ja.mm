@@ -1,10 +1,10 @@
-<map version="freeplane 1.2.0">
+<map version="freeplane 1.5.9">
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
 <attribute_registry>
     <attribute_name VISIBLE="true" NAME="See also"/>
     <attribute_name VISIBLE="true" NAME="a2"/>
 </attribute_registry>
-<node LOCALIZED_STYLE_REF="default" FOLDED="false" ID="ID_1723255651" BACKGROUND_COLOR="#00ff66" VGAP="0">
+<node LOCALIZED_STYLE_REF="default" FOLDED="false" ID="ID_1723255651" CREATED="1455910883403" MODIFIED="1455910883403" BACKGROUND_COLOR="#00ff66" VGAP_QUANTITY="0.0 px">
 <icon BUILTIN="bee"/>
 <richcontent TYPE="NODE">
 
@@ -21,6 +21,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="MapStyle">
     <conditional_styles>
@@ -31,11 +32,12 @@
             </conjunct_condition>
         </conditional_style>
     </conditional_styles>
-    <properties show_icon_for_attributes="false" show_note_icons="true" show_notes_in_map="false"/>
+    <properties fit_to_viewport="false;" show_icon_for_attributes="false" show_note_icons="true" show_notes_in_map="false"/>
 
 <map_styles>
-<stylenode LOCALIZED_TEXT="styles.root_node">
-<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="right">
+<stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24.0 pt">
+<font SIZE="24"/>
+<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="right" STYLE="bubble">
 <stylenode LOCALIZED_TEXT="defaultstyle.details">
 <font SIZE="8"/>
 </stylenode>
@@ -43,13 +45,16 @@
 <edge COLOR="#808080" WIDTH="thin"/>
 <font SIZE="8"/>
 </stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.attributes">
+<font SIZE="9"/>
+</stylenode>
 <stylenode LOCALIZED_TEXT="defaultstyle.floating">
 <edge STYLE="hide_edge"/>
 <cloud COLOR="#f0f0f0" SHAPE="ROUND_RECT"/>
 </stylenode>
 <stylenode LOCALIZED_TEXT="defaultstyle.note"/>
 </stylenode>
-<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="right">
+<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="right" STYLE="bubble">
 <stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#000000">
 <font SIZE="12"/>
 </stylenode>
@@ -66,7 +71,7 @@
 <font SIZE="12"/>
 </stylenode>
 </stylenode>
-<stylenode LOCALIZED_TEXT="styles.user-defined" POSITION="right">
+<stylenode LOCALIZED_TEXT="styles.user-defined" POSITION="right" STYLE="bubble">
 <stylenode TEXT="Beginner" BACKGROUND_COLOR="#33ffcc" STYLE="bubble">
 <font BOLD="true"/>
 <edge STYLE="bezier" COLOR="#33ffcc"/>
@@ -115,8 +120,8 @@
 <attribute NAME="birth date" VALUE=""/>
 <attribute NAME="e-mail" VALUE=""/>
 </stylenode>
-<stylenode TEXT="MainWidth" MIN_WIDTH="600"/>
-<stylenode TEXT="SubWidth" MAX_WIDTH="550" MIN_WIDTH="550"/>
+<stylenode TEXT="MainWidth" MIN_WIDTH="600.0 px"/>
+<stylenode TEXT="SubWidth" MAX_WIDTH="550.0 px" MIN_WIDTH="550.0 px"/>
 <stylenode TEXT="Method" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </stylenode>
@@ -137,7 +142,7 @@
 </map_styles>
 </hook>
 <hook NAME="FirstGroupNode"/>
-<node STYLE_REF="Beginner" POSITION="right" ID="ID_1820104438" HGAP="-121" VSHIFT="-55">
+<node STYLE_REF="Beginner" POSITION="right" ID="ID_1820104438" CREATED="1455910883405" MODIFIED="1455910883405" HGAP_QUANTITY="-121.0 px" VSHIFT_QUANTITY="-55.0 px">
 <icon BUILTIN="video"/>
 <icon BUILTIN="internet"/>
 <richcontent TYPE="NODE">
@@ -152,6 +157,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
@@ -168,13 +174,12 @@
 </richcontent>
 <edge STYLE="hide_edge"/>
 </node>
-<node TEXT="&#x306f;&#x3058;&#x3081;&#x306b;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_86446891" BACKGROUND_COLOR="#00cc33" NUMBERED="true" MIN_WIDTH="200" HGAP="22" TEXT_SHORTENED="true">
-<hook NAME="FirstGroupNode"/>
-<node TEXT="&#x76ee;&#x7684;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1074607965">
+<node TEXT="&#x306f;&#x3058;&#x3081;&#x306b;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_86446891" CREATED="1455910883406" MODIFIED="1455910883406" BACKGROUND_COLOR="#00cc33" NUMBERED="true" MIN_WIDTH="200.0 px" HGAP_QUANTITY="22.0 px" TEXT_SHORTENED="true">
+<node TEXT="&#x76ee;&#x7684;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1074607965" CREATED="1455910883406" MODIFIED="1455910883406">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1704300991" HGAP="-13" VSHIFT="65" STYLE="fork"><richcontent TYPE="NODE">
+<node ID="ID_1704300991" CREATED="1455910883406" MODIFIED="1455910883406" HGAP_QUANTITY="-13.0 px" VSHIFT_QUANTITY="65.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -192,14 +197,15 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x8aad;&#x307f;&#x65b9;&#x30ac;&#x30a4;&#x30c9;" STYLE_REF="Beginner" FOLDED="true" ID="ID_195004053" MIN_WIDTH="1">
-<node ID="ID_525900700" STYLE="fork" HGAP="-69" VSHIFT="151"><richcontent TYPE="NODE">
+<node TEXT="&#x8aad;&#x307f;&#x65b9;&#x30ac;&#x30a4;&#x30c9;" STYLE_REF="Beginner" FOLDED="true" ID="ID_195004053" CREATED="1455910883407" MODIFIED="1455910883407" MIN_WIDTH="1.0 px">
+<node ID="ID_525900700" CREATED="1455910883407" MODIFIED="1455910883407" STYLE="fork" HGAP_QUANTITY="-69.0 px" VSHIFT_QUANTITY="151.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -246,53 +252,54 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30e1;&#x30a4;&#x30f3;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" STYLE_REF="Beginner" FOLDED="true" ID="ID_767122736">
-<node TEXT="&#x3055;&#x3042;&#x3001;&#x59cb;&#x3081;&#x3088;&#x3046;" ID="ID_1060111837" HGAP="31" VSHIFT="342">
+<node TEXT="&#x30e1;&#x30a4;&#x30f3;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" STYLE_REF="Beginner" FOLDED="true" ID="ID_767122736" CREATED="1455910883407" MODIFIED="1455910883407">
+<node TEXT="&#x3055;&#x3042;&#x3001;&#x59cb;&#x3081;&#x3088;&#x3046;" ID="ID_1060111837" CREATED="1455910883407" MODIFIED="1455910883407" HGAP_QUANTITY="31.0 px" VSHIFT_QUANTITY="342.0 px">
 <icon BUILTIN="video"/>
 <icon BUILTIN="internet"/>
 </node>
-<node TEXT="" ID="ID_1720964325" HGAP="141" VSHIFT="11" STYLE="fork">
+<node TEXT="" ID="ID_1720964325" CREATED="1455910883407" MODIFIED="1455910883407" HGAP_QUANTITY="141.0 px" VSHIFT_QUANTITY="11.0 px" STYLE="fork">
 <edge STYLE="hide_edge"/>
 <hook URI="Images/doc/MenusPropertiesPanel.png" SIZE="0.43956044" NAME="ExternalObject"/>
-<node TEXT="&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x30d0;&#x30fc;" ID="ID_745779360" HGAP="-712" VSHIFT="17">
+<node TEXT="&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x30d0;&#x30fc;" ID="ID_745779360" CREATED="1455910883411" MODIFIED="1455910883411" HGAP_QUANTITY="-712.0 px" VSHIFT_QUANTITY="17.0 px">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_745779360" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
+<arrowlink SHAPE="LINE" COLOR="#0000ff" WIDTH="1" TRANSPARENCY="90" FONT_SIZE="10" FONT_FAMILY="SansSerif" DESTINATION="ID_745779360" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" BOLD="true" ITALIC="true"/>
 <edge STYLE="hide_edge"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#0000ff" WIDTH="1" TRANSPARENCY="90" FONT_SIZE="10" FONT_FAMILY="SansSerif" DESTINATION="ID_745779360" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_745779360" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 </node>
-<node TEXT="&#x30c4;&#x30fc;&#x30eb;&#x30d0;&#x30fc;" ID="ID_1924639373" HGAP="-703" VSHIFT="-1">
+<node TEXT="&#x30c4;&#x30fc;&#x30eb;&#x30d0;&#x30fc;" ID="ID_1924639373" CREATED="1455910883411" MODIFIED="1455910883411" HGAP_QUANTITY="-703.0 px" VSHIFT_QUANTITY="-1.0 px">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1924639373" STARTINCLINATION="40;-5;" ENDINCLINATION="40;-5;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" BOLD="true" ITALIC="true"/>
 <edge STYLE="hide_edge"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1924639373" STARTINCLINATION="40;-5;" ENDINCLINATION="40;-5;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30d0;&#x30fc;" ID="ID_1939718780" HGAP="-711">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30d0;&#x30fc;" ID="ID_1939718780" CREATED="1455910883411" MODIFIED="1455910883411" HGAP_QUANTITY="-711.0 px">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1939718780" STARTINCLINATION="43;-13;" ENDINCLINATION="43;-13;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" BOLD="true" ITALIC="true"/>
 <edge STYLE="hide_edge"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1939718780" STARTINCLINATION="43;-13;" ENDINCLINATION="43;-13;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 </node>
-<node TEXT="F&#x30d0;&#x30fc;" ID="ID_1406478692" HGAP="-688">
+<node TEXT="F&#x30d0;&#x30fc;" ID="ID_1406478692" CREATED="1455910883411" MODIFIED="1455910883411" HGAP_QUANTITY="-688.0 px">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1406478692" STARTINCLINATION="46;-24;" ENDINCLINATION="46;-24;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" BOLD="true" ITALIC="true"/>
 <edge STYLE="hide_edge"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1406478692" STARTINCLINATION="46;-24;" ENDINCLINATION="46;-24;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 </node>
-<node TEXT="&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#x30d0;&#x30fc;" ID="ID_1865250955" HGAP="-706" VSHIFT="-2">
+<node TEXT="&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#x30d0;&#x30fc;" ID="ID_1865250955" CREATED="1455910883411" MODIFIED="1455910883411" HGAP_QUANTITY="-706.0 px" VSHIFT_QUANTITY="-2.0 px">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1865250955" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font BOLD="true" ITALIC="true"/>
 <edge STYLE="hide_edge"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1865250955" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 </node>
-<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x30d1;&#x30cd;&#x30eb;" ID="ID_303482588" HGAP="-146" VSHIFT="30">
+<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x30d1;&#x30cd;&#x30eb;" ID="ID_303482588" CREATED="1455910883412" MODIFIED="1455910883412" HGAP_QUANTITY="-146.0 px" VSHIFT_QUANTITY="30.0 px">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_303482588" STARTINCLINATION="20;-28;" ENDINCLINATION="20;-28;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" BOLD="true" ITALIC="true"/>
 <edge STYLE="hide_edge"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_303482588" STARTINCLINATION="20;-28;" ENDINCLINATION="20;-28;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 </node>
 </node>
-<node TEXT="&#x80cc;&#x666f;&#x306e;&#xa;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_1471702513" HGAP="34" VSHIFT="-6"><richcontent TYPE="DETAILS" HIDDEN="true">
+<node TEXT="&#x80cc;&#x666f;&#x306e;&#xa;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_1471702513" CREATED="1455910883412" MODIFIED="1455910883412" HGAP_QUANTITY="34.0 px" VSHIFT_QUANTITY="-6.0 px"><richcontent TYPE="DETAILS" HIDDEN="true">
 
 <html>
   <head>
@@ -306,18 +313,18 @@
 </html>
 </richcontent>
 <hook URI="Images/mouse/mouse_RB.png" SIZE="1.0" NAME="ExternalObject"/>
-<node TEXT="&#x80cc;&#x666f;&#x306e;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_1485150857" VSHIFT="180" STYLE="fork">
+<node TEXT="&#x80cc;&#x666f;&#x306e;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_1485150857" CREATED="1455910883412" MODIFIED="1455910883412" VSHIFT_QUANTITY="180.0 px" STYLE="fork">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1485150857" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="DEFAULT" ENDARROW="NONE"/>
 <font BOLD="true" ITALIC="true"/>
 <hook URI="Images/doc/BackgroundContextMenu.png" SIZE="1.0" NAME="ExternalObject"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1485150857" STARTINCLINATION="40;0;" ENDINCLINATION="40;0;" STARTARROW="DEFAULT" ENDARROW="NONE"/>
-<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x30d1;&#x30cd;&#x30eb;&#xa;&#x3092;&#x958b;&#x304f;&#xff0f;&#x9589;&#x3058;&#x308b;" ID="ID_724121688" HGAP="56">
+<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x30d1;&#x30cd;&#x30eb;&#xa;&#x3092;&#x958b;&#x304f;&#xff0f;&#x9589;&#x3058;&#x308b;" ID="ID_724121688" CREATED="1455910883413" MODIFIED="1455910883413" HGAP_QUANTITY="56.0 px">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_724121688" STARTINCLINATION="137;-192;" ENDINCLINATION="137;-192;" STARTARROW="DEFAULT" ENDARROW="NONE"/>
 <edge STYLE="hide_edge"/>
 <font BOLD="true" ITALIC="true"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_724121688" STARTINCLINATION="137;-192;" ENDINCLINATION="137;-192;" STARTARROW="DEFAULT" ENDARROW="NONE"/>
 </node>
 </node>
 </node>
-<node TEXT="&#x30d8;&#x30eb;&#x30d7; &gt; &#x30db;&#x30c3;&#x30c8;&#x30ad;&#x30fc;&#x4e00;&#x89a7;" ID="ID_291675950" HGAP="39" VSHIFT="-217" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
+<node TEXT="&#x30d8;&#x30eb;&#x30d7; &gt; &#x30db;&#x30c3;&#x30c8;&#x30ad;&#x30fc;&#x4e00;&#x89a7;" ID="ID_291675950" CREATED="1455910883413" MODIFIED="1455910883413" HGAP_QUANTITY="39.0 px" VSHIFT_QUANTITY="-217.0 px" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -330,16 +337,16 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x30db;&#x30c3;&#x30c8;&#x30ad;&#x30fc;&#x4e00;&#x89a7;" ID="ID_1337797684">
+<node TEXT="&#x30db;&#x30c3;&#x30c8;&#x30ad;&#x30fc;&#x4e00;&#x89a7;" ID="ID_1337797684" CREATED="1455910883413" MODIFIED="1455910883413">
 <hook URI="Images/doc/HotKeysTable.png" SIZE="0.8633093" NAME="ExternalObject"/>
 </node>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1368882439" MIN_WIDTH="1">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1368882439" CREATED="1455910883413" MODIFIED="1455910883413" MIN_WIDTH="1.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_859940648" HGAP="-24" VSHIFT="88"><richcontent TYPE="NODE">
+<node ID="ID_859940648" CREATED="1455910883413" MODIFIED="1455910883413" HGAP_QUANTITY="-24.0 px" VSHIFT_QUANTITY="88.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -357,17 +364,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x5bb6;&#x65cf;&#x95a2;&#x4fc2;&#x8868;&#x793a;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1971514033" TEXT_SHORTENED="true">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x5bb6;&#x65cf;&#x95a2;&#x4fc2;&#x8868;&#x793a;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1971514033" CREATED="1455910883413" MODIFIED="1455910883413" TEXT_SHORTENED="true">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_1269567767" HGAP="-86" VSHIFT="97"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1269567767" CREATED="1455910883414" MODIFIED="1455910883414" HGAP_QUANTITY="-86.0 px" VSHIFT_QUANTITY="97.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -385,23 +393,24 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="(&#x5bb6;&#x65cf;) &#x89aa;" STYLE_REF="ConsumerTopic" FOLDED="true" ID="ID_687495618" VSHIFT="20">
+<node TEXT="(&#x5bb6;&#x65cf;) &#x89aa;" STYLE_REF="ConsumerTopic" FOLDED="true" ID="ID_687495618" CREATED="1455910883414" MODIFIED="1455910883414" VSHIFT_QUANTITY="20.0 px">
 <arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1105307139" MIDDLE_LABEL="&#x5b50;&#x3000;&#x5b6b;" STARTINCLINATION="25;-45;" ENDINCLINATION="-36;-44;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
-<node TEXT="&#x5b50;" STYLE_REF="ConsumerTopic" ID="ID_1105307139">
+<node TEXT="&#x5b50;" STYLE_REF="ConsumerTopic" ID="ID_1105307139" CREATED="1455910883414" MODIFIED="1455910883414">
 <edge STYLE="bezier"/>
 </node>
 </node>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x6298;&#x308a;&#x7573;&#x3080;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1338867820">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x6298;&#x308a;&#x7573;&#x3080;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1338867820" CREATED="1455910883414" MODIFIED="1455910883414">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_434382705" HGAP="-73" VSHIFT="178"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_434382705" CREATED="1455910883414" MODIFIED="1455910883414" HGAP_QUANTITY="-73.0 px" VSHIFT_QUANTITY="178.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -436,11 +445,12 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#xff11;&#x968e;&#x5c64;&#x5206;&#x3060;&#x3051;&#x5c55;&#x958b;&#x3059;&#x308b;" STYLE_REF="ConsumerTopic" ID="ID_321295556" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#xff11;&#x968e;&#x5c64;&#x5206;&#x3060;&#x3051;&#x5c55;&#x958b;&#x3059;&#x308b;" STYLE_REF="ConsumerTopic" ID="ID_321295556" CREATED="1455910883415" MODIFIED="1455910883415" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../unfold_one_level"/>
 <richcontent TYPE="DETAILS">
 
@@ -460,7 +470,7 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#xff11;&#x968e;&#x5c64;&#x5206;&#x3060;&#x3051;&#x6298;&#x308a;&#x7573;&#x3080;" STYLE_REF="ConsumerTopic" ID="ID_831251421" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#xff11;&#x968e;&#x5c64;&#x5206;&#x3060;&#x3051;&#x6298;&#x308a;&#x7573;&#x3080;" STYLE_REF="ConsumerTopic" ID="ID_831251421" CREATED="1455910883416" MODIFIED="1455910883416" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../fold_one_level"/>
 <richcontent TYPE="DETAILS">
 
@@ -480,7 +490,7 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x3059;&#x3079;&#x3066;&#x5c55;&#x958b;&#x3059;&#x308b;" STYLE_REF="ConsumerTopic" ID="ID_933325044" TEXT_SHORTENED="true" LINK="#ID_86446891" STYLE="as_parent">
+<node TEXT="&#x3059;&#x3079;&#x3066;&#x5c55;&#x958b;&#x3059;&#x308b;" STYLE_REF="ConsumerTopic" ID="ID_933325044" CREATED="1455910883417" MODIFIED="1455910883417" LINK="#ID_86446891" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../unfold_all"/>
 <richcontent TYPE="DETAILS">
 
@@ -517,7 +527,7 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x3059;&#x3079;&#x3066;&#x6298;&#x308a;&#x7573;&#x3080;" STYLE_REF="ConsumerTopic" ID="ID_657829947" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x3059;&#x3079;&#x3066;&#x6298;&#x308a;&#x7573;&#x3080;" STYLE_REF="ConsumerTopic" ID="ID_657829947" CREATED="1455910883417" MODIFIED="1455910883417" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../fold_all"/>
 <richcontent TYPE="DETAILS">
 
@@ -556,8 +566,8 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30a4;&#x30f3;&#x30bf;&#x30fc;&#x30cd;&#x30c3;&#x30c8;&#x4e0a;&#x306e;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x958b;&#x304f;" STYLE_REF="Advanced" FOLDED="true" ID="ID_794559549">
-<node STYLE_REF="TitlesContent" ID="ID_663032265" HGAP="-123" VSHIFT="34"><richcontent TYPE="NODE">
+<node TEXT="&#x30a4;&#x30f3;&#x30bf;&#x30fc;&#x30cd;&#x30c3;&#x30c8;&#x4e0a;&#x306e;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x958b;&#x304f;" STYLE_REF="Advanced" FOLDED="true" ID="ID_794559549" CREATED="1455910883418" MODIFIED="1455910883418">
+<node STYLE_REF="TitlesContent" ID="ID_663032265" CREATED="1455910883418" MODIFIED="1455910883418" HGAP_QUANTITY="-123.0 px" VSHIFT_QUANTITY="34.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -569,16 +579,17 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
 </node>
-<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x57fa;&#x672c;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_1337127972" NUMBERED="true" MIN_WIDTH="200">
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1370298116" MIN_WIDTH="115" STYLE="combined">
+<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x57fa;&#x672c;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_1337127972" CREATED="1455910883419" MODIFIED="1455910883419" NUMBERED="true" MIN_WIDTH="200.0 px">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1370298116" CREATED="1455910883419" MODIFIED="1455910883419" MIN_WIDTH="115.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1314148002" HGAP="-102" VSHIFT="105"><richcontent TYPE="NODE">
+<node ID="ID_1314148002" CREATED="1455910883419" MODIFIED="1455910883419" HGAP_QUANTITY="-102.0 px" VSHIFT_QUANTITY="105.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -602,13 +613,14 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node STYLE_REF="Beginner" FOLDED="true" ID="ID_268413071" STYLE="combined" MIN_WIDTH="115"><richcontent TYPE="NODE">
+<node STYLE_REF="Beginner" FOLDED="true" ID="ID_268413071" CREATED="1455910883420" MODIFIED="1455910883420" STYLE="combined" MIN_WIDTH="115.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -620,9 +632,10 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <edge STYLE="bezier"/>
-<node ID="ID_318435221" HGAP="16" VSHIFT="139">
+<node ID="ID_318435221" CREATED="1455910883420" MODIFIED="1455910883420" HGAP_QUANTITY="16.0 px" VSHIFT_QUANTITY="139.0 px">
 <icon BUILTIN="video"/>
 <icon BUILTIN="internet"/>
 <richcontent TYPE="NODE">
@@ -637,9 +650,10 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
-<node FOLDED="true" ID="ID_265318117" HGAP="-100" VSHIFT="-2" STYLE="fork"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_265318117" CREATED="1455910883420" MODIFIED="1455910883420" HGAP_QUANTITY="-100.0 px" VSHIFT_QUANTITY="-2.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -671,13 +685,14 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <edge STYLE="hide_edge"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x65b0;&#x898f;&#x30de;&#x30c3;&#x30d7;" STYLE_REF="BeginnerTopic" ID="ID_1310307853" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x65b0;&#x898f;&#x30de;&#x30c3;&#x30d7;" STYLE_REF="BeginnerTopic" ID="ID_1310307853" CREATED="1455910883421" MODIFIED="1455910883421" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../filenew"/>
 <richcontent TYPE="DETAILS">
 
@@ -692,13 +707,12 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x4fdd;&#x5b58;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x958b;&#x304f;..." STYLE_REF="BeginnerTopic" ID="ID_1284635316" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x4fdd;&#x5b58;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x958b;&#x304f;..." STYLE_REF="BeginnerTopic" ID="ID_1284635316" CREATED="1455910883422" MODIFIED="1455910883422" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../fileopen"/>
 <richcontent TYPE="DETAILS">
 
@@ -713,13 +727,12 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x3092;&#x5370;&#x5237;" STYLE_REF="BeginnerTopic" ID="ID_111478060" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x3092;&#x5370;&#x5237;" STYLE_REF="BeginnerTopic" ID="ID_111478060" CREATED="1455910883424" MODIFIED="1455910883424" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../fileprint"/>
 <richcontent TYPE="DETAILS">
 
@@ -743,7 +756,7 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x5207;&#x308a;&#x53d6;&#x308a;" STYLE_REF="BeginnerTopic" ID="ID_353410114" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x5207;&#x308a;&#x53d6;&#x308a;" STYLE_REF="BeginnerTopic" ID="ID_353410114" CREATED="1455910883425" MODIFIED="1455910883425" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../editcut"/>
 <richcontent TYPE="DETAILS">
 
@@ -762,13 +775,12 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x30b3;&#x30d4;&#x30fc;" STYLE_REF="BeginnerTopic" ID="ID_1274800359" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x30b3;&#x30d4;&#x30fc;" STYLE_REF="BeginnerTopic" ID="ID_1274800359" CREATED="1455910883425" MODIFIED="1455910883425" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../editcopy"/>
 <richcontent TYPE="DETAILS">
 
@@ -792,7 +804,7 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x8cbc;&#x308a;&#x4ed8;&#x3051;" STYLE_REF="BeginnerTopic" ID="ID_1705754282" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x8cbc;&#x308a;&#x4ed8;&#x3051;" STYLE_REF="BeginnerTopic" ID="ID_1705754282" CREATED="1455910883426" MODIFIED="1455910883426" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../editpaste"/>
 <richcontent TYPE="DETAILS">
 
@@ -816,7 +828,7 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x65b0;&#x898f;&#x5b50;&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="BeginnerTopic" ID="ID_942355748" TEXT_SHORTENED="true" STYLE="as_parent">
+<node TEXT="&#x65b0;&#x898f;&#x5b50;&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="BeginnerTopic" ID="ID_942355748" CREATED="1455910883427" MODIFIED="1455910883427" TEXT_SHORTENED="true" STYLE="as_parent">
 <icon BUILTIN="../idea"/>
 <richcontent TYPE="DETAILS">
 
@@ -851,24 +863,24 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&lt;Ins&gt; &#x65b0;&#x898f;&#x5b50;&#x30ce;&#x30fc;&#x30c9;" ID="ID_45308529" STYLE="as_parent">
+<node TEXT="&lt;Ins&gt; &#x65b0;&#x898f;&#x5b50;&#x30ce;&#x30fc;&#x30c9;" ID="ID_45308529" CREATED="1455910883427" MODIFIED="1455910883427" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&lt;Shift&gt;+&lt;Enter&gt; &#x65b0;&#x898f;&#x884c;" ID="ID_396169297" STYLE="as_parent">
+<node TEXT="&lt;Shift&gt;+&lt;Enter&gt; &#x65b0;&#x898f;&#x884c;" ID="ID_396169297" CREATED="1455910883427" MODIFIED="1455910883427" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&lt;Enter&gt; &#x7de8;&#x96c6;&#x3092;&#x5b8c;&#x4e86;&#x3057;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x9078;&#x629e;" ID="ID_780427702" STYLE="as_parent">
+<node TEXT="&lt;Enter&gt; &#x7de8;&#x96c6;&#x3092;&#x5b8c;&#x4e86;&#x3057;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x9078;&#x629e;" ID="ID_780427702" CREATED="1455910883427" MODIFIED="1455910883427" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="2*&lt;Enter&gt; &#x65b0;&#x898f;&#x5144;&#x5f1f;&#x30ce;&#x30fc;&#x30c9;" ID="ID_420903085" STYLE="as_parent">
+<node TEXT="2*&lt;Enter&gt; &#x65b0;&#x898f;&#x5144;&#x5f1f;&#x30ce;&#x30fc;&#x30c9;" ID="ID_420903085" CREATED="1455910883427" MODIFIED="1455910883427" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x53f3;&#x30af;&#x30ea;&#x30c3;&#x30af;&#xff1a;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_435495519" STYLE="as_parent">
+<node TEXT="&#x53f3;&#x30af;&#x30ea;&#x30c3;&#x30af;&#xff1a;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_435495519" CREATED="1455910883427" MODIFIED="1455910883427" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
 </node>
 </node>
-<node STYLE_REF="Beginner" FOLDED="true" ID="ID_1279324490" STYLE="combined" MIN_WIDTH="115"><richcontent TYPE="NODE">
+<node STYLE_REF="Beginner" FOLDED="true" ID="ID_1279324490" CREATED="1455910883428" MODIFIED="1455910883428" STYLE="combined" MIN_WIDTH="115.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -880,8 +892,9 @@
     </p>
   </body>
 </html>
+
 </richcontent>
-<node ID="ID_1800844060" HGAP="17" VSHIFT="105">
+<node ID="ID_1800844060" CREATED="1455910883428" MODIFIED="1455910883428" HGAP_QUANTITY="17.0 px" VSHIFT_QUANTITY="105.0 px">
 <icon BUILTIN="video"/>
 <icon BUILTIN="internet"/>
 <richcontent TYPE="NODE">
@@ -896,9 +909,10 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
-<node FOLDED="true" ID="ID_1433249332" HGAP="-103" VSHIFT="-4" STYLE="fork"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1433249332" CREATED="1455910883428" MODIFIED="1455910883428" HGAP_QUANTITY="-103.0 px" VSHIFT_QUANTITY="-4.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -921,6 +935,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <font ITALIC="false"/>
 <edge STYLE="hide_edge"/>
@@ -928,22 +943,22 @@
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x72ec;&#x81ea;&#x306e;&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x3042;&#x308a;" ID="ID_1425310908">
+<node TEXT="&#x72ec;&#x81ea;&#x306e;&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x3042;&#x308a;" ID="ID_1425310908" CREATED="1455910883428" MODIFIED="1455910883428">
 <edge STYLE="horizontal"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&lt;Enter&gt; &#xff1a;&#x65b0;&#x898f;&#x884c;" ID="ID_1043315983">
+<node TEXT="&lt;Enter&gt; &#xff1a;&#x65b0;&#x898f;&#x884c;" ID="ID_1043315983" CREATED="1455910883428" MODIFIED="1455910883428">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x53f3;&#x30af;&#x30ea;&#x30c3;&#x30af;&#xff1a;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_1846126640">
+<node TEXT="&#x53f3;&#x30af;&#x30ea;&#x30c3;&#x30af;&#xff1a;&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" ID="ID_1846126640" CREATED="1455910883428" MODIFIED="1455910883428">
 <edge STYLE="horizontal"/>
 </node>
 </node>
 </node>
-<node TEXT="&#x4fdd;&#x5b58;&#xff06;&#x9589;&#x3058;&#x308b;" STYLE_REF="Beginner" FOLDED="true" ID="ID_48547188" STYLE="combined" MIN_WIDTH="115">
-<node FOLDED="true" ID="ID_1460485800" HGAP="-99" VSHIFT="40" STYLE="fork"><richcontent TYPE="NODE">
+<node TEXT="&#x4fdd;&#x5b58;&#xff06;&#x9589;&#x3058;&#x308b;" STYLE_REF="Beginner" FOLDED="true" ID="ID_48547188" CREATED="1455910883428" MODIFIED="1455910883428" STYLE="combined" MIN_WIDTH="115.0 px">
+<node FOLDED="true" ID="ID_1460485800" CREATED="1455910883429" MODIFIED="1455910883429" HGAP_QUANTITY="-99.0 px" VSHIFT_QUANTITY="40.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -955,13 +970,14 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <edge STYLE="hide_edge"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x3092;&#xff08;&#x4e0a;&#x66f8;&#x304d;&#xff09;&#x4fdd;&#x5b58;" STYLE_REF="BeginnerTopic" ID="ID_1253878525" TEXT_SHORTENED="true">
+<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x3092;&#xff08;&#x4e0a;&#x66f8;&#x304d;&#xff09;&#x4fdd;&#x5b58;" STYLE_REF="BeginnerTopic" ID="ID_1253878525" CREATED="1455910883429" MODIFIED="1455910883429" TEXT_SHORTENED="true">
 <icon BUILTIN="../filesave"/>
 <richcontent TYPE="DETAILS">
 
@@ -985,7 +1001,7 @@
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node STYLE_REF="BeginnerTopic" ID="ID_449363060" TEXT_SHORTENED="true">
+<node STYLE_REF="BeginnerTopic" ID="ID_449363060" CREATED="1455910883429" MODIFIED="1455910883429" TEXT_SHORTENED="true">
 <icon BUILTIN="../filesaveas"/>
 <richcontent TYPE="NODE">
 
@@ -1003,6 +1019,7 @@
     </div>
   </body>
 </html>
+
 </richcontent>
 <richcontent TYPE="DETAILS">
 
@@ -1021,13 +1038,12 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x8868;&#x793a;&#x4e2d;&#x306e;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x9589;&#x3058;&#x308b;" STYLE_REF="BeginnerTopic" ID="ID_1018458898" TEXT_SHORTENED="true">
+<node TEXT="&#x8868;&#x793a;&#x4e2d;&#x306e;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x9589;&#x3058;&#x308b;" STYLE_REF="BeginnerTopic" ID="ID_1018458898" CREATED="1455910883430" MODIFIED="1455910883430" TEXT_SHORTENED="true">
 <icon BUILTIN="../close"/>
 <richcontent TYPE="DETAILS">
 
@@ -1053,9 +1069,9 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1401167294" MIN_WIDTH="80">
-<node TEXT="&#x30dd;&#x30b9;&#x30c8;&#x30a4;&#x30c3;&#x30c8;&#x30ce;&#x30fc;&#x30c9;&#xff1a;&#x81ea;&#x7531;&#x306b;&#x4f4d;&#x7f6e;&#x6307;&#x5b9a;&#x3067;&#x304d;&#x308b;&#x3001;&#x81ea;&#x7531;&#x306b;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;" STYLE_REF="Advanced" FOLDED="true" ID="ID_630972811" HGAP="18" VSHIFT="227" STYLE="combined">
-<node FOLDED="true" ID="ID_830664496" HGAP="-268" VSHIFT="77" STYLE="fork"><richcontent TYPE="NODE">
+<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1401167294" CREATED="1455910883431" MODIFIED="1455910883431" MIN_WIDTH="80.0 px">
+<node TEXT="&#x30dd;&#x30b9;&#x30c8;&#x30a4;&#x30c3;&#x30c8;&#x30ce;&#x30fc;&#x30c9;&#xff1a;&#x81ea;&#x7531;&#x306b;&#x4f4d;&#x7f6e;&#x6307;&#x5b9a;&#x3067;&#x304d;&#x308b;&#x3001;&#x81ea;&#x7531;&#x306b;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;" STYLE_REF="Advanced" FOLDED="true" ID="ID_630972811" CREATED="1455910883431" MODIFIED="1455910883431" HGAP_QUANTITY="18.0 px" VSHIFT_QUANTITY="227.0 px" STYLE="combined">
+<node FOLDED="true" ID="ID_830664496" CREATED="1455910883431" MODIFIED="1455910883431" HGAP_QUANTITY="-268.0 px" VSHIFT_QUANTITY="77.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1067,14 +1083,15 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x8868;&#x793a;&#x3055;&#x308c;&#x306a;&#x3044;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x306f;&#x3001;&#x51e1;&#x4f8b;&#x3001;&#x898b;&#x51fa;&#x3057;&#x3001;&#x8981;&#x7d04;&#x3001;&#x8457;&#x8005;&#x306a;&#x3069;&#x306e;&#x30e1;&#x30bf;&#x60c5;&#x5831;&#x3092;&#x30de;&#x30c3;&#x30d7;&#x306b;&#x4ed8;&#x52a0;&#x3059;&#x308b;&#x3053;&#x3068;&#x3092;&#x60f3;&#x5b9a;&#x3057;&#x3066;&#x3044;&#x307e;&#x3059;&#x3002;&#x3053;&#x3046;&#x3057;&#x305f;&#x60c5;&#x5831;&#x304c;&#x30de;&#x30c3;&#x30d7;&#x5168;&#x4f53;&#x306b;&#x95a2;&#x9023;&#x3059;&#x308b;&#x3082;&#x306e;&#x3060;&#x3068;&#x3059;&#x308b;&#x3068;&#x3001;&#x3053;&#x308c;&#x3089;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306f;&#x3001;&#x5e38;&#x306b;&#x8996;&#x91ce;&#x306b;&#x5165;&#x308b;&#x3088;&#x3046;&#x306b;&#x30eb;&#x30fc;&#x30c8;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x89aa;&#x3068;&#x3059;&#x308b;&#x3082;&#x306e;&#x306b;&#x306a;&#x308b;&#x306f;&#x305a;&#x3067;&#x3042;&#x308a;&#x3001;&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3068;&#x306f;&#x7121;&#x95a2;&#x4fc2;&#x306b;&#x914d;&#x7f6e;&#x3055;&#x308c;&#x308b;&#x3053;&#x3068;&#x306b;&#x306a;&#x308a;&#x307e;&#x3059;&#x3002;&#x6642;&#x306b;&#x306f;&#x3001;&#x3053;&#x3046;&#x3057;&#x305f;&#x60c5;&#x5831;&#x304c;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x4e00;&#x90e8;&#x306b;&#x3057;&#x304b;&#x95a2;&#x4fc2;&#x306a;&#x3044;&#x3053;&#x3068;&#x3082;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;&#x3053;&#x306e;&#x5834;&#x5408;&#x306f;&#x3001;&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x8868;&#x793a;&#x3055;&#x308c;&#x306a;&#x3044;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x3001;&#x30eb;&#x30fc;&#x30c8;&#x30ce;&#x30fc;&#x30c9;&#x4ee5;&#x5916;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x9023;&#x7d50;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x305d;&#x3046;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3067;&#x306f;&#x3001;&#x7269;&#x4e8b;&#x306e;&#x524d;&#x5f8c;&#x95a2;&#x4fc2;&#x304c;&#x308f;&#x304b;&#x308b;&#xff08;&#x3053;&#x308c;&#x306f;&#x91cd;&#x8981;&#x306a;&#x3053;&#x3068;&#x3067;&#x3059;&#xff09;&#x3088;&#x3046;&#x306b;&#x3001;&#x89aa;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x7d50;&#x3070;&#x308c;&#x308b;&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x3001;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x80cc;&#x666f;&#x3068;&#x540c;&#x3058;&#x8272;&#x306b;&#x6307;&#x5b9a;&#x3055;&#x308c;&#x3066;&#x3044;&#x308b;&#x306e;&#x3067;&#x306a;&#x3044;&#x304b;&#x304e;&#x308a;&#x3001;&#x901a;&#x5e38;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x9078;&#x629e;&#x6642;&#x306b;&#x7834;&#x7dda;&#x306e;&#x5f62;&#x3067;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;&#xa;&#xa;&#x30d5;&#x30ea;&#x30fc;&#x30ce;&#x30fc;&#x30c9;&#x306f;&#x3001;&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x975e;&#x8868;&#x793a;&#x3067;&#x306a;&#x304f;&#x3066;&#x3082;&#x304b;&#x307e;&#x3044;&#x307e;&#x305b;&#x3093;&#x3002;&#x3053;&#x306e;&#x7b2c;&#xff12;&#x306e;&#x7528;&#x6cd5;&#x306f;&#x3001;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x30b9;&#x30da;&#x30fc;&#x30b9;&#x306e;&#x6709;&#x52b9;&#x5229;&#x7528;&#x306b;&#x5f79;&#x7acb;&#x3061;&#x307e;&#x3059;&#x3002;&#x81ea;&#x52d5;&#x30ec;&#x30a4;&#x30a2;&#x30a6;&#x30c8;&#x30a2;&#x30eb;&#x30b4;&#x30ea;&#x30ba;&#x30e0;&#x304c;&#x4f5c;&#x52d5;&#x3059;&#x308b;&#x3068;&#x3001;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x679d;&#x540c;&#x58eb;&#x306f;&#x91cd;&#x8907;&#x3057;&#x306a;&#x3044;&#x3088;&#x3046;&#x306b;&#x306a;&#x3063;&#x3066;&#x3044;&#x307e;&#x3059;&#x3002;&#x30b3;&#x30f3;&#x30d1;&#x30af;&#x30c8;&#x306a;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x4f5c;&#x6210;&#x3057;&#x305f;&#x3044;&#x5834;&#x5408;&#x3001;&#x4e00;&#x90e8;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x30d5;&#x30ea;&#x30fc;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x5909;&#x63db;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x3053;&#x308c;&#x306b;&#x3088;&#x308a;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f4d;&#x7f6e;&#x3092;&#x67d4;&#x8edf;&#x306b;&#x5909;&#x66f4;&#x3067;&#x304d;&#x308b;&#x3088;&#x3046;&#x306b;&#x306a;&#x308a;&#x307e;&#x3059;&#x3002;&#x3057;&#x304b;&#x3082;&#x3001;&#x4ed6;&#x306e;&#x5144;&#x5f1f;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x5bfe;&#x3059;&#x308b;&#x5f53;&#x8a72;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8ad6;&#x7406;&#x7684;&#x4f4d;&#x7f6e;&#x95a2;&#x4fc2;&#x306f;&#x3001;&#x8a2d;&#x5b9a;&#x6b21;&#x7b2c;&#x3067;&#x3059;&#x3002;&#x5e38;&#x306b;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8ad6;&#x7406;&#x7684;&#x306a;&#x4f4d;&#x7f6e;&#x95a2;&#x4fc2;&#x306b;&#x5f93;&#x3063;&#x3066;&#x8868;&#x793a;&#x3055;&#x308c;&#x308b;&#x30a2;&#x30a6;&#x30c8;&#x30e9;&#x30a4;&#x30f3;&#x30d3;&#x30e5;&#x30fc;&#x306b;&#x5207;&#x308a;&#x66ff;&#x3048;&#x305f;&#x5834;&#x5408;&#x3082;&#x3001;&#x3053;&#x306e;&#x70b9;&#x306b;&#x5909;&#x308f;&#x308a;&#x3042;&#x308a;&#x307e;&#x305b;&#x3093;&#x3002;" STYLE_REF="SubWidth" ID="ID_1557640435" HGAP="-581" VSHIFT="187"/>
+<node TEXT="&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x8868;&#x793a;&#x3055;&#x308c;&#x306a;&#x3044;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x306f;&#x3001;&#x51e1;&#x4f8b;&#x3001;&#x898b;&#x51fa;&#x3057;&#x3001;&#x8981;&#x7d04;&#x3001;&#x8457;&#x8005;&#x306a;&#x3069;&#x306e;&#x30e1;&#x30bf;&#x60c5;&#x5831;&#x3092;&#x30de;&#x30c3;&#x30d7;&#x306b;&#x4ed8;&#x52a0;&#x3059;&#x308b;&#x3053;&#x3068;&#x3092;&#x60f3;&#x5b9a;&#x3057;&#x3066;&#x3044;&#x307e;&#x3059;&#x3002;&#x3053;&#x3046;&#x3057;&#x305f;&#x60c5;&#x5831;&#x304c;&#x30de;&#x30c3;&#x30d7;&#x5168;&#x4f53;&#x306b;&#x95a2;&#x9023;&#x3059;&#x308b;&#x3082;&#x306e;&#x3060;&#x3068;&#x3059;&#x308b;&#x3068;&#x3001;&#x3053;&#x308c;&#x3089;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306f;&#x3001;&#x5e38;&#x306b;&#x8996;&#x91ce;&#x306b;&#x5165;&#x308b;&#x3088;&#x3046;&#x306b;&#x30eb;&#x30fc;&#x30c8;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x89aa;&#x3068;&#x3059;&#x308b;&#x3082;&#x306e;&#x306b;&#x306a;&#x308b;&#x306f;&#x305a;&#x3067;&#x3042;&#x308a;&#x3001;&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3068;&#x306f;&#x7121;&#x95a2;&#x4fc2;&#x306b;&#x914d;&#x7f6e;&#x3055;&#x308c;&#x308b;&#x3053;&#x3068;&#x306b;&#x306a;&#x308a;&#x307e;&#x3059;&#x3002;&#x6642;&#x306b;&#x306f;&#x3001;&#x3053;&#x3046;&#x3057;&#x305f;&#x60c5;&#x5831;&#x304c;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x4e00;&#x90e8;&#x306b;&#x3057;&#x304b;&#x95a2;&#x4fc2;&#x306a;&#x3044;&#x3053;&#x3068;&#x3082;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;&#x3053;&#x306e;&#x5834;&#x5408;&#x306f;&#x3001;&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x8868;&#x793a;&#x3055;&#x308c;&#x306a;&#x3044;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x3001;&#x30eb;&#x30fc;&#x30c8;&#x30ce;&#x30fc;&#x30c9;&#x4ee5;&#x5916;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x9023;&#x7d50;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x305d;&#x3046;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3067;&#x306f;&#x3001;&#x7269;&#x4e8b;&#x306e;&#x524d;&#x5f8c;&#x95a2;&#x4fc2;&#x304c;&#x308f;&#x304b;&#x308b;&#xff08;&#x3053;&#x308c;&#x306f;&#x91cd;&#x8981;&#x306a;&#x3053;&#x3068;&#x3067;&#x3059;&#xff09;&#x3088;&#x3046;&#x306b;&#x3001;&#x89aa;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x7d50;&#x3070;&#x308c;&#x308b;&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x3001;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x80cc;&#x666f;&#x3068;&#x540c;&#x3058;&#x8272;&#x306b;&#x6307;&#x5b9a;&#x3055;&#x308c;&#x3066;&#x3044;&#x308b;&#x306e;&#x3067;&#x306a;&#x3044;&#x304b;&#x304e;&#x308a;&#x3001;&#x901a;&#x5e38;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x9078;&#x629e;&#x6642;&#x306b;&#x7834;&#x7dda;&#x306e;&#x5f62;&#x3067;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;&#xa;&#xa;&#x30d5;&#x30ea;&#x30fc;&#x30ce;&#x30fc;&#x30c9;&#x306f;&#x3001;&#x30a8;&#x30c3;&#x30b8;&#x306e;&#x7dda;&#x304c;&#x975e;&#x8868;&#x793a;&#x3067;&#x306a;&#x304f;&#x3066;&#x3082;&#x304b;&#x307e;&#x3044;&#x307e;&#x305b;&#x3093;&#x3002;&#x3053;&#x306e;&#x7b2c;&#xff12;&#x306e;&#x7528;&#x6cd5;&#x306f;&#x3001;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x30b9;&#x30da;&#x30fc;&#x30b9;&#x306e;&#x6709;&#x52b9;&#x5229;&#x7528;&#x306b;&#x5f79;&#x7acb;&#x3061;&#x307e;&#x3059;&#x3002;&#x81ea;&#x52d5;&#x30ec;&#x30a4;&#x30a2;&#x30a6;&#x30c8;&#x30a2;&#x30eb;&#x30b4;&#x30ea;&#x30ba;&#x30e0;&#x304c;&#x4f5c;&#x52d5;&#x3059;&#x308b;&#x3068;&#x3001;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x679d;&#x540c;&#x58eb;&#x306f;&#x91cd;&#x8907;&#x3057;&#x306a;&#x3044;&#x3088;&#x3046;&#x306b;&#x306a;&#x3063;&#x3066;&#x3044;&#x307e;&#x3059;&#x3002;&#x30b3;&#x30f3;&#x30d1;&#x30af;&#x30c8;&#x306a;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x4f5c;&#x6210;&#x3057;&#x305f;&#x3044;&#x5834;&#x5408;&#x3001;&#x4e00;&#x90e8;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x30d5;&#x30ea;&#x30fc;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x5909;&#x63db;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x3053;&#x308c;&#x306b;&#x3088;&#x308a;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f4d;&#x7f6e;&#x3092;&#x67d4;&#x8edf;&#x306b;&#x5909;&#x66f4;&#x3067;&#x304d;&#x308b;&#x3088;&#x3046;&#x306b;&#x306a;&#x308a;&#x307e;&#x3059;&#x3002;&#x3057;&#x304b;&#x3082;&#x3001;&#x4ed6;&#x306e;&#x5144;&#x5f1f;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x5bfe;&#x3059;&#x308b;&#x5f53;&#x8a72;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8ad6;&#x7406;&#x7684;&#x4f4d;&#x7f6e;&#x95a2;&#x4fc2;&#x306f;&#x3001;&#x8a2d;&#x5b9a;&#x6b21;&#x7b2c;&#x3067;&#x3059;&#x3002;&#x5e38;&#x306b;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8ad6;&#x7406;&#x7684;&#x306a;&#x4f4d;&#x7f6e;&#x95a2;&#x4fc2;&#x306b;&#x5f93;&#x3063;&#x3066;&#x8868;&#x793a;&#x3055;&#x308c;&#x308b;&#x30a2;&#x30a6;&#x30c8;&#x30e9;&#x30a4;&#x30f3;&#x30d3;&#x30e5;&#x30fc;&#x306b;&#x5207;&#x308a;&#x66ff;&#x3048;&#x305f;&#x5834;&#x5408;&#x3082;&#x3001;&#x3053;&#x306e;&#x70b9;&#x306b;&#x5909;&#x308f;&#x308a;&#x3042;&#x308a;&#x307e;&#x305b;&#x3093;&#x3002;" STYLE_REF="SubWidth" ID="ID_1557640435" CREATED="1455910883432" MODIFIED="1455910883432" HGAP_QUANTITY="-581.0 px" VSHIFT_QUANTITY="187.0 px"/>
 </node>
 </node>
-<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f5c;&#x6210;&#x3068;&#x79fb;&#x52d5;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1951042775" VGAP="0" HGAP="40" VSHIFT="-20" TEXT_SHORTENED="true" STYLE="fork"><richcontent TYPE="DETAILS">
+<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f5c;&#x6210;&#x3068;&#x79fb;&#x52d5;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1951042775" CREATED="1455910883432" MODIFIED="1455910883432" VGAP_QUANTITY="0.0 px" HGAP_QUANTITY="40.0 px" VSHIFT_QUANTITY="-20.0 px" TEXT_SHORTENED="true" STYLE="fork"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -1084,7 +1101,7 @@
   </body>
 </html>
 </richcontent>
-<node ID="ID_591131207" HGAP="-192" VSHIFT="157" STYLE="fork"><richcontent TYPE="NODE">
+<node ID="ID_591131207" CREATED="1455910883432" MODIFIED="1455910883432" HGAP_QUANTITY="-192.0 px" VSHIFT_QUANTITY="157.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1119,15 +1136,16 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <edge STYLE="hide_edge"/>
 </node>
 </node>
-<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f5c;&#x6210;&#x3068;&#x79fb;&#x52d5;" STYLE_REF="Advanced" FOLDED="true" ID="ID_128387683" VGAP="0" HGAP="17" VSHIFT="-230" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f5c;&#x6210;&#x3068;&#x79fb;&#x52d5;" STYLE_REF="Advanced" FOLDED="true" ID="ID_128387683" CREATED="1455910883432" MODIFIED="1455910883432" VGAP_QUANTITY="0.0 px" HGAP_QUANTITY="17.0 px" VSHIFT_QUANTITY="-230.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1188410566" HGAP="-234" VSHIFT="213"><richcontent TYPE="NODE">
+<node ID="ID_1188410566" CREATED="1455910883432" MODIFIED="1455910883432" HGAP_QUANTITY="-234.0 px" VSHIFT_QUANTITY="213.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1162,13 +1180,14 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="SubWidth" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;" LOCALIZED_STYLE_REF="defaultstyle.floating" ID="ID_1757242560" HGAP="608" VSHIFT="23" MAX_WIDTH="150">
+<node TEXT="&#x30d5;&#x30ea;&#x30fc;&#x30d5;&#x30ed;&#x30fc;&#x30c6;&#x30a3;&#x30f3;&#x30b0;&#x30ce;&#x30fc;&#x30c9;" LOCALIZED_STYLE_REF="defaultstyle.floating" ID="ID_1757242560" CREATED="1455910883433" MODIFIED="1455910883433" HGAP_QUANTITY="608.0 px" VSHIFT_QUANTITY="23.0 px" MAX_WIDTH="150.0 px">
 <hook NAME="FreeNode"/>
 <richcontent TYPE="DETAILS">
 
@@ -1186,10 +1205,10 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30a2;&#x30a4;&#x30b3;&#x30f3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_222393549" STYLE="combined" MIN_WIDTH="80">
+<node TEXT="&#x30a2;&#x30a4;&#x30b3;&#x30f3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_222393549" CREATED="1455910883433" MODIFIED="1455910883433" STYLE="combined" MIN_WIDTH="80.0 px">
 <icon BUILTIN="bookmark"/>
 <icon BUILTIN="idea"/>
-<node ID="ID_715025500" HGAP="-56" VSHIFT="153" STYLE="fork"><richcontent TYPE="NODE">
+<node ID="ID_715025500" CREATED="1455910883433" MODIFIED="1455910883433" HGAP_QUANTITY="-56.0 px" VSHIFT_QUANTITY="153.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1237,13 +1256,14 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <edge STYLE="hide_edge"/>
 </node>
 </node>
-<node TEXT="&#x753b;&#x3000;&#x50cf;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1795262306" MIN_WIDTH="80">
-<node TEXT="&#x753b;&#x3000;&#x50cf; (&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_806240384" STYLE="combined" HGAP="18" VSHIFT="12">
-<node ID="ID_199889694" HGAP="-104" VSHIFT="89" STYLE="fork"><richcontent TYPE="NODE">
+<node TEXT="&#x753b;&#x3000;&#x50cf;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1795262306" CREATED="1455910883434" MODIFIED="1455910883434" MIN_WIDTH="80.0 px">
+<node TEXT="&#x753b;&#x3000;&#x50cf; (&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_806240384" CREATED="1455910883434" MODIFIED="1455910883434" STYLE="combined" HGAP_QUANTITY="18.0 px" VSHIFT_QUANTITY="12.0 px">
+<node ID="ID_199889694" CREATED="1455910883434" MODIFIED="1455910883434" HGAP_QUANTITY="-104.0 px" VSHIFT_QUANTITY="89.0 px" STYLE="fork"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1266,16 +1286,17 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <edge STYLE="hide_edge"/>
 </node>
 </node>
-<node TEXT="&#x753b;&#x50cf;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3078;&#x306e;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x8d64;&#x3044;&#x77e2;&#x5370;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1955041924" HGAP="17" VSHIFT="-1" MAX_WIDTH="550" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x753b;&#x50cf;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3078;&#x306e;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x8d64;&#x3044;&#x77e2;&#x5370;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1955041924" CREATED="1455910883434" MODIFIED="1455910883434" HGAP_QUANTITY="17.0 px" VSHIFT_QUANTITY="-1.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <edge STYLE="bezier"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_728788498" HGAP="-145" VSHIFT="169"><richcontent TYPE="NODE">
+<node ID="ID_728788498" CREATED="1455910883434" MODIFIED="1455910883434" HGAP_QUANTITY="-145.0 px" VSHIFT_QUANTITY="169.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1306,18 +1327,19 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30a4;&#x30f3;&#x30e9;&#x30a4;&#x30f3;&#x753b;&#x50cf;" STYLE_REF="Professional" FOLDED="true" ID="ID_680497355" HGAP="17" VSHIFT="-10" MAX_WIDTH="550" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x30a4;&#x30f3;&#x30e9;&#x30a4;&#x30f3;&#x753b;&#x50cf;" STYLE_REF="Professional" FOLDED="true" ID="ID_680497355" CREATED="1455910883434" MODIFIED="1455910883434" HGAP_QUANTITY="17.0 px" VSHIFT_QUANTITY="-10.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <edge STYLE="bezier"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_990348986" HGAP="-72" VSHIFT="33"><richcontent TYPE="NODE">
+<node ID="ID_990348986" CREATED="1455910883435" MODIFIED="1455910883435" HGAP_QUANTITY="-72.0 px" VSHIFT_QUANTITY="33.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1329,6 +1351,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1336,14 +1359,14 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x9032;&#x6357;&#x5ea6;&#x6307;&#x6a19;" STYLE_REF="Professional" FOLDED="true" ID="ID_1644368711" MIN_WIDTH="100">
-<node TEXT="&#x3042;&#x308b;&#x7a2e;&#x306e;&#x9032;&#x6357;&#x5ea6;&#x8868;&#x793a;&#x304c;&#x5fc5;&#x8981;&#x306a;&#x5834;&#x5408;&#x3001;&#x5927;&#x5c0f;&#x306e;&#x9032;&#x6357;&#x6307;&#x6a19;&#x56f3;&#x3092;&#x4ed8;&#x3059;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x9032;&#x6357;&#x5ea6;&#x306f;&#x5909;&#x3048;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x9032;&#x6357;&#x5ea6;&#x3092;&#x5909;&#x3048;&#x308b;&#x624b;&#x9806;&#x306f;&#x3001;&#x5927;&#x304d;&#x3044;&#x56f3;&#x3068;&#x5c0f;&#x3055;&#x3044;&#x56f3;&#x3068;&#x3067;&#x5168;&#x304f;&#x7570;&#x306a;&#x308b;&#x3053;&#x3068;&#x306b;&#x3001;&#x6ce8;&#x610f;&#xff01;" ID="ID_707469329" HGAP="28" VSHIFT="81" STYLE="fork"/>
-<node TEXT="&#x5c0f;&#x3055;&#x3044;&#x9032;&#x6357;&#x6307;&#x6a19;&#x56f3;&#xff08;&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1826965169" HGAP="26" VSHIFT="1" MAX_WIDTH="550" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x9032;&#x6357;&#x5ea6;&#x6307;&#x6a19;" STYLE_REF="Professional" FOLDED="true" ID="ID_1644368711" CREATED="1455910883435" MODIFIED="1455910883435" MIN_WIDTH="100.0 px">
+<node TEXT="&#x3042;&#x308b;&#x7a2e;&#x306e;&#x9032;&#x6357;&#x5ea6;&#x8868;&#x793a;&#x304c;&#x5fc5;&#x8981;&#x306a;&#x5834;&#x5408;&#x3001;&#x5927;&#x5c0f;&#x306e;&#x9032;&#x6357;&#x6307;&#x6a19;&#x56f3;&#x3092;&#x4ed8;&#x3059;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x9032;&#x6357;&#x5ea6;&#x306f;&#x5909;&#x3048;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x9032;&#x6357;&#x5ea6;&#x3092;&#x5909;&#x3048;&#x308b;&#x624b;&#x9806;&#x306f;&#x3001;&#x5927;&#x304d;&#x3044;&#x56f3;&#x3068;&#x5c0f;&#x3055;&#x3044;&#x56f3;&#x3068;&#x3067;&#x5168;&#x304f;&#x7570;&#x306a;&#x308b;&#x3053;&#x3068;&#x306b;&#x3001;&#x6ce8;&#x610f;&#xff01;" ID="ID_707469329" CREATED="1455910883435" MODIFIED="1455910883435" HGAP_QUANTITY="28.0 px" VSHIFT_QUANTITY="81.0 px" STYLE="fork"/>
+<node TEXT="&#x5c0f;&#x3055;&#x3044;&#x9032;&#x6357;&#x6307;&#x6a19;&#x56f3;&#xff08;&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1826965169" CREATED="1455910883435" MODIFIED="1455910883435" HGAP_QUANTITY="26.0 px" VSHIFT_QUANTITY="1.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <icon BUILTIN="25%"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1268781768" HGAP="-135" VSHIFT="32"><richcontent TYPE="NODE">
+<node ID="ID_1268781768" CREATED="1455910883435" MODIFIED="1455910883435" HGAP_QUANTITY="-135.0 px" VSHIFT_QUANTITY="32.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1355,19 +1378,20 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x5927;&#x304d;&#x3044;&#x9032;&#x6357;&#x6307;&#x6a19;&#x56f3;&#xff08;&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#x3068;&#x753b;&#x50cf;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1080017148" HGAP="24" VSHIFT="-52" MAX_WIDTH="550" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x5927;&#x304d;&#x3044;&#x9032;&#x6357;&#x6307;&#x6a19;&#x56f3;&#xff08;&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#x3068;&#x753b;&#x50cf;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1080017148" CREATED="1455910883435" MODIFIED="1455910883435" HGAP_QUANTITY="24.0 px" VSHIFT_QUANTITY="-52.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <icon BUILTIN="0%"/>
 <hook URI="freeplaneresource:/images/svg/Progress_tenth_01.svg" SIZE="1.0" NAME="ExternalObject"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node ID="ID_522359814" HGAP="-182" VSHIFT="122"><richcontent TYPE="NODE">
+<node ID="ID_522359814" CREATED="1455910883435" MODIFIED="1455910883435" HGAP_QUANTITY="-182.0 px" VSHIFT_QUANTITY="122.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1393,6 +1417,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1400,11 +1425,11 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x7d71;&#x5408;" STYLE_REF="Professional" FOLDED="true" ID="ID_998103410" MAX_WIDTH="600" MIN_WIDTH="100" STYLE="bubble">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x7d71;&#x5408;" STYLE_REF="Professional" FOLDED="true" ID="ID_998103410" CREATED="1455910883436" MODIFIED="1455910883436" MAX_WIDTH="600.0 px" MIN_WIDTH="100.0 px" STYLE="bubble">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_795220191" HGAP="-84" VSHIFT="80"><richcontent TYPE="NODE">
+<node ID="ID_795220191" CREATED="1455910883436" MODIFIED="1455910883436" HGAP_QUANTITY="-84.0 px" VSHIFT_QUANTITY="80.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1430,18 +1455,19 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5206;&#x5272;" STYLE_REF="Professional" FOLDED="true" ID="ID_247213553" MAX_WIDTH="600" MIN_WIDTH="100" STYLE="combined">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5206;&#x5272;" STYLE_REF="Professional" FOLDED="true" ID="ID_247213553" CREATED="1455910883436" MODIFIED="1455910883436" MAX_WIDTH="600.0 px" MIN_WIDTH="100.0 px" STYLE="combined">
 <font ITALIC="false"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_497224980" HGAP="-86" VSHIFT="135"><richcontent TYPE="NODE">
+<node ID="ID_497224980" CREATED="1455910883436" MODIFIED="1455910883436" HGAP_QUANTITY="-86.0 px" VSHIFT_QUANTITY="135.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1472,17 +1498,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x8a08;&#x3000;&#x7b97;" STYLE_REF="Professional" FOLDED="true" ID="ID_448338872" LINK="http://freeplane.sourceforge.net/wiki/index.php/Formula" MIN_WIDTH="100" STYLE="combined">
+<node TEXT="&#x8a08;&#x3000;&#x7b97;" STYLE_REF="Professional" FOLDED="true" ID="ID_448338872" CREATED="1455910883436" MODIFIED="1455910883436" LINK="http://freeplane.sourceforge.net/wiki/index.php/Formula" MIN_WIDTH="100.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_60050529" HGAP="-83" VSHIFT="116"><richcontent TYPE="NODE">
+<node ID="ID_60050529" CREATED="1455910883437" MODIFIED="1455910883437" HGAP_QUANTITY="-83.0 px" VSHIFT_QUANTITY="116.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1511,6 +1538,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1518,12 +1546,12 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x9078;&#x629e;&#x3068;&#x79fb;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_272980743" NUMBERED="true" MIN_WIDTH="200">
-<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x30b9;&#x30af;&#x30ed;&#x30fc;&#x30eb;&#x3068;&#x30d1;&#x30f3;&#x30cb;&#x30f3;&#x30b0;&#x8868;&#x793a;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1577961914" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x9078;&#x629e;&#x3068;&#x79fb;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_272980743" CREATED="1455910883438" MODIFIED="1455910883438" NUMBERED="true" MIN_WIDTH="200.0 px">
+<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x30b9;&#x30af;&#x30ed;&#x30fc;&#x30eb;&#x3068;&#x30d1;&#x30f3;&#x30cb;&#x30f3;&#x30b0;&#x8868;&#x793a;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1577961914" CREATED="1455910883438" MODIFIED="1455910883438" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1560196388" HGAP="-187" VSHIFT="52"><richcontent TYPE="NODE">
+<node ID="ID_1560196388" CREATED="1455910883438" MODIFIED="1455910883438" HGAP_QUANTITY="-187.0 px" VSHIFT_QUANTITY="52.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1543,6 +1571,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1550,13 +1579,15 @@
 </hook>
 </node>
 </node>
-<node TEXT="&#x9078;&#x3000;&#x629e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1573267345" MIN_WIDTH="60">
+<node TEXT="" ID="ID_119208509" CREATED="1455910883556" MODIFIED="1455910883556">
 <hook NAME="FirstGroupNode"/>
-<node TEXT="&#x81ea;&#x52d5;&#x9078;&#x629e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1387234491" MAX_WIDTH="600" STYLE="combined">
+</node>
+<node TEXT="&#x9078;&#x3000;&#x629e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1573267345" CREATED="1455910883438" MODIFIED="1455910883438" MIN_WIDTH="60.0 px">
+<node TEXT="&#x81ea;&#x52d5;&#x9078;&#x629e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1387234491" CREATED="1455910883438" MODIFIED="1455910883438" MAX_WIDTH="600.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1185537684" HGAP="-52" VSHIFT="43"><richcontent TYPE="NODE">
+<node ID="ID_1185537684" CREATED="1455910883438" MODIFIED="1455910883438" HGAP_QUANTITY="-52.0 px" VSHIFT_QUANTITY="43.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1568,6 +1599,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1575,12 +1607,12 @@
 </hook>
 </node>
 </node>
-<node TEXT="&#x9078;&#x629e;&#x30d5;&#x30a9;&#x30fc;&#x30ab;&#x30b9;&#x3092;&#x4fdd;&#x6301;" STYLE_REF="Beginner" FOLDED="true" ID="ID_970057223" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x9078;&#x629e;&#x30d5;&#x30a9;&#x30fc;&#x30ab;&#x30b9;&#x3092;&#x4fdd;&#x6301;" STYLE_REF="Beginner" FOLDED="true" ID="ID_970057223" CREATED="1455910883438" MODIFIED="1455910883438" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
 <edge STYLE="bezier" COLOR="#33ffcc"/>
-<node ID="ID_299898759" HGAP="-125" VSHIFT="39"><richcontent TYPE="NODE">
+<node ID="ID_299898759" CREATED="1455910883438" MODIFIED="1455910883438" HGAP_QUANTITY="-125.0 px" VSHIFT_QUANTITY="39.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1592,6 +1624,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1600,9 +1633,9 @@
 <edge STYLE="hide_edge"/>
 </node>
 </node>
-<node TEXT="&#x30eb;&#x30fc;&#x30c8;&#x3078;&#x30b8;&#x30e3;&#x30f3;&#x30d7;&#x3059;&#x308b;&#x30ad;&#x30fc;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1316263866" MAX_WIDTH="550" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x30eb;&#x30fc;&#x30c8;&#x3078;&#x30b8;&#x30e3;&#x30f3;&#x30d7;&#x3059;&#x308b;&#x30ad;&#x30fc;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1316263866" CREATED="1455910883439" MODIFIED="1455910883439" MAX_WIDTH="550.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <edge STYLE="bezier"/>
-<node ID="ID_279008116" HGAP="-145" VSHIFT="23"><richcontent TYPE="NODE">
+<node ID="ID_279008116" CREATED="1455910883439" MODIFIED="1455910883439" HGAP_QUANTITY="-145.0 px" VSHIFT_QUANTITY="23.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1614,6 +1647,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1621,8 +1655,8 @@
 </hook>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x3059;&#x3079;&#x3066;&#x9078;&#x629e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_376722702">
-<node STYLE_REF="TitlesContent" ID="ID_1214336373" HGAP="-107" VSHIFT="33"><richcontent TYPE="NODE">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x3059;&#x3079;&#x3066;&#x9078;&#x629e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_376722702" CREATED="1455910883439" MODIFIED="1455910883439">
+<node STYLE_REF="TitlesContent" ID="ID_1214336373" CREATED="1455910883439" MODIFIED="1455910883439" HGAP_QUANTITY="-107.0 px" VSHIFT_QUANTITY="33.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1634,11 +1668,14 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
 </node>
-<node ID="ID_1801157892" HGAP="16" VSHIFT="8">
+<node TEXT="" ID="ID_489361336" CREATED="1455910883560" MODIFIED="1455910883560">
+<hook NAME="SummaryNode"/>
+<node ID="ID_1801157892" CREATED="1455910883439" MODIFIED="1455910883439" HGAP_QUANTITY="16.0 px" VSHIFT_QUANTITY="8.0 px">
 <icon BUILTIN="video"/>
 <icon BUILTIN="internet"/>
 <richcontent TYPE="NODE">
@@ -1653,42 +1690,46 @@
     </p>
   </body>
 </html>
+
 </richcontent>
-<hook NAME="SummaryNode"/>
 </node>
-<node TEXT="&#x79fb;&#x3000;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1560992291" MAX_WIDTH="600" MIN_WIDTH="60">
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x968e;&#x5c64;&#x9593;&#x79fb;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" ID="ID_125921821" MAX_WIDTH="550" STYLE="combined">
+</node>
+<node TEXT="&#x79fb;&#x3000;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1560992291" CREATED="1455910883439" MODIFIED="1455910883439" MAX_WIDTH="600.0 px" MIN_WIDTH="60.0 px">
+<node TEXT="" ID="ID_799049956" CREATED="1455910883561" MODIFIED="1455910883561">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x968e;&#x5c64;&#x9593;&#x79fb;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" ID="ID_125921821" CREATED="1455910883439" MODIFIED="1455910883439" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
 </hook>
-<node TEXT="&#x3042;&#x308b;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x73fe;&#x5728;&#x306e;&#x89aa;&#x30ce;&#x30fc;&#x30c9;&#x304b;&#x3089;&#x5207;&#x308a;&#x96e2;&#x3057;&#x3001;&#x5225;&#x306e;&#x89aa;&#x306b;&#x7d50;&#x3073;&#x3064;&#x3051;&#x308b;&#x306b;&#x306f;&#x3001;&#x5f53;&#x8a72;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3057;&#x3066;&#x65b0;&#x3057;&#x3044;&#x4f4d;&#x7f6e;&#x306b;&#x30c9;&#x30e9;&#x30c3;&#x30b0;&#x3059;&#x308b;&#x3060;&#x3051;&#x3067;&#x3059;&#x3002;&#x3053;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x5b50;&#x30ce;&#x30fc;&#x30c9;&#x7fa4;&#x306b;&#x66f8;&#x304b;&#x308c;&#x3066;&#x3044;&#x308b;&#x3088;&#x3046;&#x306b;&#x3001;&#x5bfe;&#x8c61;&#x30ce;&#x30fc;&#x30c9;&#x3067;&#x306e;&#x30c9;&#x30ed;&#x30c3;&#x30d7;&#x4f4d;&#x7f6e;&#x3092;&#x5909;&#x3048;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x4e26;&#x3079;&#x66ff;&#x3048;&#x306b;&#x3088;&#x3063;&#x3066;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x79fb;&#x52d5;&#x3055;&#x305b;&#x308b;&#x3053;&#x3068;&#x3082;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;" FOLDED="true" ID="ID_1599927930" HGAP="-186" VSHIFT="39">
+<node TEXT="&#x3042;&#x308b;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x73fe;&#x5728;&#x306e;&#x89aa;&#x30ce;&#x30fc;&#x30c9;&#x304b;&#x3089;&#x5207;&#x308a;&#x96e2;&#x3057;&#x3001;&#x5225;&#x306e;&#x89aa;&#x306b;&#x7d50;&#x3073;&#x3064;&#x3051;&#x308b;&#x306b;&#x306f;&#x3001;&#x5f53;&#x8a72;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3057;&#x3066;&#x65b0;&#x3057;&#x3044;&#x4f4d;&#x7f6e;&#x306b;&#x30c9;&#x30e9;&#x30c3;&#x30b0;&#x3059;&#x308b;&#x3060;&#x3051;&#x3067;&#x3059;&#x3002;&#x3053;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x5b50;&#x30ce;&#x30fc;&#x30c9;&#x7fa4;&#x306b;&#x66f8;&#x304b;&#x308c;&#x3066;&#x3044;&#x308b;&#x3088;&#x3046;&#x306b;&#x3001;&#x5bfe;&#x8c61;&#x30ce;&#x30fc;&#x30c9;&#x3067;&#x306e;&#x30c9;&#x30ed;&#x30c3;&#x30d7;&#x4f4d;&#x7f6e;&#x3092;&#x5909;&#x3048;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x4e26;&#x3079;&#x66ff;&#x3048;&#x306b;&#x3088;&#x3063;&#x3066;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x79fb;&#x52d5;&#x3055;&#x305b;&#x308b;&#x3053;&#x3068;&#x3082;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;" FOLDED="true" ID="ID_1599927930" CREATED="1455910883502" MODIFIED="1455910883502" HGAP_QUANTITY="-186.0 px" VSHIFT_QUANTITY="39.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x89e3;&#x8aac;&#x30d3;&#x30c7;&#x30aa;" ID="ID_760768670" LINK="https://www.youtube.com/watch?v=0xkUzsd4naA" HGAP="30" VSHIFT="10" MIN_WIDTH="1">
+<node TEXT="&#x89e3;&#x8aac;&#x30d3;&#x30c7;&#x30aa;" ID="ID_760768670" CREATED="1455910883502" MODIFIED="1455910883502" LINK="https://www.youtube.com/watch?v=0xkUzsd4naA" HGAP_QUANTITY="30.0 px" VSHIFT_QUANTITY="10.0 px" MIN_WIDTH="1.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
 </node>
 </node>
 </node>
-<node TEXT="&#x9023;&#x7d50;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x7a7a;&#x9593;&#x79fb;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" ID="ID_293115184" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x9023;&#x7d50;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x7a7a;&#x9593;&#x79fb;&#x52d5;" STYLE_REF="Beginner" FOLDED="true" ID="ID_293115184" CREATED="1455910883502" MODIFIED="1455910883502" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node TEXT="&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3068;&#x306e;&#x7d50;&#x5408;&#x95a2;&#x4fc2;&#x3092;&#x640d;&#x306a;&#x3046;&#x3053;&#x3068;&#x306a;&#x304f;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f4d;&#x7f6e;&#x3092;&#x5909;&#x66f4;&#x3059;&#x308b;&#x3059;&#x308b;&#x306b;&#x306f;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x89aa;&#x30ce;&#x30fc;&#x30c9;&#x5074;&#x306b;&#x3042;&#x308b;&#x6955;&#x5186;&#x5f62;&#x306e;&#x64cd;&#x4f5c;&#x30cf;&#x30f3;&#x30c9;&#x30eb;&#x3092;&#x898b;&#x3064;&#x3051;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x89aa;&#x5074;&#x3067;&#x30ab;&#x30fc;&#x30bd;&#x30eb;&#x3092;&#x52d5;&#x304b;&#x3057;&#x6955;&#x5186;&#x5f62;&#x306e;&#x8272;&#x304c;&#x5909;&#x308f;&#x308b;&#x307e;&#x3067;&#x63a2;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x6b21;&#x306b;&#x3001;&#x6955;&#x5186;&#x5f62;&#x3092;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3057;&#x3066;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x79fb;&#x52d5;&#x3057;&#x305f;&#x3044;&#x5834;&#x6240;&#x307e;&#x3067;&#x30c9;&#x30e9;&#x30c3;&#x30b0;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x5408;&#x308f;&#x305b;&#x3066;&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3082;&#x52d5;&#x304f;&#x304b;&#x3082;&#x3057;&#x308c;&#x307e;&#x305b;&#x3093;&#x3002;&#x6955;&#x5186;&#x5f62;&#x306e;&#x30cf;&#x30f3;&#x30c9;&#x30eb;&#x3092;&#x30c0;&#x30d6;&#x30eb;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3059;&#x308b;&#x3068;&#x3001;&#x79fb;&#x52d5;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5143;&#x306e;&#x4f4d;&#x7f6e;&#x306b;&#x623b;&#x3059;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;" ID="ID_1319283887" HGAP="-116" VSHIFT="45">
+<node TEXT="&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3068;&#x306e;&#x7d50;&#x5408;&#x95a2;&#x4fc2;&#x3092;&#x640d;&#x306a;&#x3046;&#x3053;&#x3068;&#x306a;&#x304f;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f4d;&#x7f6e;&#x3092;&#x5909;&#x66f4;&#x3059;&#x308b;&#x3059;&#x308b;&#x306b;&#x306f;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x89aa;&#x30ce;&#x30fc;&#x30c9;&#x5074;&#x306b;&#x3042;&#x308b;&#x6955;&#x5186;&#x5f62;&#x306e;&#x64cd;&#x4f5c;&#x30cf;&#x30f3;&#x30c9;&#x30eb;&#x3092;&#x898b;&#x3064;&#x3051;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x89aa;&#x5074;&#x3067;&#x30ab;&#x30fc;&#x30bd;&#x30eb;&#x3092;&#x52d5;&#x304b;&#x3057;&#x6955;&#x5186;&#x5f62;&#x306e;&#x8272;&#x304c;&#x5909;&#x308f;&#x308b;&#x307e;&#x3067;&#x63a2;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x6b21;&#x306b;&#x3001;&#x6955;&#x5186;&#x5f62;&#x3092;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3057;&#x3066;&#x3001;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x79fb;&#x52d5;&#x3057;&#x305f;&#x3044;&#x5834;&#x6240;&#x307e;&#x3067;&#x30c9;&#x30e9;&#x30c3;&#x30b0;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x5408;&#x308f;&#x305b;&#x3066;&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3082;&#x52d5;&#x304f;&#x304b;&#x3082;&#x3057;&#x308c;&#x307e;&#x305b;&#x3093;&#x3002;&#x6955;&#x5186;&#x5f62;&#x306e;&#x30cf;&#x30f3;&#x30c9;&#x30eb;&#x3092;&#x30c0;&#x30d6;&#x30eb;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3059;&#x308b;&#x3068;&#x3001;&#x79fb;&#x52d5;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5143;&#x306e;&#x4f4d;&#x7f6e;&#x306b;&#x623b;&#x3059;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;" ID="ID_1319283887" CREATED="1455910883502" MODIFIED="1455910883502" HGAP_QUANTITY="-116.0 px" VSHIFT_QUANTITY="45.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30c9;&#x30ed;&#x30c3;&#x30d7;&#x306e;&#x4f4d;&#x7f6e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1039655261" MAX_WIDTH="600" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x30c9;&#x30ed;&#x30c3;&#x30d7;&#x306e;&#x4f4d;&#x7f6e;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1039655261" CREATED="1455910883503" MODIFIED="1455910883503" MAX_WIDTH="600.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_786303568" HGAP="-72" VSHIFT="88" MIN_WIDTH="80"><richcontent TYPE="NODE">
+<node ID="ID_786303568" CREATED="1455910883503" MODIFIED="1455910883503" HGAP_QUANTITY="-72.0 px" VSHIFT_QUANTITY="88.0 px" MIN_WIDTH="80.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1716,6 +1757,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1723,7 +1765,9 @@
 </hook>
 </node>
 </node>
-<node ID="ID_1561397135" HGAP="16" VSHIFT="8">
+<node TEXT="" ID="ID_387936617" CREATED="1455910883561" MODIFIED="1455910883561">
+<hook NAME="SummaryNode"/>
+<node ID="ID_1561397135" CREATED="1455910883503" MODIFIED="1455910883503" HGAP_QUANTITY="16.0 px" VSHIFT_QUANTITY="8.0 px">
 <icon BUILTIN="video"/>
 <icon BUILTIN="internet"/>
 <richcontent TYPE="NODE">
@@ -1738,14 +1782,15 @@
     </p>
   </body>
 </html>
+
 </richcontent>
-<hook NAME="SummaryNode"/>
 </node>
-<node TEXT="&#x30b0;&#x30eb;&#x30fc;&#x30d7;&#x306e;&#x79fb;&#x52d5;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1040002877" MAX_WIDTH="600" MIN_WIDTH="1" STYLE="combined">
+</node>
+<node TEXT="&#x30b0;&#x30eb;&#x30fc;&#x30d7;&#x306e;&#x79fb;&#x52d5;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1040002877" CREATED="1455910883503" MODIFIED="1455910883503" MAX_WIDTH="600.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1239614830" HGAP="-84" VSHIFT="62"><richcontent TYPE="NODE">
+<node ID="ID_1239614830" CREATED="1455910883503" MODIFIED="1455910883503" HGAP_QUANTITY="-84.0 px" VSHIFT_QUANTITY="62.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1765,14 +1810,15 @@
     </ol>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f4d;&#x7f6e;&#x3092;&#x30ea;&#x30bb;&#x30c3;&#x30c8;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1352824494">
-<node STYLE_REF="TitlesContent" ID="ID_688846542" HGAP="-121" VSHIFT="31"><richcontent TYPE="NODE">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x4f4d;&#x7f6e;&#x3092;&#x30ea;&#x30bb;&#x30c3;&#x30c8;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1352824494" CREATED="1455910883503" MODIFIED="1455910883503">
+<node STYLE_REF="TitlesContent" ID="ID_688846542" CREATED="1455910883504" MODIFIED="1455910883504" HGAP_QUANTITY="-121.0 px" VSHIFT_QUANTITY="31.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1784,15 +1830,16 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x4e26;&#x3079;&#x66ff;&#x3048;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1014457432" MAX_WIDTH="600" STYLE="combined">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x4e26;&#x3079;&#x66ff;&#x3048;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1014457432" CREATED="1455910883504" MODIFIED="1455910883504" MAX_WIDTH="600.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_915226922" HGAP="-80" VSHIFT="44"><richcontent TYPE="NODE">
+<node ID="ID_915226922" CREATED="1455910883504" MODIFIED="1455910883504" HGAP_QUANTITY="-80.0 px" VSHIFT_QUANTITY="44.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1804,6 +1851,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1811,12 +1859,12 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x95a2;&#x4fc2;&#x4ed8;&#x3051;&#x3068;&#x30b0;&#x30eb;&#x30fc;&#x30d7;&#x5316;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_215646874" NUMBERED="true" MIN_WIDTH="200">
-<node TEXT="&#x7dda;&#xff08;&#x30a8;&#x30c3;&#x30b8;&#xff09;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1492225657" STYLE="combined">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x95a2;&#x4fc2;&#x4ed8;&#x3051;&#x3068;&#x30b0;&#x30eb;&#x30fc;&#x30d7;&#x5316;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_215646874" CREATED="1455910883504" MODIFIED="1455910883504" NUMBERED="true" MIN_WIDTH="200.0 px">
+<node TEXT="&#x7dda;&#xff08;&#x30a8;&#x30c3;&#x30b8;&#xff09;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1492225657" CREATED="1455910883504" MODIFIED="1455910883504" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_751107880" HGAP="-28" VSHIFT="43"><richcontent TYPE="NODE">
+<node ID="ID_751107880" CREATED="1455910883504" MODIFIED="1455910883504" HGAP_QUANTITY="-28.0 px" VSHIFT_QUANTITY="43.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1828,6 +1876,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -1835,11 +1884,11 @@
 </hook>
 </node>
 </node>
-<node TEXT="&#x30b3;&#x30cd;&#x30af;&#x30bf;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1073407528" STYLE="combined">
+<node TEXT="&#x30b3;&#x30cd;&#x30af;&#x30bf;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1073407528" CREATED="1455910883505" MODIFIED="1455910883505" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_1649729730" HGAP="-55" VSHIFT="150"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1649729730" CREATED="1455910883505" MODIFIED="1455910883505" HGAP_QUANTITY="-55.0 px" VSHIFT_QUANTITY="150.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1884,27 +1933,28 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="BeginnerTopic" LAST="false"/>
 </hook>
-<node TEXT="a" FOLDED="true" ID="ID_1328399304" HGAP="25" STYLE="as_parent">
-<edge STYLE="hide_edge"/>
+<node TEXT="a" FOLDED="true" ID="ID_1328399304" CREATED="1455910883505" MODIFIED="1455910883505" HGAP_QUANTITY="25.0 px" STYLE="as_parent">
 <arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_581303769" MIDDLE_LABEL="label" STARTINCLINATION="9;-23;" ENDINCLINATION="-28;-89;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
-<node TEXT="b" FOLDED="true" ID="ID_273400211">
+<edge STYLE="hide_edge"/>
+<node TEXT="b" FOLDED="true" ID="ID_273400211" CREATED="1455910883505" MODIFIED="1455910883505">
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_273400211" MIDDLE_LABEL="connector&#xa;without&#xa;begin" STARTINCLINATION="19;86;" ENDINCLINATION="19;86;" STARTARROW="NONE" ENDARROW="NONE"/>
 <edge STYLE="bezier"/>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_273400211" MIDDLE_LABEL="connector&#xa;without&#xa;begin" STARTINCLINATION="19;86;" ENDINCLINATION="19;86;" STARTARROW="NONE" ENDARROW="NONE"/>
-<node TEXT="c" ID="ID_581303769"/>
+<node TEXT="c" ID="ID_581303769" CREATED="1455910883505" MODIFIED="1455910883505"/>
 </node>
 </node>
 </node>
 </node>
-<node TEXT="&#x307e;&#x3068;&#x3081;&#x30ce;&#x30fc;&#x30c9;&#x30b0;&#x30eb;&#x30fc;&#x30d7;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1700918771" STYLE="combined">
+<node TEXT="&#x307e;&#x3068;&#x3081;&#x30ce;&#x30fc;&#x30c9;&#x30b0;&#x30eb;&#x30fc;&#x30d7;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1700918771" CREATED="1455910883505" MODIFIED="1455910883505" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_651594550" HGAP="-119" VSHIFT="78"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_651594550" CREATED="1455910883505" MODIFIED="1455910883505" HGAP_QUANTITY="-119.0 px" VSHIFT_QUANTITY="78.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1927,25 +1977,28 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="a" STYLE_REF="AdvancedTopic" ID="ID_902940862">
+<node TEXT="" ID="ID_451552808" CREATED="1455910883561" MODIFIED="1455910883561">
 <hook NAME="FirstGroupNode"/>
 </node>
-<node TEXT="b" STYLE_REF="AdvancedTopic" ID="ID_303013117"/>
-<node TEXT="c" STYLE_REF="AdvancedTopic" ID="ID_1837144570" VSHIFT="-9"/>
-<node TEXT="&#x307e;&#x3068;&#x3081;&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="AdvancedTopic" ID="ID_460668684">
+<node TEXT="a" STYLE_REF="AdvancedTopic" ID="ID_902940862" CREATED="1455910883506" MODIFIED="1455910883506"/>
+<node TEXT="b" STYLE_REF="AdvancedTopic" ID="ID_303013117" CREATED="1455910883506" MODIFIED="1455910883506"/>
+<node TEXT="c" STYLE_REF="AdvancedTopic" ID="ID_1837144570" CREATED="1455910883506" MODIFIED="1455910883506" VSHIFT_QUANTITY="-9.0 px"/>
+<node TEXT="" ID="ID_1921250554" CREATED="1455910883561" MODIFIED="1455910883561">
 <hook NAME="SummaryNode"/>
+<node TEXT="&#x307e;&#x3068;&#x3081;&#x30ce;&#x30fc;&#x30c9;" STYLE_REF="AdvancedTopic" ID="ID_460668684" CREATED="1455910883506" MODIFIED="1455910883506"/>
 </node>
 </node>
 </node>
-<node TEXT="&#x96f2;&#x56f2;&#x3044;&#x30ce;&#x30fc;&#x30c9;&#x30b0;&#x30eb;&#x30fc;&#x30d7;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1150908697" STYLE="combined">
+<node TEXT="&#x96f2;&#x56f2;&#x3044;&#x30ce;&#x30fc;&#x30c9;&#x30b0;&#x30eb;&#x30fc;&#x30d7;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1150908697" CREATED="1455910883506" MODIFIED="1455910883506" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_1862713604" HGAP="-101" VSHIFT="52"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1862713604" CREATED="1455910883506" MODIFIED="1455910883506" HGAP_QUANTITY="-101.0 px" VSHIFT_QUANTITY="52.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -1957,21 +2010,22 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x96f2; a" STYLE_REF="AdvancedTopic" FOLDED="true" ID="ID_1742435994" VSHIFT="15">
+<node TEXT="&#x96f2; a" STYLE_REF="AdvancedTopic" FOLDED="true" ID="ID_1742435994" CREATED="1455910883506" MODIFIED="1455910883506" VSHIFT_QUANTITY="15.0 px">
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
-<node TEXT="b" ID="ID_1270291744"/>
-<node TEXT="c" ID="ID_1022872809"/>
+<node TEXT="b" ID="ID_1270291744" CREATED="1455910883506" MODIFIED="1455910883506"/>
+<node TEXT="c" ID="ID_1022872809" CREATED="1455910883506" MODIFIED="1455910883506"/>
 </node>
-<node TEXT="&#x96f2; b" STYLE_REF="AdvancedTopic" FOLDED="true" ID="ID_539843005" HGAP="30" VSHIFT="-9">
+<node TEXT="&#x96f2; b" STYLE_REF="AdvancedTopic" FOLDED="true" ID="ID_539843005" CREATED="1455910883506" MODIFIED="1455910883506" HGAP_QUANTITY="30.0 px" VSHIFT_QUANTITY="-9.0 px">
 <cloud COLOR="#f0f0f0" SHAPE="ROUND_RECT"/>
-<node TEXT="e" ID="ID_249943796"/>
-<node TEXT="f" ID="ID_1428582117"/>
+<node TEXT="e" ID="ID_249943796" CREATED="1455910883506" MODIFIED="1455910883506"/>
+<node TEXT="f" ID="ID_1428582117" CREATED="1455910883506" MODIFIED="1455910883506"/>
 </node>
-<node STYLE_REF="AdvancedTopic" ID="ID_649516172" TEXT_SHORTENED="true">
+<node STYLE_REF="AdvancedTopic" ID="ID_649516172" CREATED="1455910883506" MODIFIED="1455910883506" TEXT_SHORTENED="true">
 <icon BUILTIN="../Cloud24"/>
 <richcontent TYPE="NODE">
 
@@ -1985,6 +2039,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
@@ -2007,20 +2062,20 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_114835202" NUMBERED="true" MIN_WIDTH="200">
-<node TEXT="&#x30ea;&#x30f3;&#x30af;&#x3068;&#x306f;?" FOLDED="true" ID="ID_55001637">
+<node TEXT="&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" POSITION="right" ID="ID_114835202" CREATED="1455910883507" MODIFIED="1455910883507" NUMBERED="true" MIN_WIDTH="200.0 px">
+<node TEXT="&#x30ea;&#x30f3;&#x30af;&#x3068;&#x306f;?" FOLDED="true" ID="ID_55001637" CREATED="1455910883507" MODIFIED="1455910883507">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="Beginner" LAST="false"/>
 </hook>
-<node TEXT="&#x30c0;&#x30a4;&#x30ca;&#x30df;&#x30c3;&#x30af;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#xff09;&#x306f;&#x3001;&#x30ea;&#x30f3;&#x30af;&#x5143;&#x30ce;&#x30fc;&#x30c9;&#x304b;&#x3089;&#x30ea;&#x30f3;&#x30af;&#x5148;&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x306b;&#x5411;&#x3051;&#x305f;&#x96fb;&#x5b50;&#x7684;&#x95a2;&#x4fc2;&#x4ed8;&#x3051;&#x306e;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x30ea;&#x30f3;&#x30af;&#x5148;&#x306f;&#x3001;&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;&#x3001;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3001;&#x30a6;&#x30a7;&#x30d6;&#x30da;&#xff0d;&#x30b8;&#x3001;&#x30a2;&#x30d7;&#x30ea;&#x30b1;&#x30fc;&#x30b7;&#x30e7;&#x30f3;&#x3001;&#x305d;&#x3057;&#x3066; E-mail &#x306a;&#x3069;&#x3092;&#x6307;&#x5b9a;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x95a2;&#x4fc2;&#x4ed8;&#x3051;&#x304c;&#x3042;&#x308b;&#x3068;&#x3001;&#x30af;&#x30ea;&#x30c3;&#x30ab;&#x30d6;&#x30eb;&#x3001;&#x3059;&#x306a;&#x308f;&#x3061;&#x3001;&#x30c0;&#x30d6;&#x30eb;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3067;&#x30aa;&#x30fc;&#x30d7;&#x30f3;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x30ea;&#x30f3;&#x30af;&#x306f;&#x3001;&#x4e0b;&#x7dda;&#x4ed8;&#x304d;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3001;&#x307e;&#x305f;&#x306f;&#x8d64;&#x3084;&#x7dd1;&#x306e;&#x77e2;&#x5370;&#x3067;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;&#x8d64;&#x3044;&#x77e2;&#x5370;&#x306f;&#x3001;&#x5916;&#x90e8;&#x30a2;&#x30c9;&#x30ec;&#x30b9;&#x306a;&#x3044;&#x3057; E-mail &#x30a2;&#x30c9;&#x30ec;&#x30b9;&#x306b;&#x3064;&#x306a;&#x304c;&#x308a;&#x307e;&#x3059;&#x3002;&#x7dd1;&#x306e;&#x77e2;&#x5370;&#x306f;&#x3001;&#x5185;&#x90e8;&#x30a2;&#x30c9;&#x30ec;&#x30b9;&#xff08;&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#xff09;&#x306b;&#x3064;&#x306a;&#x304c;&#x308a;&#x307e;&#x3059;&#x3002;&#x4e0b;&#x7dda;&#x4ed8;&#x304d;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x306f;&#x3001;&#x3069;&#x3061;&#x3089;&#x306b;&#x3082;&#x4f7f;&#x3048;&#x307e;&#x3059;&#x3002;&#x4e0b;&#x7dda;&#x8868;&#x793a;&#x578b;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#x306f;&#x540c;&#x3058;&#x30ce;&#x30fc;&#x30c9;&#x5185;&#x3067;&#x8907;&#x6570;&#x4f7f;&#x3046;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x77e2;&#x5370;&#x578b;&#x30ea;&#x30f3;&#x30af;&#x3084; E-mail &#x30a2;&#x30c9;&#x30ec;&#x30b9;&#x306f;&#x3001;&#x5404;&#x30ce;&#x30fc;&#x30c9;&#xff11;&#x3064;&#x3057;&#x304b;&#x4f7f;&#x3048;&#x307e;&#x305b;&#x3093;&#x3002;&#x77e2;&#x5370;&#x578b;&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#x306f;&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;&#x5185;&#x306b;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;&#x307e;&#x305f;&#x3001;&#x3044;&#x308f;&#x3086;&#x308b;&#x5c5e;&#x6027;&#x306b;&#x3082;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x8907;&#x6570;&#x53ef;&#xff09;&#x3092;&#x7f6e;&#x304f;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x6700;&#x5f8c;&#x306b;&#x3001;&#x4ed6;&#x306e;&#x30a2;&#x30d7;&#x30ea;&#x30b1;&#x30fc;&#x30b7;&#x30e7;&#x30f3;&#x304b;&#x3089;&#x30de;&#x30c3;&#x30d7;&#x5185;&#x306e;&#x7279;&#x5b9a;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x30ea;&#x30f3;&#x30af;&#x3092;&#x5f35;&#x308b;&#x3053;&#x3068;&#x3082;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x4e0b;&#x7dda;&#x8868;&#x793a;&#x578b;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#x3092;&#x8d77;&#x52d5;&#x3059;&#x308b;&#x306b;&#x306f;&#x3001;&#x305d;&#x308c;&#x3092;&#x30c0;&#x30d6;&#x30eb;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3057;&#x307e;&#x3059;&#x3002;" ID="ID_840626562" HGAP="-70" VSHIFT="73">
+<node TEXT="&#x30c0;&#x30a4;&#x30ca;&#x30df;&#x30c3;&#x30af;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#xff09;&#x306f;&#x3001;&#x30ea;&#x30f3;&#x30af;&#x5143;&#x30ce;&#x30fc;&#x30c9;&#x304b;&#x3089;&#x30ea;&#x30f3;&#x30af;&#x5148;&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x306b;&#x5411;&#x3051;&#x305f;&#x96fb;&#x5b50;&#x7684;&#x95a2;&#x4fc2;&#x4ed8;&#x3051;&#x306e;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x30ea;&#x30f3;&#x30af;&#x5148;&#x306f;&#x3001;&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;&#x3001;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3001;&#x30a6;&#x30a7;&#x30d6;&#x30da;&#xff0d;&#x30b8;&#x3001;&#x30a2;&#x30d7;&#x30ea;&#x30b1;&#x30fc;&#x30b7;&#x30e7;&#x30f3;&#x3001;&#x305d;&#x3057;&#x3066; E-mail &#x306a;&#x3069;&#x3092;&#x6307;&#x5b9a;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x95a2;&#x4fc2;&#x4ed8;&#x3051;&#x304c;&#x3042;&#x308b;&#x3068;&#x3001;&#x30af;&#x30ea;&#x30c3;&#x30ab;&#x30d6;&#x30eb;&#x3001;&#x3059;&#x306a;&#x308f;&#x3061;&#x3001;&#x30c0;&#x30d6;&#x30eb;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3067;&#x30aa;&#x30fc;&#x30d7;&#x30f3;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x30ea;&#x30f3;&#x30af;&#x306f;&#x3001;&#x4e0b;&#x7dda;&#x4ed8;&#x304d;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3001;&#x307e;&#x305f;&#x306f;&#x8d64;&#x3084;&#x7dd1;&#x306e;&#x77e2;&#x5370;&#x3067;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;&#x8d64;&#x3044;&#x77e2;&#x5370;&#x306f;&#x3001;&#x5916;&#x90e8;&#x30a2;&#x30c9;&#x30ec;&#x30b9;&#x306a;&#x3044;&#x3057; E-mail &#x30a2;&#x30c9;&#x30ec;&#x30b9;&#x306b;&#x3064;&#x306a;&#x304c;&#x308a;&#x307e;&#x3059;&#x3002;&#x7dd1;&#x306e;&#x77e2;&#x5370;&#x306f;&#x3001;&#x5185;&#x90e8;&#x30a2;&#x30c9;&#x30ec;&#x30b9;&#xff08;&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#xff09;&#x306b;&#x3064;&#x306a;&#x304c;&#x308a;&#x307e;&#x3059;&#x3002;&#x4e0b;&#x7dda;&#x4ed8;&#x304d;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x306f;&#x3001;&#x3069;&#x3061;&#x3089;&#x306b;&#x3082;&#x4f7f;&#x3048;&#x307e;&#x3059;&#x3002;&#x4e0b;&#x7dda;&#x8868;&#x793a;&#x578b;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#x306f;&#x540c;&#x3058;&#x30ce;&#x30fc;&#x30c9;&#x5185;&#x3067;&#x8907;&#x6570;&#x4f7f;&#x3046;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x77e2;&#x5370;&#x578b;&#x30ea;&#x30f3;&#x30af;&#x3084; E-mail &#x30a2;&#x30c9;&#x30ec;&#x30b9;&#x306f;&#x3001;&#x5404;&#x30ce;&#x30fc;&#x30c9;&#xff11;&#x3064;&#x3057;&#x304b;&#x4f7f;&#x3048;&#x307e;&#x305b;&#x3093;&#x3002;&#x77e2;&#x5370;&#x578b;&#x30a2;&#x30a4;&#x30b3;&#x30f3;&#x306f;&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;&#x5185;&#x306b;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;&#x307e;&#x305f;&#x3001;&#x3044;&#x308f;&#x3086;&#x308b;&#x5c5e;&#x6027;&#x306b;&#x3082;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x8907;&#x6570;&#x53ef;&#xff09;&#x3092;&#x7f6e;&#x304f;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x6700;&#x5f8c;&#x306b;&#x3001;&#x4ed6;&#x306e;&#x30a2;&#x30d7;&#x30ea;&#x30b1;&#x30fc;&#x30b7;&#x30e7;&#x30f3;&#x304b;&#x3089;&#x30de;&#x30c3;&#x30d7;&#x5185;&#x306e;&#x7279;&#x5b9a;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x30ea;&#x30f3;&#x30af;&#x3092;&#x5f35;&#x308b;&#x3053;&#x3068;&#x3082;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x4e0b;&#x7dda;&#x8868;&#x793a;&#x578b;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#x3092;&#x8d77;&#x52d5;&#x3059;&#x308b;&#x306b;&#x306f;&#x3001;&#x305d;&#x308c;&#x3092;&#x30c0;&#x30d6;&#x30eb;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3057;&#x307e;&#x3059;&#x3002;" ID="ID_840626562" CREATED="1455910883507" MODIFIED="1455910883507" HGAP_QUANTITY="-70.0 px" VSHIFT_QUANTITY="73.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30a2;&#x30f3;&#x30ab;&#x30fc;&#x3092;&#x4f7f;&#x3063;&#x3066;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1524719322">
-<node STYLE_REF="TitlesContent" ID="ID_1594135890" HGAP="-66" VSHIFT="117"><richcontent TYPE="NODE">
+<node TEXT="&#x30a2;&#x30f3;&#x30ab;&#x30fc;&#x3092;&#x4f7f;&#x3063;&#x3066;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1524719322" CREATED="1455910883507" MODIFIED="1455910883507">
+<node STYLE_REF="TitlesContent" ID="ID_1594135890" CREATED="1455910883508" MODIFIED="1455910883508" HGAP_QUANTITY="-66.0 px" VSHIFT_QUANTITY="117.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2054,15 +2109,16 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x5916;&#x90e8;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" ID="ID_640110372" LINK="http://freeplane.sourceforge.net/wiki/index.php/Tutorial_Freeplane" STYLE="combined">
-<attribute_layout NAME_WIDTH="82" VALUE_WIDTH="161"/>
+<node TEXT="&#x5916;&#x90e8;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" ID="ID_640110372" CREATED="1455910883508" MODIFIED="1455910883508" LINK="http://freeplane.sourceforge.net/wiki/index.php/Tutorial_Freeplane" STYLE="combined">
+<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="120.75 pt"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1913035829" HGAP="-75" VSHIFT="192"><richcontent TYPE="NODE">
+<node ID="ID_1913035829" CREATED="1455910883508" MODIFIED="1455910883508" HGAP_QUANTITY="-75.0 px" VSHIFT_QUANTITY="192.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2120,6 +2176,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -2127,11 +2184,11 @@
 </hook>
 </node>
 </node>
-<node TEXT="&#x5185;&#x90e8;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1942100751" LINK="#ID_86446891" STYLE="combined">
+<node TEXT="&#x5185;&#x90e8;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Beginner" FOLDED="true" ID="ID_1942100751" CREATED="1455910883508" MODIFIED="1455910883508" LINK="#ID_86446891" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1830541497" HGAP="-78" VSHIFT="89"><richcontent TYPE="NODE">
+<node ID="ID_1830541497" CREATED="1455910883509" MODIFIED="1455910883509" HGAP_QUANTITY="-78.0 px" VSHIFT_QUANTITY="89.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2157,6 +2214,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -2164,11 +2222,11 @@
 </hook>
 </node>
 </node>
-<node TEXT="E-mail &#x30ea;&#x30f3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_869144882" LINK="mailto:%20jokro@freeplane.nl">
+<node TEXT="E-mail &#x30ea;&#x30f3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_869144882" CREATED="1455910883509" MODIFIED="1455910883509" LINK="mailto:%20jokro@freeplane.nl">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1480409284" HGAP="-64" VSHIFT="145"><richcontent TYPE="NODE">
+<node ID="ID_1480409284" CREATED="1455910883509" MODIFIED="1455910883509" HGAP_QUANTITY="-64.0 px" VSHIFT_QUANTITY="145.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2202,13 +2260,14 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node STYLE_REF="Professional" FOLDED="true" ID="ID_241324782" STYLE="combined"><richcontent TYPE="NODE">
+<node STYLE_REF="Professional" FOLDED="true" ID="ID_241324782" CREATED="1455910883509" MODIFIED="1455910883509" STYLE="combined"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2220,11 +2279,12 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1356533861" HGAP="-81" VSHIFT="244"><richcontent TYPE="NODE">
+<node ID="ID_1356533861" CREATED="1455910883509" MODIFIED="1455910883509" HGAP_QUANTITY="-81.0 px" VSHIFT_QUANTITY="244.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2290,17 +2350,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x6a5f;&#x80fd;&#xff08;&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x9805;&#x76ee;&#xff09;&#x3078;&#x306e;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_350080162" STYLE="combined">
+<node TEXT="&#x6a5f;&#x80fd;&#xff08;&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x9805;&#x76ee;&#xff09;&#x3078;&#x306e;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_350080162" CREATED="1455910883510" MODIFIED="1455910883510" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1108178356" HGAP="-132" VSHIFT="86"><richcontent TYPE="NODE">
+<node ID="ID_1108178356" CREATED="1455910883510" MODIFIED="1455910883510" HGAP_QUANTITY="-132.0 px" VSHIFT_QUANTITY="86.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2326,17 +2387,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#xff26;&#x30ad;&#x30fc;" STYLE_REF="Professional" FOLDED="true" ID="ID_1819697018" STYLE="combined">
+<node TEXT="&#xff26;&#x30ad;&#x30fc;" STYLE_REF="Professional" FOLDED="true" ID="ID_1819697018" CREATED="1455910883511" MODIFIED="1455910883511" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_116460964" HGAP="-26" VSHIFT="60"><richcontent TYPE="NODE">
+<node ID="ID_116460964" CREATED="1455910883511" MODIFIED="1455910883511" HGAP_QUANTITY="-26.0 px" VSHIFT_QUANTITY="60.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2348,17 +2410,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x5916;&#x90e8;&#x304b;&#x3089;&#x7279;&#x5b9a;&#x30ce;&#x30fc;&#x30c9;&#x3078;&#x306e;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_1418102707" STYLE="combined">
+<node TEXT="&#x5916;&#x90e8;&#x304b;&#x3089;&#x7279;&#x5b9a;&#x30ce;&#x30fc;&#x30c9;&#x3078;&#x306e;&#x30ea;&#x30f3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_1418102707" CREATED="1455910883511" MODIFIED="1455910883511" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_822375535" HGAP="-160" VSHIFT="117"><richcontent TYPE="NODE">
+<node ID="ID_822375535" CREATED="1455910883511" MODIFIED="1455910883511" HGAP_QUANTITY="-160.0 px" VSHIFT_QUANTITY="117.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2381,6 +2444,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -2388,17 +2452,17 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x66f8;&#x5f0f;&#x3068;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Advanced" FOLDED="true" POSITION="right" ID="ID_1778719162" NUMBERED="true" MIN_WIDTH="200" TEXT_SHORTENED="true">
+<node TEXT="&#x66f8;&#x5f0f;&#x3068;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Advanced" FOLDED="true" POSITION="right" ID="ID_1778719162" CREATED="1455910883512" MODIFIED="1455910883512" NUMBERED="true" MIN_WIDTH="200.0 px" TEXT_SHORTENED="true">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MainMenu" LAST="false"/>
 </hook>
-<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_873516196" NUMBERED="true" MIN_WIDTH="90">
-<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x30d1;&#x30cd;&#x30eb;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1812601804" HGAP="32" VSHIFT="457" MAX_WIDTH="550" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_873516196" CREATED="1455910883512" MODIFIED="1455910883512" NUMBERED="true" MIN_WIDTH="90.0 px">
+<node TEXT="&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x30d1;&#x30cd;&#x30eb;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1812601804" CREATED="1455910883512" MODIFIED="1455910883512" HGAP_QUANTITY="32.0 px" VSHIFT_QUANTITY="457.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <icon BUILTIN="info"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_503272481" HGAP="-105" VSHIFT="97"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_503272481" CREATED="1455910883512" MODIFIED="1455910883512" HGAP_QUANTITY="-105.0 px" VSHIFT_QUANTITY="97.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2424,11 +2488,12 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node ID="ID_757079047"><richcontent TYPE="NODE">
+<node ID="ID_757079047" CREATED="1455910883512" MODIFIED="1455910883512"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2440,15 +2505,16 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
 </node>
-<node TEXT="&#x500b;&#x5225;&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x306e;&#x7de8;&#x96c6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1707940964" HGAP="30" VSHIFT="1" MAX_WIDTH="500" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x500b;&#x5225;&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;&#x306e;&#x7de8;&#x96c6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1707940964" CREATED="1455910883512" MODIFIED="1455910883512" HGAP_QUANTITY="30.0 px" VSHIFT_QUANTITY="1.0 px" MAX_WIDTH="500.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_676577574" HGAP="-109" VSHIFT="123"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_676577574" CREATED="1455910883512" MODIFIED="1455910883512" HGAP_QUANTITY="-109.0 px" VSHIFT_QUANTITY="123.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2472,30 +2538,31 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 <edge STYLE="hide_edge"/>
-<node TEXT="&#x76f4;&#x7dda;" STYLE_REF="AdvancedTopic" ID="ID_34702829" HGAP="14" VSHIFT="-26">
+<node TEXT="&#x76f4;&#x7dda;" STYLE_REF="AdvancedTopic" ID="ID_34702829" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="14.0 px" VSHIFT_QUANTITY="-26.0 px">
 <edge STYLE="linear"/>
 </node>
-<node TEXT="&#x30d9;&#x30b8;&#x30a7;&#x66f2;&#x7dda;" STYLE_REF="AdvancedTopic" ID="ID_1333040751" HGAP="35" VSHIFT="-27">
+<node TEXT="&#x30d9;&#x30b8;&#x30a7;&#x66f2;&#x7dda;" STYLE_REF="AdvancedTopic" ID="ID_1333040751" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="35.0 px" VSHIFT_QUANTITY="-27.0 px">
 <edge STYLE="bezier"/>
 </node>
-<node TEXT="&#x7dda;&#x3092;&#x96a0;&#x3059;" STYLE_REF="AdvancedTopic" ID="ID_1968961455" HGAP="40" VSHIFT="-5">
+<node TEXT="&#x7dda;&#x3092;&#x96a0;&#x3059;" STYLE_REF="AdvancedTopic" ID="ID_1968961455" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="40.0 px" VSHIFT_QUANTITY="-5.0 px">
 <edge STYLE="hide_edge"/>
 </node>
-<node TEXT="&#x76f4;&#x89d2;&#x66f2;&#x304c;&#x308a;" STYLE_REF="AdvancedTopic" ID="ID_494591913" HGAP="39" VSHIFT="25">
+<node TEXT="&#x76f4;&#x89d2;&#x66f2;&#x304c;&#x308a;" STYLE_REF="AdvancedTopic" ID="ID_494591913" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="39.0 px" VSHIFT_QUANTITY="25.0 px">
 <edge STYLE="horizontal"/>
 </node>
 </node>
 </node>
-<node TEXT="&#x7dda;&#x306e;&#x8272;&#x3092;&#x81ea;&#x52d5;&#x9078;&#x629e;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1005719714" HGAP="30" VSHIFT="-2" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x7dda;&#x306e;&#x8272;&#x3092;&#x81ea;&#x52d5;&#x9078;&#x629e;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1005719714" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="30.0 px" VSHIFT_QUANTITY="-2.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1565463565" HGAP="-83" VSHIFT="59"><richcontent TYPE="NODE">
+<node ID="ID_1565463565" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="-83.0 px" VSHIFT_QUANTITY="59.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2507,17 +2574,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3078;&#x306e;&#x81ea;&#x52d5;&#x9023;&#x756a;&#x632f;&#x308a;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1861361284" HGAP="30" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x3078;&#x306e;&#x81ea;&#x52d5;&#x9023;&#x756a;&#x632f;&#x308a;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1861361284" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="30.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1531819965" HGAP="-114" VSHIFT="46"><richcontent TYPE="NODE">
+<node ID="ID_1531819965" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="-114.0 px" VSHIFT_QUANTITY="46.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2529,18 +2597,19 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x305d;&#x306e;&#x4ed6;&#x306e;&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_457725429" HGAP="31" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x305d;&#x306e;&#x4ed6;&#x306e;&#x30d7;&#x30ed;&#x30d1;&#x30c6;&#x30a3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_457725429" CREATED="1455910883513" MODIFIED="1455910883513" HGAP_QUANTITY="31.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <font ITALIC="false"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node STYLE_REF="TitlesContent" ID="ID_1014522598" HGAP="-92" VSHIFT="42"><richcontent TYPE="NODE">
+<node STYLE_REF="TitlesContent" ID="ID_1014522598" CREATED="1455910883514" MODIFIED="1455910883514" HGAP_QUANTITY="-92.0 px" VSHIFT_QUANTITY="42.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2552,14 +2621,15 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x66f8;&#x5f0f;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1128382958" HGAP="29" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x66f8;&#x5f0f;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1128382958" CREATED="1455910883514" MODIFIED="1455910883514" HGAP_QUANTITY="29.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1716769321" HGAP="-67" VSHIFT="41"><richcontent TYPE="NODE">
+<node ID="ID_1716769321" CREATED="1455910883514" MODIFIED="1455910883514" HGAP_QUANTITY="-67.0 px" VSHIFT_QUANTITY="41.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2571,17 +2641,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30c4;&#x30fc;&#x30eb;&#x30d0;&#x30fc;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1235607524" HGAP="30" VSHIFT="-456" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x30c4;&#x30fc;&#x30eb;&#x30d0;&#x30fc;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1235607524" CREATED="1455910883514" MODIFIED="1455910883514" HGAP_QUANTITY="30.0 px" VSHIFT_QUANTITY="-456.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_158808063" HGAP="-54" VSHIFT="91"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_158808063" CREATED="1455910883514" MODIFIED="1455910883514" HGAP_QUANTITY="-54.0 px" VSHIFT_QUANTITY="91.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2610,11 +2681,12 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x592a;&#x5b57;" STYLE_REF="AdvancedTopic" ID="ID_25890496" HGAP="25" STYLE="as_parent">
+<node TEXT="&#x592a;&#x5b57;" STYLE_REF="AdvancedTopic" ID="ID_25890496" CREATED="1455910883514" MODIFIED="1455910883514" HGAP_QUANTITY="25.0 px" STYLE="as_parent">
 <icon BUILTIN="../Bold16"/>
 <font NAME="SansSerif" SIZE="12" BOLD="true" ITALIC="false"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
@@ -2630,13 +2702,12 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x659c;&#x4f53;" STYLE_REF="AdvancedTopic" ID="ID_408787243" TEXT_SHORTENED="true">
+<node TEXT="&#x659c;&#x4f53;" STYLE_REF="AdvancedTopic" ID="ID_408787243" CREATED="1455910883515" MODIFIED="1455910883515" TEXT_SHORTENED="true">
 <icon BUILTIN="../Italic16"/>
 <font ITALIC="true"/>
 <richcontent TYPE="DETAILS">
@@ -2660,13 +2731,13 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1838680824" NUMBERED="true" MIN_WIDTH="90">
-<node TEXT="&#x306a;&#x305c;&#x3001;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x304b;?" FOLDED="true" ID="ID_539515158" HGAP="30" VSHIFT="138" STYLE="combined">
+<node TEXT="&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1838680824" CREATED="1455910883515" MODIFIED="1455910883515" NUMBERED="true" MIN_WIDTH="90.0 px">
+<node TEXT="&#x306a;&#x305c;&#x3001;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x304b;?" FOLDED="true" ID="ID_539515158" CREATED="1455910883515" MODIFIED="1455910883515" HGAP_QUANTITY="30.0 px" VSHIFT_QUANTITY="138.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Advanced" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_406943626" HGAP="-87" VSHIFT="50" LINK="#ID_1394424447"><richcontent TYPE="NODE">
+<node ID="ID_406943626" CREATED="1455910883515" MODIFIED="1455910883515" LINK="#ID_1394424447" HGAP_QUANTITY="-87.0 px" VSHIFT_QUANTITY="50.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2678,17 +2749,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306e;&#x691c;&#x7d22;&#x3068;&#x9069;&#x7528;" STYLE_REF="Advanced" FOLDED="true" ID="ID_512501370" HGAP="29" VSHIFT="-1" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306e;&#x691c;&#x7d22;&#x3068;&#x9069;&#x7528;" STYLE_REF="Advanced" FOLDED="true" ID="ID_512501370" CREATED="1455910883515" MODIFIED="1455910883515" HGAP_QUANTITY="29.0 px" VSHIFT_QUANTITY="-1.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_602520818" HGAP="-116" VSHIFT="124"><richcontent TYPE="NODE">
+<node ID="ID_602520818" CREATED="1455910883515" MODIFIED="1455910883515" HGAP_QUANTITY="-116.0 px" VSHIFT_QUANTITY="124.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2720,20 +2792,21 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x9069;&#x7528;&#x4e2d;&#x306e;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x524a;&#x9664;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1937448981" HGAP="28">
-<node TEXT="&#x901a;&#x5e38;&#x306f;&#x3001;&#x5225;&#x306e;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3001;&#x4f8b;&#x3048;&#x3070;&#x3001;&#x300c;&#x6a19;&#x6e96;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#xff63;&#x3092;&#x9078;&#x629e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x4f8b;&#x3048;&#x3070;&#x968e;&#x5c64;&#x5225;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x4f7f;&#x7528;&#x4e2d;&#x306e;&#x5834;&#x5408;&#x3002;&#x3053;&#x306e;&#x81ea;&#x52d5;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306b;&#x512a;&#x5148;&#x3059;&#x308b;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x304b;&#x3076;&#x305b;&#x3066;&#x3044;&#x308b;&#x3053;&#x3068;&#x3082;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;&#x305d;&#x306e;&#x5834;&#x5408;&#x306f;&#x3001;&#x300c;&#x66f8;&#x5f0f; &gt; &#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x9069;&#x7528; &gt; &#x30ce;&#x30fc;&#x30c9;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x30ea;&#x30bb;&#x30c3;&#x30c8;&#x300d;&#x3092;&#x4f7f;&#x3063;&#x3066;&#x3001;&#x624b;&#x52d5;&#x8a2d;&#x5b9a;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x524a;&#x9664;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;" STYLE_REF="TitlesContent" ID="ID_1278689402" HGAP="-140" VSHIFT="43"/>
+<node TEXT="&#x9069;&#x7528;&#x4e2d;&#x306e;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x524a;&#x9664;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1937448981" CREATED="1455910883515" MODIFIED="1455910883515" HGAP_QUANTITY="28.0 px">
+<node TEXT="&#x901a;&#x5e38;&#x306f;&#x3001;&#x5225;&#x306e;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3001;&#x4f8b;&#x3048;&#x3070;&#x3001;&#x300c;&#x6a19;&#x6e96;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#xff63;&#x3092;&#x9078;&#x629e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x4f8b;&#x3048;&#x3070;&#x968e;&#x5c64;&#x5225;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x4f7f;&#x7528;&#x4e2d;&#x306e;&#x5834;&#x5408;&#x3002;&#x3053;&#x306e;&#x81ea;&#x52d5;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306b;&#x512a;&#x5148;&#x3059;&#x308b;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x304b;&#x3076;&#x305b;&#x3066;&#x3044;&#x308b;&#x3053;&#x3068;&#x3082;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;&#x305d;&#x306e;&#x5834;&#x5408;&#x306f;&#x3001;&#x300c;&#x66f8;&#x5f0f; &gt; &#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x9069;&#x7528; &gt; &#x30ce;&#x30fc;&#x30c9;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x30ea;&#x30bb;&#x30c3;&#x30c8;&#x300d;&#x3092;&#x4f7f;&#x3063;&#x3066;&#x3001;&#x624b;&#x52d5;&#x8a2d;&#x5b9a;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x524a;&#x9664;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;" STYLE_REF="TitlesContent" ID="ID_1278689402" CREATED="1455910883515" MODIFIED="1455910883515" HGAP_QUANTITY="-140.0 px" VSHIFT_QUANTITY="43.0 px"/>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x30c0;&#x30a4;&#x30a2;&#x30ed;&#x30b0;&#x3067;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x7de8;&#x96c6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1277682010" HGAP="30" VSHIFT="2" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x30c0;&#x30a4;&#x30a2;&#x30ed;&#x30b0;&#x3067;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3092;&#x7de8;&#x96c6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1277682010" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="30.0 px" VSHIFT_QUANTITY="2.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_443461395" HGAP="-197" VSHIFT="94"><richcontent TYPE="NODE">
+<node ID="ID_443461395" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="-197.0 px" VSHIFT_QUANTITY="94.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2756,18 +2829,19 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x8907;&#x6570;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306e;&#x9069;&#x7528;" FOLDED="true" ID="ID_270284358" HGAP="31" VSHIFT="1" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x8907;&#x6570;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306e;&#x9069;&#x7528;" FOLDED="true" ID="ID_270284358" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="31.0 px" VSHIFT_QUANTITY="1.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Advanced" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="Example" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_1030002880" HGAP="-127" VSHIFT="142"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1030002880" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="-127.0 px" VSHIFT_QUANTITY="142.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2810,11 +2884,12 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node ID="ID_1769439600"><richcontent TYPE="NODE">
+<node ID="ID_1769439600" CREATED="1455910883516" MODIFIED="1455910883516"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2826,17 +2901,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
-<node TEXT="es" ID="ID_170106264"/>
+<node TEXT="es" ID="ID_170106264" CREATED="1455910883516" MODIFIED="1455910883516"/>
 </node>
 </node>
-<node TEXT="&#x6761;&#x4ef6;&#x5bfe;&#x5fdc;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Professional" FOLDED="true" ID="ID_1632551821" HGAP="31" VSHIFT="-1" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x6761;&#x4ef6;&#x5bfe;&#x5fdc;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Professional" FOLDED="true" ID="ID_1632551821" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="31.0 px" VSHIFT_QUANTITY="-1.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="Example" LAST="false"/>
 </hook>
-<node ID="ID_1437965047" HGAP="-104" VSHIFT="178"><richcontent TYPE="NODE">
+<node ID="ID_1437965047" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="-104.0 px" VSHIFT_QUANTITY="178.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2877,22 +2953,20 @@
         &#12494;&#12540;&#12489;&#29992;&#26465;&#20214;&#23550;&#24540;&#12494;&#12540;&#12489;&#12473;&#12479;&#12452;&#12523;&#12392;&#12510;&#12483;&#12503;&#29992;&#26465;&#20214;&#23550;&#24540;&#12494;&#12540;&#12489;&#12473;&#12479;&#12452;&#12523;&#12395;&#12388;&#12356;&#12390;&#12289;&#35443;&#12375;&#12367;&#12399; Freeplane &#12510;&#12491;&#12517;&#12450;&#12523;&#12434;&#12362;&#35501;&#12415;&#12367;&#12384;&#12373;&#12356;&#12290;
       </li>
     </ul>
-    <p>
-      
-    </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x968e;&#x5c64;&#x5225;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Professional" FOLDED="true" ID="ID_521918713" HGAP="30" MAX_WIDTH="550">
+<node TEXT="&#x968e;&#x5c64;&#x5225;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Professional" FOLDED="true" ID="ID_521918713" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="30.0 px" MAX_WIDTH="550.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1011147934" HGAP="-92" VSHIFT="200"><richcontent TYPE="NODE">
+<node ID="ID_1011147934" CREATED="1455910883516" MODIFIED="1455910883516" HGAP_QUANTITY="-92.0 px" VSHIFT_QUANTITY="200.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2944,17 +3018,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Professional" FOLDED="true" ID="ID_13843990" HGAP="31" VSHIFT="-130" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" STYLE_REF="Professional" FOLDED="true" ID="ID_13843990" CREATED="1455910883517" MODIFIED="1455910883517" HGAP_QUANTITY="31.0 px" VSHIFT_QUANTITY="-130.0 px" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1896765128" HGAP="-96" VSHIFT="87"><richcontent TYPE="NODE">
+<node ID="ID_1896765128" CREATED="1455910883517" MODIFIED="1455910883517" HGAP_QUANTITY="-96.0 px" VSHIFT_QUANTITY="87.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -2966,6 +3041,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -2973,9 +3049,9 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30c6;&#x30f3;&#x30d7;&#x30ec;&#x30fc;&#x30c8;" STYLE_REF="Advanced" FOLDED="true" ID="ID_183210534" NUMBERED="true" MIN_WIDTH="90">
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306b;&#x306f;&#x3001;&#x5185;&#x5bb9;&#x3084;&#x5c5e;&#x6027;&#x306e;&#x4e8b;&#x524d;&#x5b9a;&#x7fa9;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x306e;&#x5f62;&#x3092;&#x3068;&#x3063;&#x305f;&#x30c6;&#x30f3;&#x30d7;&#x30ec;&#x30fc;&#x30c8;&#x578b;&#x306e;&#x60c5;&#x5831;&#x304c;&#x542b;&#x307e;&#x308c;&#x308b;&#x3053;&#x3068;&#x304c;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;&#x30e6;&#x30fc;&#x30b6;&#x306f;&#x3001;&#x3053;&#x306e;&#x3044;&#x308f;&#x3086;&#x308b;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x88c5;&#x7740;&#x60c5;&#x5831;&#x3092;&#x3001;&#x624b;&#x52d5;&#x3067;&#x30b3;&#x30d4;&#x30fc;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x305d;&#x306e;&#x5834;&#x5408;&#x306f;&#x300c;&#x7de8;&#x96c6; &gt; &#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831; &gt; &#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x30ce;&#x30fc;&#x30c9;&#x304b;&#x3089;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#x3092;&#x30b3;&#x30d4;&#x30fc;&#x300d;&#x3092;&#x9078;&#x629e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;" FOLDED="true" ID="ID_1268042238" HGAP="-59" VSHIFT="44" STYLE="fork">
-<node FOLDED="true" ID="ID_357953420" HGAP="-599" VSHIFT="177"><richcontent TYPE="NODE">
+<node TEXT="&#x30c6;&#x30f3;&#x30d7;&#x30ec;&#x30fc;&#x30c8;" STYLE_REF="Advanced" FOLDED="true" ID="ID_183210534" CREATED="1455910883517" MODIFIED="1455910883517" NUMBERED="true" MIN_WIDTH="90.0 px">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x306b;&#x306f;&#x3001;&#x5185;&#x5bb9;&#x3084;&#x5c5e;&#x6027;&#x306e;&#x4e8b;&#x524d;&#x5b9a;&#x7fa9;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x306e;&#x5f62;&#x3092;&#x3068;&#x3063;&#x305f;&#x30c6;&#x30f3;&#x30d7;&#x30ec;&#x30fc;&#x30c8;&#x578b;&#x306e;&#x60c5;&#x5831;&#x304c;&#x542b;&#x307e;&#x308c;&#x308b;&#x3053;&#x3068;&#x304c;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;&#x30e6;&#x30fc;&#x30b6;&#x306f;&#x3001;&#x3053;&#x306e;&#x3044;&#x308f;&#x3086;&#x308b;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x88c5;&#x7740;&#x60c5;&#x5831;&#x3092;&#x3001;&#x624b;&#x52d5;&#x3067;&#x30b3;&#x30d4;&#x30fc;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x305d;&#x306e;&#x5834;&#x5408;&#x306f;&#x300c;&#x7de8;&#x96c6; &gt; &#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831; &gt; &#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x30ce;&#x30fc;&#x30c9;&#x304b;&#x3089;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#x3092;&#x30b3;&#x30d4;&#x30fc;&#x300d;&#x3092;&#x9078;&#x629e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;" FOLDED="true" ID="ID_1268042238" CREATED="1455910883517" MODIFIED="1455910883517" HGAP_QUANTITY="-59.0 px" VSHIFT_QUANTITY="44.0 px" STYLE="fork">
+<node FOLDED="true" ID="ID_357953420" CREATED="1455910883517" MODIFIED="1455910883517" HGAP_QUANTITY="-599.0 px" VSHIFT_QUANTITY="177.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3013,8 +3089,9 @@
     </p>
   </body>
 </html>
+
 </richcontent>
-<node TEXT="My Example" STYLE_REF="MyTemplate" ID="ID_679492060">
+<node TEXT="My Example" STYLE_REF="MyTemplate" ID="ID_679492060" CREATED="1455910883517" MODIFIED="1455910883517">
 <attribute NAME="birth date" VALUE=""/>
 <attribute NAME="e-mail" VALUE=""/>
 <attribute NAME="birth date" VALUE=""/>
@@ -3044,15 +3121,15 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x305d;&#x306e;&#x4ed6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_429763637" NUMBERED="true" MIN_WIDTH="90">
+<node TEXT="&#x305d;&#x306e;&#x4ed6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_429763637" CREATED="1455910883517" MODIFIED="1455910883517" NUMBERED="true" MIN_WIDTH="90.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MainWidth" LAST="false"/>
 </hook>
-<node TEXT="&#x30d6;&#x30e9;&#x30a6;&#x30b6;&#x304b;&#x3089;&#x66f8;&#x5f0f;&#x306a;&#x3057;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3092;&#x8cbc;&#x308a;&#x4ed8;&#x3051;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1745656146" STYLE="combined">
+<node TEXT="&#x30d6;&#x30e9;&#x30a6;&#x30b6;&#x304b;&#x3089;&#x66f8;&#x5f0f;&#x306a;&#x3057;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3092;&#x8cbc;&#x308a;&#x4ed8;&#x3051;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1745656146" CREATED="1455910883517" MODIFIED="1455910883517" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_885396924" HGAP="-223" VSHIFT="32"><richcontent TYPE="NODE">
+<node ID="ID_885396924" CREATED="1455910883517" MODIFIED="1455910883517" HGAP_QUANTITY="-223.0 px" VSHIFT_QUANTITY="32.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3064,17 +3141,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x8868;&#x793a;&#x5e45;&#x306e;&#x56fa;&#x5b9a;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1709254927" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x8868;&#x793a;&#x5e45;&#x306e;&#x56fa;&#x5b9a;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1709254927" CREATED="1455910883517" MODIFIED="1455910883517" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_15604512" HGAP="-97" VSHIFT="88" MAX_WIDTH="300" MIN_WIDTH="300"><richcontent TYPE="NODE">
+<node ID="ID_15604512" CREATED="1455910883517" MODIFIED="1455910883517" HGAP_QUANTITY="-97.0 px" VSHIFT_QUANTITY="88.0 px" MAX_WIDTH="300.0 px" MIN_WIDTH="300.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3102,17 +3180,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x66f8;&#x5f0f;&#xff08;&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;&#xff09;&#x306e;&#x307f;&#x30b3;&#x30d4;&#x30fc;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1195279427" STYLE="combined">
+<node TEXT="&#x66f8;&#x5f0f;&#xff08;&#x30ce;&#x30fc;&#x30c9;&#x30b3;&#x30a2;&#xff09;&#x306e;&#x307f;&#x30b3;&#x30d4;&#x30fc;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1195279427" CREATED="1455910883518" MODIFIED="1455910883518" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_670948093" HGAP="-158" VSHIFT="42"><richcontent TYPE="NODE">
+<node ID="ID_670948093" CREATED="1455910883518" MODIFIED="1455910883518" HGAP_QUANTITY="-158.0 px" VSHIFT_QUANTITY="42.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3124,17 +3203,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x8cbc;&#x308a;&#x4ed8;&#x3051;&#x306e;&#x30aa;&#x30d7;&#x30b7;&#x30e7;&#x30f3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_506336466" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x8cbc;&#x308a;&#x4ed8;&#x3051;&#x306e;&#x30aa;&#x30d7;&#x30b7;&#x30e7;&#x30f3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_506336466" CREATED="1455910883518" MODIFIED="1455910883518" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1072558009" HGAP="-71" VSHIFT="87"><richcontent TYPE="NODE">
+<node ID="ID_1072558009" CREATED="1455910883518" MODIFIED="1455910883518" HGAP_QUANTITY="-71.0 px" VSHIFT_QUANTITY="87.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3160,6 +3240,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -3168,12 +3249,12 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x516c;&#x958b;&#x3068;&#x30b7;&#x30a7;&#x30a2;" STYLE_REF="Advanced" FOLDED="true" POSITION="right" ID="ID_1613405030" NUMBERED="true" MIN_WIDTH="200" HGAP="19" VSHIFT="-17">
-<node TEXT="&#x5370;&#x3000;&#x5237;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1344283469" STYLE="combined">
+<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x306e;&#x516c;&#x958b;&#x3068;&#x30b7;&#x30a7;&#x30a2;" STYLE_REF="Advanced" FOLDED="true" POSITION="right" ID="ID_1613405030" CREATED="1455910883519" MODIFIED="1455910883519" NUMBERED="true" MIN_WIDTH="200.0 px" HGAP_QUANTITY="19.0 px" VSHIFT_QUANTITY="-17.0 px">
+<node TEXT="&#x5370;&#x3000;&#x5237;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1344283469" CREATED="1455910883519" MODIFIED="1455910883519" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1759870173" HGAP="-38" VSHIFT="42"><richcontent TYPE="NODE">
+<node ID="ID_1759870173" CREATED="1455910883519" MODIFIED="1455910883519" HGAP_QUANTITY="-38.0 px" VSHIFT_QUANTITY="42.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3188,14 +3269,15 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30d7;&#x30ec;&#x30bc;&#x30f3;&#x30c6;&#x30fc;&#x30b7;&#x30e7;&#x30f3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1747402695">
-<node STYLE_REF="TitlesContent" ID="ID_1269602804" HGAP="-112" VSHIFT="41"><richcontent TYPE="NODE">
+<node TEXT="&#x30d7;&#x30ec;&#x30bc;&#x30f3;&#x30c6;&#x30fc;&#x30b7;&#x30e7;&#x30f3;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1747402695" CREATED="1455910883519" MODIFIED="1455910883519">
+<node STYLE_REF="TitlesContent" ID="ID_1269602804" CREATED="1455910883519" MODIFIED="1455910883519" HGAP_QUANTITY="-112.0 px" VSHIFT_QUANTITY="41.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3207,24 +3289,25 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x30b7;&#x30a7;&#x30a2;&#xff08;&#x5171;&#x540c;&#x5229;&#x7528;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_566359973" STYLE="combined">
+<node TEXT="&#x30b7;&#x30a7;&#x30a2;&#xff08;&#x5171;&#x540c;&#x5229;&#x7528;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_566359973" CREATED="1455910883519" MODIFIED="1455910883519" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node TEXT="&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;.mm &#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3092;&#x4ea4;&#x63db;&#x3059;&#x308b;&#x3053;&#x3068;&#x306b;&#x3088;&#x3063;&#x3066;&#x3001;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x4ed6;&#x306e;&#x4eba;&#x3068;&#x30b7;&#x30a7;&#x30a2;(&#x5171;&#x540c;&#x5229;&#x7528;)&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x753b;&#x50cf;&#x306f;&#x3001;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x4e00;&#x90e8;&#x3067;&#x306f;&#x306a;&#x304f;&#x3001;&#x3057;&#x305f;&#x304c;&#x3063;&#x3066;&#x72ec;&#x81ea;&#x306b;&#x4ea4;&#x63db;&#x3057;&#x306a;&#x3051;&#x308c;&#x3070;&#x306a;&#x3089;&#x306a;&#x3044;&#x3053;&#x3068;&#x306b;&#x6ce8;&#x610f;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x65b0;&#x3057;&#x3044;&#x7f6e;&#x304d;&#x5834;&#x3067;&#x306e;&#x753b;&#x50cf;&#x306f;&#x3001;&#x5fc5;&#x305a;&#x30de;&#x30c3;&#x30d7;&#x4f5c;&#x6210;&#x6642;&#x3068;&#x540c;&#x3058;&#x76f8;&#x5bfe;&#x4f4d;&#x7f6e;&#xff08;&#x30b5;&#x30d6;&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;)&#x306b;&#x306a;&#x308b;&#x3088;&#x3046;&#x306b;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x6700;&#x3082;&#x512a;&#x308c;&#x305f;&#x3084;&#x308a;&#x65b9;&#x306f;&#x3001;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;.mm &#x3068;&#x30a4;&#x30e1;&#x30fc;&#x30b8;&#x3092;&#x540c;&#x4e00;&#x306e;&#xff08;&#x30b5;&#x30d6;)&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;&#x3067;&#x4f5c;&#x6210;&#x3059;&#x308b;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x305d;&#x3046;&#x3059;&#x308c;&#x3070;&#x3001;&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;&#x3054;&#x3068;&#x66f8;&#x5eab;&#x306b;&#x5727;&#x7e2e;&#x3057;&#x3001;&#x5225;&#x306e;&#x30b3;&#x30f3;&#x30d4;&#x30e5;&#x30fc;&#x30bf;&#x3067;&#x305d;&#x308c;&#x3092;&#x89e3;&#x51cd;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;" ID="ID_1964465318" HGAP="-85" VSHIFT="41">
+<node TEXT="&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;.mm &#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3092;&#x4ea4;&#x63db;&#x3059;&#x308b;&#x3053;&#x3068;&#x306b;&#x3088;&#x3063;&#x3066;&#x3001;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;&#x3092;&#x4ed6;&#x306e;&#x4eba;&#x3068;&#x30b7;&#x30a7;&#x30a2;(&#x5171;&#x540c;&#x5229;&#x7528;)&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x753b;&#x50cf;&#x306f;&#x3001;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x4e00;&#x90e8;&#x3067;&#x306f;&#x306a;&#x304f;&#x3001;&#x3057;&#x305f;&#x304c;&#x3063;&#x3066;&#x72ec;&#x81ea;&#x306b;&#x4ea4;&#x63db;&#x3057;&#x306a;&#x3051;&#x308c;&#x3070;&#x306a;&#x3089;&#x306a;&#x3044;&#x3053;&#x3068;&#x306b;&#x6ce8;&#x610f;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x65b0;&#x3057;&#x3044;&#x7f6e;&#x304d;&#x5834;&#x3067;&#x306e;&#x753b;&#x50cf;&#x306f;&#x3001;&#x5fc5;&#x305a;&#x30de;&#x30c3;&#x30d7;&#x4f5c;&#x6210;&#x6642;&#x3068;&#x540c;&#x3058;&#x76f8;&#x5bfe;&#x4f4d;&#x7f6e;&#xff08;&#x30b5;&#x30d6;&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;)&#x306b;&#x306a;&#x308b;&#x3088;&#x3046;&#x306b;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x6700;&#x3082;&#x512a;&#x308c;&#x305f;&#x3084;&#x308a;&#x65b9;&#x306f;&#x3001;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;.mm &#x3068;&#x30a4;&#x30e1;&#x30fc;&#x30b8;&#x3092;&#x540c;&#x4e00;&#x306e;&#xff08;&#x30b5;&#x30d6;)&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;&#x3067;&#x4f5c;&#x6210;&#x3059;&#x308b;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x305d;&#x3046;&#x3059;&#x308c;&#x3070;&#x3001;&#x30c7;&#x30a3;&#x30ec;&#x30af;&#x30c8;&#x30ea;&#x3054;&#x3068;&#x66f8;&#x5eab;&#x306b;&#x5727;&#x7e2e;&#x3057;&#x3001;&#x5225;&#x306e;&#x30b3;&#x30f3;&#x30d4;&#x30e5;&#x30fc;&#x30bf;&#x3067;&#x305d;&#x308c;&#x3092;&#x89e3;&#x51cd;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;" ID="ID_1964465318" CREATED="1455910883520" MODIFIED="1455910883520" HGAP_QUANTITY="-85.0 px" VSHIFT_QUANTITY="41.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30a4;&#x30f3;&#x30bf;&#x30fc;&#x30cd;&#x30c3;&#x30c8;&#x4e0a;&#x3067;&#x306e;&#x516c;&#x958b;&#xff08;Java &#x30a2;&#x30d7;&#x30ec;&#x30c3;&#x30c8;&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_1417348323" STYLE="combined">
+<node TEXT="&#x30a4;&#x30f3;&#x30bf;&#x30fc;&#x30cd;&#x30c3;&#x30c8;&#x4e0a;&#x3067;&#x306e;&#x516c;&#x958b;&#xff08;Java &#x30a2;&#x30d7;&#x30ec;&#x30c3;&#x30c8;&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_1417348323" CREATED="1455910883520" MODIFIED="1455910883520" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1669899571" HGAP="-239" VSHIFT="173"><richcontent TYPE="NODE">
+<node ID="ID_1669899571" CREATED="1455910883520" MODIFIED="1455910883520" HGAP_QUANTITY="-239.0 px" VSHIFT_QUANTITY="173.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3259,18 +3342,19 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30a4;&#x30f3;&#x30bf;&#x30fc;&#x30cd;&#x30c3;&#x30c8;&#x4e0a;&#x3067;&#x306e;&#x516c;&#x958b;&#xff08;Freeplane &#x3092;&#x4f7f;&#x7528;&#xff09;" FOLDED="true" ID="ID_1269157254" STYLE="combined" VSHIFT="8">
+<node TEXT="&#x30a4;&#x30f3;&#x30bf;&#x30fc;&#x30cd;&#x30c3;&#x30c8;&#x4e0a;&#x3067;&#x306e;&#x516c;&#x958b;&#xff08;Freeplane &#x3092;&#x4f7f;&#x7528;&#xff09;" FOLDED="true" ID="ID_1269157254" CREATED="1455910883520" MODIFIED="1455910883520" STYLE="combined" VSHIFT_QUANTITY="8.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Professional" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_685749368" HGAP="-254" VSHIFT="95"><richcontent TYPE="NODE">
+<node ID="ID_685749368" CREATED="1455910883520" MODIFIED="1455910883520" HGAP_QUANTITY="-254.0 px" VSHIFT_QUANTITY="95.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3296,24 +3380,25 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30a8;&#x30c7;&#x30a3;&#x30bf;&#x3092;&#x7528;&#x3044;&#x305f;&#x30c7;&#x30fc;&#x30bf;&#x4ea4;&#x63db;" STYLE_REF="Professional" FOLDED="true" ID="ID_118482" STYLE="combined">
+<node TEXT="&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30a8;&#x30c7;&#x30a3;&#x30bf;&#x3092;&#x7528;&#x3044;&#x305f;&#x30c7;&#x30fc;&#x30bf;&#x4ea4;&#x63db;" STYLE_REF="Professional" FOLDED="true" ID="ID_118482" CREATED="1455910883520" MODIFIED="1455910883520" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node TEXT="&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30a8;&#x30c7;&#x30a3;&#x30bf;&#x3092;&#x7528;&#x3044;&#x3066;&#x3001;&#x4e00;&#x5b9a;&#x306e;&#x66f8;&#x5f0f;&#x8a2d;&#x5b9a;&#x30b3;&#x30fc;&#x30c9;&#x3092;&#x4fdd;&#x6301;&#x3057;&#x306a;&#x304c;&#x3089;&#x30c7;&#x30fc;&#x30bf;&#x4ea4;&#x63db;&#x3059;&#x308b;&#x65b9;&#x6cd5;&#x306b;&#x3064;&#x3044;&#x3066;&#x306f;&#x3001;Freeplane &#x30de;&#x30cb;&#x30e5;&#x30a2;&#x30eb;&#x306b;&#x8aac;&#x660e;&#x304c;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;" ID="ID_1023242392" HGAP="-182" VSHIFT="32">
+<node TEXT="&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30a8;&#x30c7;&#x30a3;&#x30bf;&#x3092;&#x7528;&#x3044;&#x3066;&#x3001;&#x4e00;&#x5b9a;&#x306e;&#x66f8;&#x5f0f;&#x8a2d;&#x5b9a;&#x30b3;&#x30fc;&#x30c9;&#x3092;&#x4fdd;&#x6301;&#x3057;&#x306a;&#x304c;&#x3089;&#x30c7;&#x30fc;&#x30bf;&#x4ea4;&#x63db;&#x3059;&#x308b;&#x65b9;&#x6cd5;&#x306b;&#x3064;&#x3044;&#x3066;&#x306f;&#x3001;Freeplane &#x30de;&#x30cb;&#x30e5;&#x30a2;&#x30eb;&#x306b;&#x8aac;&#x660e;&#x304c;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;" ID="ID_1023242392" CREATED="1455910883520" MODIFIED="1455910883520" HGAP_QUANTITY="-182.0 px" VSHIFT_QUANTITY="32.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
 </node>
-<node LOCALIZED_STYLE_REF="defaultstyle.floating" POSITION="right" ID="ID_766584529" HGAP="-4" VSHIFT="158" LINK="freeplaneApplications_ja.mm" TEXT_SHORTENED="true"><richcontent TYPE="NODE">
+<node LOCALIZED_STYLE_REF="defaultstyle.floating" POSITION="right" ID="ID_766584529" CREATED="1455910883521" MODIFIED="1455910883521" LINK="freeplaneApplications_ja.mm" HGAP_QUANTITY="-4.0 px" VSHIFT_QUANTITY="158.0 px" TEXT_SHORTENED="true"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3325,6 +3410,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <richcontent TYPE="DETAILS">
 
@@ -3352,8 +3438,8 @@
 </richcontent>
 <hook NAME="FreeNode"/>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x62e1;&#x5f35;&#x60c5;&#x5831;" STYLE_REF="Advanced" FOLDED="true" POSITION="left" ID="ID_143196514" NUMBERED="true" MIN_WIDTH="180">
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8a73;&#x7d30;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3092;&#x7de8;&#x96c6;" STYLE_REF="Advanced" ID="ID_898889730"><richcontent TYPE="DETAILS" HIDDEN="true">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x62e1;&#x5f35;&#x60c5;&#x5831;" STYLE_REF="Advanced" FOLDED="true" POSITION="left" ID="ID_143196514" CREATED="1455910883521" MODIFIED="1455910883521" NUMBERED="true" MIN_WIDTH="180.0 px">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8a73;&#x7d30;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3092;&#x7de8;&#x96c6;" STYLE_REF="Advanced" ID="ID_898889730" CREATED="1455910883521" MODIFIED="1455910883521"><richcontent TYPE="DETAILS" HIDDEN="true">
 
 <html>
   <head>
@@ -3387,11 +3473,11 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3092;&#x30c4;&#x30fc;&#x30eb;&#x30c1;&#x30c3;&#x30d7;&#x8868;&#x793a;&#xff08;&#x30db;&#x30d0;&#x30fc;&#x30c6;&#x30ad;&#x30b9;&#x30c8;)" STYLE_REF="Advanced" FOLDED="true" ID="ID_288274844" STYLE="combined">
+<node TEXT="&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x3092;&#x30c4;&#x30fc;&#x30eb;&#x30c1;&#x30c3;&#x30d7;&#x8868;&#x793a;&#xff08;&#x30db;&#x30d0;&#x30fc;&#x30c6;&#x30ad;&#x30b9;&#x30c8;)" STYLE_REF="Advanced" FOLDED="true" ID="ID_288274844" CREATED="1455910883521" MODIFIED="1455910883521" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_1704074218" HGAP="-186" VSHIFT="123"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1704074218" CREATED="1455910883521" MODIFIED="1455910883521" HGAP_QUANTITY="-186.0 px" VSHIFT_QUANTITY="123.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3423,11 +3509,12 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x96a0;&#x3055;&#x308c;&#x305f;&#x8a73;&#x7d30;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1710723594" HGAP="24" VSHIFT="-12" STYLE="combined" TEXT_SHORTENED="true">
+<node TEXT="&#x96a0;&#x3055;&#x308c;&#x305f;&#x8a73;&#x7d30;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1710723594" CREATED="1455910883521" MODIFIED="1455910883521" HGAP_QUANTITY="24.0 px" VSHIFT_QUANTITY="-12.0 px" STYLE="combined" TEXT_SHORTENED="true">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
@@ -3448,7 +3535,7 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="" ID="ID_1347491550" HGAP="-80" VSHIFT="50">
+<node TEXT="" ID="ID_1347491550" CREATED="1455910883521" MODIFIED="1455910883521" HGAP_QUANTITY="-80.0 px" VSHIFT_QUANTITY="50.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
@@ -3456,11 +3543,11 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x753b;&#x50cf;&#xff08;&#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_575269438" MIN_WIDTH="1">
+<node TEXT="&#x753b;&#x50cf;&#xff08;&#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#xff09;" STYLE_REF="Advanced" FOLDED="true" ID="ID_575269438" CREATED="1455910883522" MODIFIED="1455910883522" MIN_WIDTH="1.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MainWidth" LAST="false"/>
 </hook>
-<node ID="ID_1931512160"><richcontent TYPE="NODE">
+<node ID="ID_1931512160" CREATED="1455910883522" MODIFIED="1455910883522"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3472,13 +3559,14 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
-<node TEXT="&#x5185;&#x90e8;&#x30bd;&#x30fc;&#x30b9;&#x306e;&#x5834;&#x5408;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1322185425" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x5185;&#x90e8;&#x30bd;&#x30fc;&#x30b9;&#x306e;&#x5834;&#x5408;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1322185425" CREATED="1455910883522" MODIFIED="1455910883522" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1990291656" HGAP="-95" VSHIFT="178"><richcontent TYPE="NODE">
+<node ID="ID_1990291656" CREATED="1455910883522" MODIFIED="1455910883522" HGAP_QUANTITY="-95.0 px" VSHIFT_QUANTITY="178.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3530,17 +3618,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x5916;&#x90e8;&#x30bd;&#x30fc;&#x30b9;&#x306e;&#x5834;&#x5408;" STYLE_REF="Advanced" FOLDED="true" ID="ID_17945363" STYLE="combined">
+<node TEXT="&#x5916;&#x90e8;&#x30bd;&#x30fc;&#x30b9;&#x306e;&#x5834;&#x5408;" STYLE_REF="Advanced" FOLDED="true" ID="ID_17945363" CREATED="1455910883522" MODIFIED="1455910883522" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node STYLE_REF="TitlesContent" ID="ID_594983153" HGAP="-87" VSHIFT="123" MAX_WIDTH="550"><richcontent TYPE="NODE">
+<node STYLE_REF="TitlesContent" ID="ID_594983153" CREATED="1455910883522" MODIFIED="1455910883522" HGAP_QUANTITY="-87.0 px" VSHIFT_QUANTITY="123.0 px" MAX_WIDTH="550.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3575,21 +3664,22 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x30a4;&#x30f3;&#x30e9;&#x30a4;&#x30f3;&#x306e;&#x753b;&#x50cf;" STYLE_REF="Professional" FOLDED="true" ID="ID_1242295211" MAX_WIDTH="550" STYLE="combined">
+<node TEXT="&#x30a4;&#x30f3;&#x30e9;&#x30a4;&#x30f3;&#x306e;&#x753b;&#x50cf;" STYLE_REF="Professional" FOLDED="true" ID="ID_1242295211" CREATED="1455910883522" MODIFIED="1455910883522" MAX_WIDTH="550.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node TEXT="&#x4e0a;&#x7d1a;&#x30e6;&#x30fc;&#x30b6;&#x306a;&#x3089;&#x3001;&#x3044;&#x308f;&#x3086;&#x308b; HTML &#x30b3;&#x30fc;&#x30c9;&#x3092;&#x4f7f;&#x3063;&#x3066;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x306e;&#x306a;&#x304b;&#x306b;&#x753b;&#x50cf;&#x3092;&#x683c;&#x7d0d;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x307e;&#x305f;&#x3001;&#x3053;&#x308c;&#x3092;&#x884c;&#x306a;&#x3046;&#x305f;&#x3081;&#x306e;&#x30b9;&#x30af;&#x30ea;&#x30d7;&#x30c8;&#x3082;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;Freeplane &#x30de;&#x30cb;&#x30e5;&#x30a2;&#x30eb;&#x3092;&#x3054;&#x89a7;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;" ID="ID_796258305" HGAP="-93" VSHIFT="35" STYLE="combined">
+<node TEXT="&#x4e0a;&#x7d1a;&#x30e6;&#x30fc;&#x30b6;&#x306a;&#x3089;&#x3001;&#x3044;&#x308f;&#x3086;&#x308b; HTML &#x30b3;&#x30fc;&#x30c9;&#x3092;&#x4f7f;&#x3063;&#x3066;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x306e;&#x306a;&#x304b;&#x306b;&#x753b;&#x50cf;&#x3092;&#x683c;&#x7d0d;&#x3059;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x307e;&#x305f;&#x3001;&#x3053;&#x308c;&#x3092;&#x884c;&#x306a;&#x3046;&#x305f;&#x3081;&#x306e;&#x30b9;&#x30af;&#x30ea;&#x30d7;&#x30c8;&#x3082;&#x3042;&#x308a;&#x307e;&#x3059;&#x3002;Freeplane &#x30de;&#x30cb;&#x30e5;&#x30a2;&#x30eb;&#x3092;&#x3054;&#x89a7;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;" ID="ID_796258305" CREATED="1455910883522" MODIFIED="1455910883522" HGAP_QUANTITY="-93.0 px" VSHIFT_QUANTITY="35.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x753b;&#x50cf;&#x3092;&#x5909;&#x66f4;" STYLE_REF="Advanced" FOLDED="true" ID="ID_88299847">
-<node STYLE_REF="TitlesContent" ID="ID_656004509" HGAP="-60" VSHIFT="32"><richcontent TYPE="NODE">
+<node TEXT="&#x753b;&#x50cf;&#x3092;&#x5909;&#x66f4;" STYLE_REF="Advanced" FOLDED="true" ID="ID_88299847" CREATED="1455910883522" MODIFIED="1455910883522">
+<node STYLE_REF="TitlesContent" ID="ID_656004509" CREATED="1455910883522" MODIFIED="1455910883522" HGAP_QUANTITY="-60.0 px" VSHIFT_QUANTITY="32.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3601,13 +3691,14 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
 </node>
-<node TEXT="&#x5c5e;&#x6027;&#xff08;&#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_1324773677" MIN_WIDTH="1">
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#x306e;&#x5c5e;&#x6027;" STYLE_REF="Professional" FOLDED="true" ID="ID_1657366174" HGAP="-128" VSHIFT="80" MAX_WIDTH="550">
-<attribute_layout NAME_WIDTH="33" VALUE_WIDTH="82"/>
+<node TEXT="&#x5c5e;&#x6027;&#xff08;&#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_1324773677" CREATED="1455910883522" MODIFIED="1455910883522" MIN_WIDTH="1.0 px">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x62e1;&#x5f35;&#x60c5;&#x5831;&#x306e;&#x5c5e;&#x6027;" STYLE_REF="Professional" FOLDED="true" ID="ID_1657366174" CREATED="1455910883523" MODIFIED="1455910883523" HGAP_QUANTITY="-128.0 px" VSHIFT_QUANTITY="80.0 px" MAX_WIDTH="550.0 px">
+<attribute_layout NAME_WIDTH="24.75 pt" VALUE_WIDTH="61.5 pt"/>
 <attribute NAME="Name" VALUE="John"/>
 <attribute NAME="email" VALUE="john@gmail.com"/>
 <richcontent TYPE="DETAILS">
@@ -3623,7 +3714,7 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8a73;&#x7d30;&#x306b;&#x5c5e;&#x6027;&#x3092;&#x4ed8;&#x52a0;&#x3059;&#x308b;&#x306b;&#x306f;&#xff1f;" STYLE_REF="Professional" FOLDED="true" ID="ID_1441506319" HGAP="-552" VSHIFT="183" MAX_WIDTH="550"><richcontent TYPE="DETAILS">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8a73;&#x7d30;&#x306b;&#x5c5e;&#x6027;&#x3092;&#x4ed8;&#x52a0;&#x3059;&#x308b;&#x306b;&#x306f;&#xff1f;" STYLE_REF="Professional" FOLDED="true" ID="ID_1441506319" CREATED="1455910883523" MODIFIED="1455910883523" HGAP_QUANTITY="-552.0 px" VSHIFT_QUANTITY="183.0 px" MAX_WIDTH="550.0 px"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -3662,7 +3753,7 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x30aa;&#x30d7;&#x30b7;&#x30e7;&#x30f3;&#x5024;" STYLE_REF="Professional" FOLDED="true" ID="ID_1108500341" HGAP="-550" VSHIFT="166" MAX_WIDTH="550"><richcontent TYPE="DETAILS">
+<node TEXT="&#x30aa;&#x30d7;&#x30b7;&#x30e7;&#x30f3;&#x5024;" STYLE_REF="Professional" FOLDED="true" ID="ID_1108500341" CREATED="1455910883523" MODIFIED="1455910883523" HGAP_QUANTITY="-550.0 px" VSHIFT_QUANTITY="166.0 px" MAX_WIDTH="550.0 px"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -3675,7 +3766,7 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x5c5e;&#x6027;&#x7de8;&#x96c6;&#x306e;&#x4e0a;&#x7d1a;&#x30c6;&#x30af;&#x30cb;&#x30c3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_609269277" HGAP="-550" VSHIFT="100" MAX_WIDTH="550"><richcontent TYPE="DETAILS">
+<node TEXT="&#x5c5e;&#x6027;&#x7de8;&#x96c6;&#x306e;&#x4e0a;&#x7d1a;&#x30c6;&#x30af;&#x30cb;&#x30c3;&#x30af;" STYLE_REF="Professional" FOLDED="true" ID="ID_609269277" CREATED="1455910883523" MODIFIED="1455910883523" HGAP_QUANTITY="-550.0 px" VSHIFT_QUANTITY="100.0 px" MAX_WIDTH="550.0 px"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -3688,8 +3779,8 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x5c5e;&#x6027;&#x4e2d;&#x306e;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x77e2;&#x5370;&#x578b;&#xff09;" STYLE_REF="Professional" ID="ID_457929879" HGAP="-550" VSHIFT="80" MAX_WIDTH="550">
-<attribute_layout NAME_WIDTH="48" VALUE_WIDTH="101"/>
+<node TEXT="&#x5c5e;&#x6027;&#x4e2d;&#x306e;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;&#xff08;&#x77e2;&#x5370;&#x578b;&#xff09;" STYLE_REF="Professional" ID="ID_457929879" CREATED="1455910883523" MODIFIED="1455910883523" HGAP_QUANTITY="-550.0 px" VSHIFT_QUANTITY="80.0 px" MAX_WIDTH="550.0 px">
+<attribute_layout NAME_WIDTH="36.0 pt" VALUE_WIDTH="75.75 pt"/>
 <richcontent TYPE="DETAILS">
 
 <html>
@@ -3709,11 +3800,11 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x79d1;&#x5b66;&#x6570;&#x5f0f;&#xff08;LaTeX&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_616494746" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x79d1;&#x5b66;&#x6570;&#x5f0f;&#xff08;LaTeX&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_616494746" CREATED="1455910883523" MODIFIED="1455910883523" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1460441144" HGAP="-110" VSHIFT="53"><richcontent TYPE="NODE">
+<node ID="ID_1460441144" CREATED="1455910883523" MODIFIED="1455910883523" HGAP_QUANTITY="-110.0 px" VSHIFT_QUANTITY="53.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3736,6 +3827,7 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -3743,7 +3835,7 @@
 </node>
 </node>
 </node>
-<node LOCALIZED_STYLE_REF="defaultstyle.floating" POSITION="left" ID="ID_232622736" HGAP="0" VSHIFT="-94" LINK="freeplaneFunctions_ja.mm" TEXT_SHORTENED="true"><richcontent TYPE="NODE">
+<node LOCALIZED_STYLE_REF="defaultstyle.floating" POSITION="left" ID="ID_232622736" CREATED="1455910883524" MODIFIED="1455910883524" LINK="freeplaneFunctions_ja.mm" HGAP_QUANTITY="0.0 px" VSHIFT_QUANTITY="-94.0 px" TEXT_SHORTENED="true"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3755,6 +3847,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="FreeNode"/>
 <richcontent TYPE="DETAILS">
@@ -3782,7 +3875,7 @@
 </html>
 </richcontent>
 </node>
-<node LOCALIZED_STYLE_REF="default" POSITION="left" ID="ID_871432906" HGAP="39" VSHIFT="105">
+<node LOCALIZED_STYLE_REF="default" POSITION="left" ID="ID_871432906" CREATED="1455910883524" MODIFIED="1455910883524" HGAP_QUANTITY="39.0 px" VSHIFT_QUANTITY="105.0 px">
 <icon BUILTIN="idea"/>
 <richcontent TYPE="NODE">
 
@@ -3796,6 +3889,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="FreeNode"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
@@ -3812,8 +3906,8 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x30ce;&#x30fc;&#x30c8;" STYLE_REF="Advanced" FOLDED="true" POSITION="left" ID="ID_274601394" NUMBERED="true" MIN_WIDTH="180">
-<node ID="ID_1960771486"><richcontent TYPE="NODE">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x30ce;&#x30fc;&#x30c8;" STYLE_REF="Advanced" FOLDED="true" POSITION="left" ID="ID_274601394" CREATED="1455910883524" MODIFIED="1455910883524" NUMBERED="true" MIN_WIDTH="180.0 px">
+<node ID="ID_1960771486" CREATED="1455910883524" MODIFIED="1455910883524"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3851,14 +3945,15 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x65e5;&#x4ed8;&#x30fb;&#x6642;&#x523b;&#x95a2;&#x9023;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_1959496513" NUMBERED="true" MIN_WIDTH="180">
+<node TEXT="&#x65e5;&#x4ed8;&#x30fb;&#x6642;&#x523b;&#x95a2;&#x9023;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_1959496513" CREATED="1455910883524" MODIFIED="1455910883524" NUMBERED="true" MIN_WIDTH="180.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="SubMenu" LAST="false"/>
 </hook>
-<node TEXT="&#x6642;&#x9593;&#x7ba1;&#x7406;" STYLE_REF="Professional" ID="ID_1047570728" MAX_WIDTH="600" VSHIFT="40"><richcontent TYPE="DETAILS">
+<node TEXT="&#x6642;&#x9593;&#x7ba1;&#x7406;" STYLE_REF="Professional" ID="ID_1047570728" CREATED="1455910883524" MODIFIED="1455910883524" MAX_WIDTH="600.0 px" VSHIFT_QUANTITY="40.0 px"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -3886,13 +3981,15 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="&#x6642;&#x9593;&#x3092;&#x7ba1;&#x7406;..." STYLE_REF="Professional" FOLDED="true" ID="ID_1104707017" VSHIFT="10" MAX_WIDTH="450" STYLE="combined">
-<icon BUILTIN="../TimeManagementAction"/>
+<node TEXT="" ID="ID_755092950" CREATED="1455910883562" MODIFIED="1455910883562">
 <hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="&#x6642;&#x9593;&#x3092;&#x7ba1;&#x7406;..." STYLE_REF="Professional" FOLDED="true" ID="ID_1104707017" CREATED="1455910883524" MODIFIED="1455910883524" VSHIFT_QUANTITY="10.0 px" MAX_WIDTH="450.0 px" STYLE="combined">
+<icon BUILTIN="../TimeManagementAction"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_1158360877" HGAP="-114" VSHIFT="98" MAX_WIDTH="400" MIN_WIDTH="400"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1158360877" CREATED="1455910883525" MODIFIED="1455910883525" HGAP_QUANTITY="-114.0 px" VSHIFT_QUANTITY="98.0 px" MAX_WIDTH="400.0 px" MIN_WIDTH="400.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3915,33 +4012,34 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="SubWidth" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x672c;&#x65e5;&#x306e;&#x5e74;&#x6708;&#x65e5;&#x3092;&#x6307;&#x5b9a;" STYLE_REF="Method" ID="ID_629838545" STYLE="as_parent">
+<node TEXT="&#x672c;&#x65e5;&#x306e;&#x5e74;&#x6708;&#x65e5;&#x3092;&#x6307;&#x5b9a;" STYLE_REF="Method" ID="ID_629838545" CREATED="1455910883525" MODIFIED="1455910883525" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x9078;&#x629e;&#x4e2d;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x633f;&#x5165;" STYLE_REF="Method" ID="ID_77223280" STYLE="as_parent">
+<node TEXT="&#x9078;&#x629e;&#x4e2d;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x633f;&#x5165;" STYLE_REF="Method" ID="ID_77223280" CREATED="1455910883525" MODIFIED="1455910883525" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x30ab;&#x30ec;&#x30f3;&#x30c0;&#x3067;&#x9078;&#x629e;&#x3057;&#x305f;&#x65e5;&#x306b;&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c0;&#x3092;&#x8a2d;&#x5b9a;" STYLE_REF="Method" ID="ID_1905175036" STYLE="as_parent">
+<node TEXT="&#x30ab;&#x30ec;&#x30f3;&#x30c0;&#x3067;&#x9078;&#x629e;&#x3057;&#x305f;&#x65e5;&#x306b;&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c0;&#x3092;&#x8a2d;&#x5b9a;" STYLE_REF="Method" ID="ID_1905175036" CREATED="1455910883525" MODIFIED="1455910883525" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
-<node TEXT="&#x6307;&#x5b9a;&#x65e5;&#x6570;&#x7d4c;&#x904e;&#x5f8c;&#x306b;&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c9;" STYLE_REF="Method" ID="ID_46192835"/>
-<node TEXT="&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c0;&#x3092;&#x524a;&#x9664;" STYLE_REF="Method" ID="ID_1600844387" STYLE="as_parent">
+<node TEXT="&#x6307;&#x5b9a;&#x65e5;&#x6570;&#x7d4c;&#x904e;&#x5f8c;&#x306b;&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c9;" STYLE_REF="Method" ID="ID_46192835" CREATED="1455910883525" MODIFIED="1455910883525"/>
+<node TEXT="&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c0;&#x3092;&#x524a;&#x9664;" STYLE_REF="Method" ID="ID_1600844387" CREATED="1455910883525" MODIFIED="1455910883525" STYLE="as_parent">
 <edge STYLE="horizontal"/>
 </node>
 </node>
 </node>
-<node TEXT="&#x8ab2;&#x984c;&#x3092;&#x7ba1;&#x7406;..." STYLE_REF="Professional" FOLDED="true" ID="ID_1106133151" MAX_WIDTH="450" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x8ab2;&#x984c;&#x3092;&#x7ba1;&#x7406;..." STYLE_REF="Professional" FOLDED="true" ID="ID_1106133151" CREATED="1455910883525" MODIFIED="1455910883525" MAX_WIDTH="450.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <icon BUILTIN="../TimeListAction"/>
+<arrowlink SHAPE="LINE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1106133151" STARTINCLINATION="0;0;" ENDINCLINATION="0;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="80" FONT_SIZE="12" FONT_FAMILY="SansSerif" DESTINATION="ID_1106133151" STARTINCLINATION="0;0;" ENDINCLINATION="0;0;" STARTARROW="NONE" ENDARROW="DEFAULT"/>
-<node ID="ID_1400536343" MAX_WIDTH="400" HGAP="-105" VSHIFT="114"><richcontent TYPE="NODE">
+<node ID="ID_1400536343" CREATED="1455910883525" MODIFIED="1455910883525" MAX_WIDTH="400.0 px" HGAP_QUANTITY="-105.0 px" VSHIFT_QUANTITY="114.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -3973,18 +4071,19 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c0;&#x3092;&#x524a;&#x9664;" STYLE_REF="Professional" FOLDED="true" ID="ID_148977369" MAX_WIDTH="450" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x30ea;&#x30de;&#x30a4;&#x30f3;&#x30c0;&#x3092;&#x524a;&#x9664;" STYLE_REF="Professional" FOLDED="true" ID="ID_148977369" CREATED="1455910883525" MODIFIED="1455910883525" MAX_WIDTH="450.0 px" MIN_WIDTH="1.0 px" STYLE="combined">
 <icon BUILTIN="../ReminderHookAction"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_740100275" HGAP="-125" VSHIFT="65"><richcontent TYPE="NODE">
+<node ID="ID_740100275" CREATED="1455910883526" MODIFIED="1455910883526" HGAP_QUANTITY="-125.0 px" VSHIFT_QUANTITY="65.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4010,13 +4109,16 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="" ID="ID_517678813" TEXT_SHORTENED="true">
+<node TEXT="" ID="ID_537141055" CREATED="1455910883562" MODIFIED="1455910883562">
+<hook NAME="SummaryNode"/>
+<node TEXT="" ID="ID_517678813" CREATED="1455910883526" MODIFIED="1455910883526" TEXT_SHORTENED="true">
 <hook NAME="plugins/TimeManagementReminder.xml">
     <Parameters REMINDUSERAT="2077460580480" PERIOD="1" UNIT="DAY"/>
 </hook>
@@ -4024,7 +4126,6 @@
     <conditional_style ACTIVE="true" STYLE_REF="Example" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="ProfessionalTopic" LAST="false"/>
 </hook>
-<hook NAME="SummaryNode"/>
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <richcontent TYPE="DETAILS">
 
@@ -4041,22 +4142,23 @@
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3068;&#x691c;&#x7d22;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_828862571" NUMBERED="true" MIN_WIDTH="180">
-<node TEXT="&#x306a;&#x305c;&#x3001;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x304b;&#xff1f;" STYLE_REF="Professional" FOLDED="true" ID="ID_887149959" STYLE="combined">
+</node>
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3068;&#x691c;&#x7d22;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_828862571" CREATED="1455910883526" MODIFIED="1455910883526" NUMBERED="true" MIN_WIDTH="180.0 px">
+<node TEXT="&#x306a;&#x305c;&#x3001;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x304b;&#xff1f;" STYLE_REF="Professional" FOLDED="true" ID="ID_887149959" CREATED="1455910883526" MODIFIED="1455910883526" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306f;&#x3001;&#x898b;&#x305f;&#x3044;&#x30ce;&#x30fc;&#x30c9;&#x3060;&#x3051;&#x3092;&#x8868;&#x793a;&#x3055;&#x305b;&#x308b;&#x624b;&#x6bb5;&#x3067;&#x3059;&#x3002;&#x540c;&#x3058;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30eb;&#x30fc;&#x30eb;&#x306f;&#x3001;&#x60c5;&#x5831;&#x691c;&#x7d22;&#x3067;&#x3082;&#x4f7f;&#x7528;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x307e;&#x305f;&#x3001;&#x6761;&#x4ef6;&#x5bfe;&#x5fdc;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3067;&#x3082;&#x4f7f;&#x7528;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;" ID="ID_1873557100" HGAP="-85" VSHIFT="30">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306f;&#x3001;&#x898b;&#x305f;&#x3044;&#x30ce;&#x30fc;&#x30c9;&#x3060;&#x3051;&#x3092;&#x8868;&#x793a;&#x3055;&#x305b;&#x308b;&#x624b;&#x6bb5;&#x3067;&#x3059;&#x3002;&#x540c;&#x3058;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30eb;&#x30fc;&#x30eb;&#x306f;&#x3001;&#x60c5;&#x5831;&#x691c;&#x7d22;&#x3067;&#x3082;&#x4f7f;&#x7528;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x307e;&#x305f;&#x3001;&#x6761;&#x4ef6;&#x5bfe;&#x5fdc;&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#x3067;&#x3082;&#x4f7f;&#x7528;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;" ID="ID_1873557100" CREATED="1455910883526" MODIFIED="1455910883526" HGAP_QUANTITY="-85.0 px" VSHIFT_QUANTITY="30.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x691c;&#x7d22;&#x3068;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x57fa;&#x790e;" STYLE_REF="Professional" FOLDED="true" ID="ID_1598853306" STYLE="combined">
+<node TEXT="&#x691c;&#x7d22;&#x3068;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x57fa;&#x790e;" STYLE_REF="Professional" FOLDED="true" ID="ID_1598853306" CREATED="1455910883527" MODIFIED="1455910883527" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node FOLDED="true" ID="ID_1650348629" HGAP="-180" VSHIFT="187"><richcontent TYPE="NODE">
+<node FOLDED="true" ID="ID_1650348629" CREATED="1455910883527" MODIFIED="1455910883527" HGAP_QUANTITY="-180.0 px" VSHIFT_QUANTITY="187.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4108,11 +4210,12 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
-<node TEXT="&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30d5;&#x30a3;&#x30eb;&#x30bf;" STYLE_REF="ProfessionalTopic" FOLDED="true" ID="ID_1189166757">
+<node TEXT="&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30d5;&#x30a3;&#x30eb;&#x30bf;" STYLE_REF="ProfessionalTopic" FOLDED="true" ID="ID_1189166757" CREATED="1455910883527" MODIFIED="1455910883527">
 <icon BUILTIN="../apply_quick_filter"/>
 <richcontent TYPE="DETAILS">
 
@@ -4131,7 +4234,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 <edge STYLE="horizontal"/>
-<node TEXT="&#x6700;&#x8fd1;&#x66f4;&#x65b0;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x691c;&#x7d22;" ID="ID_884023176">
+<node TEXT="&#x6700;&#x8fd1;&#x66f4;&#x65b0;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x691c;&#x7d22;" ID="ID_884023176" CREATED="1455910883527" MODIFIED="1455910883527">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="ToNote" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="Procedure" LAST="false"/>
@@ -4162,7 +4265,7 @@
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x89e3;&#x9664;" STYLE_REF="ProfessionalTopic" ID="ID_983064948">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x89e3;&#x9664;" STYLE_REF="ProfessionalTopic" ID="ID_983064948" CREATED="1455910883528" MODIFIED="1455910883528">
 <icon BUILTIN="../remove_filtering"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
@@ -4182,7 +4285,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="&#x6b21;&#x3092;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_507981913">
+<node TEXT="&#x6b21;&#x3092;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_507981913" CREATED="1455910883528" MODIFIED="1455910883528">
 <icon BUILTIN="../find_next"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
@@ -4221,7 +4324,7 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x8af8;&#x6a5f;&#x80fd;" STYLE_REF="Professional" FOLDED="true" ID="ID_1254354349" TEXT_SHORTENED="true" STYLE="combined"><richcontent TYPE="DETAILS">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x8af8;&#x6a5f;&#x80fd;" STYLE_REF="Professional" FOLDED="true" ID="ID_1254354349" CREATED="1455910883529" MODIFIED="1455910883529" TEXT_SHORTENED="true" STYLE="combined"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -4237,7 +4340,10 @@
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x5143;&#x306b;&#x623b;&#x3059;" STYLE_REF="ProfessionalTopic" ID="ID_619416419" TEXT_SHORTENED="true">
+<node TEXT="" ID="ID_462564273" CREATED="1455910883562" MODIFIED="1455910883562">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x5143;&#x306b;&#x623b;&#x3059;" STYLE_REF="ProfessionalTopic" ID="ID_619416419" CREATED="1455910883529" MODIFIED="1455910883529" TEXT_SHORTENED="true">
 <icon BUILTIN="../undo_filter"/>
 <richcontent TYPE="DETAILS">
 
@@ -4252,12 +4358,11 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x5143;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x518d;&#x9069;&#x7528;" STYLE_REF="ProfessionalTopic" ID="ID_1724296233" TEXT_SHORTENED="true">
+<node TEXT="&#x5143;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x518d;&#x9069;&#x7528;" STYLE_REF="ProfessionalTopic" ID="ID_1724296233" CREATED="1455910883531" MODIFIED="1455910883531" TEXT_SHORTENED="true">
 <icon BUILTIN="../redo_filter"/>
 <richcontent TYPE="DETAILS">
 
@@ -4276,7 +4381,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x304b;&#x3051;&#x76f4;&#x3059;" STYLE_REF="ProfessionalTopic" ID="ID_1748016122" TEXT_SHORTENED="true">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x304b;&#x3051;&#x76f4;&#x3059;" STYLE_REF="ProfessionalTopic" ID="ID_1748016122" CREATED="1455910883532" MODIFIED="1455910883532" TEXT_SHORTENED="true">
 <icon BUILTIN="../reapply_filter"/>
 <richcontent TYPE="DETAILS">
 
@@ -4295,7 +4400,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30d5;&#x30a3;&#x30eb;&#x30bf;" STYLE_REF="ProfessionalTopic" FOLDED="true" ID="ID_1552136796" TEXT_SHORTENED="true">
+<node TEXT="&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30d5;&#x30a3;&#x30eb;&#x30bf;" STYLE_REF="ProfessionalTopic" FOLDED="true" ID="ID_1552136796" CREATED="1455910883532" MODIFIED="1455910883532" TEXT_SHORTENED="true">
 <icon BUILTIN="../apply_quick_filter"/>
 <richcontent TYPE="DETAILS">
 
@@ -4335,7 +4440,7 @@
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
-<node TEXT="&#x6700;&#x8fd1;&#x66f4;&#x65b0;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x691c;&#x7d22;" ID="ID_1539236846">
+<node TEXT="&#x6700;&#x8fd1;&#x66f4;&#x65b0;&#x3057;&#x305f;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x691c;&#x7d22;" ID="ID_1539236846" CREATED="1455910883533" MODIFIED="1455910883533">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Example" LAST="false"/>
     <conditional_style ACTIVE="true" STYLE_REF="Procedure" LAST="false"/>
@@ -4366,7 +4471,7 @@
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x9078;&#x629e;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x7d5e;&#x3063;&#x3066;&#x9069;&#x7528;" STYLE_REF="ProfessionalTopic" ID="ID_402507556" TEXT_SHORTENED="true">
+<node TEXT="&#x9078;&#x629e;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x7d5e;&#x3063;&#x3066;&#x9069;&#x7528;" STYLE_REF="ProfessionalTopic" ID="ID_402507556" CREATED="1455910883533" MODIFIED="1455910883533" TEXT_SHORTENED="true">
 <icon BUILTIN="../filter_selected_nodes"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
@@ -4398,9 +4503,9 @@
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
-<attribute_layout NAME_WIDTH="68" VALUE_WIDTH="68"/>
+<attribute_layout NAME_WIDTH="51.0 pt" VALUE_WIDTH="51.0 pt"/>
 </node>
-<node TEXT="&#x8a72;&#x5f53;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5168;&#x3066;&#x9078;&#x629e;" STYLE_REF="ProfessionalTopic" ID="ID_164487469" TEXT_SHORTENED="true">
+<node TEXT="&#x8a72;&#x5f53;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5168;&#x3066;&#x9078;&#x629e;" STYLE_REF="ProfessionalTopic" ID="ID_164487469" CREATED="1455910883534" MODIFIED="1455910883534" TEXT_SHORTENED="true">
 <icon BUILTIN="../select_all_found_nodes"/>
 <richcontent TYPE="DETAILS">
 
@@ -4419,7 +4524,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x89e3;&#x9664;" STYLE_REF="ProfessionalTopic" ID="ID_1978139715" TEXT_SHORTENED="true">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x89e3;&#x9664;" STYLE_REF="ProfessionalTopic" ID="ID_1978139715" CREATED="1455910883534" MODIFIED="1455910883534" TEXT_SHORTENED="true">
 <icon BUILTIN="../remove_filtering"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
@@ -4438,7 +4543,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x6761;&#x4ef6;&#x3092;&#x6307;&#x5b9a;" STYLE_REF="ProfessionalTopic" ID="ID_1142884544" TEXT_SHORTENED="true">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x6761;&#x4ef6;&#x3092;&#x6307;&#x5b9a;" STYLE_REF="ProfessionalTopic" ID="ID_1142884544" CREATED="1455910883535" MODIFIED="1455910883535" TEXT_SHORTENED="true">
 <icon BUILTIN="../edit_filtering_condition"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
@@ -4505,13 +4610,18 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x9069;&#x7528;&#x30fb;&#x89e3;&#x9664;" STYLE_REF="ProfessionalTopic" ID="ID_214063901">
+<node TEXT="" ID="ID_1005468744" CREATED="1455910883562" MODIFIED="1455910883562">
 <hook NAME="SummaryNode"/>
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x9069;&#x7528;&#x30fb;&#x89e3;&#x9664;" STYLE_REF="ProfessionalTopic" ID="ID_214063901" CREATED="1455910883538" MODIFIED="1455910883538">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x4e2d;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x9069;&#x7528;&#xff08;&#x7d5e;&#x308a;&#x8fbc;&#x307f;&#xff09;" STYLE_REF="ProfessionalTopic" ID="ID_1768599003" TEXT_SHORTENED="true">
+</node>
+<node TEXT="" ID="ID_1719178907" CREATED="1455910883562" MODIFIED="1455910883562">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x4e2d;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306b;&#x9069;&#x7528;&#xff08;&#x7d5e;&#x308a;&#x8fbc;&#x307f;&#xff09;" STYLE_REF="ProfessionalTopic" ID="ID_1768599003" CREATED="1455910883539" MODIFIED="1455910883539" TEXT_SHORTENED="true">
 <icon BUILTIN="../applies_to_filtered_nodes"/>
 <richcontent TYPE="DETAILS">
 
@@ -4526,12 +4636,11 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x975e;&#x8868;&#x793a;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5c55;&#x958b;" STYLE_REF="ProfessionalTopic" ID="ID_865947666" TEXT_SHORTENED="true">
+<node TEXT="&#x975e;&#x8868;&#x793a;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5c55;&#x958b;" STYLE_REF="ProfessionalTopic" ID="ID_865947666" CREATED="1455910883539" MODIFIED="1455910883539" TEXT_SHORTENED="true">
 <icon BUILTIN="../unfold_filtered_ancestors"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
@@ -4567,7 +4676,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x4e0a;&#x4f4d;&#x30ce;&#x30fc;&#x30c9;&#x3082;&#x8868;&#x793a;" STYLE_REF="ProfessionalTopic" ID="ID_1384592614" TEXT_SHORTENED="true">
+<node TEXT="&#x4e0a;&#x4f4d;&#x30ce;&#x30fc;&#x30c9;&#x3082;&#x8868;&#x793a;" STYLE_REF="ProfessionalTopic" ID="ID_1384592614" CREATED="1455910883540" MODIFIED="1455910883540" TEXT_SHORTENED="true">
 <icon BUILTIN="../show_ancestors"/>
 <richcontent TYPE="DETAILS">
 
@@ -4597,7 +4706,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x4e0b;&#x4f4d;&#x30ce;&#x30fc;&#x30c9;&#x3082;&#x8868;&#x793a;" STYLE_REF="ProfessionalTopic" ID="ID_347749612" TEXT_SHORTENED="true">
+<node TEXT="&#x4e0b;&#x4f4d;&#x30ce;&#x30fc;&#x30c9;&#x3082;&#x8868;&#x793a;" STYLE_REF="ProfessionalTopic" ID="ID_347749612" CREATED="1455910883541" MODIFIED="1455910883541" TEXT_SHORTENED="true">
 <icon BUILTIN="../show_descendants"/>
 <richcontent TYPE="DETAILS">
 
@@ -4627,13 +4736,18 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x6761;&#x4ef6;&#xff0f;&#x72b6;&#x614b;" STYLE_REF="ProfessionalTopic" ID="ID_1103140596">
+<node TEXT="" ID="ID_435613681" CREATED="1455910883562" MODIFIED="1455910883562">
 <hook NAME="SummaryNode"/>
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x6761;&#x4ef6;&#xff0f;&#x72b6;&#x614b;" STYLE_REF="ProfessionalTopic" ID="ID_1103140596" CREATED="1455910883542" MODIFIED="1455910883542">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x524d;&#x65b9;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_132872030" TEXT_SHORTENED="true">
+</node>
+<node TEXT="" ID="ID_1498671338" CREATED="1455910883563" MODIFIED="1455910883563">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="&#x524d;&#x65b9;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_132872030" CREATED="1455910883542" MODIFIED="1455910883542" TEXT_SHORTENED="true">
 <icon BUILTIN="../find_previous"/>
 <richcontent TYPE="DETAILS">
 
@@ -4665,12 +4779,11 @@
   </body>
 </html>
 </richcontent>
-<hook NAME="FirstGroupNode"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x5f8c;&#x65b9;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_1528431308" TEXT_SHORTENED="true">
+<node TEXT="&#x5f8c;&#x65b9;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_1528431308" CREATED="1455910883542" MODIFIED="1455910883542" TEXT_SHORTENED="true">
 <icon BUILTIN="../find_next"/>
 <richcontent TYPE="DETAILS">
 
@@ -4706,18 +4819,20 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x63a2;&#x67fb;&#xff0f;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_721920269">
+<node TEXT="" ID="ID_599482793" CREATED="1455910883563" MODIFIED="1455910883563">
 <hook NAME="SummaryNode"/>
+<node TEXT="&#x63a2;&#x67fb;&#xff0f;&#x691c;&#x7d22;" STYLE_REF="ProfessionalTopic" ID="ID_721920269" CREATED="1455910883543" MODIFIED="1455910883543">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30bb;&#x30c3;&#x30c8;&#x3092;&#x4f7f;&#x3046;" STYLE_REF="Professional" FOLDED="true" ID="ID_665978371" STYLE="combined">
+</node>
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30bb;&#x30c3;&#x30c8;&#x3092;&#x4f7f;&#x3046;" STYLE_REF="Professional" FOLDED="true" ID="ID_665978371" CREATED="1455910883543" MODIFIED="1455910883543" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_49510380" HGAP="-115" VSHIFT="91"><richcontent TYPE="NODE">
+<node ID="ID_49510380" CREATED="1455910883543" MODIFIED="1455910883543" HGAP_QUANTITY="-115.0 px" VSHIFT_QUANTITY="91.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4735,15 +4850,16 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x3053;&#x306e;&#x300c;&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30ea;&#x30d5;&#x30a1;&#x30ec;&#x30f3;&#x30b9;&#x300d;&#x7528;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30bb;&#x30c3;&#x30c8;&#x306e;&#x8aad;&#x307f;&#x8fbc;&#x307f;&#x3068;&#x6d3b;&#x7528;" STYLE_REF="Professional" FOLDED="true" ID="ID_1284293100" LINK="http://www.kioo.nl/freeplane/tutorial_en/filterSet" MIN_WIDTH="1">
-<node TEXT="&#xff08;&#x521d;&#x7d1a;&#x3001;&#x4e2d;&#x7d1a;&#x3001;&#x4e0a;&#x7d1a;&#x306e;&#xff09;&#xff13;&#x3064;&#x306e;&#x719f;&#x9054;&#x5ea6;&#x306e;&#x3069;&#x308c;&#x304b;&#xff11;&#x3064;&#x3060;&#x3051;&#x3092;&#x8868;&#x793a;&#x3055;&#x305b;&#x308b;&#x5834;&#x5408;&#x306f;&#x3001;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3068;&#x3044;&#x3046; Freeplane &#x306e;&#x5f37;&#x529b;&#x306a;&#x6a5f;&#x80fd;&#x306e;&#x5229;&#x7528;&#x3092;&#x691c;&#x8a0e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#xa;&#xa;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x624b;&#x9806;&#x306f;&#x4e0b;&#x8a18;&#x306e;&#x3068;&#x304a;&#x308a;&#x3067;&#x3059;&#x3002;&#x3053;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8d64;&#x3044;&#x77e2;&#x5370;&#x3092;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3059;&#x308b;&#x3068;&#x3001;&#x30a2;&#x30cb;&#x30e1;&#x30b7;&#x30e7;&#x30f3;&#x306e;&#x8aac;&#x660e;&#x304c;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;" ID="ID_352888342"/>
-<node TEXT="&#x3053;&#x306e;&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30ea;&#x30d5;&#x30a1;&#x30ec;&#x30f3;&#x30b9;&#x7528;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30bb;&#x30c3;&#x30c8;&#x3092;&#x8aad;&#x307f;&#x8fbc;&#x3080;" ID="ID_551050917">
+<node TEXT="&#x3053;&#x306e;&#x300c;&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30ea;&#x30d5;&#x30a1;&#x30ec;&#x30f3;&#x30b9;&#x300d;&#x7528;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30bb;&#x30c3;&#x30c8;&#x306e;&#x8aad;&#x307f;&#x8fbc;&#x307f;&#x3068;&#x6d3b;&#x7528;" STYLE_REF="Professional" FOLDED="true" ID="ID_1284293100" CREATED="1455910883544" MODIFIED="1455910883544" LINK="http://www.kioo.nl/freeplane/tutorial_en/filterSet" MIN_WIDTH="1.0 px">
+<node TEXT="&#xff08;&#x521d;&#x7d1a;&#x3001;&#x4e2d;&#x7d1a;&#x3001;&#x4e0a;&#x7d1a;&#x306e;&#xff09;&#xff13;&#x3064;&#x306e;&#x719f;&#x9054;&#x5ea6;&#x306e;&#x3069;&#x308c;&#x304b;&#xff11;&#x3064;&#x3060;&#x3051;&#x3092;&#x8868;&#x793a;&#x3055;&#x305b;&#x308b;&#x5834;&#x5408;&#x306f;&#x3001;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3068;&#x3044;&#x3046; Freeplane &#x306e;&#x5f37;&#x529b;&#x306a;&#x6a5f;&#x80fd;&#x306e;&#x5229;&#x7528;&#x3092;&#x691c;&#x8a0e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#xa;&#xa;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x306e;&#x624b;&#x9806;&#x306f;&#x4e0b;&#x8a18;&#x306e;&#x3068;&#x304a;&#x308a;&#x3067;&#x3059;&#x3002;&#x3053;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x8d64;&#x3044;&#x77e2;&#x5370;&#x3092;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3059;&#x308b;&#x3068;&#x3001;&#x30a2;&#x30cb;&#x30e1;&#x30b7;&#x30e7;&#x30f3;&#x306e;&#x8aac;&#x660e;&#x304c;&#x8868;&#x793a;&#x3055;&#x308c;&#x307e;&#x3059;&#x3002;" ID="ID_352888342" CREATED="1455910883544" MODIFIED="1455910883544"/>
+<node TEXT="&#x3053;&#x306e;&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30ea;&#x30d5;&#x30a1;&#x30ec;&#x30f3;&#x30b9;&#x7528;&#x306e;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x30bb;&#x30c3;&#x30c8;&#x3092;&#x8aad;&#x307f;&#x8fbc;&#x3080;" ID="ID_551050917" CREATED="1455910883544" MODIFIED="1455910883544">
 <icon BUILTIN="full-0"/>
 <richcontent TYPE="DETAILS">
 
@@ -4765,7 +4881,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="SubWidth" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x9078;&#x629e;&#x3057;&#x3001;&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x5b9f;&#x884c;" LOCALIZED_STYLE_REF="default" ID="ID_81563733" LINK="FilterExampleBegin.jpg">
+<node TEXT="&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x9078;&#x629e;&#x3057;&#x3001;&#x30af;&#x30a3;&#x30c3;&#x30af;&#x30d5;&#x30a3;&#x30eb;&#x30bf;&#x3092;&#x5b9f;&#x884c;" LOCALIZED_STYLE_REF="default" ID="ID_81563733" CREATED="1455910883544" MODIFIED="1455910883544" LINK="FilterExampleBegin.jpg">
 <icon BUILTIN="full-1"/>
 <richcontent TYPE="DETAILS">
 
@@ -4798,7 +4914,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="SubWidth" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x5c55;&#x958b;&#x3057;&#x3066;&#x53ef;&#x8996;&#x72b6;&#x614b;&#x306b;&#x3059;&#x308b;" ID="ID_1451237301" HGAP="19" VSHIFT="-8" LINK="FilterExampleEnd.jpg">
+<node TEXT="&#x5c55;&#x958b;&#x3057;&#x3066;&#x53ef;&#x8996;&#x72b6;&#x614b;&#x306b;&#x3059;&#x308b;" ID="ID_1451237301" CREATED="1455910883544" MODIFIED="1455910883544" LINK="FilterExampleEnd.jpg" HGAP_QUANTITY="19.0 px" VSHIFT_QUANTITY="-8.0 px">
 <icon BUILTIN="full-2"/>
 <richcontent TYPE="DETAILS">
 
@@ -4825,7 +4941,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="SubWidth" LAST="false"/>
 </hook>
 </node>
-<node TEXT="&#x8868;&#x793a;&#x3068;&#x8868;&#x793a;&#x7d42;&#x4e86;" ID="ID_1331360426" HGAP="16" VSHIFT="6" LINK="FilterExampleUnfold.jpg">
+<node TEXT="&#x8868;&#x793a;&#x3068;&#x8868;&#x793a;&#x7d42;&#x4e86;" ID="ID_1331360426" CREATED="1455910883545" MODIFIED="1455910883545" LINK="FilterExampleUnfold.jpg" HGAP_QUANTITY="16.0 px" VSHIFT_QUANTITY="6.0 px">
 <icon BUILTIN="full-3"/>
 <richcontent TYPE="DETAILS">
 
@@ -4857,12 +4973,12 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x3084;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x4fdd;&#x8b77;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_1232153769" NUMBERED="true" MIN_WIDTH="180">
-<node TEXT="&#x30d1;&#x30b9;&#x30ef;&#x30fc;&#x30c9;&#x3067;&#x5b50;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x4fdd;&#x8b77;" STYLE_REF="Professional" FOLDED="true" ID="ID_1433157907" STYLE="combined">
+<node TEXT="&#x30de;&#x30c3;&#x30d7;&#x3084;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x4fdd;&#x8b77;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_1232153769" CREATED="1455910883545" MODIFIED="1455910883545" NUMBERED="true" MIN_WIDTH="180.0 px">
+<node TEXT="&#x30d1;&#x30b9;&#x30ef;&#x30fc;&#x30c9;&#x3067;&#x5b50;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x4fdd;&#x8b77;" STYLE_REF="Professional" FOLDED="true" ID="ID_1433157907" CREATED="1455910883545" MODIFIED="1455910883545" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1784889270" HGAP="-153" VSHIFT="94"><richcontent TYPE="NODE">
+<node ID="ID_1784889270" CREATED="1455910883545" MODIFIED="1455910883545" HGAP_QUANTITY="-153.0 px" VSHIFT_QUANTITY="94.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4888,17 +5004,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x4fdd;&#x8b77;&#xff08;&#x6697;&#x8a3c;&#xff09;&#x4ed8;&#x304d;&#x65b0;&#x898f;&#x30de;&#x30c3;&#x30d7;" STYLE_REF="Professional" FOLDED="true" ID="ID_1064538299" STYLE="combined">
+<node TEXT="&#x4fdd;&#x8b77;&#xff08;&#x6697;&#x8a3c;&#xff09;&#x4ed8;&#x304d;&#x65b0;&#x898f;&#x30de;&#x30c3;&#x30d7;" STYLE_REF="Professional" FOLDED="true" ID="ID_1064538299" CREATED="1455910883546" MODIFIED="1455910883546" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_802748820" HGAP="-149" VSHIFT="41"><richcontent TYPE="NODE">
+<node ID="ID_802748820" CREATED="1455910883546" MODIFIED="1455910883546" HGAP_QUANTITY="-149.0 px" VSHIFT_QUANTITY="41.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4910,6 +5027,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
@@ -4917,8 +5035,8 @@
 </node>
 </node>
 </node>
-<node TEXT="Freeplane &#x306e;&#x30c1;&#x30e5;&#x30fc;&#x30cb;&#x30f3;&#x30b0;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_1746471823" NUMBERED="true" MIN_WIDTH="180" VGAP="5">
-<node ID="ID_931065203" HGAP="28" VSHIFT="-15"><richcontent TYPE="NODE">
+<node TEXT="Freeplane &#x306e;&#x30c1;&#x30e5;&#x30fc;&#x30cb;&#x30f3;&#x30b0;" STYLE_REF="Professional" FOLDED="true" POSITION="left" ID="ID_1746471823" CREATED="1455910883546" MODIFIED="1455910883546" NUMBERED="true" MIN_WIDTH="180.0 px" VGAP_QUANTITY="5.0 px">
+<node ID="ID_931065203" CREATED="1455910883546" MODIFIED="1455910883546" HGAP_QUANTITY="28.0 px" VSHIFT_QUANTITY="-15.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4930,9 +5048,10 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
-<node TEXT="&#x3059;&#x3079;&#x3066;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x300c;&#x56f2;&#x307f;&#xff63;&#x3001;&#x7279;&#x5b9a;&#x306e;&#x7dda;&#xff08;&#x30a8;&#x30c3;&#x30b8;&#xff09;&#x7b49;&#x306b;..." STYLE_REF="Advanced" FOLDED="true" ID="ID_210892586" MIN_WIDTH="1" STYLE="combined"><richcontent TYPE="DETAILS" HIDDEN="true">
+<node TEXT="&#x3059;&#x3079;&#x3066;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x300c;&#x56f2;&#x307f;&#xff63;&#x3001;&#x7279;&#x5b9a;&#x306e;&#x7dda;&#xff08;&#x30a8;&#x30c3;&#x30b8;&#xff09;&#x7b49;&#x306b;..." STYLE_REF="Advanced" FOLDED="true" ID="ID_210892586" CREATED="1455910883546" MODIFIED="1455910883546" MIN_WIDTH="1.0 px" STYLE="combined"><richcontent TYPE="DETAILS" HIDDEN="true">
 
 <html>
   <head>
@@ -4945,7 +5064,7 @@
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1274034553" HGAP="-291" VSHIFT="37"><richcontent TYPE="NODE">
+<node ID="ID_1274034553" CREATED="1455910883546" MODIFIED="1455910883546" HGAP_QUANTITY="-291.0 px" VSHIFT_QUANTITY="37.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4957,12 +5076,13 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
-<node STYLE_REF="TitlesContent" ID="ID_423831026" HGAP="-291" VSHIFT="36"><richcontent TYPE="NODE">
+<node STYLE_REF="TitlesContent" ID="ID_423831026" CREATED="1455910883546" MODIFIED="1455910883546" HGAP_QUANTITY="-291.0 px" VSHIFT_QUANTITY="36.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -4988,14 +5108,15 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x6a19;&#x6e96;&#x7684;&#x306a;&#x8868;&#x793a;&#x8a2d;&#x5b9a;" STYLE_REF="Professional" FOLDED="true" ID="ID_1173853188" STYLE="combined">
+<node TEXT="&#x6a19;&#x6e96;&#x7684;&#x306a;&#x8868;&#x793a;&#x8a2d;&#x5b9a;" STYLE_REF="Professional" FOLDED="true" ID="ID_1173853188" CREATED="1455910883547" MODIFIED="1455910883547" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1748316183" HGAP="-82" VSHIFT="102"><richcontent TYPE="NODE">
+<node ID="ID_1748316183" CREATED="1455910883547" MODIFIED="1455910883547" HGAP_QUANTITY="-82.0 px" VSHIFT_QUANTITY="102.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5018,17 +5139,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x79d1;&#x5b66;&#x7814;&#x7a76;&#x7528;&#x30d1;&#x30c3;&#x30b1;&#x30fc;&#x30b8;&#xff08;Docear&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_170927482" LINK="http://docear.org" STYLE="combined">
+<node TEXT="&#x79d1;&#x5b66;&#x7814;&#x7a76;&#x7528;&#x30d1;&#x30c3;&#x30b1;&#x30fc;&#x30b8;&#xff08;Docear&#xff09;" STYLE_REF="Professional" FOLDED="true" ID="ID_170927482" CREATED="1455910883547" MODIFIED="1455910883547" LINK="http://docear.org" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1788895132" HGAP="-167" VSHIFT="120"><richcontent TYPE="NODE">
+<node ID="ID_1788895132" CREATED="1455910883547" MODIFIED="1455910883547" HGAP_QUANTITY="-167.0 px" VSHIFT_QUANTITY="120.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5064,17 +5186,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x6a19;&#x6e96;&#x7684;&#x306a;&#x74b0;&#x5883;&#x8a2d;&#x5b9a;" STYLE_REF="Professional" FOLDED="true" ID="ID_889570489" MIN_WIDTH="1" STYLE="combined">
+<node TEXT="&#x6a19;&#x6e96;&#x7684;&#x306a;&#x74b0;&#x5883;&#x8a2d;&#x5b9a;" STYLE_REF="Professional" FOLDED="true" ID="ID_889570489" CREATED="1455910883547" MODIFIED="1455910883547" MIN_WIDTH="1.0 px" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node TEXT="&#x74b0;&#x5883;" FOLDED="true" ID="ID_908072469" HGAP="-89" VSHIFT="27" MAX_WIDTH="550" MIN_WIDTH="550" STYLE="fork" TEXT_SHORTENED="true">
+<node TEXT="&#x74b0;&#x5883;" FOLDED="true" ID="ID_908072469" CREATED="1455910883547" MODIFIED="1455910883547" HGAP_QUANTITY="-89.0 px" VSHIFT_QUANTITY="27.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="550.0 px" STYLE="fork" TEXT_SHORTENED="true">
 <font BOLD="true"/>
 <richcontent TYPE="DETAILS">
 
@@ -5112,7 +5235,7 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x753b;&#x9762;&#x8868;&#x793a;" STYLE_REF="Introduction" FOLDED="true" ID="ID_1541392544" HGAP="-554" VSHIFT="33" MAX_WIDTH="600" MIN_WIDTH="550" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
+<node TEXT="&#x753b;&#x9762;&#x8868;&#x793a;" STYLE_REF="Introduction" FOLDED="true" ID="ID_1541392544" CREATED="1455910883548" MODIFIED="1455910883548" HGAP_QUANTITY="-554.0 px" VSHIFT_QUANTITY="33.0 px" MAX_WIDTH="600.0 px" MIN_WIDTH="550.0 px" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5137,7 +5260,7 @@
 </html>
 </richcontent>
 <font BOLD="true"/>
-<node STYLE_REF="Introduction" FOLDED="true" ID="ID_748518266" HGAP="-550" VSHIFT="80" MIN_WIDTH="550" TEXT_SHORTENED="true"><richcontent TYPE="NODE">
+<node STYLE_REF="Introduction" FOLDED="true" ID="ID_748518266" CREATED="1455910883548" MODIFIED="1455910883548" HGAP_QUANTITY="-550.0 px" VSHIFT_QUANTITY="80.0 px" MIN_WIDTH="550.0 px" TEXT_SHORTENED="true"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5150,6 +5273,7 @@
   </body>
 </html>
 <!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+
 </richcontent>
 <richcontent TYPE="DETAILS">
 
@@ -5165,7 +5289,7 @@
 </html>
 </richcontent>
 <font BOLD="true"/>
-<node TEXT="&#x52d5;&#x4f5c;&#x8a2d;&#x5b9a;" STYLE_REF="Introduction" FOLDED="true" ID="ID_1578508847" HGAP="-551" VSHIFT="157" MAX_WIDTH="550" MIN_WIDTH="550" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
+<node TEXT="&#x52d5;&#x4f5c;&#x8a2d;&#x5b9a;" STYLE_REF="Introduction" FOLDED="true" ID="ID_1578508847" CREATED="1455910883548" MODIFIED="1455910883548" HGAP_QUANTITY="-551.0 px" VSHIFT_QUANTITY="157.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="550.0 px" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5220,7 +5344,7 @@
 </html>
 </richcontent>
 <font BOLD="true"/>
-<node TEXT="&#xff28;&#xff34;&#xff2d;&#xff2c;" STYLE_REF="Introduction" FOLDED="true" ID="ID_1185446743" HGAP="-550" VSHIFT="157" MAX_WIDTH="550" MIN_WIDTH="550" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
+<node TEXT="&#xff28;&#xff34;&#xff2d;&#xff2c;" STYLE_REF="Introduction" FOLDED="true" ID="ID_1185446743" CREATED="1455910883549" MODIFIED="1455910883549" HGAP_QUANTITY="-550.0 px" VSHIFT_QUANTITY="157.0 px" MAX_WIDTH="550.0 px" MIN_WIDTH="550.0 px" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5234,7 +5358,7 @@
 </html>
 </richcontent>
 <font BOLD="true"/>
-<node TEXT="&#x30d7;&#x30e9;&#x30b0;&#x30a4;&#x30f3;" STYLE_REF="Introduction" ID="ID_1546138946" HGAP="-550" VSHIFT="55" MIN_WIDTH="550" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
+<node TEXT="&#x30d7;&#x30e9;&#x30b0;&#x30a4;&#x30f3;" STYLE_REF="Introduction" ID="ID_1546138946" CREATED="1455910883549" MODIFIED="1455910883549" HGAP_QUANTITY="-550.0 px" VSHIFT_QUANTITY="55.0 px" MIN_WIDTH="550.0 px" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5255,11 +5379,11 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x7e26;&#x9593;&#x9694;" STYLE_REF="Professional" FOLDED="true" ID="ID_1934584954" STYLE="combined" VGAP="35">
+<node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x7e26;&#x9593;&#x9694;" STYLE_REF="Professional" FOLDED="true" ID="ID_1934584954" CREATED="1455910883549" MODIFIED="1455910883549" STYLE="combined" VGAP_QUANTITY="35.0 px">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_801516363" HGAP="-59" VSHIFT="62"><richcontent TYPE="NODE">
+<node ID="ID_801516363" CREATED="1455910883549" MODIFIED="1455910883549" HGAP_QUANTITY="-59.0 px" VSHIFT_QUANTITY="62.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5280,17 +5404,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30b9;&#x30af;&#x30ea;&#x30d7;&#x30c8;&#x306e;&#x5229;&#x7528;&#x3068;&#x4f5c;&#x6210;" STYLE_REF="Professional" FOLDED="true" ID="ID_519455593" LINK="http://freeplane.sourceforge.net/wiki/index.php/Scripting" STYLE="combined">
+<node TEXT="&#x30b9;&#x30af;&#x30ea;&#x30d7;&#x30c8;&#x306e;&#x5229;&#x7528;&#x3068;&#x4f5c;&#x6210;" STYLE_REF="Professional" FOLDED="true" ID="ID_519455593" CREATED="1455910883549" MODIFIED="1455910883549" LINK="http://freeplane.sourceforge.net/wiki/index.php/Scripting" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1965879157" HGAP="-150" VSHIFT="62"><richcontent TYPE="NODE">
+<node ID="ID_1965879157" CREATED="1455910883550" MODIFIED="1455910883550" HGAP_QUANTITY="-150.0 px" VSHIFT_QUANTITY="62.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5308,17 +5433,18 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="Windows 7 &#x3067; *.MM &#x30a4;&#x30f3;&#x30c7;&#x30c3;&#x30af;&#x30b9;&#x3092;&#x4f5c;&#x6210;" STYLE_REF="Professional" FOLDED="true" ID="ID_952466464" STYLE="combined">
+<node TEXT="Windows 7 &#x3067; *.MM &#x30a4;&#x30f3;&#x30c7;&#x30c3;&#x30af;&#x30b9;&#x3092;&#x4f5c;&#x6210;" STYLE_REF="Professional" FOLDED="true" ID="ID_952466464" CREATED="1455910883550" MODIFIED="1455910883550" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_844014092" HGAP="-177" VSHIFT="145"><richcontent TYPE="NODE">
+<node ID="ID_844014092" CREATED="1455910883550" MODIFIED="1455910883550" HGAP_QUANTITY="-177.0 px" VSHIFT_QUANTITY="145.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5361,17 +5487,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30b9;&#x30da;&#x30eb;&#x30c1;&#x30a7;&#x30c3;&#x30af;&#x7528;&#x8f9e;&#x66f8;" STYLE_REF="Professional" FOLDED="true" ID="ID_141336344" LINK="http://sourceforge.net/projects/freeplane/files/spell_check_dictionaries" STYLE="combined">
+<node TEXT="&#x30b9;&#x30da;&#x30eb;&#x30c1;&#x30a7;&#x30c3;&#x30af;&#x7528;&#x8f9e;&#x66f8;" STYLE_REF="Professional" FOLDED="true" ID="ID_141336344" CREATED="1455910883551" MODIFIED="1455910883551" LINK="http://sourceforge.net/projects/freeplane/files/spell_check_dictionaries" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_1759599610" HGAP="-138" VSHIFT="71"><richcontent TYPE="NODE">
+<node ID="ID_1759599610" CREATED="1455910883551" MODIFIED="1455910883551" HGAP_QUANTITY="-138.0 px" VSHIFT_QUANTITY="71.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5397,17 +5524,18 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x6a19;&#x6e96;&#x306e;&#x30b7;&#x30e7;&#x30fc;&#x30c8;&#x30ab;&#x30c3;&#x30c8;" STYLE_REF="Professional" FOLDED="true" ID="ID_64846119" STYLE="combined">
+<node TEXT="&#x6a19;&#x6e96;&#x306e;&#x30b7;&#x30e7;&#x30fc;&#x30c8;&#x30ab;&#x30c3;&#x30c8;" STYLE_REF="Professional" FOLDED="true" ID="ID_64846119" CREATED="1455910883551" MODIFIED="1455910883551" STYLE="combined">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
-<node ID="ID_667200365" HGAP="-120" VSHIFT="77"><richcontent TYPE="NODE">
+<node ID="ID_667200365" CREATED="1455910883551" MODIFIED="1455910883551" HGAP_QUANTITY="-120.0 px" VSHIFT_QUANTITY="77.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5430,14 +5558,15 @@
     </ul>
   </body>
 </html>
+
 </richcontent>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="TitlesContent" LAST="false"/>
 </hook>
 </node>
 </node>
-<node TEXT="&#x30a2;&#x30c9;&#x30aa;&#x30f3;" STYLE_REF="Professional" FOLDED="true" ID="ID_1156954596" LINK="http://freeplane.sourceforge.net/wiki/index.php/Add-ons_%28install%29" MIN_WIDTH="1" HGAP="24" VSHIFT="-92">
-<node STYLE_REF="TitlesContent" ID="ID_1670821464" HGAP="-72" VSHIFT="34"><richcontent TYPE="NODE">
+<node TEXT="&#x30a2;&#x30c9;&#x30aa;&#x30f3;" STYLE_REF="Professional" FOLDED="true" ID="ID_1156954596" CREATED="1455910883552" MODIFIED="1455910883552" LINK="http://freeplane.sourceforge.net/wiki/index.php/Add-ons_%28install%29" MIN_WIDTH="1.0 px" HGAP_QUANTITY="24.0 px" VSHIFT_QUANTITY="-92.0 px">
+<node STYLE_REF="TitlesContent" ID="ID_1670821464" CREATED="1455910883552" MODIFIED="1455910883552" HGAP_QUANTITY="-72.0 px" VSHIFT_QUANTITY="34.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5452,12 +5581,13 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
 </node>
-<node TEXT="Freeplane &#x5229;&#x7528;&#x306e;&#x30b3;&#x30c4;" STYLE_REF="Beginner" FOLDED="true" POSITION="left" ID="ID_722085722" BACKGROUND_COLOR="#00cc33" NUMBERED="true" MIN_WIDTH="180">
-<node STYLE_REF="Beginner" ID="ID_163805859"><richcontent TYPE="NODE">
+<node TEXT="Freeplane &#x5229;&#x7528;&#x306e;&#x30b3;&#x30c4;" STYLE_REF="Beginner" FOLDED="true" POSITION="left" ID="ID_722085722" CREATED="1455910883552" MODIFIED="1455910883552" BACKGROUND_COLOR="#00cc33" NUMBERED="true" MIN_WIDTH="180.0 px">
+<node STYLE_REF="Beginner" ID="ID_163805859" CREATED="1455910883552" MODIFIED="1455910883552"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5469,10 +5599,11 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
-<node TEXT="&#x3053;&#x306e;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x6210;&#x308a;&#x7acb;&#x3061;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1394424447">
-<node TEXT="&#x756a;&#x53f7;&#x4ed8;&#x304d;&#x306e;&#x5927;&#x898b;&#x51fa;&#x3057;" FOLDED="true" ID="ID_1866200606" NUMBERED="true" MIN_WIDTH="180"><richcontent TYPE="DETAILS">
+<node TEXT="&#x3053;&#x306e;&#x30de;&#x30a4;&#x30f3;&#x30c9;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x6210;&#x308a;&#x7acb;&#x3061;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1394424447" CREATED="1455910883553" MODIFIED="1455910883553">
+<node TEXT="&#x756a;&#x53f7;&#x4ed8;&#x304d;&#x306e;&#x5927;&#x898b;&#x51fa;&#x3057;" FOLDED="true" ID="ID_1866200606" CREATED="1455910883553" MODIFIED="1455910883553" NUMBERED="true" MIN_WIDTH="180.0 px"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5496,7 +5627,7 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x898b;&#x51fa;&#x3057;" FOLDED="true" ID="ID_1129463861" VSHIFT="28"><richcontent TYPE="DETAILS">
+<node TEXT="&#x898b;&#x51fa;&#x3057;" FOLDED="true" ID="ID_1129463861" CREATED="1455910883553" MODIFIED="1455910883553" VSHIFT_QUANTITY="28.0 px"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5509,7 +5640,7 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="&#x898b;&#x51fa;&#x3057;&#x306b;&#x95a2;&#x9023;&#x3057;&#x305f;&#x5185;&#x5bb9;&#x8aac;&#x660e;" ID="ID_1693370436" HGAP="19" VSHIFT="29"><richcontent TYPE="DETAILS">
+<node TEXT="&#x898b;&#x51fa;&#x3057;&#x306b;&#x95a2;&#x9023;&#x3057;&#x305f;&#x5185;&#x5bb9;&#x8aac;&#x660e;" ID="ID_1693370436" CREATED="1455910883553" MODIFIED="1455910883553" HGAP_QUANTITY="19.0 px" VSHIFT_QUANTITY="29.0 px"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5533,7 +5664,7 @@
 </node>
 </node>
 </node>
-<node TEXT="&#x7528;&#x4f8b;&#x3084;&#x66f4;&#x65b0;&#x306e;&#x76ee;&#x5370;" ID="ID_1987503747"><richcontent TYPE="DETAILS">
+<node TEXT="&#x7528;&#x4f8b;&#x3084;&#x66f4;&#x65b0;&#x306e;&#x76ee;&#x5370;" ID="ID_1987503747" CREATED="1455910883553" MODIFIED="1455910883553"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5552,8 +5683,8 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="&#x30e6;&#x30fc;&#x30b6;&#x5b9a;&#x7fa9;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" FOLDED="true" ID="ID_1542766589">
-<node TEXT="Beginner" STYLE_REF="Beginner" ID="ID_1530366440"><richcontent TYPE="DETAILS">
+<node TEXT="&#x30e6;&#x30fc;&#x30b6;&#x5b9a;&#x7fa9;&#x30b9;&#x30bf;&#x30a4;&#x30eb;" FOLDED="true" ID="ID_1542766589" CREATED="1455910883553" MODIFIED="1455910883553">
+<node TEXT="Beginner" STYLE_REF="Beginner" ID="ID_1530366440" CREATED="1455910883553" MODIFIED="1455910883553"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5573,7 +5704,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="Advanced" STYLE_REF="Advanced" ID="ID_535640598"><richcontent TYPE="DETAILS">
+<node TEXT="Advanced" STYLE_REF="Advanced" ID="ID_535640598" CREATED="1455910883553" MODIFIED="1455910883553"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5593,7 +5724,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="Professional" STYLE_REF="Professional" ID="ID_1633698334"><richcontent TYPE="DETAILS">
+<node TEXT="Professional" STYLE_REF="Professional" ID="ID_1633698334" CREATED="1455910883553" MODIFIED="1455910883553"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5613,7 +5744,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="TitlesContent" STYLE_REF="TitlesContent" ID="ID_1999102003"><richcontent TYPE="DETAILS">
+<node TEXT="TitlesContent" STYLE_REF="TitlesContent" ID="ID_1999102003" CREATED="1455910883554" MODIFIED="1455910883554"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5630,7 +5761,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="Example" STYLE_REF="Example" ID="ID_149652811"><richcontent TYPE="DETAILS">
+<node TEXT="Example" STYLE_REF="Example" ID="ID_149652811" CREATED="1455910883554" MODIFIED="1455910883554"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5644,7 +5775,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="Revision" STYLE_REF="Revision" ID="ID_1141559530"><richcontent TYPE="DETAILS">
+<node TEXT="Revision" STYLE_REF="Revision" ID="ID_1141559530" CREATED="1455910883554" MODIFIED="1455910883554"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5658,7 +5789,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="MyTemplate" STYLE_REF="MyTemplate" ID="ID_669326751">
+<node TEXT="MyTemplate" STYLE_REF="MyTemplate" ID="ID_669326751" CREATED="1455910883554" MODIFIED="1455910883554">
 <attribute NAME="birth date" VALUE=""/>
 <attribute NAME="e-mail" VALUE=""/>
 <richcontent TYPE="DETAILS">
@@ -5684,7 +5815,7 @@
 </richcontent>
 </node>
 </node>
-<node TEXT="Freeplane &#x306e;&#x5168;&#x6a5f;&#x80fd;&#x306b;&#x95a2;&#x3059;&#x308b;&#xff08;&#x30a4;&#x30f3;&#x30c7;&#x30c3;&#x30af;&#x30b9;&#xff09;&#x30de;&#x30c3;&#x30d7;&#x3078;" ID="ID_1680872369" LINK="#ID_232622736"><richcontent TYPE="DETAILS">
+<node TEXT="Freeplane &#x306e;&#x5168;&#x6a5f;&#x80fd;&#x306b;&#x95a2;&#x3059;&#x308b;&#xff08;&#x30a4;&#x30f3;&#x30c7;&#x30c3;&#x30af;&#x30b9;&#xff09;&#x30de;&#x30c3;&#x30d7;&#x3078;" ID="ID_1680872369" CREATED="1455910883554" MODIFIED="1455910883554" LINK="#ID_232622736"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5706,7 +5837,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="&#x9069;&#x7528;&#x4e8b;&#x4f8b;(&#x30a4;&#x30f3;&#x30c7;&#x30c3;&#x30af;&#x30b9;&#xff09;&#x30de;&#x30c3;&#x30d7;&#x3078;" ID="ID_311616726" LINK="#ID_766584529"><richcontent TYPE="DETAILS">
+<node TEXT="&#x9069;&#x7528;&#x4e8b;&#x4f8b;(&#x30a4;&#x30f3;&#x30c7;&#x30c3;&#x30af;&#x30b9;&#xff09;&#x30de;&#x30c3;&#x30d7;&#x3078;" ID="ID_311616726" CREATED="1455910883554" MODIFIED="1455910883554" LINK="#ID_766584529"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -5729,9 +5860,9 @@
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x66f4;&#x65b0;&#xff08;&#x30ea;&#x30d3;&#x30b8;&#x30e7;&#x30f3;&#xff09;&#x306e;&#x8868;&#x793a;" STYLE_REF="Advanced" ID="ID_1424120147" LINK="#ID_1437965047"/>
-<node TEXT="&#x540c;&#x4e00;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x8907;&#x6570;&#x30d3;&#x30e5;&#x30fc;&#x7de8;&#x96c6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1926778226">
-<node STYLE_REF="TitlesContent" ID="ID_1319135286" HGAP="-169" VSHIFT="61"><richcontent TYPE="NODE">
+<node TEXT="&#x66f4;&#x65b0;&#xff08;&#x30ea;&#x30d3;&#x30b8;&#x30e7;&#x30f3;&#xff09;&#x306e;&#x8868;&#x793a;" STYLE_REF="Advanced" ID="ID_1424120147" CREATED="1455910883554" MODIFIED="1455910883554" LINK="#ID_1437965047"/>
+<node TEXT="&#x540c;&#x4e00;&#x30de;&#x30c3;&#x30d7;&#x306e;&#x8907;&#x6570;&#x30d3;&#x30e5;&#x30fc;&#x7de8;&#x96c6;" STYLE_REF="Advanced" FOLDED="true" ID="ID_1926778226" CREATED="1455910883554" MODIFIED="1455910883554">
+<node STYLE_REF="TitlesContent" ID="ID_1319135286" CREATED="1455910883554" MODIFIED="1455910883554" HGAP_QUANTITY="-169.0 px" VSHIFT_QUANTITY="61.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5743,12 +5874,13 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 <font ITALIC="false"/>
 </node>
 </node>
-<node TEXT="&#x5c65;&#x6b74;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x304b;&#x3089;&#x5fa9;&#x5143;" STYLE_REF="Professional" FOLDED="true" ID="ID_1448419614">
-<node STYLE_REF="TitlesContent" ID="ID_1628771343" HGAP="-162" VSHIFT="25"><richcontent TYPE="NODE">
+<node TEXT="&#x5c65;&#x6b74;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x304b;&#x3089;&#x5fa9;&#x5143;" STYLE_REF="Professional" FOLDED="true" ID="ID_1448419614" CREATED="1455910883555" MODIFIED="1455910883555">
+<node STYLE_REF="TitlesContent" ID="ID_1628771343" CREATED="1455910883555" MODIFIED="1455910883555" HGAP_QUANTITY="-162.0 px" VSHIFT_QUANTITY="25.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5760,11 +5892,12 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>
-<node TEXT="&#x30d0;&#x30c3;&#x30c1;&#x51e6;&#x7406;" STYLE_REF="Professional" FOLDED="true" ID="ID_1371818753">
-<node STYLE_REF="TitlesContent" ID="ID_804893281" HGAP="-73" VSHIFT="78"><richcontent TYPE="NODE">
+<node TEXT="&#x30d0;&#x30c3;&#x30c1;&#x51e6;&#x7406;" STYLE_REF="Professional" FOLDED="true" ID="ID_1371818753" CREATED="1455910883555" MODIFIED="1455910883555">
+<node STYLE_REF="TitlesContent" ID="ID_804893281" CREATED="1455910883555" MODIFIED="1455910883555" HGAP_QUANTITY="-73.0 px" VSHIFT_QUANTITY="78.0 px"><richcontent TYPE="NODE">
 
 <html>
   <head>
@@ -5793,6 +5926,7 @@
     </p>
   </body>
 </html>
+
 </richcontent>
 </node>
 </node>

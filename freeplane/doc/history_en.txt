@@ -1,4 +1,122 @@
 ===============================
+1.5.11
+===============================
+Restore old default map template
+
+===============================
+1.5.10
+===============================
+Stable release
+===============================
+1.5.9
+===============================
+User preferences can be saved and loaded from preferences dialog
+Drag and drop of *.freeplaneoptions file into the preferences dialog
+Look and feel jar can be put into user lib directory and class name entered into the preferences
+
+===============================
+1.5.8
+===============================
+Init scripts
+Rework scripting permissions
+
+===============================
+1.5.7
+===============================
+Keep summarized nodes together
+Option "Center small maps" for map position when root is selected
+Option to copy structure indentation as tabs
+Allow joining non sibling nodes
+Configurable join node action separators
+Allow to redefine actions for keys LEFT, RIGHT, UP, DOWN, PAGE_UP and PAGE_DOWN
+
+===============================
+1.5.6
+===============================
+Format changes (save length/width attributes as quantities)
+Scripting: textUtils.setClipboardContentsToHtml()
+Attribute table background and border color taken from attribute style or from current node
+Set standard content as default for BigMap.mm
+User defined characters to be accepted in words by SplitToWordsAction
+Automatic edge colors for node levels (format change)
+
+===============================
+1.5.5
+===============================
+Save autosave period in time period units
+Reminder notification popups
+Change shortcut for blue color in inline editor to control + L
+Use dark green in inline editor
+Import arbitrary xml as mind maps
+Export mind maps to xml (no syntax validation)
+Move menu and preference configuration to external resources
+Save attribute column widths in points
+Open new maps near selected maps
+
+===============================
+1.5.4
+===============================
+Single node clones
+Copy format to new siblings (option)
+Scroll map after unfolding a node (option)
+Change node size on mouse wheel scrolling
+Optionally copy icons with node format
+Extend scripting API for clones
+Only connectors inside cloned subtrees are replicated
+Local hyperlink targets are not changed for clones
+
+===============================
+1.5.3
+===============================
+Background images
+Clones
+Scripting API extensions
+Save and restore last edit location
+New handling for summary nodes 
+Actions for splitting node text to words
+
+===============================
+1.5.2
+===============================
+Save node location options in length units
+Use new style "attributes" for attribute formatting
+
+===============================
+1.5.1
+===============================
+New node shapes small_bubble, oval, rectangle, hexagons
+Node shape margin and uniform options
+Improve map positioning on start and on window size changes
+Make Javascript scripts available with Java 1.8
+
+===============================
+1.5.0
+===============================
+Node and detail text alignment
+Distance between child nodes can be set in node style
+Support length measurement units pt, cm, mm and in in addition to px
+Formatted tool tips
+Remove tabs and borders in full screen
+Column based edge colors
+Summary node improvements
+Do not clear "map modified" flag unless save was successful
+Configurable default Map Save Directory
+Changed behavior of read-only maps
+Make data formatting, formula processing and LaTeX rendering independently configurable
+Keep icon name of user icon if it's not found in the current installation
+
+===============================
+1.3.16
+===============================
+Fix zooming for external images
+Automatic edge coloring: no yellow edges
+Fix date filtering on nodes and attributes
+Use oracle appbundler and universalJavaApplicationStub.sh for MacOS
+===============================
+1.3.15
+===============================
+Work around for JRE 1.8 bug for editing of attributes
+===============================
 1.3.14
 ===============================
 Use oracle launcher for MacOS
@@ -35,12 +153,13 @@ Bug fixes
 ===============================
 1.3.8
 ===============================
-Bug fixes
+
 ===============================
 1.3.7
 ===============================
 compress tabs and remove ".mm" from tab titles
 Add Format=Unparsed LaTeX and \unparsedlatex node prefix to allow LaTeX content that is solely used for export
+
 ===============================
 1.3.6
 ===============================

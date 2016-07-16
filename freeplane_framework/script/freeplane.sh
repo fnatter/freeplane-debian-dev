@@ -178,10 +178,11 @@ _debug "Calling: "\
  "-Dorg.freeplane.userfpdir=$userfpdir"\
  "-Dorg.freeplane.old_userfpdir=$old_userfpdir"\
  "-Dorg.freeplane.globalresourcedir=${freedir}/resources"\
+ "-Dswing.systemlaf=javax.swing.plaf.metal.MetalLookAndFeel"\
  $JAVA_OPTS\
  $xdockname\
  -jar "${freedir}/freeplanelauncher.jar"\
- $*
+ "$@"
 ( echo "${DEBUG}" | grep -qe "exit" ) && exit 0 # do not start Freeplane
 
 # now actually launch Freeplane
@@ -189,7 +190,8 @@ _debug "Calling: "\
  "-Dorg.freeplane.userfpdir=$userfpdir"\
  "-Dorg.freeplane.old_userfpdir=$old_userfpdir"\
  "-Dorg.freeplane.globalresourcedir=${freedir}/resources"\
+ "-Dswing.systemlaf=javax.swing.plaf.metal.MetalLookAndFeel"\
  $JAVA_OPTS\
  $xdockname\
  -jar "${freedir}/freeplanelauncher.jar"\
- $*
+ "$@"
