@@ -3,6 +3,7 @@ freeplane (1.5.11-1) unstable; urgency=medium
   * New upstream version, requires Java7
   * Patch new gradle build system: OSGi manifests are created automatically
     from gradle dependency information (documented in README.source)
+    (Closes: #831967)
   * depend on simplyhtml 0.16.17 and libmnemonicsetter-java
   * override lintians about empty knopflerfish directories
     (necessary because of knopflerfish bugs)
