@@ -10,7 +10,7 @@ freeplane (1.5.11-1) unstable; urgency=medium
   * change debian/copyright for 1.5
   * drop libjortho-freeplane-java, add freeplane-scripting-api package
 
- -- Felix Natter <fnatter@gmx.net>  Sat, 16 Jul 2016 13:34:05 +0200
+ -- Felix Natter <fnatter@gmx.net>  Thu, 21 Jul 2016 01:15:38 +0200
 
 freeplane (1.3.15-4) unstable; urgency=medium
 
