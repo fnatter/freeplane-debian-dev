@@ -174,7 +174,9 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 			FreeplaneGUIStarter.showSysInfo();
 			final String lookandfeel = System.getProperty("lookandfeel", applicationResourceController
 			    .getProperty("lookandfeel"));
-			FrameController.setLookAndFeel(lookandfeel);
+			final boolean supportHidpi = Boolean.valueOf(System.getProperty("lookandfeel.scaleuifonts", applicationResourceController
+				    .getProperty("lookandfeel.scaleuifonts")));
+			FrameController.setLookAndFeel(lookandfeel, supportHidpi);
 			final JFrame frame;
 			frame = new JFrame("Freeplane");
 			frame.setContentPane(new JPanel(){
@@ -216,7 +218,6 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 			FilterController.getCurrentFilterController().getConditionFactory().addConditionController(70,
 			    new LogicalStyleFilterController());
 			MapController.install();
-
 			NodeHistory.install(controller);
 			return controller;
 		}
@@ -274,7 +275,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 				if (extendedState != frame.getExtendedState()) {
 					frame.setExtendedState(extendedState);
 				}
-				loadMaps(options.getFilesToOpenAsArray());
+				loadMaps(CommandLineParser.parse(args, false).getFilesToOpenAsArray());
 				focusCurrentView();
 				contentPane.setVisible(true);
 				frame.toFront();

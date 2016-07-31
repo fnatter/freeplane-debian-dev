@@ -81,6 +81,7 @@ import org.freeplane.features.filter.Filter;
 import org.freeplane.features.link.ConnectorModel;
 import org.freeplane.features.link.ConnectorModel.Shape;
 import org.freeplane.features.link.LinkController;
+import org.freeplane.features.link.MapLinks;
 import org.freeplane.features.link.NodeLinkModel;
 import org.freeplane.features.link.NodeLinks;
 import org.freeplane.features.map.IMapChangeListener;
@@ -180,7 +181,8 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 		}
 
 		public void keepNodePosition(final NodeModel node, final float horizontalPoint, final float verticalPoint) {
-			mapScroller.anchorToNode(getNodeView(node), horizontalPoint, verticalPoint);
+			final NodeView nodeView = getNodeView(node);
+			MapView.this.keepNodePosition(nodeView, horizontalPoint, verticalPoint);
 		}
 		
 		public void scrollNodeTreeToVisible(final NodeModel  node) {
@@ -1526,12 +1528,12 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 		arrowLinkViews = new Vector<ILinkView>();
 		final Object renderingHint = getModeController().getController().getMapViewManager().setEdgesRenderingHint(
 		    graphics);
-		paintLinks(rootView, graphics, new HashSet<ConnectorModel>());
+		if(MapLinks.hasLinks(model))
+			paintLinks(rootView, graphics, new HashSet<ConnectorModel>());
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, renderingHint);
 	}
 
-	private void paintLinks(final NodeView source, final Graphics2D graphics,
-	                        final HashSet<ConnectorModel> alreadyPaintedLinks) {
+	private void paintLinks(final NodeView source, final Graphics2D graphics, final HashSet<ConnectorModel> alreadyPaintedLinks) {
 		final LinkController linkController = LinkController.getController(getModeController());
 		final NodeModel node = source.getModel();
 		final Collection<NodeLinkModel> outLinks = linkController.getLinksFrom(node);
@@ -1546,6 +1548,8 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 			}
 			final NodeView child = (NodeView) component;
 			if (!isPrinting) {
+				if(!child.isHierarchyVisible())
+					continue;
 				final Rectangle bounds = SwingUtilities.convertRectangle(source, child.getBounds(), this);
 				final JViewport vp = (JViewport) getParent();
 				final Rectangle viewRect = vp.getViewRect();
@@ -1775,8 +1779,6 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 		final NodeModel node = newSelected.getModel();
 		if(node.isHiddenSummary())
 			throw new AssertionError("select invisible node");
-		if(node.isVisible())
-			node.getFilterInfo().reset();
 		if (ResourceController.getResourceController().getBooleanProperty("center_selected_node")) {
 			mapScroller.scrollNode(newSelected, ScrollingDirective.SCROLL_NODE_TO_CENTER, ResourceController.getResourceController().getBooleanProperty("slow_scroll_selected_node"));
 		}
@@ -2063,4 +2065,9 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 	void keepRootNodePosition() {
 		mapScroller.anchorToRoot();
 	}
+
+	public void keepNodePosition(final NodeView nodeView, final float horizontalPoint, final float verticalPoint) {
+		mapScroller.anchorToNode(nodeView, horizontalPoint, verticalPoint);
+	}
+
 }
