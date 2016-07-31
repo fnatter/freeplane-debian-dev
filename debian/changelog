@@ -1,6 +1,6 @@
 freeplane (1.5.13-1) unstable; urgency=medium
 
-  * New upstream version
+  * New upstream version (Closes: #832453)
 
  -- Felix Natter <fnatter@gmx.net>  Sun, 31 Jul 2016 18:57:17 +0200
 
