@@ -1,3 +1,12 @@
+freeplane (1.5.14-1) UNRELEASED; urgency=medium
+
+  * New upstream version
+  * Use compile instead of mergedViewerDependencies for mnemonicsetter
+    since we don't use the applet (signature required!) and
+    to avoid possible upgrade issues.
+
+ -- Felix Natter <fnatter@gmx.net>  Sun, 14 Aug 2016 14:12:32 +0200
+
 freeplane (1.5.13-1) unstable; urgency=medium
 
   * New upstream version (Closes: #832453)
