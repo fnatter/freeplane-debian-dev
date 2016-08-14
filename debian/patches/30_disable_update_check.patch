@@ -4,7 +4,7 @@ Forwarded: not-needed
 Last-Update: 2016-02-04
 --- a/freeplane/viewer-resources/freeplane.properties
 +++ b/freeplane/viewer-resources/freeplane.properties
-@@ -180,7 +180,7 @@
+@@ -170,7 +170,7 @@
  browsemode_initial_map=map.mm
  bugTrackerLocation=http\://www.freeplane.org/bugs
  center_selected_node=false
