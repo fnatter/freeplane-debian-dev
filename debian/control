@@ -11,7 +11,6 @@ Build-Depends: debhelper (>= 9),
                librsvg2-bin,
                gradle,
                default-jdk,
-               quilt,
                jflex
 Build-Depends-Indep: javahelp2,
                      groovy,
