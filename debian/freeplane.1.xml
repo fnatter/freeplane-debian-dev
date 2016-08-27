@@ -2,7 +2,7 @@
 
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
 	"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd" [
-	
+
   <!-- Fill in your name for FIRSTNAME and SURNAME. -->
   <!ENTITY dhfirstname "<firstname>Eric</firstname>">
   <!ENTITY dhsurname   "<surname>Lavarde</surname>">
@@ -32,7 +32,7 @@
       <author>
         &dhfirstname;
         &dhsurname;
-        &dhemail;        
+        &dhemail;
       </author>
       <author>
         <firstname>Felix</firstname>
@@ -101,7 +101,7 @@
 
     <para>This manual page was written for the &debian; distribution
       because the original program does not have a manual page.
-      Instead, it has documentation in the 
+      Instead, it has documentation in the
       <application>Help</application> menu and the <command>Freeplane</command> wiki
       (http://freeplane.sourceforge.net/wiki/index.php/Main_Page).
     </para>
@@ -172,7 +172,7 @@
 
   <refsect1>
     <title>ENVIRONMENT VARIABLES</title>
-    
+
     <variablelist>
       <varlistentry>
         <term>JAVA_OPTS</term>
@@ -187,7 +187,7 @@
       <varlistentry>
         <term>DEBUG</term>
         <listitem>
-          <para>Start Freeplane in debug mode (if you have problems starting): 
+          <para>Start Freeplane in debug mode (if you have problems starting):
             <command>DEBUG=true freeplane</command></para>
         </listitem>
       </varlistentry>
@@ -195,14 +195,14 @@
     </variablelist>
 
   </refsect1>
-  
+
   <refsect1>
     <title>NEW FEATURES IN 1.5.x</title>
     <para>
       Please open the what's new map: Help-&gt;Whats new in Freeplane 1.5.x.
     </para>
   </refsect1>
-    
+
   <refsect1>
     <title>NEW FEATURES IN 1.3.x</title>
 
@@ -276,7 +276,7 @@
       <listitem>
         <para>The Debian package does not include the <emphasis>signed</emphasis> applet code.
         That's why <ulink url="http://www.duckware.com/tech/java-security-clusterfuck.html">most applets won't run</ulink> after creating an applet export from the Debian package.
-        You can ask for the signed applet in the open discussion forum: 
+        You can ask for the signed applet in the open discussion forum:
         http://www.freeplane.org/discussion
         </para>
       </listitem>

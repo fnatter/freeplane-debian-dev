@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
 
-  <!-- register FreeMind files, but with a lower priority than 
+  <!-- register FreeMind files, but with a lower priority than
        FreeMind uses, if that is installed -->
     <mime-type type="application/x-freeplane">
 	<comment xml:lang="cs">FreeMind Mapa</comment>
@@ -28,7 +28,7 @@
   <icon name="freeplane"/>
 	<glob pattern="*.mm" />
 	<!-- freemind.xml uses prority 65, and we don't want to override it! -->
-	<magic priority="60"> 
+	<magic priority="60">
 		<match type="string" value="&lt;map" offset="0" />
 	</magic>
 	<sub-class-of type="text/plain" />
