@@ -1,3 +1,9 @@
+freeplane (1.5.16-2) experimental; urgency=medium
+
+  * apply patch to build against jgoodies 1.9
+
+ -- Felix Natter <fnatter@gmx.net>  Sun, 20 Nov 2016 14:09:33 +0100
+
 freeplane (1.5.16-1) unstable; urgency=medium
 
   * New upstream version.
