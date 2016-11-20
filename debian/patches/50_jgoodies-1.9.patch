@@ -1,0 +1,26 @@
+Description: Fix building against jgoodies-forms-1.9
+Author: Oliver Kopp <kopp.dev@gmail.com>
+Forwarded: https://github.com/freeplane/freeplane/pull/60
+Applied-Upstream: PENDING
+Reviewed-by: Felix Natter <fnatter@gmx.net>
+Last-Update: 2016-11-20
+--- a/freeplane/src/main/java/org/freeplane/core/resources/components/OptionPanel.java
++++ b/freeplane/src/main/java/org/freeplane/core/resources/components/OptionPanel.java
+@@ -50,6 +50,7 @@
+ import javax.swing.filechooser.FileNameExtensionFilter;
+ import javax.swing.tree.DefaultMutableTreeNode;
+ 
++import com.jgoodies.forms.factories.Borders;
+ import org.apache.commons.lang.StringUtils;
+ import org.dpolivaev.mnemonicsetter.MnemonicSetter;
+ import org.freeplane.core.resources.ResourceController;
+@@ -134,7 +135,8 @@
+ 				final TabProperty newTab = (TabProperty) control;
+ 				bottomLayout = new FormLayout(newTab.getName(), "");
+ 				bottomBuilder = new DefaultFormBuilder(bottomLayout);
+-				bottomBuilder.setDefaultDialogBorder();
++				//bottomBuilder.setDefaultDialogBorder();
++				bottomBuilder.border(Borders.DIALOG);
+ 				final JScrollPane bottomComponent = new JScrollPane(bottomBuilder.getPanel());
+ 				UITools.setScrollbarIncrement(bottomComponent);
+ 				final String tabName = TextUtils.getOptionalText(newTab.getLabel());

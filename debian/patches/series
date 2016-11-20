@@ -2,3 +2,4 @@
 20_freeplane_sh.patch
 30_disable_update_check.patch
 40_allow_usj_codebase.patch
+50_jgoodies-1.9.patch
