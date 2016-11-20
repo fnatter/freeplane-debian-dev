@@ -1,8 +1,3 @@
-Description: Fix building against jgoodies-forms-1.9
-Author: Oliver Kopp <kopp.dev@gmail.com>
-Applied-Upstream: https://github.com/freeplane/freeplane/commit/95684d2e9f753cd79819d1c72a05258662592e6f
-Reviewed-by: Felix Natter <fnatter@gmx.net>
-Last-Update: 2016-11-20
 --- a/freeplane/src/main/java/org/freeplane/core/resources/components/OptionPanel.java
 +++ b/freeplane/src/main/java/org/freeplane/core/resources/components/OptionPanel.java
 @@ -50,6 +50,7 @@
