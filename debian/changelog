@@ -1,6 +1,7 @@
 freeplane (1.5.16-2) experimental; urgency=medium
 
-  * apply patch to build against jgoodies 1.9
+  * apply patch to allow building against jgoodies 1.9.0
+    (thanks to Oliver Kopp <kopp.dev@gmail.com>)
 
  -- Felix Natter <fnatter@gmx.net>  Sun, 20 Nov 2016 14:09:33 +0100
 
