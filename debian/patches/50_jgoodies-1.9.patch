@@ -23,3 +23,25 @@ Last-Update: 2016-11-20
  				final JScrollPane bottomComponent = new JScrollPane(bottomBuilder.getPanel());
  				UITools.setScrollbarIncrement(bottomComponent);
  				final String tabName = TextUtils.getOptionalText(newTab.getLabel());
+--- a/freeplane/src/main/java/org/freeplane/features/styles/mindmapmode/StyleEditorPanel.java
++++ b/freeplane/src/main/java/org/freeplane/features/styles/mindmapmode/StyleEditorPanel.java
+@@ -116,6 +116,9 @@
+ import com.jgoodies.forms.factories.Borders;
+ import com.jgoodies.forms.layout.FormLayout;
+ 
++import com.jgoodies.forms.factories.*;
++import com.jgoodies.forms.layout.*;
++
+ public class StyleEditorPanel extends JPanel {
+ 	private static final int FONT_SIZE = Math.round(UITools.FONT_SCALE_FACTOR * 8);
+ 	private static final TranslatedObject AUTOMATIC_LAYOUT_DISABLED = new TranslatedObject("automatic_layout_disabled");
+@@ -842,7 +845,8 @@
+ 		final String form = "right:max(20dlu;p), 2dlu, p, 1dlu,right:max(20dlu;p), 4dlu, 80dlu, 7dlu";
+ 		final FormLayout rightLayout = new FormLayout(form, "");
+ 		final DefaultFormBuilder rightBuilder = new DefaultFormBuilder(rightLayout);
+-		rightBuilder.border(Borders.DLU2);
++		//rightBuilder.border(Borders.DLU2);
++		rightBuilder.border(Paddings.DLU2);
+ 		new SeparatorProperty("OptionPanel.separator.NodeStyle").layout(rightBuilder);
+ 		if (addStyleBox) {
+ 			addAutomaticLayout(rightBuilder);

@@ -1,3 +1,10 @@
+freeplane (1.5.16-3) unstable; urgency=medium
+
+  * fix compile problem with jgoodies-1.9 (50_jgoodies-1.9.patch updated)
+    (Closes: #846816)
+
+ -- Felix Natter <fnatter@gmx.net>  Sat, 03 Dec 2016 20:33:37 +0100
+
 freeplane (1.5.16-2) unstable; urgency=medium
 
   * apply patch to allow building against jgoodies 1.9.0
