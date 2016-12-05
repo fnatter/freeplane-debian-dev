@@ -1,9 +1,10 @@
 freeplane (1.5.16-3) unstable; urgency=medium
 
-  * fix compile problem with jgoodies-1.9 (50_jgoodies-1.9.patch updated)
+  * fix runtime problem with jgoodies-forms-1.9 (50_jgoodies-1.9.patch)
     (Closes: #846816)
+  * the above requires jgoodies-forms-1.9.0, so depend on that
 
- -- Felix Natter <fnatter@gmx.net>  Sat, 03 Dec 2016 20:33:37 +0100
+ -- Felix Natter <fnatter@gmx.net>  Mon, 05 Dec 2016 18:47:02 +0100
 
 freeplane (1.5.16-2) unstable; urgency=medium
 
