@@ -9,13 +9,7 @@ Forwarded: not-needed
 Last-Update: 2016-02-04
 --- a/build.gradle
 +++ b/build.gradle
-@@ -1,3 +1,5 @@
-+apply from: 'debian.gradle'
-+
- allprojects {
-     // in a multi-project setup, all projects must have the same version number!
-     // the real (specific) version number is in freeplane/viewer-resources/version.properties!
-@@ -15,6 +17,7 @@
+@@ -15,23 +15,45 @@
                         rootDir.path + "/freeplane_plugin_jsyntaxpane/lib",
                         rootDir.path + "/freeplane_plugin_latex/lib",
                         rootDir.path + "/freeplane_plugin_svg/lib"]
@@ -23,7 +17,26 @@ Last-Update: 2016-02-04
      }
  
  }
-@@ -22,16 +25,18 @@
+ 
++def isDebianJar(File jar) {
++    def ret = jar.path.startsWith("/usr/share/java/") ||
++              jar.path.startsWith("/usr/share/maven-repo/")
++    return ret;
++}
++
++def relpath(File basePath, File targetPath) {
++    def relPath = ""
++    // targetPath is either '/usr/share/java/**' or '/usr/share/maven-repo/**'!
++    def commonPrefix = '/usr/share'
++    def parent = basePath
++    while (parent.path != commonPrefix) {
++        parent = parent.parentFile
++        relPath += '../'
++    }
++    def targetPathRel = targetPath.path.replaceFirst(/^${commonPrefix}/, '').substring(1)
++    relPath += targetPathRel
++}
++
  // this is used for (linux) packages, where the dependencies
  // live on the file system (/usr/share/java/*.jar on Debian):
  def externalizeJar(File jar) {
@@ -47,7 +60,7 @@ Last-Update: 2016-02-04
  }
  
  def filterAndExternalizePluginDependencies(runtime_files) {
-@@ -77,12 +82,6 @@
+@@ -77,12 +99,6 @@
        failOnError = false  
      }
  
@@ -60,7 +73,7 @@ Last-Update: 2016-02-04
      dependencies {
          testCompile group: 'junit', name: 'junit', version: '4.11'
      }
-@@ -104,14 +103,9 @@
+@@ -104,14 +120,9 @@
  // OSGi projects (/plugin/, freeplane) need this for compilation (e.g. resolve Bundle),
  // and freeplane_framework needs to copy it to BUILD/framework.jar
  configure(subprojects.findAll {it.name =~ /plugin/ || it.name =~ /^freeplane$/ || it.name =~ /^freeplane_framework$/}){
@@ -77,7 +90,7 @@ Last-Update: 2016-02-04
      }
  }
  
-@@ -124,11 +118,13 @@
+@@ -124,11 +135,13 @@
      else
         ext.pluginid = project.name.replace("freeplane_plugin_", "org.freeplane.plugin.")
  
@@ -96,7 +109,7 @@ Last-Update: 2016-02-04
  
      task filterOSGiManifestForEclipse(type: Copy) {
          from('build/tmp/jar/MANIFEST.MF') {
-@@ -180,18 +176,11 @@
+@@ -180,18 +193,11 @@
  configure(subprojects.findAll {it.name =~ /plugin/ }) {
  
      task copyOSGiJars(type: Copy) {
@@ -260,24 +273,3 @@ Last-Update: 2016-02-04
  }
  
  jar {
---- /dev/null
-+++ b/debian.gradle
-@@ -0,0 +1,18 @@
-+def isDebianJar(File jar) {
-+    def ret = jar.path.startsWith("/usr/share/java/") ||
-+              jar.path.startsWith("/usr/share/maven-repo/")
-+    return ret;
-+}
-+
-+def relpath(File basePath, File targetPath) {
-+    def relPath = ""
-+    // targetPath is either '/usr/share/java/**' or '/usr/share/maven-repo/**'!
-+    def commonPrefix = '/usr/share'
-+    def parent = basePath
-+    while (parent.path != commonPrefix) {
-+        parent = parent.parentFile
-+        relPath += '../'
-+    }
-+    def targetPathRel = targetPath.path.replaceFirst(/^${commonPrefix}/, '').substring(1)
-+    relPath += targetPathRel
-+}
