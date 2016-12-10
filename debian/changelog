@@ -1,3 +1,10 @@
+freeplane (1.5.18-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update patches for 1.5.18.
+
+ -- Felix Natter <fnatter@gmx.net>  Sat, 10 Dec 2016 18:08:55 +0100
+
 freeplane (1.5.16-3) unstable; urgency=medium
 
   * fix runtime problem with jgoodies-forms-1.9 (50_jgoodies-1.9.patch)
