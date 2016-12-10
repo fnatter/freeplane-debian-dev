@@ -13,6 +13,7 @@ allprojects {
         flatDir name: 'localGitDepsRepository',
                 dirs: [rootDir.path + "/freeplane/lib",
                        rootDir.path + "/freeplane_plugin_jsyntaxpane/lib",
+                       rootDir.path + "/freeplane_plugin_latex/lib",
                        rootDir.path + "/freeplane_plugin_svg/lib"]
     }
 
@@ -105,7 +106,7 @@ subprojects {
 configure(subprojects.findAll {it.name =~ /plugin/ || it.name =~ /^freeplane$/ || it.name =~ /^freeplane_framework$/}){
     repositories {
         maven {
-            url 'http://www.knopflerfish.org/maven2/'
+            url 'https://dl.bintray.com/knopflerfish/knopflerfish-maven/'
         }
     }
 
