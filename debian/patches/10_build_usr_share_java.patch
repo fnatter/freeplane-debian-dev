@@ -246,7 +246,7 @@ Last-Update: 2016-02-04
  jar {
 --- a/freeplane_plugin_svg/build.gradle
 +++ b/freeplane_plugin_svg/build.gradle
-@@ -20,11 +20,13 @@
+@@ -20,11 +20,18 @@
              'org.apache.xmlgraphics:batik-util:1.7',
              'org.apache.xmlgraphics:batik-xml:1.7',
  
@@ -258,10 +258,15 @@ Last-Update: 2016-02-04
              // (replaced by ./lib/pdf-transcoder.jar below):
              //'org.apache.xmlgraphics:fop:1.1', // "fop.jar"/libfop-java
 +	    ':fop',
++	    // these have to be loaded explicitly on Debian/Ubuntu,
++	    // otherwise you get runtime errors on PDF export!
++	    ':avalon-framework', // dep of libfop-java??
++	    ':commons-logging', // dep of libbatik-java??
++	    ':xmlgraphics-commons', // dep of libfop-java??
  
              // libxml-commons-external-java 1.4.01
              //WRONG: 'org.apache.xmlgraphics:xmlgraphics-commons:1.4'
-@@ -34,10 +36,8 @@
+@@ -34,10 +41,8 @@
              // need to fix javax.xml.parsers.FactoryConfigurationError:
              // Provider org.apache.xerces.jaxp.SAXParserFactoryImpl not found
              // when starting from elipse:
@@ -273,3 +278,18 @@ Last-Update: 2016-02-04
  }
  
  jar {
+@@ -62,7 +67,13 @@
+                       org.freeplane.features.*,
+                       org.freeplane.main.*,
+                       org.freeplane.n3.*,
+-                      org.freeplane.view.*
++                      org.freeplane.view.*,
++                      org.apache.commons.io,
++                      org.apache.commons.io.comparator,
++                      org.apache.commons.io.filefilter,
++                      org.apache.commons.io.input,
++                      org.apache.commons.io.monitor,
++                      org.apache.commons.io.output
+                       """
+         instruction 'Import-Package', imports.replaceAll("\\s+", "")
+         instruction 'Export-Package', ''
