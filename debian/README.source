@@ -14,11 +14,11 @@ The freeplane gradle build system
 ---------------------------------
 - there is one core OSGi bundle (freeplane) and plugin bundles
   (freeplane_plugin_*)
-- the upstream build system copies ALL jars (dependencies + built) to BUILD/**
+- the upstream build system copies ALL jars (dependencies + built) to BIN/**
 - the MANIFEST.MFs (for the bundles) are generated using gradle dependency info
 - ALL jars are copied to build/libs so that they can be used in eclipse
 --> changes for Debian (see 10_build_usr_share_java.patch):
  - do not copy all jars to build/libs (that would mix up built jars with deps)
- - only copy the jars just built to BUILD/**
+ - only copy the jars just built to BIN/**
  - for Debian jars (deps), create relative paths in the MANIFEST.MFs
    to /usr/share/java/*.jar or /usr/share/maven-repo/**.jar

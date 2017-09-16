@@ -28,13 +28,13 @@ override_dh_auto_build:
 	mkdir 128x128
 	convert -background none -geometry !128x128 freeplane_framework/script/freeplane.svg 128x128/freeplane.png
 
-	mv BUILD/doc/api API
-	mv BUILD/doc DOC
+	mv BIN/doc/api API
+	mv BIN/doc DOC
 
 override_dh_clean:
 	dh_clean
 # directories cannot be removed via debian/clean
-	rm -rf BUILD/
+	rm -rf BIN/
 	rm -rf API/
 	rm -rf DOC/
 	if [ -d 48x48 ]; then rmdir 48x48; fi

@@ -1,4 +1,4 @@
-BUILD/* usr/share/freeplane
+BIN/* usr/share/freeplane
 
 DOC/* usr/share/doc/freeplane
 DOC/* usr/share/freeplane/doc
