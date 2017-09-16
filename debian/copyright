@@ -5,13 +5,13 @@ Upstream-Contact: Felix Natter <fnatter@gmx.net>
 
 Files: *
 Copyright: 2000-2008 Joerg Mueller, Daniel Polansky, Christian Foltin, Dimitry Polivaev <dpolivaev@gmx.de>
-           2008-2016 Dimitry Polivaev <dpolivaev@gmx.de>, Volker Börchers <boercher@web.de>, Felix Natter <fnatter@gmx.net>
-           2008-2016 Others
+           2008-2017 Dimitry Polivaev <dpolivaev@gmx.de>, Volker Börchers <boercher@web.de>, Felix Natter <fnatter@gmx.net>
+           2008-2017 Others
 License: GPL-2+
 
 Files: debian/*
 Copyright: 2010-2012 Eric Lavarde <deb@zorglub.s.bawue.de>
-           2013-2016 Felix Natter <fnatter@gmx.net>
+           2013-2017 Felix Natter <fnatter@gmx.net>
 License: GPL-2+
 
 Files: ./freeplane/resources/fonts/intuitive-subset.ttf
@@ -23,7 +23,6 @@ Files: ./freeplane_framework/script/freeplane.svg
        ./freeplane/resources/images/Freeplane_splash.png
        ./freeplane/resources/images/Freeplane_frame_icon_32x32.png
        ./freeplane/resources/images/Freeplane_frame_icon.png
-       ./freeplane/resources/images/Freeplane_frame_icon_64x64.png
        ./freeplane/resources/images/freeplane_app_128x128.png
        ./freeplane_framework/windows-icons/Freeplane_doc.ico
        ./freeplane_framework/mac-appbundler/freeplane.icns
