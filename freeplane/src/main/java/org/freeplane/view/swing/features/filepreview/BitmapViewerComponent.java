@@ -20,7 +20,6 @@
 package org.freeplane.view.swing.features.filepreview;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -33,8 +32,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.Iterator;
-import java.util.concurrent.Future;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
@@ -43,7 +42,6 @@ import javax.swing.JComponent;
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.util.LogUtils;
 
-import com.thebuzzmedia.imgscalr.AsyncScalr;
 import com.thebuzzmedia.imgscalr.Scalr;
 
 /**
@@ -65,18 +63,16 @@ public class BitmapViewerComponent extends JComponent implements ScalableCompone
 	private final Dimension originalSize;
 	private int imageX;
 	private int imageY;
-	private boolean processing;
 	private boolean scaleEnabled;
 	private Dimension maximumSize = null;
 	private boolean center;
 	private final static Object LOCK = new Object();
-	private ImageLoadingListener imageLoadinglistener;
+	private static boolean disabledDueToJavaBug = false;
 
 	public BitmapViewerComponent(final URI uri) throws MalformedURLException, IOException {
 		url = uri.toURL();
 		originalSize = readOriginalSize();
 		hint = Image.SCALE_SMOOTH;
-		processing = false;
 		scaleEnabled = true;
 		cachedImage = null;
 	}
@@ -134,7 +130,7 @@ public class BitmapViewerComponent extends JComponent implements ScalableCompone
 
 	@Override
 	protected void paintComponent(final Graphics g) {
-		if (processing || componentHasNoArea()) {
+		if (componentHasNoArea() || disabledDueToJavaBug) {
 			return;
 		}
 		if (cachedImage == null && cachedImageWeakRef != null) {
@@ -148,68 +144,57 @@ public class BitmapViewerComponent extends JComponent implements ScalableCompone
 				cacheFile = null;
 			}
 		}
-		if (isCachedImageValid()) {
-			g.drawImage(cachedImage, imageX, imageY, null);
-			flushImage();
-		}
-		else {
+		if (!isCachedImageValid()) {
 			final BufferedImage image = loadImageFromURL();
 			if (image == null || hasNoArea(image)) {
 				return;
 			}
-			processing = true;
-			final Future<BufferedImage> result = AsyncScalr.resize(image, Scalr.Mode.BEST_FIT_BOTH, getWidth(),
-			    getHeight());
-			AsyncScalr.getService().submit(new Runnable() {
-				public void run() {
-					BufferedImage scaledImage = null;
-					try {
-						scaledImage = result.get();
-					}
-					catch (final Exception e) {
-						LogUtils.severe(e);
-						return;
-					}
-					finally {
-						image.flush();
-					}
-					final int scaledImageHeight = scaledImage.getHeight();
-					final int scaledImageWidth = scaledImage.getWidth();
-					centerImagePosition(scaledImageWidth, scaledImageHeight);
-					cachedImage = scaledImage;
-					if (getCacheType().equals(CacheType.IC_FILE)) {
-						writeCacheFile();
-					}
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							processing = false;
-							if(imageLoadinglistener != null)
-								imageLoadinglistener.imageLoaded();
-							repaint();
-						}
-					});
-				}
-
-				private void centerImagePosition(final int scaledImageWidth, final int scaledImageHeight) {
-					if (center) {
-						imageX = (getWidth() - scaledImageWidth) / 2;
-						imageY = (getHeight() - scaledImageHeight) / 2;
-					}
-					else {
-						if (scaledImageWidth > getHeight()) {
-							imageX = 0;
-							imageY = (getHeight() - scaledImageHeight) / 2;
-						}
-						else {
-							imageX = (getWidth() - scaledImageWidth) / 2;
-							imageY = 0;
-						}
-					}
-				}
-			});
+			BufferedImage scaledImage = null;
+			try {
+				scaledImage = Scalr.resize(image, Scalr.Mode.BEST_FIT_BOTH, getWidth(), getHeight());
+			}
+			catch (final Exception e) {
+				LogUtils.severe(e);
+				return;
+			}
+			finally {
+				image.flush();
+			}
+			final int scaledImageHeight = scaledImage.getHeight();
+			final int scaledImageWidth = scaledImage.getWidth();
+			centerImagePosition(scaledImageWidth, scaledImageHeight);
+			cachedImage = scaledImage;
+			if (getCacheType().equals(CacheType.IC_FILE)) {
+				writeCacheFile();
+			}
 		}
+		try {
+			g.drawImage(cachedImage, imageX, imageY, null);
+		}
+		catch (ClassCastException e) {
+			LogUtils.severe("Disabled bitmap image painting due to java bug https://bugs.openjdk.java.net/browse/JDK-8160328. Modify freeplane.sh to run java with option '-Dsun.java2d.xrender=false'");
+			disabledDueToJavaBug = true;
+		}
+		flushImage();
 	}
 
+	private void centerImagePosition(final int scaledImageWidth, final int scaledImageHeight) {
+		if (center) {
+			imageX = (getWidth() - scaledImageWidth) / 2;
+			imageY = (getHeight() - scaledImageHeight) / 2;
+		}
+		else {
+			if (scaledImageWidth > getHeight()) {
+				imageX = 0;
+				imageY = (getHeight() - scaledImageHeight) / 2;
+			}
+			else {
+				imageX = (getWidth() - scaledImageWidth) / 2;
+				imageY = 0;
+			}
+		}
+	}
+	
 	private boolean componentHasNoArea() {
 		return getWidth() == 0 || getHeight() == 0;
 	}
@@ -267,11 +252,17 @@ public class BitmapViewerComponent extends JComponent implements ScalableCompone
 	}
 
 	private void logImageReadingException(final IOException e) {
+		if((e instanceof FileNotFoundException) || (e instanceof IIOException)) {
+			LogUtils.warn(e.getMessage());
+			return;
+		}
 		final Throwable cause = e.getCause();
-		if(! (cause instanceof FileNotFoundException))
-			LogUtils.severe(e);
-		else
+		if((cause instanceof FileNotFoundException) || (cause instanceof IIOException)) {
 			LogUtils.warn(cause.getMessage());
+			return;
+		}
+		
+		LogUtils.severe(e);
 	}
 
 	private void flushImage() {
@@ -358,9 +349,4 @@ public class BitmapViewerComponent extends JComponent implements ScalableCompone
 	public void setCenter(boolean center) {
 		this.center = center;
 	}
-
-	public void setImageLoadingListener(ImageLoadingListener listener) {
-		this.imageLoadinglistener = listener;
-	    
-    }
 }

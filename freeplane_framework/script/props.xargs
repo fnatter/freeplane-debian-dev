@@ -40,5 +40,8 @@
 
 
 -Dorg.knopflerfish.startlevel.use=true
+# -Dorg.knopflerfish.framework.bundlestorage.file.unpack=false
+-Dorg.osgi.framework.bundle.parent=app
 
+-Dorg.knopflerfish.framework.bundlestorage.file.unpack=false
 

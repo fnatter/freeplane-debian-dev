@@ -29,7 +29,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
@@ -38,12 +37,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.AFreeplaneAction;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.core.util.collection.IListModel;
 import org.freeplane.features.attribute.AttributeRegistry;
+import org.freeplane.features.icon.factory.IconStoreFactory;
 import org.freeplane.features.map.IMapSelectionListener;
 import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.MapModel;
@@ -187,8 +186,7 @@ public class AttributeManagerDialog extends JDialog implements IMapSelectionList
 		}
 	}
 
-	static final Icon editButtonImage = new ImageIcon(ResourceController.getResourceController().getResource(
-	    "/images/edit12.png"));
+	static final Icon editButtonImage = IconStoreFactory.ICON_STORE.getUIIcon("edit12.png").getIcon();
 	private static final long serialVersionUID = 1L;
 // // 	final private Controller controller;
 	private ImportAttributesDialog importDialog = null;

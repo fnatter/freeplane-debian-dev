@@ -42,6 +42,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.net.URI;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -88,6 +89,9 @@ import org.freeplane.main.application.FreeplaneSplashModern;
  * @since 29.12.2008
  */
 public class UITools {
+	public static final String MENU_ITEM_FONT_SIZE_PROPERTY = "menuItemFontSize";
+	public static final String MAIN_FREEPLANE_FRAME = "mainFreeplaneFrame";
+
 	@SuppressWarnings("serial")
     public static final class InsertEolAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -96,7 +100,6 @@ public class UITools {
         }
     }
 
-	public static final String MAIN_FREEPLANE_FRAME = "mainFreeplaneFrame";
 
 	public static void addEscapeActionToDialog(final JDialog dialog) {
 		class EscapeAction extends AbstractAction {
@@ -153,6 +156,8 @@ public class UITools {
 			p.y += y;
 		};
 	}
+	
+	static private final AtomicBoolean errorMessageQueued = new AtomicBoolean(false);
 
 	static public void errorMessage(final Object message) {
 		final String myMessage;
@@ -163,11 +168,26 @@ public class UITools {
 			myMessage = TextUtils.getText("undefined_error");
 		}
 		LogUtils.warn(myMessage);
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				JOptionPane.showMessageDialog(UITools.getCurrentRootComponent(), myMessage, "Freeplane", JOptionPane.ERROR_MESSAGE);
-			}
-		});
+		if(! errorMessageQueued.getAndSet(true))
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					final Component currentRootComponent = UITools.getCurrentRootComponent();
+					if(currentRootComponent != null) {
+						try {
+							currentRootComponent.validate();
+							JOptionPane.showMessageDialog(currentRootComponent, myMessage, "Freeplane", JOptionPane.ERROR_MESSAGE);
+						}
+						catch (Exception e) {
+							currentRootComponent.setVisible(false);
+							UITools.getFrame().setVisible(false);
+							JOptionPane.showMessageDialog(null, myMessage, "Freeplane", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, TextUtils.getText("program_terminates"), "Freeplane", JOptionPane.ERROR_MESSAGE);
+							System.exit(-1);
+						}
+					}
+					errorMessageQueued.set(false);
+				}
+			});
 	}
 	
 	static public Component getCurrentRootComponent(){
@@ -492,22 +512,6 @@ public class UITools {
 
 	public static final Dimension MAX_BUTTON_DIMENSION = new Dimension(1000, 1000);
 
-// FIXME: not used - can we remove it? -- Volker
-//	public static Controller getController(Component c) {
-//		if(c == null){
-//			return null;
-//		}
-//	    final JRootPane rootPane = SwingUtilities.getRootPane(c);
-//		if(rootPane == null){
-//			return null;
-//		}
-//	    Controller controller = (Controller) rootPane.getClientProperty(Controller.class);
-//	    if(controller != null){
-//	    	return controller;
-//	    }
-//	    return getController(JOptionPane.getFrameForComponent(rootPane));
-//    }
-
 	public static void focusOn(JComponent component) {
 		component.addAncestorListener(new AncestorListener() {
 			public void ancestorRemoved(AncestorEvent event) {
@@ -527,8 +531,14 @@ public class UITools {
 		});
     }
 
-	public static BasicStroke createStroke(int width, final int[] dash) {
-        final float[] fdash;
+	public static BasicStroke createStroke(float width, final int[] dash, int join) {
+		final float[] fdash = toFloats(dash);
+		final BasicStroke stroke = new BasicStroke(width, BasicStroke.CAP_BUTT, join, 1f, fdash, 0f);
+        return stroke;
+	}
+
+	public static float[] toFloats(final int[] dash) {
+		final float[] fdash;
     	if(dash  != null){
     		fdash = new float[dash.length];
     		int i = 0;
@@ -539,9 +549,8 @@ public class UITools {
     	else{
     		fdash = null;
     	}
-    	final BasicStroke stroke = new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 1f, fdash, 0f);
-        return stroke;
-    }
+		return fdash;
+	}
 
 	public static void repaintAll(Container root) {
 		root.repaint();
@@ -632,8 +641,41 @@ public class UITools {
 	}
 
 	private static float getScaleFactor() {
-			return ResourceController.getResourceController().getIntProperty("user_defined_screen_resolution", 96)  / 72f;
+			final ResourceController resourceController = ResourceController.getResourceController();
+			int windowX = resourceController.getIntProperty("appwindow_x", 0);
+			int windowY = resourceController.getIntProperty("appwindow_y", 0);
+			final GraphicsConfiguration graphicsConfiguration = findGraphicsConfiguration(windowX, windowY);
+			final int userDefinedScreenResolution; 
+			if(graphicsConfiguration != null) {
+				final Rectangle screenBounds = graphicsConfiguration.getBounds();
+				final int w = screenBounds.width;
+				final int h = screenBounds.height;
+				final double diagonalPixels = Math.sqrt(w*w + h*h);
+				final double monitorSize = resourceController.getDoubleProperty("monitor_size_inches", 0);
+				if(monitorSize >= 1 && diagonalPixels >= 1){
+					userDefinedScreenResolution = (int) Math.round(diagonalPixels / monitorSize);
+					resourceController.setProperty("user_defined_screen_resolution", userDefinedScreenResolution);
+				}
+				else{
+					userDefinedScreenResolution = resourceController.getIntProperty("user_defined_screen_resolution", 96);
+					final double effectiveMonitorSize = Math.round(diagonalPixels / userDefinedScreenResolution * 10) / 10;
+					resourceController.setDefaultProperty("monitor_size_inches", Double.toString(effectiveMonitorSize));
+				}
+			}
+			else {
+				userDefinedScreenResolution = resourceController.getIntProperty("user_defined_screen_resolution", 96);
+				resourceController.setDefaultProperty("monitor_size_inches", Double.toString(0));
+			}
+			return userDefinedScreenResolution  / 72f;
     }
+
+	private static GraphicsConfiguration findGraphicsConfiguration(int windowX, int windowY) {
+		final GraphicsConfiguration graphicsConfiguration = findGraphicsConfiguration(null, windowX, windowY);
+		if(graphicsConfiguration != null || windowX == 0 && windowY == 0)
+			return graphicsConfiguration;
+		else
+			return findGraphicsConfiguration(null, 0, 0);
+	}
 	
 	public static Font scale(Font font) {
 		return font.deriveFont(font.getSize2D()*FONT_SCALE_FACTOR);
@@ -691,6 +733,10 @@ public class UITools {
 		}
 		else
 			runnable.run();
+	}
+
+	public static float getUIFontSize(double scalingFactor) {
+		return (int)Math.round(FONT_SCALE_FACTOR*scalingFactor * ResourceController.getResourceController().getIntProperty(MENU_ITEM_FONT_SIZE_PROPERTY, 10));
 	}
 
 }

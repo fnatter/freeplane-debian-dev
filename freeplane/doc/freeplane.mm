@@ -57,7 +57,6 @@
 </stylenode>
 <stylenode TEXT="MenuGroupLabel" COLOR="#000000" BACKGROUND_COLOR="#33ffcc" STYLE="bubble">
 <edge COLOR="#33ffcc" WIDTH="2"/>
-<attribute_layout NAME_WIDTH="58.5 pt" VALUE_WIDTH="87.0 pt"/>
 </stylenode>
 <stylenode TEXT="Title" COLOR="#ffffff" BACKGROUND_COLOR="#2ed2a9" STYLE="bubble">
 <font BOLD="true"/>
@@ -2132,7 +2131,7 @@
   <body>
     <ul>
       <li>
-        Deselect <i>View &gt; Properties panel &gt; Automatic edge color</i>
+        Deselect <i>View &gt; Tool panel &gt; Automatic edge color</i>
       </li>
     </ul>
   </body>
@@ -2956,7 +2955,6 @@
 </richcontent>
 <edge STYLE="bezier"/>
 <node TEXT="File" STYLE_REF="MainMenu" FOLDED="true" ID="ID_1242926404" CREATED="1455910903923" MODIFIED="1455910903923" TEXT_SHORTENED="true" MIN_WIDTH="60.0 px" HGAP_QUANTITY="19.0 px" VSHIFT_QUANTITY="27.0 px">
-<attribute_layout NAME_WIDTH="27.75 pt" VALUE_WIDTH="57.75 pt"/>
 <attribute NAME="Chapter" VALUE="1,2,6,8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MainMenu" LAST="false"/>
@@ -4866,7 +4864,6 @@
   </body>
 </html>
 </richcontent>
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="120.75 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Procedure" LAST="false"/>
@@ -4936,7 +4933,6 @@
 <attribute NAME="Chapter" VALUE="3"/>
 </node>
 <node TEXT="Hyperlink in attribute" ID="ID_457929879" CREATED="1455910903966" MODIFIED="1455910903966">
-<attribute_layout NAME_WIDTH="36.0 pt" VALUE_WIDTH="36.0 pt"/>
 <attribute NAME="See also" VALUE="#ID_278329781"/>
 <attribute NAME="See also" VALUE="#ID_1279811672"/>
 <attribute NAME="Chapter" VALUE="3"/>
@@ -5641,7 +5637,6 @@
 <node TEXT="" ID="ID_524484700" CREATED="1455910904137" MODIFIED="1455910904137">
 <hook NAME="SummaryNode"/>
 <node TEXT="" ID="ID_1791031466" CREATED="1455910903990" MODIFIED="1455910903990" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="67.5 pt" VALUE_WIDTH="144.0 pt"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Exception" LAST="false"/>
 </hook>
@@ -5756,7 +5751,6 @@
 </node>
 </node>
 <node TEXT="" STYLE_REF="Aggregatie als Toelichting" ID="ID_892520547" CREATED="1455910903994" MODIFIED="1455910903994" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="158.25 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Refine" LAST="false"/>
@@ -6268,7 +6262,6 @@
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="AlwaysUnfoldedNode"/>
 <node TEXT="Publish images" ID="ID_1111281504" CREATED="1455910903999" MODIFIED="1455910903999" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="198.0 pt"/>
 <attribute NAME="Chapter" VALUE="3,6"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Exception" LAST="false"/>
@@ -6390,7 +6383,6 @@
 <node TEXT="" FOLDED="true" ID="ID_560316882" CREATED="1455910904001" MODIFIED="1455910904001">
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <node TEXT="" ID="ID_110645225" CREATED="1455910904001" MODIFIED="1455910904001" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="67.5 pt" VALUE_WIDTH="122.25 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Exception" LAST="false"/>
@@ -7085,7 +7077,6 @@
   </body>
 </html>
 </richcontent>
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="123.75 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="ToNote" LAST="false"/>
@@ -8085,7 +8076,6 @@
 <node TEXT="" ID="ID_1857769175" CREATED="1455910904141" MODIFIED="1455910904141">
 <hook NAME="SummaryNode"/>
 <node TEXT="Context menu&apos;s" FOLDED="true" ID="ID_832730564" CREATED="1455910904026" MODIFIED="1455910904026" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="171.0 pt"/>
 <attribute NAME="Chapter" VALUE="1,2,3,4,5"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
@@ -8136,7 +8126,7 @@
 </node>
 </node>
 </node>
-<node TEXT="Properties panel" FOLDED="true" ID="ID_1783882978" CREATED="1455910904026" MODIFIED="1455910904026" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
+<node TEXT="Tool panel" FOLDED="true" ID="ID_1783882978" CREATED="1455910904026" MODIFIED="1455910904026" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -8153,7 +8143,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
 <attribute NAME="Chapter" VALUE="3,4,5"/>
-<node TEXT="Properties panel" FOLDED="true" ID="ID_125269399" CREATED="1455910904026" MODIFIED="1455910904026" TEXT_SHORTENED="true">
+<node TEXT="Tool panel" FOLDED="true" ID="ID_125269399" CREATED="1455910904026" MODIFIED="1455910904026" TEXT_SHORTENED="true">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Definition" LAST="false"/>
 </hook>
@@ -8452,7 +8442,7 @@
     </p>
     <ul>
       <li>
-        View &gt; Properties panel
+        View &gt; Tool panel
       </li>
     </ul>
   </body>
@@ -8477,7 +8467,7 @@
     </p>
     <ul>
       <li>
-        View &gt; Properties panel
+        View &gt; Tool panel
       </li>
     </ul>
   </body>
@@ -9235,7 +9225,7 @@
 </hook>
 </node>
 <node TEXT="Center selected node" ID="ID_1435118166" CREATED="1455910904036" MODIFIED="1455910904036" TEXT_SHORTENED="true">
-<icon BUILTIN="../CenterSelectedNodeAction"/>
+<icon BUILTIN="../MoveSelectedNodeAction.CENTER"/>
 <richcontent TYPE="DETAILS" HIDDEN="true">
 
 <html>
@@ -9930,7 +9920,7 @@
 
     </p>
     <p>
-      Properties that can be changed in the <i>Properties panel</i>&#160;are:
+      Properties that can be changed in the <i>Tool panel</i>&#160;are:
     </p>
     <ul>
       <li>
@@ -10034,7 +10024,7 @@
         <i>Styles &gt; User defined styles</i>
       </li>
       <li>
-        <i>View &gt; Properties panel&#160;: Styles, Conditional Node styles, Conditional map styles</i>
+        <i>View &gt; Tool panel&#160;: Styles, Conditional Node styles, Conditional map styles</i>
       </li>
       <li>
         <i>Styles &gt; Manage Conditional Node Styles</i>
@@ -10186,7 +10176,7 @@
         <i>Styles &gt; predefined styles</i>
       </li>
       <li>
-        <i>View &gt; Properties panel&#160;</i>
+        <i>View &gt; Tool panel&#160;</i>
       </li>
       <li>
         <i>Styles &gt; Manage Conditional Styles</i>
@@ -11068,7 +11058,7 @@ elements from the styles activated by conditions are copied.</pre>
     </p>
     <ul>
       <li>
-        <i>File &gt; New map</i>&#160;uses the style <i>standard.mm</i>. You can define a user map as standard.mm by naming it that way and putting it in the directory that opens by selecting <i>Tools &gt; Open user directory &gt; templates. </i>
+        <i>File &gt; New map</i>&#160;uses the style <i>standard-1.6.mm</i>. You can define a user map as standard-1.6.mm by naming it that way and putting it in the directory that opens by selecting <i>Tools &gt; Open user directory &gt; templates. </i>
       </li>
       <li>
         <i>In Tools &gt; Preferences</i>&#160;can be defined that the standard mind map should have a different name.
@@ -11133,7 +11123,6 @@ elements from the styles activated by conditions are copied.</pre>
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <hook NAME="AlwaysUnfoldedNode"/>
 <node TEXT="Style (and Node template)" ID="ID_1305038685" CREATED="1455910904047" MODIFIED="1455910904047" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="117.0 pt"/>
 <attribute NAME="Chapter" VALUE="4"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Definition" LAST="false"/>
@@ -12074,7 +12063,7 @@ elements from the styles activated by conditions are copied.</pre>
   </head>
   <body>
     <p>
-      An edge is a lineage between parent and child. The flow of the edge can be altered by clicking on it and drawing it to a different location. Technically an edge belongs to the child and edge properties like color can be changed in the child node. See <i>View &gt; Properties panel. </i>An edge can be hidden, see Egde style.
+      An edge is a lineage between parent and child. The flow of the edge can be altered by clicking on it and drawing it to a different location. Technically an edge belongs to the child and edge properties like color can be changed in the child node. See <i>View &gt; Tool panel. </i>An edge can be hidden, see Egde style.
     </p>
   </body>
 </html>
@@ -12102,10 +12091,10 @@ elements from the styles activated by conditions are copied.</pre>
     </p>
     <ul>
       <li>
-        View &gt; Properties panel &gt; Min node width
+        View &gt; Tool panel &gt; Min node width
       </li>
       <li>
-        View &gt; Properties panel &gt; Max node width
+        View &gt; Tool panel &gt; Max node width
       </li>
     </ul>
     <p>
@@ -12690,7 +12679,6 @@ elements from the styles activated by conditions are copied.</pre>
   </body>
 </html>
 </richcontent>
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="117.0 pt"/>
 <attribute NAME="Chapter" VALUE="1,2"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Definition" LAST="false"/>
@@ -13255,7 +13243,6 @@ elements from the styles activated by conditions are copied.</pre>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
-<attribute_layout NAME_WIDTH="51.0 pt" VALUE_WIDTH="51.0 pt"/>
 <attribute NAME="Chapter" VALUE="9"/>
 </node>
 <node TEXT="Select all matching nodes" ID="ID_164487469" CREATED="1455910904075" MODIFIED="1455910904075" TEXT_SHORTENED="true">
@@ -13802,7 +13789,6 @@ elements from the styles activated by conditions are copied.</pre>
 </node>
 </node>
 <node TEXT="Tools" STYLE_REF="MainMenu" FOLDED="true" ID="ID_1833899525" CREATED="1455910904080" MODIFIED="1455910904080" TEXT_SHORTENED="true" MIN_WIDTH="60.0 px">
-<attribute_layout NAME_WIDTH="27.75 pt" VALUE_WIDTH="57.75 pt"/>
 <attribute NAME="Chapter" VALUE="3,6,7,8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MainMenu" LAST="false"/>
@@ -13843,7 +13829,7 @@ elements from the styles activated by conditions are copied.</pre>
         <i>Node features &gt; Time management </i>
       </li>
       <li>
-        <i>View &gt; Properties panel &gt; Calendar and Attribute</i>s
+        <i>View &gt; Tool panel &gt; Calendar and Attribute</i>s
       </li>
     </ul>
   </body>
@@ -15013,7 +14999,6 @@ elements from the styles activated by conditions are copied.</pre>
     <conditional_style ACTIVE="true" STYLE_REF="OptionalValue" LAST="false"/>
 </hook>
 <node TEXT="" ID="ID_390598009" CREATED="1455910904107" MODIFIED="1455910904107">
-<attribute_layout NAME_WIDTH="24.75 pt" VALUE_WIDTH="102.75 pt"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="OptionalValue" LAST="false"/>
 </hook>
@@ -15075,7 +15060,7 @@ elements from the styles activated by conditions are copied.</pre>
 </hook>
 </node>
 <node TEXT="Standard Template File" STYLE_REF="Method" FOLDED="true" ID="ID_1036795471" CREATED="1455910904107" MODIFIED="1455910904107">
-<node TEXT="standard.mm" ID="ID_706234894" CREATED="1455910904108" MODIFIED="1455910904108">
+<node TEXT="standard-1.6.mm" ID="ID_706234894" CREATED="1455910904108" MODIFIED="1455910904108">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="OptionalValue" LAST="false"/>
 </hook>
@@ -15726,7 +15711,6 @@ elements from the styles activated by conditions are copied.</pre>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
 </hook>
-<attribute_layout NAME_WIDTH="34.5 pt" VALUE_WIDTH="34.5 pt"/>
 <attribute NAME="Chapter" VALUE="3,8"/>
 </node>
 </node>
@@ -15828,7 +15812,6 @@ elements from the styles activated by conditions are copied.</pre>
 <node TEXT="" ID="ID_1081583553" CREATED="1455910904157" MODIFIED="1455910904157">
 <hook NAME="SummaryNode"/>
 <node TEXT="Behaviour" ID="ID_171435040" CREATED="1455910904112" MODIFIED="1455910904112">
-<attribute_layout NAME_WIDTH="54.75 pt" VALUE_WIDTH="77.25 pt"/>
 <attribute NAME="Chapter" VALUE="8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
@@ -15890,7 +15873,6 @@ elements from the styles activated by conditions are copied.</pre>
 <node TEXT="" ID="ID_1968306467" CREATED="1455910904158" MODIFIED="1455910904158">
 <hook NAME="SummaryNode"/>
 <node TEXT="Data formatting and parsing" ID="ID_1277533848" CREATED="1455910904113" MODIFIED="1455910904113" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="34.5 pt" VALUE_WIDTH="111.75 pt"/>
 <attribute NAME="Chapter" VALUE="4,8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
@@ -15907,7 +15889,7 @@ elements from the styles activated by conditions are copied.</pre>
     </p>
     <ul>
       <li>
-        <i>Properties panel . Calendar &amp; Attributes .&gt; Date/time and number formatting</i>
+        <i>Tool panel . Calendar &amp; Attributes .&gt; Date/time and number formatting</i>
       </li>
     </ul>
   </body>
@@ -16573,9 +16555,6 @@ elements from the styles activated by conditions are copied.</pre>
         </p>
       </li>
       <li>
-        <font face="SansSerif, sans-serif" color="#000000">Small maps can also use Export as Flash which also offers limited browsing functionality.</font>
-      </li>
-      <li>
         <font face="SansSerif, sans-serif" color="#000000">LaTeX and SVG images are not displayed in the Freeplane Applet nor in the Flash browser.</font>
       </li>
     </ul>
@@ -16874,7 +16853,7 @@ elements from the styles activated by conditions are copied.</pre>
   </head>
   <body>
     <p>
-      <i>View-&gt;Properties panel</i>, then <i>Core text-&gt;Format-&gt;LaTeX</i>&#160;:
+      <i>View-&gt;Tool panel</i>, then <i>Core text-&gt;Format-&gt;LaTeX</i>&#160;:
     </p>
   </body>
 </html>

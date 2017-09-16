@@ -45,10 +45,6 @@ public class FilterInfo {
 		info |= flag;
 	}
 
-	int get() {
-		return info;
-	}
-
 	/**
 	 */
 	public boolean isAncestor() {
@@ -79,5 +75,11 @@ public class FilterInfo {
 
 	public boolean isUnset() {
 		return info == FilterInfo.FILTER_INITIAL_VALUE;
+	}
+
+	boolean isVisible(final int filterOptions) {
+		final boolean showAsAncestor = (filterOptions & FilterInfo.FILTER_SHOW_ANCESTOR) != 0;
+		return (showAsAncestor || (filterOptions & FilterInfo.FILTER_SHOW_ECLIPSED) >= (info & FilterInfo.FILTER_SHOW_ECLIPSED))
+		        && ((filterOptions & info & ~FilterInfo.FILTER_SHOW_ECLIPSED) != 0);
 	}
 }
