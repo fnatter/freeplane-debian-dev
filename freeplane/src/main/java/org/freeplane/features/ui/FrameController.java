@@ -51,7 +51,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ComboBoxEditor;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -60,6 +59,7 @@ import javax.swing.JPanel;
 import javax.swing.LookAndFeel;
 import javax.swing.RootPaneContainer;
 import javax.swing.Timer;
+import javax.swing.ToolTipManager;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -70,11 +70,13 @@ import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.resources.TranslatedObject;
 import org.freeplane.core.ui.FixedBasicComboBoxEditor;
 import org.freeplane.core.ui.IUserInputListenerFactory;
+import org.freeplane.core.ui.LengthUnits;
 import org.freeplane.core.ui.components.ContainerComboBoxEditor;
 import org.freeplane.core.ui.components.FreeplaneMenuBar;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.ClassLoaderFactory;
 import org.freeplane.core.util.LogUtils;
+import org.freeplane.core.util.Quantity;
 import org.freeplane.features.format.FormattedDate;
 import org.freeplane.features.format.FormattedObject;
 import org.freeplane.features.format.ScannerController;
@@ -88,6 +90,9 @@ import org.freeplane.features.time.TimeComboBoxEditor;
  * @author Dimitry Polivaev
  */
 abstract public class FrameController implements ViewController {
+
+	private static final Quantity<LengthUnits> ICON_SIZE = new Quantity<LengthUnits>(12, LengthUnits.pt);
+
 
 	private final class HorizontalToolbarPanel extends JPanel {
 		/**
@@ -143,12 +148,20 @@ abstract public class FrameController implements ViewController {
 	final private JComponent toolbarPanel[];
 
 	final private String propertyKeyPrefix;
-	public static Icon textIcon;
-	public static Icon numberIcon;
-	public static Icon dateIcon;
-	public static Icon dateTimeIcon;
-	public static Icon linkIcon;
-	public static Icon localLinkIcon;
+	private static Icon textIcon;
+	private static Icon numberIcon;
+	private static Icon dateIcon;
+	private static Icon dateTimeIcon;
+	private static Icon linkIcon;
+	
+	static {
+		final ResourceController resourceController = ResourceController.getResourceController();
+		textIcon = resourceController.getIcon("text_icon", ICON_SIZE);
+		numberIcon = resourceController.getIcon("number_icon", ICON_SIZE);
+		dateIcon = resourceController.getIcon("date_icon", ICON_SIZE);
+		dateTimeIcon = resourceController.getIcon("date_time_icon", ICON_SIZE);
+		linkIcon = resourceController.getIcon("link_icon", ICON_SIZE);
+	}
 	private final IMapViewManager mapViewManager;
 
 	public FrameController(Controller controller,  final IMapViewManager mapViewManager,
@@ -156,15 +169,6 @@ abstract public class FrameController implements ViewController {
 		super();
 		this.controller = controller;
 		this.mapViewManager = mapViewManager;
-		final ResourceController resourceController = ResourceController.getResourceController();
-		if(textIcon == null){
-			FrameController.textIcon = new ImageIcon(resourceController.getResource("/images/text.png"));
-			FrameController.numberIcon = new ImageIcon(resourceController.getResource("/images/number.png"));
-			FrameController.dateIcon = new ImageIcon(resourceController.getResource("/images/calendar_red.png"));
-			FrameController.dateTimeIcon = new ImageIcon(resourceController.getResource("/images/calendar_clock_red.png"));
-			FrameController.linkIcon = new ImageIcon(resourceController.getResource("/images/" + resourceController.getProperty("link_icon")));
-			FrameController.localLinkIcon = new ImageIcon(resourceController.getResource("/images/" + resourceController.getProperty("link_local_icon")));
-		}
 		this.propertyKeyPrefix = propertyKeyPrefix;
 		statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 3, 0));
 		UIComponentVisibilityDispatcher.install(this, statusPanel, "toolbarVisible");
@@ -426,12 +430,13 @@ abstract public class FrameController implements ViewController {
 		
 	}
 
-	protected void setFullScreen(final boolean fullScreen) {
+	public void setFullScreen(final boolean fullScreen) {
 		final JFrame frame = (JFrame) getCurrentRootComponent();
 		final Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
 		if (fullScreen == isFullScreenEnabled()) {
 			return;
 		}
+		ToolTipManager.sharedInstance().setEnabled(false);
 		final Controller controller = getController();
 		ResourceController.getResourceController().firePropertyChanged(FULLSCREEN_ENABLED_PROPERTY, Boolean.toString(!fullScreen),Boolean.toString(fullScreen));
 		Iterable<Window> visibleFrames = collectVisibleFrames(frame);
@@ -472,6 +477,7 @@ abstract public class FrameController implements ViewController {
 			}
 			showWindows(visibleFrames);
 		}
+		ToolTipManager.sharedInstance().setEnabled(true);
 		if(focusOwner != null)
 		    focusOwner.requestFocus();
 	}
@@ -544,6 +550,14 @@ abstract public class FrameController implements ViewController {
 		if(supportHidpi)
 			scaleDefaultUIFonts();
 
+		// Workaround for https://bugs.openjdk.java.net/browse/JDK-8134828
+		// Scrollbar thumb disappears with Nimbus L&F
+		// http://stackoverflow.com/questions/32857372/jscrollbar-dont-show-thumb-in-nimbus-lf
+
+		final Dimension minimumThumbSize = new Dimension(30, 30);
+		UIManager.getLookAndFeelDefaults().put("ScrollBar.minimumThumbSize", minimumThumbSize);
+		UIManager.put("ScrollBar.minimumThumbSize", minimumThumbSize);
+
 		// Workaround for http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=7077418
 		// NullPointerException in WindowsFileChooserUI when system icons missing/invalid
 		// set FileChooserUI to MetalFileChooserUI if no JFileChooser can be created
@@ -558,6 +572,9 @@ abstract public class FrameController implements ViewController {
 			}
 		}
 		
+		// Workaround for https://bugs.openjdk.java.net/browse/JDK-8179014
+		UIManager.put("FileChooser.useSystemExtensionHiding", false); 
+		
 		final Color color = UIManager.getColor("control");
 		if(color != null && color.getAlpha() < 255)
 			UIManager.getDefaults().put("control", Color.LIGHT_GRAY);
@@ -569,11 +586,13 @@ abstract public class FrameController implements ViewController {
 		final UIDefaults uiDefaults = UIManager.getDefaults();
 		final UIDefaults lookAndFeelDefaults = UIManager.getLookAndFeel().getDefaults();
 		
+		double scalingFactor = calculateFontSizeScalingFactor();
+		
 		for (Object key : keys) {
 		    if (isFontKey(key)) {
 				Font font = uiDefaults.getFont(key);
 				if (font != null) {
-				    font = UITools.scaleFontInt(font, 0.8);
+				    font = UITools.scaleFontInt(font, scalingFactor);
 				    UIManager.put(key, font);
 				    lookAndFeelDefaults.put(key, font);
 				}
@@ -581,6 +600,27 @@ abstract public class FrameController implements ViewController {
 		
 		}
     }
+
+	private static double calculateFontSizeScalingFactor() {
+		final int unknown = -1;
+		final int userDefinedMenuItemFontSize = ResourceController.getResourceController().getIntProperty(UITools.MENU_ITEM_FONT_SIZE_PROPERTY, unknown);
+		double scalingFactor = 0.8;
+		
+		int lookAndFeelDefaultMenuItemFontSize = 10;
+		Font uiDefaultMenuItemFont = UIManager.getDefaults().getFont("MenuItem.font");
+		if(uiDefaultMenuItemFont != null) {
+			lookAndFeelDefaultMenuItemFontSize = uiDefaultMenuItemFont.getSize();
+		}
+		
+		if(userDefinedMenuItemFontSize == unknown){
+			final long defaultMenuItemSize = Math.round(lookAndFeelDefaultMenuItemFontSize * scalingFactor);
+			ResourceController.getResourceController().setDefaultProperty(UITools.MENU_ITEM_FONT_SIZE_PROPERTY, Long.toString(defaultMenuItemSize));
+		}
+		else{
+			scalingFactor = ((double)userDefinedMenuItemFontSize) / lookAndFeelDefaultMenuItemFontSize;
+		}
+		return scalingFactor;
+	}
 
 	private static boolean isFontKey(Object key) {
 		return key != null && key.toString().toLowerCase().endsWith("font");
@@ -592,22 +632,22 @@ abstract public class FrameController implements ViewController {
 			value = ((FormattedObject) value).getObject();
 		}
 		if (value instanceof String || value instanceof StyleTranslatedObject) {
-			addStatusInfo(ResourceController.OBJECT_TYPE, null, FrameController.textIcon);
+			addStatusInfo(ResourceController.OBJECT_TYPE, null, textIcon);
 		}
 		else if (value instanceof FormattedDate) {
 			final FormattedDate fd = (FormattedDate) value;
 			if (fd.containsTime()) {
-				addStatusInfo(ResourceController.OBJECT_TYPE, null, FrameController.dateTimeIcon);
+				addStatusInfo(ResourceController.OBJECT_TYPE, null, dateTimeIcon);
 			}
 			else {
-				addStatusInfo(ResourceController.OBJECT_TYPE, null, FrameController.dateIcon);
+				addStatusInfo(ResourceController.OBJECT_TYPE, null, dateIcon);
 			}
 		}
 		else if (value instanceof Number) {
-			addStatusInfo(ResourceController.OBJECT_TYPE, null, FrameController.numberIcon);
+			addStatusInfo(ResourceController.OBJECT_TYPE, null, numberIcon);
 		}
 		else if (value instanceof URI) {
-			addStatusInfo(ResourceController.OBJECT_TYPE, null, FrameController.linkIcon);
+			addStatusInfo(ResourceController.OBJECT_TYPE, null, linkIcon);
 		}
 		else {
 			addStatusInfo(ResourceController.OBJECT_TYPE, null, null);
@@ -680,8 +720,9 @@ abstract public class FrameController implements ViewController {
 	}
 
 	public boolean quit() {
-		Controller.getCurrentController().selectMode(MModeController.MODENAME);
-		final boolean allMapsClosed = Controller.getCurrentModeController().getMapController().closeAllMaps();
+		final Controller controller = Controller.getCurrentController();
+		controller.selectMode(MModeController.MODENAME);
+		final boolean allMapsClosed = controller.closeAllMaps();
 	    if(allMapsClosed)
 	    	getController().getMapViewManager().onQuitApplication();
 	    return allMapsClosed;

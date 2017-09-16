@@ -20,6 +20,7 @@ package org.freeplane.plugin.script;
 import java.io.FileDescriptor;
 import java.net.InetAddress;
 import java.security.AccessControlException;
+import java.security.Permission;
 
 import org.freeplane.core.util.TextUtils;
 
@@ -208,4 +209,21 @@ class InternationalizedSecurityManager extends SecurityManager {
 	private SecurityException getException(AccessControlException e, final int pPermissionGroup, final int pPermission) {
 		return getException(e, pPermissionGroup, pPermission, "");
 	}
+
+	@Override
+	public void checkPermission(Permission perm) {
+		disallowSupressingAccessChecks(perm);
+		super.checkPermission(perm);
+	}
+
+	private void disallowSupressingAccessChecks(Permission perm) {
+	}
+
+	@Override
+	public void checkPermission(Permission perm, Object context) {
+		disallowSupressingAccessChecks(perm);
+		super.checkPermission(perm, context);	
+	}
+	
+	
 }

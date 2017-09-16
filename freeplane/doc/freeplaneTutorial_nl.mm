@@ -1844,7 +1844,6 @@
 </node>
 </node>
 <node TEXT="Externe koppeling" STYLE_REF="Beginner" FOLDED="true" ID="ID_640110372" CREATED="1286651969385" MODIFIED="1336125011738" LINK="http://freeplane.sourceforge.net/wiki/index.php/Tutorial_Freeplane" STYLE="combined">
-<attribute_layout NAME_WIDTH="82" VALUE_WIDTH="161"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuTitle" LAST="false"/>
 </hook>
@@ -3391,7 +3390,6 @@
 </node>
 <node TEXT="Attributen (knoopuitbreiding)" STYLE_REF="Professional" FOLDED="true" ID="ID_1324773677" CREATED="1314208168037" MODIFIED="1323706758395" MIN_WIDTH="1">
 <node TEXT="Wat zijn attributen ?" STYLE_REF="Professional" ID="ID_1657366174" CREATED="1314209542018" MODIFIED="1336118227857" HGAP="-170" VSHIFT="83" MAX_WIDTH="550">
-<attribute_layout NAME_WIDTH="34" VALUE_WIDTH="92"/>
 <attribute NAME="Name" VALUE="John"/>
 <attribute NAME="email" VALUE="john@gmail.com"/>
 <richcontent TYPE="DETAILS">
@@ -3477,7 +3475,6 @@
 </html>
 </richcontent>
 <node TEXT="Hyperlink (pijl) in attribuutwaarde" STYLE_REF="Professional" ID="ID_457929879" CREATED="1312540477537" MODIFIED="1336118261522" HGAP="-550" VSHIFT="80" MAX_WIDTH="550">
-<attribute_layout NAME_WIDTH="48" VALUE_WIDTH="101"/>
 <richcontent TYPE="DETAILS">
 
 <html>
@@ -3995,7 +3992,6 @@
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
-<attribute_layout NAME_WIDTH="68" VALUE_WIDTH="68"/>
 <edge STYLE="horizontal"/>
 </node>
 <node TEXT="Filteren en selecteren" STYLE_REF="ProfessionalOnderwerp" ID="ID_164487469" CREATED="1310134532663" MODIFIED="1330166218726" TEXT_SHORTENED="true">
@@ -4296,7 +4292,7 @@
 </hook>
 </node>
 </node>
-<node TEXT="Laden en gebruiken van de filterset voor deze Quick reference" STYLE_REF="Professional" FOLDED="true" ID="ID_1284293100" CREATED="1316177216317" MODIFIED="1323713282573" LINK="http://www.kioo.nl/freeplane/tutorial_en/filterSet" MIN_WIDTH="1" VSHIFT="-30">
+<node TEXT="Laden en gebruiken van de filterset voor deze Quick reference" STYLE_REF="Professional" FOLDED="true" ID="ID_1284293100" CREATED="1316177216317" MODIFIED="1323713282573" MIN_WIDTH="1" VSHIFT="-30">
 <node TEXT="Consider using a powerfull feature of Freeplane, filtering, to present to you only the information of&#xa;one of these 3 levels (Beginner, Advanced, Professional) at a time.&#xa;&#xa;The procedure for filtering is described to the left.  If you do not see it, click on the colored bar above&#xa;this text to unhide it. If you click on the red arrow, the instruction is illustrated in an animation." ID="ID_352888342" CREATED="1323529491351" MODIFIED="1323529654285"/>
 <node TEXT="Load filter set for this Quick reference" ID="ID_551050917" CREATED="1317234746190" MODIFIED="1323811074382">
 <icon BUILTIN="full-0"/>
@@ -4360,7 +4356,7 @@
     <conditional_style ACTIVE="true" STYLE_REF="SubWidth" LAST="false"/>
 </hook>
 </node>
-<node TEXT="Unfold to make visible" ID="ID_1451237301" CREATED="1316176206878" MODIFIED="1323811105176" HGAP="15" VSHIFT="-8" LINK="FilterExampleEnd.jpg">
+<node TEXT="Unfold to make visible" ID="ID_1451237301" CREATED="1316176206878" MODIFIED="1323811105176" HGAP="15" VSHIFT="-8">
 <icon BUILTIN="full-2"/>
 <richcontent TYPE="DETAILS">
 
@@ -4521,10 +4517,10 @@
     </p>
     <ul>
       <li>
-        De veranderde standaardstijl geldt alleen voor de mindmap waarin je werkt. Om de standaardstijl voor alle nieuwe mindmaps toe te passen, moet je de mindmap <i>standard.mm</i>&#160;aanpassen. Deze bevindt zich in: <i>Extra &gt; Openen gebruikersdirectory &gt; Templates.</i>
+        De veranderde standaardstijl geldt alleen voor de mindmap waarin je werkt. Om de standaardstijl voor alle nieuwe mindmaps toe te passen, moet je de mindmap <i>standard-1.6.mm</i>&#160;aanpassen. Deze bevindt zich in: <i>Extra &gt; Openen gebruikersdirectory &gt; Templates.</i>
       </li>
       <li>
-        Overweeg om in standard.mm de optie &quot;Hyperlinks&quot; aan te vinken. Dit zorgt er voor dat de tekst van een pijl-hyperlink wordt onderstreept en klikbaar is.
+        Overweeg om in standard-1.6.mm de optie &quot;Hyperlinks&quot; aan te vinken. Dit zorgt er voor dat de tekst van een pijl-hyperlink wordt onderstreept en klikbaar is.
       </li>
     </ul>
   </body>

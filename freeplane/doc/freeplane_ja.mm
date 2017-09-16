@@ -57,7 +57,6 @@
 </stylenode>
 <stylenode TEXT="MenuGroupLabel" COLOR="#000000" BACKGROUND_COLOR="#33ffcc" STYLE="bubble">
 <edge COLOR="#33ffcc" WIDTH="2"/>
-<attribute_layout NAME_WIDTH="58.5 pt" VALUE_WIDTH="87.0 pt"/>
 </stylenode>
 <stylenode TEXT="Title" COLOR="#ffffff" BACKGROUND_COLOR="#2ed2a9" STYLE="bubble">
 <font BOLD="true"/>
@@ -277,7 +276,6 @@
 </richcontent>
 <edge STYLE="bezier"/>
 <node TEXT="&#x30d5;&#x30a1;&#x30a4;&#x30eb;" STYLE_REF="MainMenu" FOLDED="true" ID="ID_1242926404" CREATED="1455910948847" MODIFIED="1455910948847" TEXT_SHORTENED="true" MIN_WIDTH="60.0 px" HGAP_QUANTITY="19.0 px" VSHIFT_QUANTITY="27.0 px">
-<attribute_layout NAME_WIDTH="27.75 pt" VALUE_WIDTH="57.75 pt"/>
 <attribute NAME="Chapter" VALUE="1,2,6,8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MainMenu" LAST="false"/>
@@ -2290,7 +2288,6 @@
   </body>
 </html>
 </richcontent>
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="120.75 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Procedure" LAST="false"/>
@@ -2360,7 +2357,6 @@
 <attribute NAME="Chapter" VALUE="3"/>
 </node>
 <node TEXT="&#x5c5e;&#x6027;&#x3067;&#x306e;&#x30cf;&#x30a4;&#x30d1;&#x30fc;&#x30ea;&#x30f3;&#x30af;" ID="ID_284791629" CREATED="1455910948894" MODIFIED="1455910948894" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="36.0 pt" VALUE_WIDTH="36.0 pt"/>
 <attribute NAME="See also" VALUE="#ID_278329781"/>
 <attribute NAME="See also" VALUE="#ID_1279811672"/>
 <attribute NAME="Chapter" VALUE="3"/>
@@ -3100,7 +3096,6 @@
 <node TEXT="" ID="ID_897938627" CREATED="1455910949160" MODIFIED="1455910949160">
 <hook NAME="SummaryNode"/>
 <node TEXT="" ID="ID_1351859449" CREATED="1455910948904" MODIFIED="1455910948904">
-<attribute_layout NAME_WIDTH="67.5 pt" VALUE_WIDTH="144.0 pt"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Exception" LAST="false"/>
 </hook>
@@ -3215,7 +3210,6 @@
 </node>
 </node>
 <node TEXT="" STYLE_REF="Aggregatie als Toelichting" ID="ID_892520547" CREATED="1455910948907" MODIFIED="1455910948907" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="158.25 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Refine" LAST="false"/>
@@ -3757,7 +3751,6 @@
 </hook>
 <attribute NAME="Chapter" VALUE="3"/>
 <node TEXT="&#x753b;&#x50cf;&#x3092;&#x516c;&#x958b;" ID="ID_452599330" CREATED="1455910948910" MODIFIED="1455910948910" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="198.0 pt"/>
 <attribute NAME="Chapter" VALUE="3,6"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Exception" LAST="false"/>
@@ -3845,7 +3838,6 @@
 <node TEXT="" FOLDED="true" ID="ID_1214682222" CREATED="1455910948941" MODIFIED="1455910948941" TEXT_SHORTENED="true">
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <node TEXT="" ID="ID_1094419120" CREATED="1455910948941" MODIFIED="1455910948941" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="67.5 pt" VALUE_WIDTH="122.25 pt"/>
 <attribute NAME="Chapter" VALUE="3" OBJECT="org.freeplane.features.format.FormattedNumber|3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Exception" LAST="false"/>
@@ -3977,7 +3969,6 @@
 <node TEXT="" FOLDED="true" ID="ID_560316882" CREATED="1455910948942" MODIFIED="1455910948942">
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <node TEXT="" ID="ID_110645225" CREATED="1455910948942" MODIFIED="1455910948942" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="67.5 pt" VALUE_WIDTH="122.25 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Exception" LAST="false"/>
@@ -4567,7 +4558,6 @@
   </body>
 </html>
 </richcontent>
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="123.75 pt"/>
 <attribute NAME="Chapter" VALUE="3"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="ToNote" LAST="false"/>
@@ -5909,7 +5899,6 @@
 <node TEXT="" ID="ID_691111776" CREATED="1455910949163" MODIFIED="1455910949163">
 <hook NAME="SummaryNode"/>
 <node TEXT="&#x30b3;&#x30f3;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x30e1;&#x30cb;&#x30e5;&#x30fc;" FOLDED="true" ID="ID_1460700080" CREATED="1455910949004" MODIFIED="1455910949004" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="171.0 pt"/>
 <attribute NAME="Chapter" VALUE="1,2,3,4,5"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
@@ -7072,7 +7061,7 @@
 <edge COLOR="#00ffff"/>
 </node>
 <node TEXT="&#x9078;&#x629e;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x4e2d;&#x592e;&#x3078;" FOLDED="true" ID="ID_1924496837" CREATED="1455910949015" MODIFIED="1455910949015" TEXT_SHORTENED="true">
-<icon BUILTIN="../CenterSelectedNodeAction"/>
+<icon BUILTIN="../MoveSelectedNodeAction.CENTER"/>
 <richcontent TYPE="DETAILS">
 
 <html>
@@ -8902,7 +8891,7 @@
     </p>
     <ul>
       <li>
-        <i>&#12300;&#12501;&#12449;&#12452;&#12523;&#160;&gt; &#26032;&#35215;&#20316;&#25104;&#12301;</i>&#12399;&#12289;&quot;<i>standard.mm&quot;</i>&#160;&#12398;&#12473;&#12479;&#12452;&#12523;&#12434;&#20351;&#29992;&#12375;&#12414;&#12377;&#12290;&#12518;&#12540;&#12470;&#12399;&#12289;&#12518;&#12540;&#12470;&#12510;&#12483;&#12503;&#12434; &quot;standard.mm&quot; &#12395;&#21517;&#31216;&#22793;&#26356;&#12375;&#12390;<i>&#12300;&#12484;&#12540;&#12523;&#160; &gt; &#12518;&#12540;&#12470;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12434;&#38283;&#12367; &gt; &#12486;&#12531;&#12503;&#12524;&#12540;&#12488;&#12301;</i>&#12398;&#36984;&#25246;&#12395;&#12424;&#12387;&#12390;&#38283;&#12367;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12395;&#26684;&#32013;&#12377;&#12428;&#12400;&#12289;&#12371;&#12428;&#12434; &quot;standard.mm&quot; &#12395;&#25351;&#23450;&#12377;&#12427;&#12371;&#12392;&#12364;&#12391;&#12365;&#12414;&#12377;&#12290;&#160; <content ename="content"/>
+        <i>&#12300;&#12501;&#12449;&#12452;&#12523;&#160;&gt; &#26032;&#35215;&#20316;&#25104;&#12301;</i>&#12399;&#12289;&quot;<i>standard-1.6.mm&quot;</i>&#160;&#12398;&#12473;&#12479;&#12452;&#12523;&#12434;&#20351;&#29992;&#12375;&#12414;&#12377;&#12290;&#12518;&#12540;&#12470;&#12399;&#12289;&#12518;&#12540;&#12470;&#12510;&#12483;&#12503;&#12434; &quot;standard-1.6.mm&quot; &#12395;&#21517;&#31216;&#22793;&#26356;&#12375;&#12390;<i>&#12300;&#12484;&#12540;&#12523;&#160; &gt; &#12518;&#12540;&#12470;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12434;&#38283;&#12367; &gt; &#12486;&#12531;&#12503;&#12524;&#12540;&#12488;&#12301;</i>&#12398;&#36984;&#25246;&#12395;&#12424;&#12387;&#12390;&#38283;&#12367;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12395;&#26684;&#32013;&#12377;&#12428;&#12400;&#12289;&#12371;&#12428;&#12434; &quot;standard-1.6.mm&quot; &#12395;&#25351;&#23450;&#12377;&#12427;&#12371;&#12392;&#12364;&#12391;&#12365;&#12414;&#12377;&#12290;&#160; <content ename="content"/>
       </li>
       <li>
         <i>&#12300;&#12484;&#12540;&#12523;&#160;&gt; &#29872;&#22659;&#35373;&#23450;&#12301;</i>&#12391;&#27161;&#28310;&#12510;&#12452;&#12531;&#12489;&#12510;&#12483;&#12503;&#65339;&#12501;&#12449;&#12452;&#12523;&#65341;&#12434;&#21029;&#12398;&#21517;&#31216;&#12418;&#12398;&#12418;&#12395;&#25351;&#23450;&#12377;&#12427;&#12371;&#12392;&#12418;&#12391;&#12365;&#12414;&#12377;&#12290;
@@ -8966,7 +8955,6 @@
 <attribute NAME="Chapter" VALUE="4"/>
 <cloud COLOR="#f0f0f0" SHAPE="ARC"/>
 <node TEXT="&#x30b9;&#x30bf;&#x30a4;&#x30eb;&#xff08;&#x53ca;&#x3073;&#x30ce;&#x30fc;&#x30c9;&#x30c6;&#x30f3;&#x30d7;&#x30ec;&#x30fc;&#x30c8;)" ID="ID_402718478" CREATED="1455910949024" MODIFIED="1455910949024" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="117.0 pt"/>
 <attribute NAME="Chapter" VALUE="4"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Definition" LAST="false"/>
@@ -10552,7 +10540,6 @@
   </body>
 </html>
 </richcontent>
-<attribute_layout NAME_WIDTH="61.5 pt" VALUE_WIDTH="117.0 pt"/>
 <attribute NAME="Chapter" VALUE="1,2"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Definition" LAST="false"/>
@@ -11120,7 +11107,6 @@
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="Method" LAST="false"/>
 </hook>
-<attribute_layout NAME_WIDTH="51.0 pt" VALUE_WIDTH="51.0 pt"/>
 <attribute NAME="Chapter" VALUE="9"/>
 </node>
 <node TEXT="&#x8a72;&#x5f53;&#x30ce;&#x30fc;&#x30c9;&#x3092;&#x5168;&#x3066;&#x9078;&#x629e;" ID="ID_738746195" CREATED="1455910949064" MODIFIED="1455910949064" TEXT_SHORTENED="true">
@@ -11665,7 +11651,6 @@
 </node>
 </node>
 <node TEXT="&#x30c4; &#x30fc; &#x30eb;" STYLE_REF="MainMenu" FOLDED="true" ID="ID_210475551" CREATED="1455910949077" MODIFIED="1455910949077" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="27.75 pt" VALUE_WIDTH="57.75 pt"/>
 <attribute NAME="Chapter" VALUE="3,6,7,8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MainMenu" LAST="false"/>
@@ -12946,7 +12931,7 @@
 </hook>
 </node>
 <node TEXT="&#x6a19;&#x6e96;&#x30c6;&#x30f3;&#x30d7;&#x30ec;&#x30fc;&#x30c8;&#x30d5;&#x30a1;&#x30a4;&#x30eb;" FOLDED="true" ID="ID_1199778737" CREATED="1455910949099" MODIFIED="1455910949099" TEXT_SHORTENED="true">
-<node TEXT="standard.mm" ID="ID_95697114" CREATED="1455910949099" MODIFIED="1455910949099" TEXT_SHORTENED="true">
+<node TEXT="standard-1.6.mm" ID="ID_95697114" CREATED="1455910949099" MODIFIED="1455910949099" TEXT_SHORTENED="true">
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="OptionalValue" LAST="false"/>
 </hook>
@@ -13627,7 +13612,6 @@
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
 </hook>
-<attribute_layout NAME_WIDTH="34.5 pt" VALUE_WIDTH="34.5 pt"/>
 <attribute NAME="Chapter" VALUE="3,8"/>
 </node>
 </node>
@@ -13738,7 +13722,6 @@
 <node TEXT="" ID="ID_990360666" CREATED="1455910949183" MODIFIED="1455910949183">
 <hook NAME="SummaryNode"/>
 <node TEXT="&#x57fa;&#x672c;&#x52d5;&#x4f5c;" ID="ID_155279064" CREATED="1455910949103" MODIFIED="1455910949103" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="54.75 pt" VALUE_WIDTH="77.25 pt"/>
 <attribute NAME="Chapter" VALUE="8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
@@ -13806,7 +13789,6 @@
 <node TEXT="" ID="ID_247415093" CREATED="1455910949184" MODIFIED="1455910949184">
 <hook NAME="SummaryNode"/>
 <node TEXT="&#x30c7;&#x30fc;&#x30bf;&#x66f8;&#x5f0f;&#x306e;&#x8a2d;&#x5b9a;&#x3068;&#x89e3;&#x6790;" ID="ID_713876240" CREATED="1455910949104" MODIFIED="1455910949104" TEXT_SHORTENED="true">
-<attribute_layout NAME_WIDTH="34.5 pt" VALUE_WIDTH="111.75 pt"/>
 <attribute NAME="Chapter" VALUE="4,8"/>
 <hook NAME="NodeConditionalStyles">
     <conditional_style ACTIVE="true" STYLE_REF="MenuGroupLabel" LAST="false"/>
@@ -17848,7 +17830,6 @@
 <node TEXT="&#x5236;&#x9650;&#x4e8b;&#x9805;&#x3068;&#x65e2;&#x77e5;&#x306e;&#x30d0;&#x30b0;" FOLDED="true" ID="ID_1288924719" CREATED="1455910949150" MODIFIED="1455910949150">
 <edge STYLE="horizontal"/>
 <node TEXT="&#x30ce;&#x30fc;&#x30c9;&#x304c;&#x4ed6;&#x306e;&#x30ce;&#x30fc;&#x30c9;&#x306e;&#x30c6;&#x30ad;&#x30b9;&#x30c8;&#x306b;&#x91cd;&#x8907;&#x8868;&#x793a;" ID="ID_416103426" CREATED="1455910949150" MODIFIED="1455910949150" LINK="https://sourceforge.net/apps/mantisbt/freeplane/view.php?id=1210" TEXT_SHORTENED="true"/>
-<node TEXT="Flash player &#x306b;&#x3064;&#x3044;&#x3066;" ID="ID_470970220" CREATED="1455910949150" MODIFIED="1455910949150" LINK="https://sourceforge.net/projects/freeplane/forums/forum/758437/topic/4668966" TEXT_SHORTENED="true"/>
 </node>
 <node TEXT="&#x30de;&#x30c3;&#x30d7;&#xff0f;&#x30ce;&#x30fc;&#x30c9;&#x304c;&#x7de8;&#x96c6;&#x3067;&#x304d;&#x306a;&#x3044;" ID="ID_138844829" CREATED="1455910949150" MODIFIED="1455910949150" TEXT_SHORTENED="true"><richcontent TYPE="DETAILS">
 

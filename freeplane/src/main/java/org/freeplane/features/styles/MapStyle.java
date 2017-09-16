@@ -36,8 +36,8 @@ import org.freeplane.core.io.IElementDOMHandler;
 import org.freeplane.core.io.IElementHandler;
 import org.freeplane.core.io.IExtensionElementWriter;
 import org.freeplane.core.io.ITreeWriter;
-import org.freeplane.core.resources.TranslatedObject;
 import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.resources.TranslatedObject;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.undo.IActor;
 import org.freeplane.core.undo.IUndoHandler;
@@ -154,7 +154,6 @@ public class MapStyle extends PersistentNodeHook implements IExtension, IMapLife
 			);
 
 		}
-		modeController.getMapController().addMapLifeCycleListener(this);
 		final MapController mapController = modeController.getMapController();
 		mapController.addMapLifeCycleListener(this);
 	}
@@ -164,12 +163,12 @@ public class MapStyle extends PersistentNodeHook implements IExtension, IMapLife
 		        throws IOException {
 			final MapStyleModel mapStyleModel = (MapStyleModel) extension;
 			final MapModel styleMap = mapStyleModel.getStyleMap();
-			final String el = System.getProperty("line.separator");
 			if (styleMap == null) {
 				return;
 			}
 			final MapWriter mapWriter = Controller.getCurrentModeController().getMapController().getMapWriter();
 			final StringWriter sw = new StringWriter();
+			final String el = System.getProperty("line.separator");
 			sw.append(el);
 			sw.append("<map_styles>");
 			sw.append(el);
@@ -394,7 +393,8 @@ public class MapStyle extends PersistentNodeHook implements IExtension, IMapLife
 		final IExtension oldStyleModel = targetMap.getRootNode().removeExtension(MapStyleModel.class);
 		final ModeController modeController = Controller.getCurrentModeController();
 		final UrlManager urlManager = modeController.getExtension(UrlManager.class);
-		urlManager.loadCatchExceptions(source, styleMapContainer);
+		if (! urlManager.loadCatchExceptions(source, styleMapContainer))
+			return;
 		onCreate(styleMapContainer);
 		moveStyle(styleMapContainer, targetMap, true);
 		modeController.getExtension(AutomaticLayoutController.class).moveExtension(modeController, styleMapContainer, targetMap);

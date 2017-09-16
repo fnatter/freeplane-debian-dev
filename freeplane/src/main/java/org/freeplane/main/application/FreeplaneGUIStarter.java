@@ -28,7 +28,6 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Set;
 
@@ -36,6 +35,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 
 import org.dpolivaev.mnemonicsetter.MnemonicSetter;
@@ -56,6 +56,7 @@ import org.freeplane.features.filter.NextPresentationItemAction;
 import org.freeplane.features.format.FormatController;
 import org.freeplane.features.format.ScannerController;
 import org.freeplane.features.help.HelpController;
+import org.freeplane.features.highlight.HighlightController;
 import org.freeplane.features.icon.IconController;
 import org.freeplane.features.link.LinkController;
 import org.freeplane.features.map.MapController;
@@ -64,7 +65,6 @@ import org.freeplane.features.map.mindmapmode.MMapController;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
 import org.freeplane.features.mode.QuitAction;
-import org.freeplane.features.mode.browsemode.BModeController;
 import org.freeplane.features.mode.filemode.FModeController;
 import org.freeplane.features.mode.mindmapmode.LoadAcceleratorPresetsAction;
 import org.freeplane.features.mode.mindmapmode.MModeController;
@@ -80,7 +80,6 @@ import org.freeplane.main.application.CommandLineParser.Options;
 import org.freeplane.main.application.survey.FreeplaneSurveyProperties;
 import org.freeplane.main.application.survey.SurveyRunner;
 import org.freeplane.main.application.survey.SurveyStarter;
-import org.freeplane.main.browsemode.BModeControllerFactory;
 import org.freeplane.main.filemode.FModeControllerFactory;
 import org.freeplane.main.mindmapmode.MModeControllerFactory;
 import org.freeplane.view.swing.features.nodehistory.NodeHistory;
@@ -165,7 +164,6 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 		try {
 			Controller controller = new Controller(applicationResourceController);
 			Controller.setCurrentController(controller);
-			Compat.macAppChanges();
 			controller.addAction(new QuitAction());
 			applicationResourceController.init();
 			LogUtils.createLogger();
@@ -191,9 +189,15 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 			viewController = new ApplicationViewController(controller, mapViewController, frame);
 			splash = new FreeplaneSplashModern(frame);
 			if (!System.getProperty("org.freeplane.nosplash", "false").equals("true")) {
-				splash.setVisible(true);
+				SwingUtilities.invokeAndWait(new Runnable() {
+					@Override
+					public void run() {
+						splash.setVisible(true);
+					}
+				});
 			}
 			mapViewController.addMapViewChangeListener(applicationResourceController.getLastOpenedList());
+			controller.addExtension(HighlightController.class, new HighlightController());
 			FilterController.install();
 			PrintController.install();
 			FormatController.install(new FormatController());
@@ -210,7 +214,8 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 			controller.addAction(new NextNodeAction(Direction.BACK));
 			controller.addAction(new NextNodeAction(Direction.FORWARD_N_FOLD));
 			controller.addAction(new NextNodeAction(Direction.BACK_N_FOLD));
-			controller.addAction(new NextPresentationItemAction());
+			controller.addAction(NextPresentationItemAction.createFoldingAction());
+			controller.addAction(NextPresentationItemAction.createNotFoldingAction());
 			controller.addAction(new ShowSelectionAsRectangleAction());
 			controller.addAction(new ViewLayoutTypeAction(MapViewLayout.OUTLINE));
 			FilterController.getCurrentFilterController().getConditionFactory().addConditionController(70,
@@ -221,6 +226,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 			if(freeplaneSurveyProperties.mayAskUserToFillSurveys()) {
 				controller.addApplicationLifecycleListener(new SurveyStarter(freeplaneSurveyProperties, new SurveyRunner(freeplaneSurveyProperties), Math.random()));
 			}
+			Compat.macAppChanges();
 			return controller;
 		}
 		catch (final Exception e) {
@@ -238,14 +244,12 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 		mindMapModeController.addUiBuilder(Phase.ACTIONS, "filterConditions", FilterController
 		    .getController(controller)
 		    .getMenuBuilder(), new ChildActionEntryRemover(controller));
-		BModeControllerFactory.createModeController();
 		FModeControllerFactory.createModeController();
     }
 
 	public void buildMenus(final Controller controller, final Set<String> plugins) {
 		LoadAcceleratorPresetsAction.install(controller.getModeController(MModeController.MODENAME));
 	    buildMenus(controller, plugins, MModeController.MODENAME, "/xml/mindmapmodemenu.xml");
-	    buildMenus(controller, plugins, BModeController.MODENAME, "/xml/browsemodemenu.xml");
 	    buildMenus(controller, plugins, FModeController.MODENAME, "/xml/filemodemenu.xml");
 	    ResourceController.getResourceController().getAcceleratorManager().loadAcceleratorPresets();
     }
@@ -290,8 +294,16 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
                 catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                fireStartupFinished();
-                MenuUtils.executeMenuItems(options.getMenuItemsToExecute());
+		        
+		        UITools.executeWhenNodeHasFocus(new Runnable() {
+					@Override
+					public void run() {
+		                fireStartupFinished();
+		                MenuUtils.executeMenuItems(options.getMenuItemsToExecute());
+		                if(options.shouldStopAfterLaunch())
+		                	System.exit(0);
+					}
+				});
             }
 
 			private void focusCurrentView() {

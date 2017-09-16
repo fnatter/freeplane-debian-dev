@@ -26,7 +26,6 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.Action;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -123,8 +122,7 @@ class AttributeRegistryTable extends JTable {
 		}
 	}
 
-	static final private Icon checkBoxImage = new ImageIcon(ResourceController.getResourceController().getResource(
-	    "/images/checkbox12.png"));
+	static final private Icon checkBoxImage = ResourceController.getResourceController().getIcon("/images/checkbox12.png");
 	private static final ButtonRenderer editButtonRenderer = new ButtonRenderer(AttributeManagerDialog.editButtonImage,
 	    TextUtils.getText("attributes_edit_tooltip"));
 	/**

@@ -185,6 +185,14 @@ public interface Proxy {
 		/** sets name and value of the attribute at the given index. This method will not create new attributes.
 		 * @throws IndexOutOfBoundsException if index is out of range, i. e. {@code index < 0 || index >= size()}.*/
 		void set(final int index, final String name, final Object value);
+		
+		/** sets name, value and format pattern of the attribute at the given index. This method will not create new attributes.
+		 * @throws IndexOutOfBoundsException if index is out of range, i. e. {@code index < 0 || index >= size()}.*/
+		public void set(final int index, final String name, final Object value, String format);
+		
+		/** sets format pattern to  the attribute at the given index.
+		 * @throws IndexOutOfBoundsException if index is out of range, i. e. {@code index < 0 || index >= size()}.*/
+		public void setFormat(final int index, String format);
 
 		/** removes the <em>first</em> attribute with this name.
 		 * @return true on removal of an existing attribute and false otherwise.
@@ -206,6 +214,9 @@ public interface Proxy {
 
 		/** adds an attribute no matter if an attribute with the given name already exists. */
 		void add(final String name, final Object value);
+		
+		/** adds an attribute with formatting pattern no matter if an attribute with the given name already exists. */
+		public void add(final String name, final Object value, String format);
 
 		/** removes all attributes.
 		 * @since 1.2 */
@@ -1083,8 +1094,8 @@ public interface Proxy {
 		 * @deprecated since 1.2 - use getPlainText() or getTo().getPlain() instead. */
 		String getPlainTextContent();
 
-		/** Plain text after removal of possible HTML markup.
-		 * Possible transformations (formula evaluation, formatting, ...) are not applied.
+		/** The node text as HTML markup. Returns the same as {@link NodeProxy#getText()} if the node text
+		 * already is HTML or converts the plain text to HTML otherwise.
 		 * @since 1.2 */
 		String getHtmlText();
 

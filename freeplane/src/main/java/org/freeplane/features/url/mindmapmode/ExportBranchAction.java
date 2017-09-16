@@ -42,6 +42,7 @@ import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.map.mindmapmode.MMapController;
 import org.freeplane.features.mode.Controller;
+import org.freeplane.features.mode.MapExtensions;
 import org.freeplane.features.mode.ModeController;
 import org.freeplane.features.mode.PersistentNodeHook;
 import org.freeplane.features.mode.mindmapmode.MModeController;
@@ -138,35 +139,36 @@ class ExportBranchAction extends AFreeplaneAction {
 					}
 
 					public void act() {
-						existingNode.setParent(null);
 						existingNode.setFolded(false);
-						mMapController.newModel(existingNode);
 					}
 				};
 				Controller.getCurrentModeController().execute(actor, parentMap);
 			}
-			final MapModel map = existingNode.getMap();
-			IExtension[] oldExtensions = map.getRootNode().getSharedExtensions().values().toArray(new IExtension[]{});
+			mMapController.newModel(existingNode);
+			final MapModel newMap = existingNode.getMap();
+			IExtension[] oldExtensions = newMap.getRootNode().getSharedExtensions().values().toArray(new IExtension[]{});
 			for(final IExtension extension : oldExtensions){
 				final Class<? extends IExtension> clazz = extension.getClass();
-				if(PersistentNodeHook.isMapExtension(clazz)){
+				if(MapExtensions.isMapExtension(clazz)){
 					existingNode.removeExtension(clazz);
 				}
 			}
 			final Collection<IExtension> newExtensions = parentMap.getRootNode().getSharedExtensions().values();
 			for(final IExtension extension : newExtensions){
 				final Class<? extends IExtension> clazz = extension.getClass();
-				if(PersistentNodeHook.isMapExtension(clazz)){
+				if(MapExtensions.isMapExtension(clazz)){
 					existingNode.addExtension(extension);
 				}
 			}
-			((MFileManager) UrlManager.getController()).save(map, chosenFile);
+			((MFileManager) UrlManager.getController()).save(newMap, chosenFile);
 			final NodeModel newNode = mMapController.addNewNode(parent, nodePosition, existingNode.isLeft());
 			((MTextController) TextController.getController()).setNodeText(newNode, existingNode.getText());
 			modeController.undoableCopyExtensions(LogicalStyleKeys.NODE_STYLE, existingNode, newNode);
-			map.getFile();
+			newMap.getFile();
 			((MLinkController) LinkController.getController()).setLink(newNode, newUri, LinkController.LINK_ABSOLUTE);
-			map.destroy();
+			newMap.destroy();
+			existingNode.setParent(null);
+			mMapController.select(newNode);
 		}
 	}
 
