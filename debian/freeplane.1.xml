@@ -7,7 +7,7 @@
   <!ENTITY dhfirstname "<firstname>Eric</firstname>">
   <!ENTITY dhsurname   "<surname>Lavarde</surname>">
   <!-- Please adjust the date whenever revising the manpage. -->
-  <!ENTITY dhdate      "<date>December, 10th, 2016</date>">
+  <!ENTITY dhdate      "<date>September, 15th, 2017</date>">
   <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
        allowed: see man(7), man(1). -->
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
@@ -19,7 +19,7 @@
   <!ENTITY debian      "<productname>Debian</productname>">
   <!ENTITY gnu         "<acronym>GNU</acronym>">
   <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
-  <!ENTITY version     "1.5.18">
+  <!ENTITY version     "1.6.6">
 ]>
 
 <refentry>
@@ -194,6 +194,27 @@
 
     </variablelist>
 
+  </refsect1>
+
+  <refsect1>
+    <title>NEW FEATURES IN 1.6.x</title>
+    <variablelist>
+      <varlistentry>
+        <term>SVG Icons</term>
+        <listitem>
+          <para>All icons are SVGs, the size can be changed per node
+	  via the Tools panel.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Presentations</term>
+        <listitem>
+          <para>Very powerful presentations can be created via the
+          Tools panel. If you have questions about the usage,
+	  post in the discussion forum.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1>
