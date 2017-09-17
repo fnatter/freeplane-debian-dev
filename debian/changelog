@@ -11,6 +11,7 @@ freeplane (1.6.6-1) unstable; urgency=medium
   * Update man page
   * Switch to compat level 10
   * Update standards-version to 4.1.0 (no changes)
+  * d/control: Change priority to optional.
 
  -- Felix Natter <fnatter@gmx.net>  Sun, 17 Sep 2017 16:41:53 +0200
 

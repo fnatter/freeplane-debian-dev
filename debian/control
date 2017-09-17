@@ -2,7 +2,7 @@ Source: freeplane
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
 Uploaders: Felix Natter <fnatter@gmx.net>
 Section: editors
-Priority: extra
+Priority: optional
 Build-Depends: debhelper (>= 10),
                docbook-xsl,
                docbook-xml,
