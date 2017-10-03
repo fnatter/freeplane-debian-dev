@@ -1,3 +1,11 @@
+freeplane (1.6.6-2) unstable; urgency=medium
+
+  * Minor update to trigger rebuild because 1.6.6-1 in archive seems broken
+  * Update standards-version to 4.1.1 (no changes)
+  * Remove jython build dep which is not needed with libbatik-java >= 1.9-3
+
+ -- Felix Natter <fnatter@gmx.net>  Tue, 03 Oct 2017 14:33:17 +0200
+
 freeplane (1.6.6-1) unstable; urgency=medium
 
   * New upstream release.
