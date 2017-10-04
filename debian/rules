@@ -8,7 +8,7 @@ DEB_COMPRESS_EXCLUDE := .mm .pdf
 
 
 %:
-	dh $@ --buildsystem=gradle
+	dh $@ --buildsystem=gradle --no-parallel
 
 override_dh_auto_build:
 	dh_auto_build -- build -x test -x check_translation
