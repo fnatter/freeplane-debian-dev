@@ -18,8 +18,8 @@ def textFilesIncludeSpec(dir) {
                 dir + '/**/*.gradle']
 }
 
-def buildFilesIncludeSpec() {
-    return ['*/build/**', '*/bin/**']
+def buildFiles() {
+    return ['*/build/**', '*/bin/**', '*/apt_generated/**']
 }
 
 def miscExcludedFilesSpec() {
@@ -44,12 +44,12 @@ task srcTarGz(type: Tar) {
         include(textFilesIncludeSpec('JOrtho_0.4_freeplane'))
 
         // exclude gradle/eclipse build files for all projects:
-        exclude(buildFilesIncludeSpec())
+        exclude(buildFiles())
         // exclude misc files:
         exclude(miscExcludedFilesSpec())
 
         filter(FixCrLfFilter.class,
-            eol:FixCrLfFilter.CrLf.newInstance("lf"))
+            eol:FixCrLfFilter.CrLf.newInstance("lf"), fixlast:false)
     }
 
     // all other (source) files
@@ -59,7 +59,7 @@ task srcTarGz(type: Tar) {
         exclude(textFilesIncludeSpec(null))
 
         // exclude gradle/eclipse build files for all projects:
-        exclude(buildFilesIncludeSpec())
+        exclude(buildFiles())
         // exclude misc files:
         exclude(miscExcludedFilesSpec())
     }
@@ -109,14 +109,14 @@ task srcpureTarGz(type: Tar) {
         include(textFilesIncludeSpec('JOrtho_0.4_freeplane'))
 
         // exclude gradle/eclipse build files for all projects:
-        exclude(buildFilesIncludeSpec())
+        exclude(buildFiles())
         // exclude misc files:
         exclude(miscExcludedFilesSpec())
         // exclude additional srcpure stuff
         exclude(srcpureAdditionalExcludeSpec())
 
         filter(FixCrLfFilter.class,
-            eol:FixCrLfFilter.CrLf.newInstance("lf"))
+            eol:FixCrLfFilter.CrLf.newInstance("lf"), fixlast:false)
     }
 
     // all other (source) files
@@ -126,7 +126,7 @@ task srcpureTarGz(type: Tar) {
         exclude(textFilesIncludeSpec(null))
 
         // exclude gradle/eclipse build files for all projects:
-        exclude(buildFilesIncludeSpec())
+        exclude(buildFiles())
         // exclude misc files:
         exclude(miscExcludedFilesSpec())
         // exclude additional srcpure stuff
