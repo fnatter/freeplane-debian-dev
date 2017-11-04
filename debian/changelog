@@ -1,11 +1,12 @@
-freeplane (1.6.10-1) UNRELEASED; urgency=medium
+freeplane (1.6.10-1) unstable; urgency=medium
 
   * New upstream release.
     * PDF/SVG export fixed and re-enabled
   * depend on jlatexmath >= 1.0.6
   * re-worked plugin-svg dependencies
+  * bump version in man page
 
- -- Felix Natter <fnatter@gmx.net>  Sat, 04 Nov 2017 09:45:08 +0100
+ -- Felix Natter <fnatter@gmx.net>  Sat, 04 Nov 2017 10:41:23 +0100
 
 freeplane (1.6.6-3) unstable; urgency=medium
 
