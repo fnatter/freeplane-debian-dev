@@ -1,11 +1,7 @@
 #!/usr/bin/make -f
-# See debhelper(7) (uncomment to enable)
-# output every command that modifies files on the build system.
 #DH_VERBOSE = 1
 
 DEB_COMPRESS_EXCLUDE := .mm .pdf
-#DEB_DH_INSTALL_ARGS := -XLICENSE.txt
-
 
 %:
 	dh $@ --buildsystem=gradle --no-parallel
