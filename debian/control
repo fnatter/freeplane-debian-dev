@@ -3,7 +3,7 @@ Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.or
 Uploaders: Felix Natter <fnatter@gmx.net>
 Section: editors
 Priority: optional
-Build-Depends: debhelper (>= 10),
+Build-Depends: debhelper (>= 11),
                docbook-xsl,
                docbook-xml,
                xsltproc,
