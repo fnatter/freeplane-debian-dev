@@ -103,6 +103,15 @@ subprojects {
         delete(project.file(".settings"))
     }
     cleanEclipseJdt.dependsOn cleanEclipseSettings
+	
+	if (project.hasProperty('TestLoggingFull')) {
+		test {
+			testLogging {
+				events "failed"
+				exceptionFormat "full"
+			}
+		}
+	}
 }
 
 // OSGi projects (/plugin/, freeplane) need this for compilation (e.g. resolve Bundle),
@@ -159,13 +168,13 @@ configure(subprojects.findAll {it.name =~ /plugin/ || it.name =~ /^freeplane$/ }
         whenMerged { classpath ->
            for (entry in classpath.entries)
            {
-               if (entry.getKind().equals('lib'))
+               if (entry.kind.equals('lib'))
                {
                    def jarName = new File(entry.path).name
-                   def localDep = project.configurations.runtime.files.any { it.name.equals(jarName) }
-                   if (localDep)
+                   def localDep = project.configurations.runtime.files.any { it.name.equals(jarName)}
+                   if (localDep && file('build/libs/' + jarName).exists())
                    {
-                       entry.path = "build/libs/" + jarName
+                       entry.path = 'build/libs/' + jarName
                    }
                }
            }

@@ -33,6 +33,7 @@
 			<Entry builder="main_toolbar_font_size" />
 			<Entry name="BoldAction" />
 			<Entry name="ItalicAction" />
+			<Entry name="StrikeThroughAction"/>
 		</Entry>
 		<Entry builder="separator" />
 		<Entry>
@@ -241,6 +242,7 @@
 				<Entry name="ToggleFBarAction" />
 				<Entry name="ToggleLeftToolbarAction" />
 				<Entry name="ToggleStatusAction" />
+				<Entry name="SetBooleanPropertyAction.show_creation_modification_in_status" />
 				<Entry name="ToggleScrollbarsAction" />
 				<Entry name="ShowFormatPanel" accelerator="alt P" />
 			</Entry>
@@ -252,6 +254,7 @@
 			<Entry builder="separator" />
 			<Entry name="menu_viewmode">
 				<Entry name="ViewLayoutTypeAction.OUTLINE" />
+				<Entry name="SetBooleanPropertyAction.outline_view_fits_window_width" />
 				<Entry name="ToggleFullScreenAction" accelerator="F11" />
 				<Entry name="SetBooleanMapViewPropertyAction.spotlight" />
 				<Entry name="SetBooleanPropertyAction.show_icons" />
@@ -272,7 +275,7 @@
 			<Entry name="menu_hoverView">
 				<Entry name="SetBooleanPropertyAction.show_node_tooltips" />
 				<Entry name="SetBooleanPropertyAction.show_styles_in_tooltip" />
-				<Entry name="CreationModificationPluginAction" />
+				<Entry name="SetBooleanPropertyAction.show_creation_modification_in_tooltip" />
 			</Entry>
 			<Entry name="menu_displayAttributes">
 				<Entry builder="radio_button_group">
@@ -327,6 +330,7 @@
 			<Entry name="menu_coreFormat">
 				<Entry name="BoldAction" accelerator="control B" />
 				<Entry name="ItalicAction" accelerator="control I" />
+				<Entry name="StrikeThroughAction"/>
 				<Entry name="IncreaseNodeFontAction" accelerator="control PLUS" />
 				<Entry name="DecreaseNodeFontAction" accelerator="control MINUS" />
 				<Entry builder="separator" />
@@ -473,7 +477,7 @@
 			<Entry builder="separator" />
 			<Entry name="OpenUserDirAction" />
 			<Entry builder="separator" />
-			<Entry name="PropertyAction" accelerator="control COMMA" builder="removeOnMac"/>
+			<Entry name="ShowPreferencesAction" accelerator="control COMMA" builder="removeOnMac"/>
 			<Entry builder="conditionalActionBuilder" property="enableUserDefinedInterfaceStrings" 
 				actionKey="TextChangeHotKeyAction" 
 				actionClass="org.freeplane.core.ui.textchanger.TextChangeHotKeyAction" 
