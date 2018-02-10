@@ -83,6 +83,7 @@
 			<Entry name="menu_coreFormat">
 				<Entry accelerator="control B" name="BoldAction" />
 				<Entry accelerator="control I" name="ItalicAction" />
+				<Entry name="StrikeThroughAction"/>
 				<Entry accelerator="control PLUS" name="IncreaseNodeFontAction" />
 				<Entry accelerator="control MINUS" name="DecreaseNodeFontAction" />
 				<Entry builder="separator" />
@@ -137,8 +138,8 @@
 			<Entry name="AboutAction" builder="removeOnMac"/>
 		</Entry>
 	</Entry>
-	<Entry name="map_popup">
-		<Entry name="ToggleMenubarAction" builder="MP_ToggleMenubarAction" />
+	<Entry name="map_popup" builder="map_popup">
+		<Entry name="ToggleMenubarAction" />
 		<Entry name="ToggleToolbarAction" />
 		<Entry name="ToggleLeftToolbarAction" />
 	</Entry>
@@ -163,6 +164,7 @@
 			<Entry name="toolbar_fonts" builder="main_toolbar_font_size" />
 			<Entry name="BoldAction" />
 			<Entry name="ItalicAction" />
+			<Entry name="StrikeThroughAction"/>
 		</Entry>
 		<Entry builder="separator" />
 		<Entry>

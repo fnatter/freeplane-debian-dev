@@ -25,19 +25,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URI;
-import java.util.Collection;
-
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import org.freeplane.core.util.TextUtils;
-import org.freeplane.features.map.INodeView;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.url.UrlManager;
 import org.freeplane.view.swing.features.progress.mindmapmode.ProgressUtilities;
 import org.freeplane.view.swing.map.MainView;
-import org.freeplane.view.swing.map.NodeView;
 
 /**
  * @author Stefan Ott
@@ -76,19 +72,7 @@ class ExternalImagePopupMenu extends JPopupMenu implements MouseListener {
 			remove = new JMenuItem(TextUtils.getText("ExternalImage_popupMenu_Remove"));
 			remove.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					final ExternalResource extRes = node.getExtension(ExternalResource.class);
 					if (progUtil.hasExternalResource(node) && !progUtil.hasExtendedProgressIcon(node)) {
-						viewer.remove(node, extRes);
-						NodeView nv = null;
-						final Collection<INodeView> invs = Controller.getCurrentController().getModeController()
-						    .getMapController().getSelectedNode().getViewers();
-						for (final INodeView inv : invs) {
-							if (inv instanceof NodeView) {
-								nv = (NodeView) inv;
-								break;
-							}
-						}
-						viewer.deleteViewer(extRes, nv);
 						viewer.undoableDeactivateHook(node);
 						Controller.getCurrentModeController().getMapController().nodeChanged(node,
 						    NodeModel.UNKNOWN_PROPERTY, null, null);

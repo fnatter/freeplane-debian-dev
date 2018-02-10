@@ -1,11 +1,13 @@
 dependencies {
-    compile project(':freeplane')
-    compile project(':freeplane_plugin_jsyntaxpane')
+    compileOnly project(':freeplane')
+	testCompile project(':freeplane')
+    compileOnly project(':freeplane_plugin_jsyntaxpane')
+	testCompile project(':freeplane_plugin_jsyntaxpane')
     compile 'org.codehaus.groovy:groovy-all:2.3.1'
 	compile ('org.freeplane.securegroovy:groovy-patcher:0.0.2') {
 		transitive = false
 	}
-    compile 'net.bytebuddy:byte-buddy:1.6.9'
+    compile 'net.bytebuddy:byte-buddy:1.7.9'
 }
 
 tasks.withType(JavaCompile) {
@@ -18,7 +20,7 @@ jar {
         name = pluginid
         symbolicName = pluginid
 
-        configurations.runtime.transitive = false
+        
         def deps = filterAndExternalizePluginDependencies(configurations.runtime.files)
         deps.add(0, "lib/plugin-" + project.version + '.jar')
 
