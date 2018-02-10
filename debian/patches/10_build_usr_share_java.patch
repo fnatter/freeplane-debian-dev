@@ -86,7 +86,7 @@ Last-Update: 2016-02-04
      dependencies {
          testCompile 'junit:junit:4.11'
          testCompile 'org.assertj:assertj-core:2.6.0'
-@@ -108,14 +121,9 @@
+@@ -117,14 +130,9 @@
  // OSGi projects (/plugin/, freeplane) need this for compilation (e.g. resolve Bundle),
  // and freeplane_framework needs to copy it to BUILD/framework.jar
  configure(subprojects.findAll {it.name =~ /plugin/ || it.name =~ /^freeplane$/ || it.name =~ /^freeplane_framework$/}){
@@ -103,7 +103,7 @@ Last-Update: 2016-02-04
      }
  }
  
-@@ -128,11 +136,13 @@
+@@ -137,11 +145,13 @@
      else
         ext.pluginid = project.name.replace("freeplane_plugin_", "org.freeplane.plugin.")
  
@@ -122,7 +122,7 @@ Last-Update: 2016-02-04
  
      task filterOSGiManifestForEclipse(type: Copy) {
          from('build/tmp/jar/MANIFEST.MF') {
-@@ -184,18 +194,9 @@
+@@ -193,18 +203,9 @@
  configure(subprojects.findAll {it.name =~ /plugin/ }) {
  
      task copyOSGiJars(type: Copy) {
@@ -184,7 +184,7 @@ Last-Update: 2016-02-04
  }
  
  sourceSets {
-@@ -181,16 +181,17 @@
+@@ -187,16 +187,17 @@
  }
  
  task copyOSGiJars(type: Copy) {
@@ -211,7 +211,7 @@ Last-Update: 2016-02-04
       }
       into(globalBin + '/core/' + pluginid + '/lib/')
  }
-@@ -315,7 +316,7 @@
+@@ -321,7 +322,7 @@
  jar.dependsOn viewerJar
  jar.dependsOn editorJar
  jar.dependsOn osgiJar
@@ -222,8 +222,8 @@ Last-Update: 2016-02-04
  build.dependsOn copyExternalResources
 --- a/freeplane_plugin_jsyntaxpane/build.gradle
 +++ b/freeplane_plugin_jsyntaxpane/build.gradle
-@@ -2,7 +2,8 @@
-     compile project(':freeplane')
+@@ -3,7 +3,8 @@
+ 	testCompile project(':freeplane')
  
      // from flatDir "localGitDepsRepository":
 -    compile ':jsyntaxpane-0.9.6~r156-5' // from the Debian "libjsyntaxpane-java" package
@@ -236,7 +236,7 @@ Last-Update: 2016-02-04
 +++ b/freeplane_plugin_openmaps/build.gradle
 @@ -8,7 +8,8 @@
  dependencies {
-     compile project(':freeplane')
+     compileOnly project(':freeplane')
  
 -    compile 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
 +    //compile 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
@@ -246,18 +246,18 @@ Last-Update: 2016-02-04
  jar {
 --- a/freeplane_plugin_script/build.gradle
 +++ b/freeplane_plugin_script/build.gradle
-@@ -2,10 +2,10 @@
-     compile project(':freeplane')
-     compile project(':freeplane_plugin_jsyntaxpane')
+@@ -4,10 +4,10 @@
+     compileOnly project(':freeplane_plugin_jsyntaxpane')
+ 	testCompile project(':freeplane_plugin_jsyntaxpane')
      compile 'org.codehaus.groovy:groovy-all:2.3.1'
 -	compile ('org.freeplane.securegroovy:groovy-patcher:0.0.2') {
 -		transitive = false
 -	}
--    compile 'net.bytebuddy:byte-buddy:1.6.9'
+-    compile 'net.bytebuddy:byte-buddy:1.7.9'
 +	//compile ('org.freeplane.securegroovy:groovy-patcher:0.0.2') {
 +	//	transitive = false
 +	//}
-+    //compile 'net.bytebuddy:byte-buddy:1.6.9'
++    //compile 'net.bytebuddy:byte-buddy:1.7.9'
  }
  
  tasks.withType(JavaCompile) {

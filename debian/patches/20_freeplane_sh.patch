@@ -20,7 +20,7 @@ Last-Update: 2016-05-05
  ########## FUNCTIONS DEFINITIONS #######################################
  
  _debug() {
-@@ -29,36 +36,36 @@
+@@ -29,31 +36,31 @@
  
  findjava() {
  	# We try hard to find the proper 'java' command
@@ -58,18 +58,12 @@ Last-Update: 2016-05-05
 -			"$JAVACMD" -version >&2
 +			"$JAVA_CMD" -version >&2
  		fi
--		if (! "${JAVACMD}" -version 2>&1 | grep -qe 'Java(TM)' -e OpenJDK); then
-+		if (! "${JAVA_CMD}" -version 2>&1 | grep -qe 'Java(TM)' -e OpenJDK); then
- 			_error "Your Java is not a derivative from Sun's code," \
- 			       "========================================" \
- 			       "FREEPLANE WILL MOST PROBABLY *NOT* WORK," \
- 			       "========================================" \
--			       "define JAVACMD, JAVA_BINDIR, JAVA_HOME or PATH" \
-+			       "define JAVA_CMD, JAVA_BINDIR, JAVA_HOME or PATH" \
- 			       "in order to point to such a VM." \
- 			       "See the manpage of freeplane(1) for details."
+-		if "${JAVACMD}" -version 2>&1 | grep -qe OpenJDK; then
++		if "${JAVA_CMD}" -version 2>&1 | grep -qe OpenJDK; then
  			JAVA_TYPE=other
-@@ -68,7 +75,7 @@
+ 		else
+ 			JAVA_TYPE=sun
+@@ -61,7 +68,7 @@
  		return 0
  	else
  		_error "Couldn't find a java virtual machine," \
@@ -78,7 +72,7 @@ Last-Update: 2016-05-05
  		return 1
  	fi
  }
-@@ -119,9 +126,16 @@
+@@ -112,9 +119,16 @@
  _source /etc/freeplane/freeplanerc
  _source "${userfpdir}/freeplanerc"
  
@@ -98,7 +92,7 @@ Last-Update: 2016-05-05
  fi
  
  output_debug_info
-@@ -179,7 +193,8 @@
+@@ -176,7 +190,8 @@
  fi
  
  _debug "Calling: "\
@@ -108,7 +102,7 @@ Last-Update: 2016-05-05
   "-Dorg.freeplane.userfpdir=$userfpdir"\
   "-Dorg.freeplane.old_userfpdir=$old_userfpdir"\
   "-Dorg.freeplane.globalresourcedir=${freedir}/resources"\
-@@ -191,7 +206,8 @@
+@@ -188,7 +203,8 @@
  ( echo "${DEBUG}" | grep -qe "exit" ) && exit 0 # do not start Freeplane
  
  # now actually launch Freeplane
