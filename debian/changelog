@@ -1,3 +1,9 @@
+freeplane (1.5.18-1+deb9u4) UNRELEASED; urgency=medium
+
+  * fix CVE-2018-1000069
+
+ -- Felix Natter <fnatter@gmx.net>  Sat, 31 Mar 2018 17:27:23 +0200
+
 freeplane (1.5.18-1) unstable; urgency=medium
 
   * New upstream release.
