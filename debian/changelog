@@ -1,8 +1,11 @@
-freeplane (1.5.18-1+deb9u1) unstable; urgency=medium
+freeplane (1.5.18-1+deb9u1) stretch-security; urgency=high
 
-  * fix CVE-2018-1000069
+  * Fix CVE-2018-1000069: Wojciech Reguła discovered that FreePlane was
+    affected by a XML External Entity (XXE) vulnerability in its mindmap
+    loader that could compromise a user's machine by opening a specially
+    crafted mind map file. (Closes: #893663)
 
- -- Felix Natter <fnatter@gmx.net>  Sun, 01 Apr 2018 15:53:49 +0200
+ -- Felix Natter <fnatter@gmx.net>  Sun, 01 Apr 2018 17:55:27 +0200
 
 freeplane (1.5.18-1) unstable; urgency=medium
 
