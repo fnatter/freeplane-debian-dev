@@ -1,0 +1,8 @@
+freeplane (1.6.15-1) unstable; urgency=medium
+
+    Sometimes the PDF Export takes very long. In 1.6.15, you can change
+    the following option in order to work around this:
+    [x] Tools->Preferences->Environment->Export
+       ->Convert texts to shapes in exported PDF 
+
+ -- Felix Natter <fnatter@gmx.net>  Sat, 26 May 2018 12:47:35 +0200
