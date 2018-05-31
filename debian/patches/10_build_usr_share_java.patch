@@ -222,12 +222,12 @@ Last-Update: 2016-02-04
  build.dependsOn copyExternalResources
 --- a/freeplane_plugin_jsyntaxpane/build.gradle
 +++ b/freeplane_plugin_jsyntaxpane/build.gradle
-@@ -3,7 +3,8 @@
- 	testCompile project(':freeplane')
- 
+@@ -5,7 +5,8 @@
      // from flatDir "localGitDepsRepository":
--    compile ':jsyntaxpane-0.9.6~r156-5' // from the Debian "libjsyntaxpane-java" package
-+    //compile ':jsyntaxpane-0.9.6~r156-5' // from the Debian "libjsyntaxpane-java" package
+     // from the Debian "libjsyntaxpane-java" package:
+     // https://anonscm.debian.org/cgit/pkg-java/libjsyntaxpane-java.git
+-    compile ':jsyntaxpane-0.9.6~r156-7' 
++    //compile ':jsyntaxpane-0.9.6~r156-7'
 +    compile ':jsyntaxpane'
  }
  
@@ -281,3 +281,68 @@ Last-Update: 2016-02-04
  }
  
  // clean
+--- a/freeplane_plugin_svg/build.gradle
++++ b/freeplane_plugin_svg/build.gradle
+@@ -1,16 +1,58 @@
++// dependencies {
++//     compileOnly project(':freeplane')
++// 	testCompile project(':freeplane')
++
++// 	// libbatik-java / batik-*.jar:
++// 	compile ('org.apache.xmlgraphics:batik-transcoder:1.9.1')
++	
++// 	compile 'org.apache.xmlgraphics:batik-swing:1.9.1'
++// 	compile 'org.apache.xmlgraphics:batik-codec:1.9.1'
++// 	compile 'org.apache.xmlgraphics:fop:2.1'
++// 	compile 'commons-logging:commons-logging:1.2'
++// }
++
+ dependencies {
+     compileOnly project(':freeplane')
+ 	testCompile project(':freeplane')
+ 
+ 	// libbatik-java / batik-*.jar:
+-	compile ('org.apache.xmlgraphics:batik-transcoder:1.9.1')
++	compile ('org.apache.xmlgraphics:batik-all:1.9.1') {
++		transitive = false
++	}
+ 	
+-	compile 'org.apache.xmlgraphics:batik-swing:1.9.1'
+-	compile 'org.apache.xmlgraphics:batik-codec:1.9.1'
+-	compile 'org.apache.xmlgraphics:fop:2.1'
++	// libxml-commons-external-java 1.4.01:
++	// org.w3c.dom.svg.SVGDocument
++	//compile 'org.apache.xmlgraphics:xmlgraphics-commons:2.2': does not help!
++	compile 'xml-apis:xml-apis:1.4.01'
++	compile 'xml-apis:xml-apis-ext:1.3.04'
++	
++	// org.apache.xmlgraphics.java2d.color.NamedColorSpace
++	// libxmlgraphics-commons-java / xmlgraphics-commons.jar:
++	compile (group: 'org.apache.xmlgraphics', name: 'xmlgraphics-commons', version: '2.2') {
++		transitive = false
++	}
++
++	// libfop-java / fop.jar:
++	compile (group: 'org.apache.xmlgraphics', name: 'fop', version: '2.1') {
++		transitive = false
++	}
++
++	// libavalon-framework-java / avalon-framework.jar:
++	// PDF problem: org.apache.avalon.framework.configuration.Configurable
++	// PDF problem: org.apache.avalon.framework.configuration.DefaultConfiguration
++	compile group: 'org.apache.avalon.framework', name: 'avalon-framework-impl', version: '4.3.1'
++
++	// libcommons-logging-java / commons-logging.jar:
++	// PDF problem: org.apache.commons.logging.Log
+ 	compile 'commons-logging:commons-logging:1.2'
++
++	// PDF problem: org.apache.commons.io.output.ByteArrayOutputStream
++	// PDF problem: org.apache.commons.io.IOUtils
++	// PDF problem: org.apache.commons.io.filefilter.IOFileFilter
++	// --> import from core bundle!
+ }
+ 
++
+ configurations.all {
+     exclude module: 'jython' 
+     exclude module: 'rhino' 
