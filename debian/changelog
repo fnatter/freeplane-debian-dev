@@ -7,7 +7,7 @@ freeplane (1.6.15-1) unstable; urgency=medium
   * Restore old dependency config for plugin_svg
   * Add NEWS entry for long running export workaround
 
- -- Felix Natter <fnatter@gmx.net>  Sun, 20 May 2018 19:13:53 +0200
+ -- Felix Natter <fnatter@gmx.net>  Thu, 31 May 2018 19:33:28 +0200
 
 freeplane (1.6.13-1) unstable; urgency=medium
 
