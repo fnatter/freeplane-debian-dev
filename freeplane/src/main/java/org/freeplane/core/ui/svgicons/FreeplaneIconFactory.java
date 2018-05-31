@@ -1,6 +1,8 @@
 package org.freeplane.core.ui.svgicons;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -11,6 +13,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.util.LogUtils;
 
 import com.kitfox.svg.SVGDiagram;
 import com.kitfox.svg.SVGUniverse;
@@ -111,6 +114,23 @@ public class FreeplaneIconFactory {
 		SVGIconCreator setWidth(final int widthPixels) {
 			icon.setPreferredSize(new Dimension(widthPixels, (int) (widthPixels * aspectRatio)));
 			return this;
+		}
+	}
+
+	public static ImageIcon toImageIcon(Icon icon) {
+		if(icon == null)
+			return null;
+		else if(icon instanceof ImageIcon)
+			return (ImageIcon) icon;
+		else if(icon instanceof CachingIcon)
+			return ((CachingIcon)icon).getImageIcon();
+		else {
+	      int width = icon.getIconWidth();
+	      int height = icon.getIconHeight();
+	      BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	      Graphics g = image.getGraphics();
+	      icon.paintIcon(null, g, 0, 0);
+	      return new ImageIcon(image);
 		}
 	}
 }
