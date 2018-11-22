@@ -44,7 +44,7 @@ Homepage: http://freeplane.org/
 Package: freeplane
 Architecture: all
 Depends: ${misc:Depends},
-         default-jre | java7-runtime,
+         default-jre | java8-runtime,
          javahelp2,
          groovy (>= 2.4.8-2),
          libsvgsalamander-java (>= 1.1.1),
