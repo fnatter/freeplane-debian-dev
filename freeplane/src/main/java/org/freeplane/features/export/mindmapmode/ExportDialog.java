@@ -17,23 +17,23 @@
  */
 package org.freeplane.features.export.mindmapmode;
 
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.text.MessageFormat;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.ExampleFileFilter;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.FileUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.map.MapModel;
+import org.freeplane.features.map.NodeModel;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class uses the JFileChooser dialog to allow users to choose a file name to
@@ -58,8 +58,11 @@ import org.freeplane.features.map.MapModel;
  */
 public class ExportDialog {
 	private static final String LAST_CHOOSEN_EXPORT_FILE_FILTER = "lastChoosenExportFileFilter";
+	public static final String EXPORT_MAP_TITLE = "ExportAction.text";
+	public static final String EXPORT_BRANCHES_TITLE = "ExportBranches.text";
 	/** the JFileChooser dialog used to choose filter and the file to export to. */
 	final private JFileChooser fileChooser = new JFileChooser();
+	final private Map<FileFilter, IExportEngine> exportEngines;
 
 	/**
 	 * This constructor does <i>not</i> the export per itself.
@@ -67,13 +70,13 @@ public class ExportDialog {
 	 * (especially the {@link JFileChooser#getChoosableFileFilters() choosable
 	 * file filters}).
 	 */
-	public ExportDialog() {
+	ExportDialog(List<FileFilter> fileFilters, Map<FileFilter, IExportEngine> exportEngines, String dialogTitle) {
 		super();
+		this.exportEngines = exportEngines;
 		fileChooser.setAcceptAllFileFilterUsed(false); // the user can't select an "All Files filter"
-		fileChooser.setDialogTitle(TextUtils.getText("export_using_xslt"));
+		fileChooser.setDialogTitle(TextUtils.getText(dialogTitle));
 		fileChooser.setToolTipText(TextUtils.getText("select_file_export_to"));
-		final ExportController  exportEngineRegistry = ExportController.getContoller();
-		for (FileFilter filter : exportEngineRegistry.getFileFilters()) {
+		for (FileFilter filter : fileFilters) {
 	        fileChooser.addChoosableFileFilter(filter);
         }
 		preselectFileFilter();
@@ -92,24 +95,15 @@ public class ExportDialog {
 		fileChooser.setFileFilter(fileFilter);
 	}
 
-	/**
-	 * A function to call again and again in order to export the same XML source file.
-	 * @see #export(Component)
-	 */
-	/**
-	 * A function to call again and again in order to export the same XML source file.
-	 * @param parentframe a parent component for the dialogs to appear (can be null).
-	 * @param streamSource 
-	 */
-	void export(final Component parentframe, final MapModel map) {
-		final ExportController exportEngineRegistry = ExportController.getContoller();
-		if (exportEngineRegistry.getFilterMap().isEmpty()) {
+	void export(final Component parentframe, List<NodeModel> branches) {
+		if (exportEngines.isEmpty()) {
 			JOptionPane.showMessageDialog(parentframe, TextUtils.getText("xslt_export_not_possible"));
 			return;
 		}
 		// Finish to setup the File Chooser...
 		// And then use it
 		final String absolutePathWithoutExtension;
+		MapModel map = branches.get(0).getMap();
 		final File xmlSourceFile = map.getFile();
 		if (xmlSourceFile != null) {
 			absolutePathWithoutExtension = FileUtils.removeExtension(xmlSourceFile.getAbsolutePath());
@@ -186,8 +180,8 @@ public class ExportDialog {
 						return;
 					}
 				}
-				final IExportEngine exportEngine = exportEngineRegistry.getFilterMap().get(fileFilter);
-				exportEngine.export(map, selectedFile);
+				final IExportEngine exportEngine = exportEngines.get(fileFilter);
+				exportEngine.export(branches, selectedFile);
 			}
 		}
 		finally {

@@ -47,7 +47,7 @@ public abstract class NodeLinkModel{
 	public NodeModel getTarget() {
 		return getSource().getMap().getNodeForID(getTargetID());
 	}
-	
+
 	public String getTargetID() {
 		return targetID;
 	}
@@ -55,11 +55,11 @@ public abstract class NodeLinkModel{
 	void setTargetID(final String targetID) {
 		this.targetID = targetID;
 	}
-	
+
 	public boolean isSelfLink() {
 		return getSource().createID().equals(getTargetID());
 	}
-	
+
     public Collection<NodeLinkModel> clones() {
 	    final Clones sourceNodeClones = getSource().subtreeClones();
 	    if(sourceNodeClones.size() == 1)

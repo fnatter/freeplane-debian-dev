@@ -22,6 +22,7 @@ package org.freeplane.features.attribute;
 import java.awt.Component;
 import java.awt.Font;
 import java.net.URI;
+
 import org.freeplane.core.extension.IExtension;
 import org.freeplane.core.io.ReadManager;
 import org.freeplane.core.io.WriteManager;
@@ -37,6 +38,7 @@ import org.freeplane.features.icon.UIIcon;
 import org.freeplane.features.icon.factory.IconStoreFactory;
 import org.freeplane.features.map.ITooltipProvider;
 import org.freeplane.features.map.MapController;
+import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.MapReader;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
@@ -54,14 +56,22 @@ public class AttributeController implements IExtension {
 	public static final String SHOW_ICON_FOR_ATTRIBUTES = "show_icon_for_attributes";
 	private static final Integer ATTRIBUTE_TOOLTIP = 7;
 	static private UIIcon attributeIcon = null;
+	static private AttributeSelection attributeSelection;
+
+	public static void setAttributeSelection(AttributeSelection attributeSelection) {
+		if(AttributeController.attributeSelection != null)
+			throw new IllegalStateException();
+		AttributeController.attributeSelection = attributeSelection;
+	}
+
 	public static AttributeController getController() {
 		return getController(Controller.getCurrentModeController());
 	}
 
 	public static AttributeController getController(ModeController modeController) {
-		return (AttributeController) modeController.getExtension(AttributeController.class);
+		return modeController.getExtension(AttributeController.class);
 	}
-	
+
 	public static void install( final AttributeController attributeController) {
 		Controller.getCurrentModeController().addExtension(AttributeController.class, attributeController);
 	}
@@ -82,7 +92,7 @@ public class AttributeController implements IExtension {
 	}
 
 	public NodeAttributeTableModel createAttributeTableModel(final NodeModel node) {
-		NodeAttributeTableModel attributeModel = (NodeAttributeTableModel) node
+		NodeAttributeTableModel attributeModel = node
 		    .getExtension(NodeAttributeTableModel.class);
 		if (attributeModel != null) {
 			return attributeModel;
@@ -96,16 +106,16 @@ public class AttributeController implements IExtension {
 		return attributeModel;
 	}
 
-	public void performInsertRow(final NodeAttributeTableModel model, final int row, final String name,
+	public void performInsertRow(final NodeModel node, final NodeAttributeTableModel model, final int row, final String name,
 	                             final Object value) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performRegistryAttribute(final String name) {
+	public void performRegistryAttribute(MapModel map, final String name) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performRegistryAttributeValue(final String name, final String value, boolean manual) {
+	public void performRegistryAttributeValue(MapModel map, final String name, final String value, boolean manual) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -113,44 +123,45 @@ public class AttributeController implements IExtension {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performRemoveAttribute(final String name) {
+	public void performRemoveAttribute(MapModel map, final String name) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performRemoveAttributeValue(final String name, final Object value) {
+	public void performRemoveAttributeValue(MapModel map, final String name, final Object value) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Attribute performRemoveRow(final NodeAttributeTableModel model, final int row) {
+	public Attribute performRemoveRow(final NodeModel node, final NodeAttributeTableModel model, final int row) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performReplaceAtributeName(final String oldName, final String newName) {
+	public void performReplaceAtributeName(MapModel map, final String oldName, final String newName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performReplaceAttributeValue(final String name, final Object oldO, final Object newO) {
+	public void performReplaceAttributeValue(MapModel map, final String name, final Object oldO, final Object newO) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performSetColumnWidth(final NodeAttributeTableModel model, final int col, final Quantity<LengthUnits> width) {
+	public void performSetColumnWidth(final NodeModel node, final NodeAttributeTableModel model, final int col, final Quantity<LengthUnits> width) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performSetRestriction(final int row, final boolean restricted) {
+	public void performSetRestriction(MapModel map, final int row, final boolean restricted) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performSetValueAt(final NodeAttributeTableModel model, final Object o, final int row, final int col) {
+	public void performSetValueAt(final NodeModel node, final NodeAttributeTableModel model, final Object o, final int row, final int col) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void performSetVisibility(final int index, final boolean isVisible) {
+	public void performSetVisibility(MapModel map, final int index, final boolean isVisible) {
 		throw new UnsupportedOperationException();
 	}
 
 	private void registerTooltipProvider() {
 		modeController.addToolTipProvider(ATTRIBUTE_TOOLTIP, new ITooltipProvider() {
+			@Override
 			public String getTooltip(ModeController modeController, NodeModel node, Component view) {
 				final NodeAttributeTableModel attributes = NodeAttributeTableModel.getModel(node);
 				final int rowCount = attributes.getRowCount();
@@ -163,7 +174,7 @@ public class AttributeController implements IExtension {
 						&& ! textController.isMinimized(node)) {
 					return null;
 				}
-				final NodeStyleController style = (NodeStyleController) modeController.getExtension(NodeStyleController.class);
+				final NodeStyleController style = modeController.getExtension(NodeStyleController.class);
 		        final MapStyleModel model = MapStyleModel.getExtension(node.getMap());
 		        final NodeModel attributeStyleNode = model.getStyleNodeSafe(MapStyleModel.ATTRIBUTE_STYLE);
 		        final Font font = style.getFont(attributeStyleNode);
@@ -210,7 +221,7 @@ public class AttributeController implements IExtension {
 						return unicodeText;
 				}
 				catch (Throwable e) {
-					LogUtils.warn(e.getMessage(), e);
+					LogUtils.warn(e.getMessage());
 					return colorize(
 						TextUtils.format("MainView.errorUpdateText", String.valueOf(value), e.getLocalizedMessage())
 						.replace("\n", "<br>"), "red");
@@ -225,6 +236,7 @@ public class AttributeController implements IExtension {
 
 	private void registerStateIconProvider() {
 	    IconController.getController().addStateIconProvider(new IStateIconProvider() {
+			@Override
 			public UIIcon getStateIcon(NodeModel node) {
 				NodeAttributeTableModel attributes = NodeAttributeTableModel.getModel(node);;
 				if (attributes.getRowCount() == 0) {
@@ -248,8 +260,12 @@ public class AttributeController implements IExtension {
 			}
 		});
     }
-	
+
 	public boolean canEdit() {
 	    return false;
     }
+
+	public static NodeAttribute getSelectedAttribute() {
+		return attributeSelection != null ? attributeSelection.getSelectedAttribute() : null;
+	}
 }

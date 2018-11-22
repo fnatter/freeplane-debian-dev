@@ -51,6 +51,7 @@ import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.AFreeplaneAction;
 import org.freeplane.core.undo.IActor;
 import org.freeplane.core.util.DelayedRunner;
+import org.freeplane.features.explorer.MapExplorerController;
 import org.freeplane.features.filter.FilterController;
 import org.freeplane.features.filter.condition.ConditionFactory;
 import org.freeplane.features.map.MapWriter.Mode;
@@ -69,7 +70,8 @@ import org.freeplane.view.swing.map.NodeView;
 /**
  * @author Dimitry Polivaev
  */
-public class MapController extends SelectionController implements IExtension{
+public class MapController extends SelectionController
+implements IExtension, NodeChangeAnnouncer{
 	public enum Direction {
 		BACK, BACK_N_FOLD, FORWARD, FORWARD_N_FOLD
 	}
@@ -436,7 +438,7 @@ public class MapController extends SelectionController implements IExtension{
 			setFoldingState(node, false);
 		}
 		boolean childShown = false;
-		for(NodeModel child:childrenUnfolded(node)){
+		for(NodeModel child:node.getChildren()){
 			if (mapViewManager.showHiddenNode(child)) {
 				if (child.hasVisibleContent()) {
 					childShown = true;
@@ -528,21 +530,12 @@ public class MapController extends SelectionController implements IExtension{
 			final List<NodeModel> empty = Collections.emptyList();
 			return empty;
 		}
-		return childrenUnfolded(node);
-	}
-
-	public List<NodeModel> childrenUnfolded(final NodeModel node) {
-		final EncryptionModel encryptionModel = EncryptionModel.getModel(node);
-		if (encryptionModel != null && !encryptionModel.isAccessible()) {
-			final List<NodeModel> empty = Collections.emptyList();
-			return empty;
-		}
 		return node.getChildren();
 	}
 
 	public void closeWithoutSaving(final MapModel map) {
 		fireMapRemoved(map);
-		map.destroy();
+		map.releaseResources();
 	}
 
 	/**
@@ -576,13 +569,13 @@ public class MapController extends SelectionController implements IExtension{
 			if (nodesUnfoldedByDisplay != null && isFolded(nodeOnPath)) {
             	nodesUnfoldedByDisplay.add(nodeOnPath);
             }
-			unfold(nodeOnPath);
 		}
+		modeController.getController().getMapViewManager().displayOnCurrentView(node);
 	}
 
 	public void fireMapChanged(final MapChangeEvent event) {
 		final MapModel map = event.getMap();
-		if (map != null) {
+		if (map != null && event.setsDirtyFlag()) {
 			setSaved(map, false);
 		}
 		final IMapChangeListener[] list = mapChangeListeners.toArray(new IMapChangeListener[]{});
@@ -652,8 +645,14 @@ public class MapController extends SelectionController implements IExtension{
 	}
 
 	public void getFilteredXml(final MapModel map, final Writer fileout, final Mode mode, final boolean forceFormat)
-	        throws IOException {
+			throws IOException {
 		getMapWriter().writeMapAsXml(map, fileout, mode, false, forceFormat);
+	}
+
+	public void getFilteredXml(Collection<NodeModel> nodes, final Writer fileout, final Mode mode, final boolean forceFormat)
+			throws IOException {
+		for(NodeModel node :nodes)
+		getMapWriter().writeNodeAsXml(fileout, node, mode, false, true, forceFormat);
 	}
 
 	public MapReader getMapReader() {
@@ -667,7 +666,7 @@ public class MapController extends SelectionController implements IExtension{
 	/*
 	 * Helper methods
 	 */
-	public NodeModel getNodeFromID(final String nodeID) {
+	public NodeModel getNodeFromID_(final String nodeID) {
 		final MapModel map = Controller.getCurrentController().getMap();
 		if(map == null)
 			return null;
@@ -715,21 +714,13 @@ public class MapController extends SelectionController implements IExtension{
 		return writeManager;
 	}
 
-	public boolean hasChildren(final NodeModel node) {
-		final EncryptionModel encryptionModel = EncryptionModel.getModel(node);
-		if (encryptionModel != null && !encryptionModel.isAccessible()) {
-			return false;
-		}
-		return node.hasChildren();
-	}
-
 	/**
 	 * True iff one of node's <i>strict</i> descendants is folded. A node N is
 	 * not its strict descendant - the fact that node itself is folded is not
 	 * sufficient to return true.
 	 */
 	public boolean hasFoldedStrictDescendant(final NodeModel node) {
-		for (final NodeModel child : childrenUnfolded(node)) {
+		for (final NodeModel child : node.getChildren()) {
 			if (isFolded(child) || hasFoldedStrictDescendant(child)) {
 				return true;
 			}
@@ -762,25 +753,24 @@ public class MapController extends SelectionController implements IExtension{
 	/**@throws XMLException
 	 * @deprecated -- use MapIO*/
 	@Deprecated
-	public boolean newMap(final URL url) throws FileNotFoundException, XMLParseException,IOException, URISyntaxException, XMLException{
-        	final IMapViewManager mapViewManager = Controller.getCurrentController().getMapViewManager();
-        	if (mapViewManager.tryToChangeToMapView(url))
-        		return false;
-        	try {
-        	if (AddOnsController.getController().installIfAppropriate(url))
-        		return false;
-        	Controller.getCurrentController().getViewController().setWaitingCursor(true);
-        	final MapModel newModel = new MapModel();
-        	UrlManager.getController().loadCatchExceptions(url, newModel);
-        	newModel.setReadOnly(true);
-        	newModel.setSaved(true);
-        	fireMapCreated(newModel);
-        	newMapView(newModel);
-        	return true;
-        }
-        finally {
-        	Controller.getCurrentController().getViewController().setWaitingCursor(false);
-        }
+	public void openMap(final URL url) throws FileNotFoundException, XMLParseException,IOException, URISyntaxException, XMLException{
+		if (AddOnsController.getController().installIfAppropriate(url))
+			return;
+		final IMapViewManager mapViewManager = Controller.getCurrentController().getMapViewManager();
+		if (mapViewManager.tryToChangeToMapView(url))
+			return;
+		try {
+			Controller.getCurrentController().getViewController().setWaitingCursor(true);
+			final MapModel newModel = new MapModel();
+			UrlManager.getController().loadCatchExceptions(url, newModel);
+			newModel.setReadOnly(true);
+			newModel.setSaved(true);
+			fireMapCreated(newModel);
+			createMapView(newModel);
+		}
+		finally {
+			Controller.getCurrentController().getViewController().setWaitingCursor(false);
+		}
 	}
 
 
@@ -788,29 +778,30 @@ public class MapController extends SelectionController implements IExtension{
 	        XMLParseException, IOException, URISyntaxException, XMLException, MalformedURLException {
 	    String nodeReference = url.getRef();
 	    if(nodeReference != null){
-	    	newMap(new URL(url.getProtocol(), url.getHost(), url.getPort(), url.getPath()));
-	    	select(getNodeFromID(nodeReference));
+	    	openMap(new URL(url.getProtocol(), url.getHost(), url.getPort(), url.getPath()));
+	    	final NodeModel node = getNodeAt(nodeReference);
+	    	if(node != null)
+	    		select(node);
 	    }
 	    else{
-	    	newMap(url);
+	    	openMap(url);
 	    }
 	}
 
-	public void newMapView(final MapModel mapModel) {
+
+	private NodeModel getNodeAt(String nodeReference) {
+		return modeController.getExtension(MapExplorerController.class).getNodeAt(getRootNode(), nodeReference);
+	}
+
+	public void createMapView(final MapModel mapModel) {
 		Controller.getCurrentController().getMapViewManager().newMapView(mapModel, Controller.getCurrentModeController());
 	}
 
 	public MapModel newMap() {
-		final MapModel newModel = newModel();
-		fireMapCreated(newModel);
-		newMapView(newModel);
-		return newModel;
-	}
-
-	public MapModel newModel() {
 		final MapModel mindMapMapModel = new MapModel();
 		mindMapMapModel.createNewRoot();
 		fireMapCreated(mindMapMapModel);
+		createMapView(mindMapMapModel);
 		return mindMapMapModel;
 	}
 
@@ -818,26 +809,29 @@ public class MapController extends SelectionController implements IExtension{
 		return new NodeModel(userObject, map);
 	}
 
-	@Deprecated
+	@Override
 	public void nodeChanged(final NodeModel node) {
 		nodeChanged(node, NodeModel.UNKNOWN_PROPERTY, null, null);
 	}
 
+	@Override
 	public void nodeChanged(final NodeModel node, final Object property, final Object oldValue, final Object newValue) {
 		final NodeChangeEvent nodeChangeEvent = new NodeChangeEvent(node, property, oldValue, newValue, true, true);
 		nodeRefresh(nodeChangeEvent);
 	}
 
-	@Deprecated
+	@Override
 	public void nodeRefresh(final NodeModel node) {
 		nodeRefresh(node, NodeModel.UNKNOWN_PROPERTY, null, null);
 	}
 
+	@Override
 	public void nodeRefresh(final NodeModel node, final Object property, final Object oldValue, final Object newValue) {
 		final NodeChangeEvent nodeChangeEvent = new NodeChangeEvent(node, property, oldValue, newValue, false, false);
 		nodeRefresh(nodeChangeEvent);
 	}
 
+	@Override
 	public void nodeRefresh(final NodeChangeEvent nodeChangeEvent) {
 		if (mapReader.isMapLoadingInProcess()) {
 			return;
@@ -1086,7 +1080,7 @@ public class MapController extends SelectionController implements IExtension{
 
 
 	public void select(String nodeReference) {
-		select(getNodeFromID(nodeReference));
+		select(getNodeFromID_(nodeReference));
 	}
 
 }

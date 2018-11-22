@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import org.freeplane.api.Script;
 import org.freeplane.core.util.ClassLoaderFactory;
 
 public final class ScriptClassLoader extends URLClassLoader {
@@ -29,7 +30,7 @@ public final class ScriptClassLoader extends URLClassLoader {
 				GenericScript.class.getClassLoader());
 		return classLoader;
 	}
-	
+
 	private static URL pathToUrl(String path) {
         try {
             return new File(path).toURI().toURL();
@@ -54,6 +55,8 @@ public final class ScriptClassLoader extends URLClassLoader {
 	}
 
 	private URL superGetResource(String name) {
+		if(name.startsWith(Script.class.getPackage().getName().replace('.', '/') + '/'))
+			return Script.class.getClassLoader().getResource(name);
 		return super.getResource(name);
 	}
 
@@ -90,17 +93,19 @@ public final class ScriptClassLoader extends URLClassLoader {
 			throw (ClassNotFoundException)e.getCause();
 		}
 	}
-	
-	
+
+
 	private Class<?> superLoadClass(String name, boolean resolve) throws ClassNotFoundException {
 		return super.loadClass(name, resolve);
 	}
-	
+
 	public void setSecurityManager(ScriptingSecurityManager securityManager) {
+		if(this.securityManager != null && ! this.securityManager.equals(securityManager))
+			throw new IllegalStateException("Security manager is already set");
 		this.securityManager = securityManager;
 	}
 
 	public boolean implies(Permission permission) {
 		return securityManager != null && securityManager.implies(permission);
-	}	
+	}
 }

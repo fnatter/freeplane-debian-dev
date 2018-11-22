@@ -26,6 +26,8 @@ import java.awt.Font;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.LengthUnits;
@@ -217,12 +219,16 @@ class MindMapHTMLWriter {
 		defaultColor = nodeStyleController.getColor(styleNode);
 	}
 
-	void writeHTML(final NodeModel rootNodeOfBranch) throws IOException {
-		setDefaultsFrom(rootNodeOfBranch.getMap());
+	void writeHTML(final List<NodeModel> branchRootNodes) throws IOException {
+		if(branchRootNodes.isEmpty())
+			return;
+		NodeModel firstNode = branchRootNodes.get(0);
+		MapModel map = firstNode.getMap();
+		setDefaultsFrom(map);
 		final String htmlExportFoldingOption = getProperty("html_export_folding");
-		writeFoldingCode = (htmlExportFoldingOption.equals("html_export_fold_currently_folded") && mapController
-		    .hasFoldedStrictDescendant(rootNodeOfBranch))
-		        || htmlExportFoldingOption.equals("html_export_fold_all");
+		writeFoldingCode = htmlExportFoldingOption.equals("html_export_fold_all")
+				|| (htmlExportFoldingOption.equals("html_export_fold_currently_folded")
+				&& hasFoldedStrictDescendant(branchRootNodes));
 		ResourceController.getResourceController().getBooleanProperty("export_icons_in_html");
 		fileout
 		    .write(
@@ -230,23 +236,23 @@ class MindMapHTMLWriter {
 		                + lf + "<html>" + lf + "<head>" + lf);
 		fileout.write("<title>"
 		        + MindMapHTMLWriter.writeHTML_escapeUnicodeAndSpecialCharacters(
-		            TextController.getController().getPlainTransformedTextWithoutNodeNumber(rootNodeOfBranch)
+		            TextController.getController().getPlainTransformedTextWithoutNodeNumber(branchRootNodes.size() == 1 ?  firstNode : map.getRootNode())
 		                .replace('\n', ' '))
 		        + "</title>" + lf);
 		writeStyle();
 		fileout.write(lf + "</head>" + lf + "<body");
-		final MapStyleModel style = MapStyleModel.getExtension(rootNodeOfBranch.getMap());
+		final MapStyleModel style = MapStyleModel.getExtension(map);
 		final Color background = style != null ? style.getBackgroundColor() : null;
 		if (background != null) {
 			fileout.write(" bgcolor=" + ColorUtils.colorToString(background));
 		}
 		fileout.write(">" + lf);
-		if (writeFoldingCode) {
-			writeBodyWithFolding(rootNodeOfBranch);
-		}
-		else {
-			writeHTML(rootNodeOfBranch, "1", 0, /* isRoot */true, true, /* depth */
-			    1);
+		for(NodeModel node : branchRootNodes) {
+			if (writeFoldingCode) {
+				writeBodyWithFolding(node);
+			} else {
+				writeHTML(node, "1", 0, /* isRoot */true, true, /* depth */ 1);
+			}
 		}
 		fileout.write("</body>" + lf);
 		fileout.write("</html>" + lf);
@@ -254,11 +260,19 @@ class MindMapHTMLWriter {
 		resetDefaults();
 	}
 
+	private boolean hasFoldedStrictDescendant(List<NodeModel> branchRootNodes) {
+		for(NodeModel node : branchRootNodes) {
+			if (mapController.hasFoldedStrictDescendant(node))
+				return true;
+		}
+		return  false;
+	}
+
 	private int writeHTML(final NodeModel model, final String parentID, int lastChildNumber, final boolean isRoot,
 	                      final boolean treatAsParagraph, final int depth)
 	        throws IOException {
 		if (!model.hasVisibleContent()) {
-			for (final NodeModel child : mapController.childrenUnfolded(model)) {
+			for (final NodeModel child : model.getChildren()) {
 				lastChildNumber = writeHTML(child, parentID, lastChildNumber, false, false, depth);
 			}
 			return lastChildNumber;
@@ -267,7 +281,7 @@ class MindMapHTMLWriter {
 		if (writeFoldingCode) {
 			createFolding = mapController.isFolded(model);
 			if (getProperty("html_export_folding").equals("html_export_fold_all")) {
-				createFolding = mapController.hasChildren(model);
+				createFolding = model.hasChildren();
 			}
 			if (getProperty("html_export_folding").equals("html_export_no_folding") || basedOnHeadings || isRoot) {
 				createFolding = false;
@@ -277,7 +291,7 @@ class MindMapHTMLWriter {
 		final Object userObject = model.getUserObject();
 		final String text = textController.getTransformedTextNoThrow(userObject, model, userObject);
 		final boolean hasHtml = text.startsWith("<html>");
-		final boolean heading = basedOnHeadings && !hasHtml && mapController.hasChildren(model) && depth <= 6;
+		final boolean heading = basedOnHeadings && !hasHtml && model.hasChildren() && depth <= 6;
 		if (!treatAsParagraph && !basedOnHeadings) {
 			fileout.write("<li>");
 		}
@@ -329,15 +343,15 @@ class MindMapHTMLWriter {
 			fileout.write("</h" + depth + ">" + lf);
 		}
 		if (getProperty("html_export_folding").equals("html_export_based_on_headings")) {
-			for (final NodeModel child : mapController.childrenUnfolded(model)) {
+			for (final NodeModel child : model.getChildren()) {
 				lastChildNumber = writeHTML(child, parentID, lastChildNumber, /*isRoot=*/false,
 				    false, depth + 1);
 			}
 			return lastChildNumber;
 		}
-		if (mapController.hasChildren(model)) {
+		if (model.hasChildren()) {
 			if (getProperty("html_export_folding").equals("html_export_based_on_headings")) {
-				for (final NodeModel child : mapController.childrenUnfolded(model)) {
+				for (final NodeModel child : model.getChildren()) {
 					lastChildNumber = writeHTML(child, parentID, lastChildNumber,
 					    /*isRoot=*/false, false, depth + 1);
 				}
@@ -346,14 +360,14 @@ class MindMapHTMLWriter {
 				fileout.write(lf + "<ul id=\"fold" + localParentID
 				        + "\" style=\"POSITION: relative; VISIBILITY: visible;\">" + lf);
 				int localLastChildNumber = 0;
-				for (final NodeModel child : mapController.childrenUnfolded(model)) {
+				for (final NodeModel child : model.getChildren()) {
 					localLastChildNumber = writeHTML(child, localParentID, localLastChildNumber,
 					    /* isRoot=*/false, false, depth + 1);
 				}
 			}
 			else {
 				fileout.write(lf + "<ul>" + lf);
-				for (final NodeModel child : mapController.childrenUnfolded(model)) {
+				for (final NodeModel child : model.getChildren()) {
 					lastChildNumber = writeHTML(child, parentID, lastChildNumber,
 					    /* isRoot= */false, false, depth + 1);
 				}

@@ -169,17 +169,19 @@ class ScriptingRegistration {
 			}
 		});
 		registerScriptAddOns();
+		new ScriptingConfiguration();
+		new ScriptCompiler().compileScriptsOnPath(ScriptResources.getClasspath());
 		if(! modeController.getController().getViewController().isHeadless()){
 			registerGuiStuff(modeController);
-			ScriptCompiler.compileScriptsOnPath(ScriptResources.getClasspath());
 			createUserScriptsDirectory();
 			createInitScriptsDirectory();
 			createUserLibDirectory();
 		}
-		FilterController.getCurrentFilterController().getConditionFactory().addConditionController(100,
+		FilterController.getCurrentFilterController().getConditionFactory().addConditionController(200,
 			new ScriptConditionController());
 		ScriptingPolicy.installRestrictingPolicy();
-		System.setSecurityManager(new InternationalizedSecurityManager());
+		if(System.getSecurityManager() != null)
+			System.setSecurityManager(new InternationalizedSecurityManager());
 	}
 
 	private void registerGuiStuff(ModeController modeController) {
@@ -196,7 +198,7 @@ class ScriptingRegistration {
         		dialog.install(url);
         	}
         });
-        ScriptingConfiguration configuration = new ScriptingConfiguration();
+        ScriptingGuiConfiguration configuration = new ScriptingGuiConfiguration();
 		updateMenus(modeController, configuration);
 		registerInitScripts(configuration);
     }
@@ -230,10 +232,10 @@ class ScriptingRegistration {
         modeController.getOptionPanelBuilder().load(preferences);
     }
 
-    private void updateMenus(ModeController modeController, final ScriptingConfiguration configuration) {
+    private void updateMenus(ModeController modeController, final ScriptingGuiConfiguration configuration) {
 		ScriptingMenuEntryVisitor builder = new ScriptingMenuEntryVisitor(configuration, modeController);
 		modeController.addUiBuilder(Phase.ACTIONS, "userScripts", builder, EntryVisitor.ILLEGAL);
-		modeController.getUserInputListenerFactory().addBuildPhaseListener(builder); 
+		modeController.getUserInputListenerFactory().addBuildPhaseListener(builder);
     }
 
     private void registerScriptAddOns() {
@@ -263,15 +265,16 @@ class ScriptingRegistration {
 		}
 	}
 
-	private void registerInitScripts(ScriptingConfiguration configuration) {
+	private void registerInitScripts(ScriptingGuiConfiguration configuration) {
 		final List<IScript> initScripts = configuration.getInitScripts();
+		final List<File> initScriptFiles = configuration.getInitScriptFiles();
 		if (!initScripts.isEmpty())
 		Controller.getCurrentController().addApplicationLifecycleListener(new ApplicationLifecycleListener() {
 			@Override
 			public void onStartupFinished() {
-				for (IScript script : initScripts) {
-					LogUtils.info("running init script " + script.getScript());
-					script.execute(null);
+				for (int i = 0; i < initScriptFiles.size(); i++) {
+					LogUtils.info("running init script " + initScriptFiles.get(i));
+					new ScriptRunner(initScripts.get(i)).execute(null);
 				}
 			}
 
@@ -284,7 +287,7 @@ class ScriptingRegistration {
 	private void createUserScriptsDirectory() {
 		createDirIfNotExists(ScriptResources.getUserScriptsDir(), "user scripts");
 	}
-	
+
 	private void createInitScriptsDirectory() {
 		createDirIfNotExists(ScriptResources.getInitScriptsDir(), "init scripts");
 	}

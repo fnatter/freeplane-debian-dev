@@ -18,14 +18,14 @@ class FoundNodes implements IExtension {
 		if (map == null) {
 			return null;
 		}
-		FoundNodes nodes = (FoundNodes) map.getExtension(FoundNodes.class);
+		FoundNodes nodes = map.getExtension(FoundNodes.class);
 		if (nodes == null) {
 			nodes = new FoundNodes();
 			map.addExtension(nodes);
 		}
 		return nodes;
 	}
-	
+
 	/**
 	 * Display a node in the display (used by find and the goto action by arrow
 	 * link actions).

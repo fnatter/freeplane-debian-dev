@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -39,7 +40,6 @@ import javax.swing.filechooser.FileFilter;
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.ExampleFileFilter;
 import org.freeplane.core.ui.components.UITools;
-import org.freeplane.core.ui.image.BigBufferedImage;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.map.IMapSelection.NodePosition;
@@ -59,12 +59,16 @@ public class ExportToImage implements IExportEngine {
 	public static ExportToImage toPNG(){
 		return new ExportToImage("png", "to png");
 	}
-	
+
 	ExportToImage( final String imageType, final String imageDescripton) {
 		this.imageType = imageType;
 		this.imageDescripton = imageDescripton;
 	}
 
+	@Override
+	public void export(List<NodeModel> nodes, File toFile) {
+		export(nodes.get(0).getMap(), toFile);
+	}
 	public void export(MapModel map, File toFile) {
 		export(map, null, null, null, toFile);
 	}
@@ -80,15 +84,8 @@ public class ExportToImage implements IExportEngine {
 		catch (final OutOfMemoryError ex) {
 			UITools.errorMessage(TextUtils.getText("out_of_memory"));
 		}
-		finally {
-			if (image != null)
-				BigBufferedImage.dispose(image);
-		}
 	}
-	/**
-	 * Export image.
-	 * @param toFile 
-	 */
+
 	public boolean exportToImage(final RenderedImage image, File chosenFile) {
 		try {
 			Controller.getCurrentController().getViewController().setWaitingCursor(true);
