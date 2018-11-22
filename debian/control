@@ -36,7 +36,7 @@ Build-Depends-Indep: javahelp2,
                      jmapviewer (>= 1.11),
                      libmnemonicsetter-java (>= 0.5),
                      gradle-debian-helper
-Standards-Version: 4.1.4
+Standards-Version: 4.2.1
 Vcs-Git: https://salsa.debian.org/java-team/freeplane.git
 Vcs-Browser: https://salsa.debian.org/java-team/freeplane
 Homepage: http://freeplane.org/
