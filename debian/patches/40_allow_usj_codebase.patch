@@ -10,14 +10,14 @@ Last-Update: 2016-05-05
          permission java.lang.RuntimePermission "getClassLoader";
  };
 +
-+grant codeBase "file:/usr/share/knopflerfish/*" {
-+        permission java.security.AllPermission;
-+};
-+
-+grant codeBase "file:/usr/share/java/*" {
-+        permission java.security.AllPermission;
-+};
-+
-+grant codeBase "file:/usr/share/maven-repo/-" {
-+        permission java.security.AllPermission;
-+};
++grant codeBase "file:/usr/share/knopflerfish/*" {
++        permission java.security.AllPermission;
++};
++
++grant codeBase "file:/usr/share/java/*" {
++        permission java.security.AllPermission;
++};
++
++grant codeBase "file:/usr/share/maven-repo/-" {
++        permission java.security.AllPermission;
++};

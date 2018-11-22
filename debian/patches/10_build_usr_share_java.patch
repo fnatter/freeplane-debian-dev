@@ -245,10 +245,10 @@ Last-Update: 2016-02-04
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-commons'
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-picocli'
  	}
--	runtime 'org.codehaus.groovy:groovy-dateutil:2.5.3'
+-	runtime 'org.codehaus.groovy:groovy-dateutil:2.5.4'
 +	// this is not available in Debian 10's groovy 2.4.x
 +	// (maybe it is included in groovy-all?)
-+	//runtime 'org.codehaus.groovy:groovy-dateutil:2.5.3'
++	//runtime 'org.codehaus.groovy:groovy-dateutil:2.5.4'
  
  }
  
