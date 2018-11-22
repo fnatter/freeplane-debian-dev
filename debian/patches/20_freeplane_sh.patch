@@ -20,7 +20,7 @@ Last-Update: 2016-05-05
  ########## FUNCTIONS DEFINITIONS #######################################
  
  _debug() {
-@@ -29,31 +36,31 @@
+@@ -29,34 +36,34 @@
  
  findjava() {
  	# We try hard to find the proper 'java' command
@@ -32,6 +32,10 @@ Last-Update: 2016-05-05
 -		JAVACMD="${JAVA_BINDIR}/java"
 +		JAVA_CMD="${JAVA_BINDIR}/java"
  		_debug "Using \$JAVA_BINDIR to find java virtual machine."
+ 	elif [ -n "${FREEPLANE_JAVA_HOME}" ] && [ -x "${FREEPLANE_JAVA_HOME}/bin/java" ]; then
+-		JAVACMD="${FREEPLANE_JAVA_HOME}/bin/java"
++		JAVA_CMD="${FREEPLANE_JAVA_HOME}/bin/java"
+ 		_debug "Using \$FREEPLANE_JAVA_HOME to find java virtual machine."
  	elif [ -n "${JAVA_HOME}" ] && [ -x "${JAVA_HOME}/bin/java" ]; then
 -		JAVACMD="${JAVA_HOME}/bin/java"
 +		JAVA_CMD="${JAVA_HOME}/bin/java"
@@ -63,7 +67,7 @@ Last-Update: 2016-05-05
  			JAVA_TYPE=other
  		else
  			JAVA_TYPE=sun
-@@ -61,7 +68,7 @@
+@@ -64,7 +71,7 @@
  		return 0
  	else
  		_error "Couldn't find a java virtual machine," \
@@ -72,7 +76,7 @@ Last-Update: 2016-05-05
  		return 1
  	fi
  }
-@@ -112,9 +119,16 @@
+@@ -115,9 +122,16 @@
  _source /etc/freeplane/freeplanerc
  _source "${userfpdir}/freeplanerc"
  
@@ -82,7 +86,7 @@ Last-Update: 2016-05-05
 +if [ -r /usr/lib/java-wrappers/java-wrappers.sh ]
 +then # the Debian method
 +	. /usr/lib/java-wrappers/java-wrappers.sh
-+	require_java_runtime java7
++	require_java_runtime java8
 +else
 +	findjava
 +	if [ $? -ne 0 ]
@@ -92,7 +96,7 @@ Last-Update: 2016-05-05
  fi
  
  output_debug_info
-@@ -176,7 +190,8 @@
+@@ -179,7 +193,8 @@
  fi
  
  _debug "Calling: "\
@@ -102,7 +106,7 @@ Last-Update: 2016-05-05
   "-Dorg.freeplane.userfpdir=$userfpdir"\
   "-Dorg.freeplane.old_userfpdir=$old_userfpdir"\
   "-Dorg.freeplane.globalresourcedir=${freedir}/resources"\
-@@ -188,7 +203,8 @@
+@@ -191,7 +206,8 @@
  ( echo "${DEBUG}" | grep -qe "exit" ) && exit 0 # do not start Freeplane
  
  # now actually launch Freeplane

@@ -1,9 +1,9 @@
 Description: Disable update check (automatically and in menu)
 Author: Felix Natter <fnatter@gmx.net>
 Forwarded: not-needed
-Last-Update: 2016-02-04
---- a/freeplane/viewer-resources/freeplane.properties
-+++ b/freeplane/viewer-resources/freeplane.properties
+Last-Update: 2018-09-15
+--- a/freeplane/src/viewer/resources/freeplane.properties
++++ b/freeplane/src/viewer/resources/freeplane.properties
 @@ -177,7 +177,7 @@
  browsemode_initial_map=map.mm
  bugTrackerLocation=http\://www.freeplane.org/bugs
@@ -13,9 +13,9 @@ Last-Update: 2016-02-04
  compare_as_number=true
  connector_alpha=200
  connector_shape=CUBIC_CURVE
---- a/freeplane/external-resources/xml/mindmapmodemenu.xml
-+++ b/freeplane/external-resources/xml/mindmapmodemenu.xml
-@@ -497,7 +497,7 @@
+--- a/freeplane/src/external/resources/xml/mindmapmodemenu.xml
++++ b/freeplane/src/external/resources/xml/mindmapmodemenu.xml
+@@ -503,7 +503,7 @@
  			<Entry builder="separator" />
  		</Entry>
  		<Entry name="help">

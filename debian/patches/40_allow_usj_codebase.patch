@@ -5,7 +5,7 @@ Forwarded: not-needed
 Last-Update: 2016-05-05
 --- a/freeplane_framework/script/freeplane.policy
 +++ b/freeplane_framework/script/freeplane.policy
-@@ -10,3 +10,15 @@
+@@ -14,3 +14,15 @@
  		permission java.io.FilePermission "${org.freeplane.basedirectory}/-", "read";
          permission java.lang.RuntimePermission "getClassLoader";
  };
