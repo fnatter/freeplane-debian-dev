@@ -57,6 +57,7 @@ import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.DashVariant;
 import org.freeplane.features.edge.EdgeController;
 import org.freeplane.features.edge.EdgeStyle;
+import org.freeplane.features.filter.FilterController;
 import org.freeplane.features.icon.IconController;
 import org.freeplane.features.icon.MindIcon;
 import org.freeplane.features.icon.UIIcon;
@@ -167,7 +168,6 @@ public abstract class MainView extends ZoomableLabel {
 	protected int getMainViewWidthWithFoldingMark() {
 		int width = getWidth();
 		final NodeView nodeView = getNodeView();
-		final NodeModel model = nodeView.getModel();
 		if (nodeView.isFolded()) {
 			width += getZoomedFoldingSymbolHalfWidth() * 3;
 		}
@@ -187,7 +187,7 @@ public abstract class MainView extends ZoomableLabel {
 
 	public abstract Point getRightPoint();
 
-	
+
 	abstract public ShapeConfigurationModel getShapeConfiguration();
 
 	int getZoomedFoldingSymbolHalfWidth() {
@@ -201,7 +201,7 @@ public abstract class MainView extends ZoomableLabel {
 			return false;
 		return isInIconRegion(xCoord);
 	}
-	
+
 	public boolean isInIconRegion(final double xCoord)
 	{
 		Rectangle iconR = getIconRectangle();
@@ -235,7 +235,7 @@ public abstract class MainView extends ZoomableLabel {
 			super.paint(g);
 	}
 
-	
+
 	public void paintDragOver(final Graphics2D graphics) {
 		if (isDraggedOver == NodeView.DRAGGED_OVER_SON || isDraggedOver == NodeView.DRAGGED_OVER_SON_LEFT) {
 			paintDragOverSon(graphics);
@@ -269,7 +269,8 @@ public abstract class MainView extends ZoomableLabel {
 		if (nodeView.isFolded()) {
 			return FoldingMark.ITSELF_FOLDED;
 		}
-		for (final NodeModel child : mapController.childrenUnfolded(node)) {
+		final NodeModel node1 = node;
+		for (final NodeModel child : node1.getChildren()) {
 			if (child.hasVisibleContent() && nodeView.isChildHidden(child)) {
 				return FoldingMark.ITSELF_FOLDED;
 			}
@@ -334,7 +335,6 @@ public abstract class MainView extends ZoomableLabel {
 				p.x -= width;
 			final FoldingMark foldingCircle;
 			if(markType.equals(FoldingMark.UNFOLDED)) {
-				final NodeModel node = nodeView.getModel();
 				if(nodeView.hasHiddenChildren())
 					foldingCircle = FoldingMark.FOLDING_CIRCLE_HIDDEN_CHILD;
 				else
@@ -395,14 +395,17 @@ public abstract class MainView extends ZoomableLabel {
 
     private void drawModificationRect(Graphics g) {
 		final Color color = g.getColor();
-		if(TextModificationState.HIGHLIGHT.equals(textModified)){
+		if(TextModificationState.FAILURE.equals(textModified)) {
+			g.setColor(HighlightedTransformedObject.FAILURE_COLOR);
+		}
+		else if (MapView.isElementHighlighted(this, getNodeView().getModel())){
+			g.setColor(FilterController.HIGHLIGHT_COLOR);
+		}
+		else if(TextModificationState.HIGHLIGHT.equals(textModified)) {
 			final boolean markTransformedText = TextController.isMarkTransformedTextSet();
 			if(! markTransformedText)
 				return;
-			g.setColor(Color.GREEN);
-		}
-		else if(TextModificationState.FAILURE.equals(textModified)){
-			g.setColor(Color.RED);
+			g.setColor(HighlightedTransformedObject.OK_COLOR);
 		}
 		else{
 			return;
@@ -456,7 +459,7 @@ public abstract class MainView extends ZoomableLabel {
 				draggedOver = NodeView.DRAGGED_OVER_SON_LEFT;
 			else
 				draggedOver = NodeView.DRAGGED_OVER_SON;
-		} 
+		}
 		else {
 			if (dropAsSibling(p.getX()))
 				draggedOver = NodeView.DRAGGED_OVER_SIBLING;
@@ -504,7 +507,7 @@ public abstract class MainView extends ZoomableLabel {
 		    node.getModel());
 		setForeground(color);
 	}
-	
+
 	void updateHorizontalTextAlignment(NodeView node) {
 		final HorizontalTextAlignment textAlignment = NodeStyleController.getController(node.getMap().getModeController()).getHorizontalTextAlignment(node.getModel());
 		final boolean isCenteredByDefault = textAlignment == HorizontalTextAlignment.DEFAULT && node.isRoot();
@@ -538,7 +541,7 @@ public abstract class MainView extends ZoomableLabel {
 			textModified = transformedContent instanceof HighlightedTransformedObject ? TextModificationState.HIGHLIGHT : TextModificationState.NONE;
 		}
 		catch (Throwable e) {
-			LogUtils.warn(e.getMessage(), e);
+			LogUtils.warn(e.getMessage());
 			text = TextUtils.format("MainView.errorUpdateText", String.valueOf(userObject), e.getLocalizedMessage());
 			textModified = TextModificationState.FAILURE;
 		}
@@ -794,12 +797,12 @@ public abstract class MainView extends ZoomableLabel {
 			Point transformedToIconCoordinate = new Point(coordinate);
 			transformedToIconCoordinate.translate(-iconRectangle.x, -iconRectangle.y);
 			return ((MultipleImage)icon).getUIIconAt(transformedToIconCoordinate);
-			
+
 		}
 		else
 			return null;
 	}
-	
+
 	public int getSingleChildShift() {
 		return 0;
 	}
@@ -811,7 +814,7 @@ public abstract class MainView extends ZoomableLabel {
 		final float nodeLineWidth = style.getNodeLineWidth(edgeWidth);
 		return nodeLineWidth;
 	}
-	
+
 	public float getPaintedBorderWidth() {
 		final float zoomedLineWidth = getNodeView().getMap().getZoom() * unzoomedBorderWidth;
 		return Math.max(zoomedLineWidth, 1);
@@ -837,13 +840,13 @@ public abstract class MainView extends ZoomableLabel {
 			unzoomedBorderWidth = getUnzoomedEdgeWidth();
 		else
 			unzoomedBorderWidth = (float) controller.getBorderWidth(node).toBaseUnits();
-		
+
 		final Boolean borderDashMatchesEdgeDash = controller.getBorderDashMatchesEdgeDash(node);
 		if(borderDashMatchesEdgeDash)
 			dash = nodeView.getEdgeDash();
 		else
 			dash = controller.getBorderDash(node);
-		
+
 		borderColorMatchesEdgeColor = controller.getBorderColorMatchesEdgeColor(node);
 		if(borderColorMatchesEdgeColor)
 			borderColor = null;

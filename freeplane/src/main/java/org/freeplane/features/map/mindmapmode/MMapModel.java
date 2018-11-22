@@ -44,6 +44,7 @@ public class MMapModel extends MapModel {
 	private LockManager lockManager;
 	private Timer timerForAutomaticSaving;
 	private int titleNumber = 0;
+	private boolean autosaveEnabled;
 
 	/**
 	 * The current version and all other version that don't need XML update for
@@ -51,12 +52,20 @@ public class MMapModel extends MapModel {
 	 */
 	public MMapModel() {
 		super();
+		this.autosaveEnabled = false;
 		addExtension(IUndoHandler.class, new UndoHandler(this));
-		this.setLockManager(ResourceController.getResourceController().getBooleanProperty(
-		    "experimental_file_locking_on") ? new LockManager() : new DummyLockManager());
+		this.lockManager = ResourceController.getResourceController().getBooleanProperty(
+		"experimental_file_locking_on") ? new LockManager() : new DummyLockManager();
+	}
+
+	public void enableAutosave() {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
-				scheduleTimerForAutomaticSaving();
+				if(! autosaveEnabled) {
+					autosaveEnabled = true;
+					scheduleTimerForAutomaticSaving();
+				}
 			}
 		});
 	}
@@ -67,14 +76,14 @@ public class MMapModel extends MapModel {
 	 * @param mindMapMapModel
 	 */
 	@Override
-	public void destroy() {
-		getLockManager().releaseLock();
-		getLockManager().releaseTimer();
+	public void releaseResources() {
+		getLockManager().release();
 		/* cancel the timer, if map is closed. */
 		if (getTimerForAutomaticSaving() != null) {
 			getTimerForAutomaticSaving().cancel();
 		}
-		super.destroy();
+		autosaveEnabled = false;
+		super.releaseResources();
 	}
 
 	public LockManager getLockManager() {
@@ -106,7 +115,9 @@ public class MMapModel extends MapModel {
 	}
 
 	public void scheduleTimerForAutomaticSaving() {
-		if (!(UrlManager.getController() instanceof MFileManager)) {
+		if (!(UrlManager.getController() instanceof MFileManager)
+				|| Controller.getCurrentController().getMapViewManager().isHeadless()
+				|| ! autosaveEnabled) {
 			return;
 		}
 		final int numberOfTempFiles = Integer.parseInt(ResourceController.getResourceController().getProperty(
@@ -127,15 +138,7 @@ public class MMapModel extends MapModel {
 		final Timer timer = SysUtils.createTimer("TimerForAutomaticSaving");
 		timer.schedule(new DoAutomaticSave(this, numberOfTempFiles, filesShouldBeDeletedAfterShutdown,
 		    useSingleBackupDirectory, singleBackupDirectory), delay, delay);
-		this.setTimerForAutomaticSaving(timer);
-	}
-
-	void setLockManager(final LockManager lockManager) {
-		this.lockManager = lockManager;
-	}
-
-	void setTimerForAutomaticSaving(final Timer timerForAutomaticSaving) {
-		this.timerForAutomaticSaving = timerForAutomaticSaving;
+		this.timerForAutomaticSaving = timer;
 	}
 
 	@Override

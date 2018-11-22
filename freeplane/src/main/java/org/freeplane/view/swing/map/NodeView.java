@@ -66,6 +66,7 @@ import org.freeplane.features.map.FreeNode;
 import org.freeplane.features.map.HistoryInformationModel;
 import org.freeplane.features.map.INodeView;
 import org.freeplane.features.map.MapChangeEvent;
+import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeChangeEvent;
 import org.freeplane.features.map.NodeDeletionEvent;
@@ -135,7 +136,7 @@ public class NodeView extends JComponent implements INodeView {
 	private int bottomOverlap;
 	private boolean isFolded;
 	private DashVariant edgeDash = DashVariant.DEFAULT;
-	
+
 	public static final int DETAIL_VIEWER_POSITION = 2;
 
 	protected NodeView(final NodeModel model, final MapView map, final Container parent) {
@@ -177,7 +178,7 @@ public class NodeView extends JComponent implements INodeView {
 	}
 
 	public static int ADDITIONAL_MOUSE_SENSITIVE_AREA = 50;
-	
+
 	@Override
 	public boolean contains(final int x, final int y) {
 		final int space = getMap().getZoomed(NodeView.SPACE_AROUND);
@@ -197,7 +198,7 @@ public class NodeView extends JComponent implements INodeView {
 	}
 
 	public void createAttributeView() {
-		if (attributeView == null && NodeAttributeTableModel.getModel(model).getNode() != null) {
+		if (attributeView == null && NodeAttributeTableModel.getModel(model) != NodeAttributeTableModel.EMTPY_ATTRIBUTES) {
 			attributeView = new AttributeView(this, true);
 		}
 		syncronizeAttributeView();
@@ -281,9 +282,11 @@ public class NodeView extends JComponent implements INodeView {
 			mainView.requestFocusInWindow();
 		else
 			windowAncestor.addWindowFocusListener(new WindowFocusListener() {
+				@Override
 				public void windowLostFocus(WindowEvent e) {
 				}
 
+				@Override
 				public void windowGainedFocus(WindowEvent e) {
 					mainView.requestFocusInWindow();
 					windowAncestor.removeWindowFocusListener(this);
@@ -742,7 +745,7 @@ public class NodeView extends JComponent implements INodeView {
 		}
 		return parentView.getAncestorWithVisibleContent();
 	}
-	
+
 	public NodeView getChildDistanceContainer(){
 		if (model.isVisible()) {
 			return this;
@@ -752,7 +755,7 @@ public class NodeView extends JComponent implements INodeView {
 			// actually should not happen
 			return this;
 		return parentView.getChildDistanceContainer();
-	
+
 	}
 
 	public NodeView getVisibleSummarizedOrParentView() {
@@ -774,7 +777,7 @@ public class NodeView extends JComponent implements INodeView {
 					startFromSummary = false;
 				else if(! startFromSummary)
 					break;
-				
+
 			}
 		}
 		if (parentView.isContentVisible()) {
@@ -782,7 +785,7 @@ public class NodeView extends JComponent implements INodeView {
 		}
 		return parentView.getVisibleSummarizedOrParentView();
 	}
-	
+
 	public int getZoomedFoldingSymbolHalfWidth() {
 		final int preferredFoldingSymbolHalfWidth = (int) ((ResourceController.getResourceController().getIntProperty("foldingsymbolwidth", 10) * map.getZoom()) / 2);
 		return preferredFoldingSymbolHalfWidth;
@@ -797,7 +800,8 @@ public class NodeView extends JComponent implements INodeView {
 		if(isFolded)
 			return;
 		int index = 0;
-		for (NodeModel child : getMap().getModeController().getMapController().childrenUnfolded(getModel())) {
+		MapController r = getMap().getModeController().getMapController();
+		for (NodeModel child : getModel().getChildren()) {
 			if(isChildHidden(child))
 				return;
 			if(getComponentCount() <= index
@@ -806,11 +810,6 @@ public class NodeView extends JComponent implements INodeView {
 		}
 	}
 
-	/**
-	 * Create views for the newNode and all his descendants, set their isLeft
-	 * attribute according to this view.
-	 * @param index2
-	 */
 	void addChildView(final NodeModel newNode, int index) {
 			NodeViewFactory.getInstance().newNodeView(newNode, getMap(), this, index);
 	}
@@ -863,9 +862,11 @@ public class NodeView extends JComponent implements INodeView {
 		return getParentView() == myNodeView.getParentView();
 	}
 
+	@Override
 	public void mapChanged(final MapChangeEvent event) {
 	}
 
+	@Override
 	public void nodeChanged(final NodeChangeEvent event) {
 		final NodeModel node = event.getNode();
 		// is node is deleted, skip the rest.
@@ -876,7 +877,7 @@ public class NodeView extends JComponent implements INodeView {
 		if (property == NodeChangeType.FOLDING || property == Properties.HIDDEN_CHILDREN || property == EncryptionModel.class) {
 			if(map.isSelected() || property == EncryptionModel.class && ! isFolded){
 				boolean folded = getMap().getModeController().getMapController().isFolded(model);
-				boolean force = property ==Properties.HIDDEN_CHILDREN;
+				boolean force = property ==Properties.HIDDEN_CHILDREN || property == EncryptionModel.class;
 				setFolded(folded, force);
 			}
 			if(property != EncryptionModel.class)
@@ -910,7 +911,7 @@ public class NodeView extends JComponent implements INodeView {
 		setFolded(folded, false);
 		revalidate();
 	}
-	
+
 	private void setFolded(boolean folded, boolean force) {
 		boolean wasFolded = isFolded;
 		this.isFolded = folded;
@@ -923,6 +924,7 @@ public class NodeView extends JComponent implements INodeView {
 		}
 	}
 
+	@Override
 	public void onNodeDeleted(NodeDeletionEvent nodeDeletionEvent) {
 		if (nodeDeletionEvent.index >= getComponentCount() - 1) {
 			return;
@@ -968,6 +970,7 @@ public class NodeView extends JComponent implements INodeView {
 			getMap().selectVisibleAncestorOrSelf(preferred);
 	}
 
+	@Override
 	public void onNodeInserted(final NodeModel parent, final NodeModel child, final int index) {
 		assert parent == model;
 		if (isFolded) {
@@ -978,9 +981,11 @@ public class NodeView extends JComponent implements INodeView {
 		revalidate();
 	}
 
+	@Override
 	public void onNodeMoved(NodeMoveEvent nodeMoveEvent) {
 	}
 
+	@Override
 	public void onPreNodeDelete(NodeDeletionEvent nodeDeletionEvent) {
 	}
 
@@ -1283,7 +1288,7 @@ public class NodeView extends JComponent implements INodeView {
 		}
 		getMap().scrollNodeToVisible(this);
 		Controller.getCurrentController().getViewController().addObjectTypeInfo(getModel().getUserObject());
-		super.requestFocus(); 
+		super.requestFocus();
 		mainView.requestFocus();
 	}
 
@@ -1462,7 +1467,7 @@ public class NodeView extends JComponent implements INodeView {
 			return parentView.getEdgeDash();
 		return DashVariant.DEFAULT;
     }
-	
+
 	public int getEdgeWidth() {
 		if(edgeWidth != null)
 		    return edgeWidth;
@@ -1471,7 +1476,7 @@ public class NodeView extends JComponent implements INodeView {
 			return parentView.getEdgeWidth();
 		return 1;
     }
-	
+
 	public Color getEdgeColor() {
 		if(edgeColor.hasValue())
 			return edgeColor.getValue();
@@ -1569,6 +1574,7 @@ public class NodeView extends JComponent implements INodeView {
 		return isSelected() && !MapView.standardDrawRectangleForSelection && !map.isPrinting();
 	}
 
+	@Override
 	public void onPreNodeMoved(NodeMoveEvent nodeMoveEvent) {
 	}
 
@@ -1666,12 +1672,19 @@ public class NodeView extends JComponent implements INodeView {
 	boolean isHierarchyVisible() {
 		return getHeight() > 2 * getSpaceAround();
 	}
+
 	public enum Properties{HIDDEN_CHILDREN};
-	
+
 	boolean isChildHidden(NodeModel node) {
 		@SuppressWarnings("unchecked")
 		final Set<NodeModel> hiddenChildren = (Set<NodeModel>) getClientProperty(Properties.HIDDEN_CHILDREN);
 		return hiddenChildren != null && hiddenChildren.contains(node);
+	}
+
+	public int getHiddenChildCount() {
+		@SuppressWarnings("unchecked")
+		final Set<NodeModel> hiddenChildren = (Set<NodeModel>) getClientProperty(Properties.HIDDEN_CHILDREN);
+		return hiddenChildren != null ? hiddenChildren.size() : 0;
 	}
 
 	boolean hasHiddenChildren() {
@@ -1698,5 +1711,5 @@ public class NodeView extends JComponent implements INodeView {
 		return hiddenChildren != null && hiddenChildren.remove(node);
 	}
 
-	
+
 }

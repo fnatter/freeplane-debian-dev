@@ -19,26 +19,24 @@
  */
 package org.freeplane.view.swing.map.attribute;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.net.URI;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.freeplane.core.ui.LengthUnits;
 import org.freeplane.core.util.HtmlUtils;
 import org.freeplane.core.util.Quantity;
 import org.freeplane.core.util.TextUtils;
-import org.freeplane.features.attribute.IAttributeTableModel;
+import org.freeplane.features.attribute.Attribute;
+import org.freeplane.features.attribute.NodeAttributeTableModel;
+import org.freeplane.features.filter.FilterController;
 import org.freeplane.features.icon.factory.IconFactory;
 import org.freeplane.features.text.HighlightedTransformedObject;
 import org.freeplane.features.text.TextController;
+import org.freeplane.view.swing.map.MapView;
 
 class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 	public AttributeTableCellRenderer() {
@@ -46,7 +44,7 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	static final float ZOOM_CORRECTION_FACTOR = 0.97F;
@@ -71,27 +69,30 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 	@Override
 	public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected,
 	                                               final boolean hasFocus, final int row, final int column) {
-		final Component rendererComponent = super.getTableCellRendererComponent(table, value, hasFocus, isSelected, row,
+		final Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
 		    column);
 		final AttributeTable attributeTable = (AttributeTable) table;
 		zoom = attributeTable.getZoom();
-	    final IAttributeTableModel attributeTableModel = (IAttributeTableModel) table.getModel();
+	    final AttributeTableModel attributeTableModel = (AttributeTableModel) table.getModel();
 		final String originalText = value == null ? null : value.toString();
 		String text = originalText;
 		Icon icon;
+		Color color = null;
+		if (column == 1 && isAttributeHighlighted(attributeTable, row))
+			color = FilterController.HIGHLIGHT_COLOR;
 		if (column == 1 && value != null) {
 			try {
 				// evaluate values only
 				final TextController textController = TextController.getController();
 				Object transformedObject = textController.getTransformedObject(value, attributeTableModel.getNode(), null);
 				text = transformedObject.toString();
-				if (transformedObject instanceof HighlightedTransformedObject && TextController.isMarkTransformedTextSet()) {
-					setBorder(BorderFactory.createLineBorder(Color.GREEN));
+				if (color == null && transformedObject instanceof HighlightedTransformedObject && TextController.isMarkTransformedTextSet()) {
+					color = HighlightedTransformedObject.OK_COLOR;
 				}
 			}
 			catch (Exception e) {
 				text = TextUtils.format("MainView.errorUpdateText", originalText, e.getLocalizedMessage());
-				setBorder(BorderFactory.createLineBorder(Color.RED));
+				color = HighlightedTransformedObject.FAILURE_COLOR;
 			}
 			if(value instanceof URI){
 	                icon = ((AttributeTable)table).getLinkIcon((URI) value);
@@ -103,6 +104,7 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 		else{
 			icon = null;
 		}
+		configureBorder(color);
 		final Icon scaledIcon;
 		final IconFactory iconFactory = IconFactory.getInstance();
 		if(icon != null && iconFactory.canScaleIcon(icon)){
@@ -130,8 +132,21 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 				setToolTipText(null);
 			}
 		}
-		setOpaque(hasFocus);
+		setOpaque(isSelected);
 		return rendererComponent;
+	}
+
+	private boolean isAttributeHighlighted(AttributeTable attributeTable, int row) {
+		NodeAttributeTableModel attributes = attributeTable.getAttributeTableModel().getNodeAttributeModel();
+		if(attributes.getRowCount() <= row)
+			return false;
+		Attribute attribute = attributes.getAttribute(row);
+		return MapView.isElementHighlighted(attributeTable, attribute);
+	}
+
+	private void configureBorder(Color color) {
+		if(color != null)
+			setBorder(BorderFactory.createLineBorder(color));
 	}
 
 	/*
@@ -174,6 +189,6 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 	public void setOpaque(boolean opaque) {
 		this.opaque = opaque;
 	}
-	
-	
+
+
 }

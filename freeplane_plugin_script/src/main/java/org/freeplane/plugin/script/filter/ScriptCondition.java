@@ -15,12 +15,8 @@ import org.freeplane.features.filter.condition.ASelectableCondition;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.n3.nanoxml.XMLElement;
-import org.freeplane.plugin.script.ExecuteScriptException;
-import org.freeplane.plugin.script.FormulaUtils;
-import org.freeplane.plugin.script.GroovyScript;
-import org.freeplane.plugin.script.IScript;
+import org.freeplane.plugin.script.*;
 import org.freeplane.plugin.script.ScriptContext;
-import org.freeplane.plugin.script.ScriptingPermissions;
 
 public class ScriptCondition extends ASelectableCondition {
 	private static final String SCRIPT_FILTER_DESCRIPTION_RESOURCE = "plugins/script_filter";
@@ -29,7 +25,8 @@ public class ScriptCondition extends ASelectableCondition {
 	static final String NAME = "script_condition";
 	static final String TAG_NAME = "script";
 	static final String ATTRIB_NAME = "SCRIPT"; // for backward compatibility
-	final private GroovyScript script;
+	final private ScriptRunner scriptRunner;
+	final private String source;
 	private boolean errorReported = false;
 
 	static ASelectableCondition load(final XMLElement element) {
@@ -46,7 +43,7 @@ public class ScriptCondition extends ASelectableCondition {
     public void fillXML(final XMLElement element) {
 		final XMLElement child = new XMLElement(TAG_NAME);
 		super.fillXML(element);
-		child.setContent(script.getScript().toString());
+		child.setContent(source);
 		element.addChild(child);
 	}
 
@@ -58,7 +55,8 @@ public class ScriptCondition extends ASelectableCondition {
 	public ScriptCondition(final String script) {
 		super();
 		final ScriptingPermissions formulaPermissions = ScriptingPermissions.getFormulaPermissions();
-		this.script = new GroovyScript(script, formulaPermissions);
+		this.source = script;
+		this.scriptRunner = new ScriptRunner(new GroovyScript(script, formulaPermissions));
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class ScriptCondition extends ASelectableCondition {
 		final PrintStream printStream = new PrintStream(out);
 		final Object result;
         try {
-			result = script.setOutStream(printStream).execute(node);
+			result = scriptRunner.setOutStream(printStream).execute(node);
 			if(result instanceof Boolean)
 				return (Boolean) result;
 			if(result instanceof Number)
@@ -87,17 +85,20 @@ public class ScriptCondition extends ASelectableCondition {
         return false;
 	}
 
+	@Override
 	public boolean checkNodeInFormulaContext(NodeModel node){
-		final ScriptContext scriptContext = new ScriptContext();
-		scriptContext.push(node, (String)script.getScript());
-		script.setScriptContext(scriptContext);
+		NodeScript nodeScript = new NodeScript(node, source);
+		final ScriptContext scriptContext = new ScriptContext(nodeScript);
+		if (! FormulaThreadLocalStack.INSTANCE.push(nodeScript))
+			return false;
+		scriptRunner.setScriptContext(scriptContext);
 		try {
 			final boolean checkNode = checkNode(node);
 			return checkNode;
 		}
 		finally {
-			scriptContext.pop();
-			script.setScriptContext(null);
+			FormulaThreadLocalStack.INSTANCE.pop();
+			scriptRunner.setScriptContext(null);
 		}
 	}
 
@@ -117,7 +118,7 @@ public class ScriptCondition extends ASelectableCondition {
 
 	@Override
 	protected String createDescription() {
-		return TextUtils.format(SCRIPT_FILTER_DESCRIPTION_RESOURCE, script.getScript());
+		return TextUtils.format(SCRIPT_FILTER_DESCRIPTION_RESOURCE, source);
 	}
 
 	@Override
@@ -127,9 +128,8 @@ public class ScriptCondition extends ASelectableCondition {
 	    if(preferredSize.width > 200) {
 	        renderer.setPreferredSize(new Dimension(200, preferredSize.height));
         }
-		String scriptText = (String) script.getScript();
-		if (preferredSize.width > 200 || scriptText.contains("\n")) {
-			renderer.setToolTipText(HtmlUtils.plainToHTML(scriptText));
+		if (preferredSize.width > 200 || source.contains("\n")) {
+			renderer.setToolTipText(HtmlUtils.plainToHTML(source));
 	    }
 		return renderer;
     }

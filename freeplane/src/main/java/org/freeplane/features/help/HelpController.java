@@ -28,7 +28,7 @@ import org.freeplane.features.mode.Controller;
  */
 public class HelpController implements IExtension {
 	public static HelpController getController() {
-		return (HelpController) Controller.getCurrentController().getExtension(HelpController.class);
+		return Controller.getCurrentController().getExtension(HelpController.class);
 	}
 
 	public static void install() {
@@ -48,12 +48,11 @@ public class HelpController implements IExtension {
 		controller.addAction(new OpenSourceForgeURLAction("ReportBugAction",  resourceController.getProperty("bugTrackerLocation")));
 		controller.addAction(new OpenSourceForgeURLAction("RequestFeatureAction",  resourceController.getProperty("featureTrackerLocation")));
 		controller.addAction(new OpenSourceForgeURLAction("AskForHelp",  resourceController.getProperty("helpForumLocation")));
+		controller.addAction(new OpenURLAction("FreeplaneHandbook",  resourceController.getProperty("handbook_url")));
 		final String defaultMap = resourceController.getProperty("docu_map");
 		controller.addAction(new DocumentationAction("DocumentationAction", defaultMap));
 		final String tutorialMap = resourceController.getProperty("tutorial_map");
-		controller.addAction(new DocumentationAction("GettingStartedAction", tutorialMap));
-		final String whatsNewMap = resourceController.getProperty("whatsnew_map");
-		controller.addAction(new DocumentationAction("WhatsNewAction", whatsNewMap));
+		controller.addAction(new DocumentationAction("TutorialAction", tutorialMap));
 		controller.addAction(new HotKeyInfoAction());
 	}
 

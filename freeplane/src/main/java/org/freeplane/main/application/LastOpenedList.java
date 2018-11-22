@@ -23,6 +23,7 @@ import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -124,7 +125,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 
 	LastOpenedList() {
 		restore();
-		
+
 	}
 
 	public void registerMenuContributor(final ModeController modeController) {
@@ -143,6 +144,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 
 	}
 
+	@Override
 	public void afterViewChange(final Component oldView, final Component newView) {
 		if (newView == null) {
 			updateMenus();
@@ -153,6 +155,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 		updateList(map, restoreString);
     }
 
+	@Override
 	public void afterViewClose(final Component oldView) {
 		updateLastVisitedNodeId(oldView);
 	}
@@ -176,10 +179,11 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 	    return ResourceController.getResourceController().getBooleanProperty("save_last_position_in_map");
     }
 
+	@Override
 	public void afterViewCreated(final Component mapView) {
 		final MapModel map = getMapModel(mapView);
 		final RecentFile recentFile = findRecentFileByMapModel(map);
-		// the next line will only succeed if the map is already opened 
+		// the next line will only succeed if the map is already opened
 		if (saveLastPositionInMapEnabled() && ! selectLastVisitedNode(recentFile)) {
 			ensureSelectLastVisitedNodeOnOpen(map, recentFile);
 		}
@@ -188,9 +192,14 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 	private void ensureSelectLastVisitedNodeOnOpen(final MapModel map, final RecentFile recentFile) {
 	    final MapController mapController = Controller.getCurrentModeController().getMapController();
 		if (recentFile != null && recentFile.lastVisitedNodeId != null) {
+			final WeakReference<MapModel> mapReference = new WeakReference<>(map);
 			mapController.addNodeSelectionListener(new INodeSelectionListener() {
+				@Override
 				public void onSelect(NodeModel node) {
-					if (node.getMap() == map) {
+					MapModel map = mapReference.get();
+					if(map == null)
+						mapController.removeNodeSelectionListener(this);
+					else if (node.getMap() == map) {
 						// only once
 						mapController.removeNodeSelectionListener(this);
 						final NodeModel toSelect = map.getNodeForID(recentFile.lastVisitedNodeId);
@@ -200,6 +209,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 					}
 				}
 
+				@Override
 				public void onDeselect(NodeModel node) {
 				}
 			});
@@ -211,6 +221,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 		return mapViewManager.getModel(mapView);
     }
 
+	@Override
 	public void beforeViewChange(final Component oldView, final Component newView) {
 	}
 
@@ -254,6 +265,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 		return getRestorable(file);
 	}
 
+	@Override
 	public void mapChanged(final MapChangeEvent event) {
 		if (!event.getProperty().equals(UrlManager.MAP_URL)) {
 			return;
@@ -268,15 +280,19 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 		}
 	}
 
+	@Override
 	public void onNodeDeleted(NodeDeletionEvent nodeDeletionEvent) {
 	}
 
+	@Override
 	public void onNodeInserted(final NodeModel parent, final NodeModel child, final int newIndex) {
 	}
 
+	@Override
 	public void onNodeMoved(NodeMoveEvent nodeMoveEvent) {
 	}
 
+	@Override
 	public void onPreNodeDelete(NodeDeletionEvent nodeDeletionEvent) {
 	}
 
@@ -292,7 +308,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
         File file = createFileFromRestorable(tokens);
         final URL url = Compat.fileToUrl(file);
         if (!tryToChangeToMapView(url))
-			Controller.getCurrentModeController().getMapController().newMap(url);
+			Controller.getCurrentModeController().getMapController().openMap(url);
     }
 
 	public File createFileFromRestorable(StringTokenizer tokens) {
@@ -486,6 +502,7 @@ public class LastOpenedList implements IMapViewChangeListener, IMapChangeListene
 
     }
 
+	@Override
 	public void onPreNodeMoved(NodeMoveEvent nodeMoveEvent) {
 	}
 }

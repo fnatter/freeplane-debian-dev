@@ -195,7 +195,7 @@ public class TextController implements IExtension {
 				return transformedObject;
 		}
 		catch (Throwable e) {
-			LogUtils.warn(e.getMessage(), e);
+			LogUtils.warn(e.getMessage());
 			return TextUtils.format("MainView.errorUpdateText", data, e.getLocalizedMessage());
 		}
 	}
@@ -218,8 +218,8 @@ public class TextController implements IExtension {
 	}
 
 	public String getTransformedTextNoThrow(Object text, final NodeModel nodeModel, Object extension) {
-		text = getTransformedObjectNoFormattingNoThrow(text, nodeModel, extension);
-		return text.toString();
+		Object result = getTransformedObjectNoFormattingNoThrow(text, nodeModel, extension);
+		return result.toString();
 	}
 
 	public boolean isMinimized(NodeModel node) {
@@ -255,12 +255,13 @@ public class TextController implements IExtension {
 		return text;
 	}
 
-	public String getShortPlainText(NodeModel nodeModel) {
+	public String getShortPlainText(NodeModel nodeModel, int maximumCharacters, String continuationMark) {
 		String adaptedText = getPlainTransformedTextWithoutNodeNumber(nodeModel);
-		if (adaptedText.length() > 40) {
-			adaptedText = adaptedText.substring(0, 40) + " ...";
-		}
-		return adaptedText;
+		return TextUtils.getShortText(adaptedText, maximumCharacters, continuationMark);
+	}
+
+	public String getShortPlainText(NodeModel nodeModel) {
+		return getShortPlainText(nodeModel, 40, " ...");
 	}
 
 	public String getShortText(String longText) {
@@ -298,7 +299,7 @@ public class TextController implements IExtension {
 		}
 		details.setHidden(isHidden);
 		node.addExtension(details);
-		final NodeChangeEvent nodeChangeEvent = new NodeChangeEvent(node, DETAILS_HIDDEN, !isHidden, (Object) isHidden, true, false);
+		final NodeChangeEvent nodeChangeEvent = new NodeChangeEvent(node, DETAILS_HIDDEN, !isHidden, isHidden, true, false);
 		Controller.getCurrentModeController().getMapController().nodeRefresh(nodeChangeEvent);
 	}
 

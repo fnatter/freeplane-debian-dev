@@ -1,50 +1,46 @@
 package org.freeplane.plugin.script;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.net.URL;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.freeplane.core.extension.Configurable;
 import org.freeplane.core.util.HtmlUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
+import org.freeplane.features.attribute.NodeAttributeTableModel;
+import org.freeplane.features.link.LinkController;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
-import org.freeplane.plugin.script.proxy.FormulaCache;
+import org.freeplane.plugin.script.dependencies.RelatedElements;
 
 public class FormulaUtils {
-	// don't let caching use too much memory - but currently there are little means to cope with unavailable
-	// dependency data. It has to be tested but it should "only" lead to some missing updates.
-	private static final boolean ENABLE_CACHING = !Controller.getCurrentController().getResourceController()
-	    .getBooleanProperty("formula_disable_caching");
-    static final boolean DEBUG_FORMULA_EVALUATION = false;
 
 	/** evaluate text as a script if it starts with '='.
-	 * @return the evaluation result for script and the original text otherwise 
+	 * @return the evaluation result for script and the original text otherwise
 	 * @throws ExecuteScriptException */
-	public static Object evalIfScript(final NodeModel nodeModel, ScriptContext scriptContext, final String text){
-		if (containsFormula(text)) {
-			scriptContext = (scriptContext == null) ? new ScriptContext() : scriptContext;
-			return eval(nodeModel, scriptContext, text.substring(1));
+	public static Object evalIfScript(final NodeModel nodeModel, final String text){
+		if (textContainsFormula(text)) {
+			final String script = scriptOf(text);
+			return eval(nodeModel, script);
 		}
 		else {
 			return text;
 		}
 	}
 
-    public static Object safeEvalIfScript(final NodeModel nodeModel, ScriptContext scriptContext, String text) {
+	public static Object safeEvalIfScript(final NodeModel nodeModel, final String text) {
         try {
-            return evalIfScript(nodeModel, scriptContext, text);
-        }
-        catch (Exception e) {
+            return evalIfScript(nodeModel, text);
+        } catch (final Exception e) {
             LogUtils.info("could not interpret as a formula (ignored): " + text + " due to " + e.getMessage());
             return text;
         }
     }
 
-	public static boolean containsFormula(final String text) {
+	public static boolean textContainsFormula(final String text) {
 		// ignore == and => since these are often used in text
 		return startsWithEqualSign(text) && secondCharIsntSpecial(text.charAt(1));
 	}
@@ -53,120 +49,146 @@ public class FormulaUtils {
 		return text != null && text.length() > 2 && text.charAt(0) == '=';
 	}
 
-	private static boolean secondCharIsntSpecial(char secondChar) {
+	private static boolean secondCharIsntSpecial(final char secondChar) {
 		return secondChar != '=' && secondChar != '>';
 	}
 
-	public static boolean containsFormulaCheckHTML(String text) {
+	public static boolean containsFormula(final Object object) {
+		return (object instanceof String) && containsFormula((String)object);
+	}
+
+	public static boolean containsFormula(final String text) {
 	    if(HtmlUtils.isHtmlNode(text))
 	    	return htmlContainsFormula(text);
 	    else
-	    	return containsFormula(text);
+	    	return textContainsFormula(text);
     }
-	
-	private static Pattern FIRST_CHARACTER_IN_HTML = Pattern.compile("(?m)>\\s*[^<\\s]");
-	private static boolean htmlContainsFormula(String text) {
+
+	private static final Pattern FIRST_CHARACTER_IN_HTML = Pattern.compile("(?m)>\\s*[^<\\s]");
+
+	private static boolean htmlContainsFormula(final String text) {
 	    final Matcher matcher = FIRST_CHARACTER_IN_HTML.matcher(text);
 		return matcher.find() && text.charAt(matcher.end()-1) == '=';
     }
 
 	/** evaluate text as a script.
-	 * @return the evaluation result. 
+	 * @return the evaluation result.
 	 * @throws ExecuteScriptException */
-	public static Object eval(final NodeModel nodeModel, final ScriptContext scriptContext, final String text) {
-	    if (DEBUG_FORMULA_EVALUATION)
-	        System.err.println("eval " + nodeModel.getID() + ": " + text);
-		if (!scriptContext.push(nodeModel, text)) {
-			throw new StackOverflowError(TextUtils.format("formula.error.circularReference",
-			    HtmlUtils.htmlToPlain(scriptContext.getStackFront().getText())));
-		}
+	private static Object eval(final NodeModel nodeModel, final String script) {
+		final NodeScript nodeScript = new NodeScript(nodeModel, script);
+		final ScriptContext scriptContext = new ScriptContext(nodeScript);
 		final ScriptingPermissions restrictedPermissions = ScriptingPermissions.getFormulaPermissions();
+		if (FormulaCache.ENABLE_CACHING) {
+			final FormulaCache formulaCache = FormulaCache.of(nodeModel.getMap());
+			Object value = formulaCache.getOrThrowCachedResult(nodeScript);
+			if (value == null) {
+				try {
+					value = evaluateLoggingExceptions(nodeScript, scriptContext, restrictedPermissions);
+					formulaCache.put(nodeScript, new CachedResult(value, scriptContext.getRelatedElements()));
+				}
+				catch (final ExecuteScriptException e) {
+					formulaCache.put(nodeScript, new CachedResult(e, scriptContext.getRelatedElements()));
+					throw e;
+				}
+			}
+			return value;
+		}
+		else {
+			return evaluateLoggingExceptions(nodeScript, scriptContext, restrictedPermissions);
+		}
+	}
+
+	private static Object evaluateLoggingExceptions(final NodeScript nodeScript, final ScriptContext scriptContext,
+	                           final ScriptingPermissions restrictedPermissions) {
 		try {
-			if (ENABLE_CACHING) {
-				final FormulaCache formulaCache = getFormulaCache(nodeModel.getMap());
-				Object value = formulaCache.get(nodeModel, text);
-				if (value == null) {
-					try {
-						value = ScriptingEngine.executeScript(nodeModel, text, scriptContext, restrictedPermissions);
-						formulaCache.put(nodeModel, text, value);
-						if (DEBUG_FORMULA_EVALUATION)
-						    System.err.println("eval: cache miss: recalculated: " + text);
-					}
-					catch (ExecuteScriptException e) {
-						formulaCache.put(nodeModel, text, e);
-				        if (DEBUG_FORMULA_EVALUATION)
-				            System.err.println("eval: cache miss: exception for: " + text);
-						throw e;
-					}
-				}
-				else {
-			        if (DEBUG_FORMULA_EVALUATION)
-			            System.err.println("eval: cache hit for: " + text);
-					scriptContext.accessNode(nodeModel);
-				}
-				return value;
-			}
-			else {
-				return ScriptingEngine.executeScript(nodeModel, text, scriptContext, restrictedPermissions);
-			}
+			return evaluateCheckingForCyclesAndNonNullResult(nodeScript, scriptContext, restrictedPermissions);
+		}
+		catch (final ExecuteScriptException e) {
+			final NodeModel node = nodeScript.node;
+			final URL url = node.getMap().getURL();
+			String nodeLocation = url != null ? url.toString() : "Unsaved map ";
+			String message = "Error on evaluating formula in map " + nodeLocation + ", node " +  node.getID() + ",\n"
+					+ "Script '" + nodeScript.script + "'";
+			LogUtils.warn(message, e);
+			throw e;
+		}
+	}
+
+	private static Object evaluateCheckingForCyclesAndNonNullResult(final NodeScript nodeScript,
+																	final ScriptContext scriptContext,
+																	final ScriptingPermissions restrictedPermissions) {
+		if (!FormulaThreadLocalStack.INSTANCE.push(nodeScript)) {
+			showCyclicDependency(nodeScript);
+			final String message = TextUtils.format("formula.error.circularReference",
+				HtmlUtils.htmlToPlain(nodeScript.script));
+			Controller.getCurrentController().getViewController().out(message);
+			throw new ExecuteScriptException(new CyclicScriptReferenceException(message));
+		}
+		try {
+			final Object value = ScriptingEngine.executeScript(nodeScript.node, nodeScript.script, scriptContext,
+				restrictedPermissions);
+			if (value == null)
+				throw new ExecuteScriptException("Null pointer returned by formula");
+			return value;
 		}
 		finally {
-			scriptContext.pop();
+			FormulaThreadLocalStack.INSTANCE.pop();
 		}
 	}
 
-	public static List<NodeModel> manageChangeAndReturnDependencies(boolean includeChanged, final NodeModel... nodes) {
-		final ArrayList<NodeModel> dependencies = new ArrayList<NodeModel>();
-		for (int i = 0; i < nodes.length; i++) {
-			final LinkedHashSet<NodeModel> nodeDependencies = new LinkedHashSet<NodeModel>(0);
-			getEvaluationDependencies(nodes[i].getMap()).getDependencies(nodeDependencies, nodes[i]);
-			if (nodeDependencies != null)
-				dependencies.addAll(nodeDependencies);
-			if (includeChanged)
-				dependencies.add(nodes[i]);
+	private static void showCyclicDependency(final NodeScript nodeScript) {
+		final Controller controller = Controller.getCurrentController();
+		if (controller.getMap() != nodeScript.node.getMap())
+			return;
+		final List<NodeScript> cycle = FormulaThreadLocalStack.INSTANCE.findCycle(nodeScript);
+		final Configurable configurable = controller.getMapViewManager().getMapViewConfiguration();
+		final DependencyHighlighter dependencyHighlighter = new DependencyHighlighter(LinkController.getController(),
+			configurable);
+		if (! cycle.isEmpty())
+			dependencyHighlighter.showCyclicDependency(nodeScript);
+	}
+
+	public static RelatedElements getRelatedElements(final NodeModel node, final Object object) {
+		if (FormulaUtils.containsFormula(object)) {
+			final RelatedElements accessedValues = FormulaCache.of(node.getMap()).getAccessedValues(node,
+				scriptOf((String) object));
+			if (accessedValues != null)
+				return accessedValues;
 		}
-		if (ENABLE_CACHING) {
-			for (NodeModel nodeModel : dependencies) {
-				getFormulaCache(nodeModel.getMap()).markAsDirtyIfFormulaNode(nodeModel);
+		return new RelatedElements(node);
+	}
+
+	public static String scriptOf(final String object) {
+		return object.substring(1);
+	}
+
+	public static void clearCache(final MapModel map) {
+		FormulaDependencies.clearCache(map);
+	}
+
+	public static void evaluateAllFormulas(MapModel map) {
+		clearCache(map);
+		evaluateOutdatedFormulas(map);
+	}
+
+	public static void evaluateOutdatedFormulas(MapModel map) {
+		evaluateAllRecursively(map.getRootNode());
+	}
+
+	static private void evaluateAllRecursively(NodeModel node) {
+		evaluateObject(node, node.getUserObject());
+		NodeAttributeTableModel attributeTableModel = node.getExtension(NodeAttributeTableModel.class);
+		if(attributeTableModel != null)
+			attributeTableModel.getAttributes().stream().forEach(a -> evaluateObject(node, a.getValue()));
+		node.getChildren().stream().forEach(FormulaUtils::evaluateAllRecursively);
+	}
+
+	static private void evaluateObject(NodeModel node, Object userObject) {
+		try {
+			if (FormulaUtils.containsFormula(userObject)){
+				FormulaUtils.evalIfScript(node, (String) userObject);
 			}
+		} catch (Exception e) {
 		}
-		return dependencies;
-	}
-
-	private static FormulaCache getFormulaCache(MapModel map) {
-		FormulaCache formulaCache = (FormulaCache) map.getExtension(FormulaCache.class);
-		if (formulaCache == null) {
-			formulaCache = new FormulaCache();
-			map.addExtension(formulaCache);
-		}
-		return formulaCache;
-	}
-
-	private static EvaluationDependencies getEvaluationDependencies(MapModel map) {
-		EvaluationDependencies dependencies = (EvaluationDependencies) map.getExtension(EvaluationDependencies.class);
-		if (dependencies == null) {
-			dependencies = new EvaluationDependencies();
-			map.addExtension(dependencies);
-		}
-		return dependencies;
-	}
-
-	public static void accessNode(NodeModel accessingNode, NodeModel accessedNode) {
-			getEvaluationDependencies(accessingNode.getMap()).accessNode(accessingNode, accessedNode);
-	}
-
-	public static void accessBranch(NodeModel accessingNode, NodeModel accessedNode) {
-		getEvaluationDependencies(accessingNode.getMap()).accessBranch(accessingNode, accessingNode);
-	}
-
-	public static void accessAll(NodeModel accessingNode) {
-		getEvaluationDependencies(accessingNode.getMap()).accessAll(accessingNode);
-	}
-
-	public static void clearCache(MapModel map) {
-        if (DEBUG_FORMULA_EVALUATION)
-            System.out.println("clearing formula cache for " + map.getTitle());
-		map.removeExtension(FormulaCache.class);
-		map.removeExtension(EvaluationDependencies.class);
 	}
 }

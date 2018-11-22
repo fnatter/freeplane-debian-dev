@@ -27,6 +27,7 @@ import java.util.List;
 import org.freeplane.core.ui.AFreeplaneAction;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.features.map.IMapSelection;
+import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
@@ -52,14 +53,15 @@ public class ExecuteScriptAction extends AFreeplaneAction {
 
 	private final File scriptFile;
 	private final ExecutionMode mode;
-	private final IScript script;
+	private final ScriptRunner scriptRunner;
 
 	public ExecuteScriptAction(final String scriptName, final String menuItemName, final String scriptFile,
 	                           final ExecutionMode mode, ScriptingPermissions permissions) {
 		super(ExecuteScriptAction.makeMenuItemKey(scriptName, mode), menuItemName, null);
 		this.scriptFile = new File(scriptFile);
 		this.mode = mode;
-		script = ScriptingEngine.createScriptForFile(this.scriptFile, permissions);
+		final IScript script = ScriptingEngine.createScript(this.scriptFile, permissions, true);
+		scriptRunner = new ScriptRunner(script);
 	}
 
 	public static String makeMenuItemKey(final String scriptName, final ExecutionMode mode) {
@@ -89,7 +91,7 @@ public class ExecuteScriptAction extends AFreeplaneAction {
 						executeScriptRecursive(node);
 					}
 					else {
-						script.execute(node);
+						scriptRunner.execute(node);
 					}
 				}
 				catch (ExecuteScriptException ex) {
@@ -124,18 +126,19 @@ public class ExecuteScriptAction extends AFreeplaneAction {
 
 	private void executeScriptRecursive(final NodeModel node) {
 		ModeController modeController = Controller.getCurrentModeController();
-		final NodeModel[] children = modeController.getMapController().childrenUnfolded(node)
+		MapController r = modeController.getMapController();
+		final NodeModel[] children = node.getChildren()
 		    .toArray(new NodeModel[] {});
 		for (final NodeModel child : children) {
 			executeScriptRecursive(child);
 		}
-		script.execute(node);
+		scriptRunner.execute(node);
 	}
-	
+
 	public ExecutionMode getExecutionMode() {
 		return mode;
 	}
-	
+
 	public File getScriptFile() {
 		return scriptFile;
 	}

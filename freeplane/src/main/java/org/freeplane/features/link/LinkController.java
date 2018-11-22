@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,6 +55,7 @@ import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import org.freeplane.core.extension.Configurable;
 import org.freeplane.core.extension.IExtension;
 import org.freeplane.core.io.ReadManager;
 import org.freeplane.core.resources.ResourceController;
@@ -65,19 +65,12 @@ import org.freeplane.core.ui.menubuilders.generic.Entry;
 import org.freeplane.core.ui.menubuilders.generic.EntryAccessor;
 import org.freeplane.core.ui.menubuilders.generic.EntryVisitor;
 import org.freeplane.core.ui.menubuilders.generic.PhaseProcessor.Phase;
-import org.freeplane.core.util.ColorUtils;
-import org.freeplane.core.util.Compat;
-import org.freeplane.core.util.HtmlUtils;
-import org.freeplane.core.util.LogUtils;
-import org.freeplane.core.util.MenuUtils;
-import org.freeplane.core.util.TextUtils;
+import org.freeplane.core.util.*;
 import org.freeplane.features.DashVariant;
+import org.freeplane.features.explorer.MapExplorerController;
 import org.freeplane.features.filter.FilterController;
 import org.freeplane.features.link.ConnectorModel.Shape;
-import org.freeplane.features.map.IMapSelection;
-import org.freeplane.features.map.INodeSelectionListener;
-import org.freeplane.features.map.MapController;
-import org.freeplane.features.map.NodeModel;
+import org.freeplane.features.map.*;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
 import org.freeplane.features.mode.SelectionController;
@@ -124,18 +117,18 @@ public class LinkController extends SelectionController implements IExtension {
 		final ReadManager readManager = mapController.getReadManager();
 		LinkBuilder linkBuilder = new LinkBuilder(this);
 		linkBuilder.registerBy(readManager);
-		
+
 		// this IContentTransformer is unconditional because the outcome
 		// (#ID_1698830792 -> Nodename) is usually wanted
 		final LinkTransformer textTransformer = new LinkTransformer(modeController, 10);
 		TextController.getController(modeController).addTextTransformer(textTransformer);
-		
-		textTransformer.registerListeners(modeController);
 
 		final INodeSelectionListener listener = new INodeSelectionListener() {
+			@Override
 			public void onDeselect(final NodeModel node) {
 			}
 
+			@Override
 			public void onSelect(final NodeModel node) {
 				final URI link = NodeLinks.getValidLink(node);
 				final String linkString = (link != null ? link.toString() : null);
@@ -175,7 +168,8 @@ public class LinkController extends SelectionController implements IExtension {
     protected void addClosingAction(final JComponent arrowLinkPopup, Action action) {
         JButton comp = addAction(arrowLinkPopup, action);
         comp.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
+        	@Override
+			public void actionPerformed(ActionEvent e) {
         		SwingUtilities.getWindowAncestor(arrowLinkPopup).setVisible(false);
         	}
         });
@@ -196,60 +190,9 @@ public class LinkController extends SelectionController implements IExtension {
 		modeController.addAction(new FollowLinkAction());
 		modeController.addUiBuilder(Phase.ACTIONS, "clone_actions", new ClonesMenuBuilder(modeController),
 				new ChildActionEntryRemover(modeController));
-		modeController.addUiBuilder(Phase.ACTIONS, "link_actions", new LinkMenuBuilder(modeController), 
+		modeController.addUiBuilder(Phase.ACTIONS, "link_actions", new LinkMenuBuilder(modeController, this),
 				new ChildActionEntryRemover(modeController));
 	}
-
-	final class LinkMenuBuilder implements EntryVisitor {
-	    private final ModeController modeController;
-
-	    LinkMenuBuilder(ModeController modeController) {
-		    this.modeController = modeController;
-	    }
-
-	    @Override
-	    public void visit(Entry entry) {
-	    	final IMapSelection selection = modeController.getController().getSelection();
-	    	if (selection == null)
-	    		return;
-	    	final NodeModel node = selection.getSelected();
-	    	Set<NodeLinkModel> links = new LinkedHashSet<NodeLinkModel>(NodeLinks.getLinks(node));
-	    	links.addAll(getLinksTo(node));
-	    	boolean firstAction = true;
-	    	for (NodeLinkModel link : links) {
-	    		final String targetID = link.getTargetID();
-	    		final NodeModel target;
-	    		if (node.getID().equals(targetID)) {
-	    			if (link instanceof ConnectorModel) {
-	    				ConnectorModel cm = (ConnectorModel) link;
-	    				target = cm.getSource();
-	    				if (node.equals(target))
-	    					continue;
-	    			}
-	    			else
-	    				continue;
-	    		}
-	    		else
-	    			target = node.getMap().getNodeForID(targetID);
-	    		final GotoLinkNodeAction gotoLinkNodeAction = new GotoLinkNodeAction(LinkController.this, target);
-	    		gotoLinkNodeAction.configureText("follow_graphical_link", target);
-	    		if (!(link instanceof ConnectorModel)) {
-	    			gotoLinkNodeAction.putValue(Action.SMALL_ICON, LinkType.LOCAL.icon);
-	    		}
-	    		if (firstAction) {
-	    			entry.addChild(new Entry().setBuilders("separator"));
-	    			firstAction = false;
-	    		}
-	    		modeController.addActionIfNotAlreadySet(gotoLinkNodeAction);
-				new EntryAccessor().addChildAction(entry, gotoLinkNodeAction);
-	    	}
-	    }
-
-	    @Override
-	    public boolean shouldSkipChildren(Entry entry) {
-	    	return true;
-	    }
-    }
 
 
 	private class ClonesMenuBuilder implements EntryVisitor {
@@ -300,7 +243,8 @@ public class LinkController extends SelectionController implements IExtension {
             this.reason = reason;
         }
 
-        public void actionPerformed(ActionEvent e) {
+        @Override
+		public void actionPerformed(ActionEvent e) {
             JComponent src = (JComponent) e.getSource();
             src.putClientProperty(reason, Boolean.TRUE);
             SwingUtilities.getWindowAncestor(src).setVisible(false);
@@ -320,7 +264,7 @@ public class LinkController extends SelectionController implements IExtension {
 		sourceButton.setEnabled(!selection.isSelected(source));
 		final JButton targetButton = addLinks(arrowLinkPopup, target);
 		targetButton.setEnabled(!selection.isSelected(target));
-		
+
 		sourceButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -340,7 +284,7 @@ public class LinkController extends SelectionController implements IExtension {
 
 	private void registerCloseActions(final JComponent arrowLinkPopup) {
 		arrowLinkPopup.addHierarchyListener(new HierarchyListener() {
-			
+
 			@Override
 			public void hierarchyChanged(HierarchyEvent e) {
 				if(arrowLinkPopup.isDisplayable()) {
@@ -378,20 +322,44 @@ public class LinkController extends SelectionController implements IExtension {
 		final String adaptedText = uri.toString();
 		if (adaptedText.startsWith("#")) {
 			ModeController modeController = Controller.getCurrentModeController();
-			final NodeModel dest = modeController.getMapController().getNodeFromID(adaptedText.substring(1));
+			final MapExplorerController explorer = modeController.getExtension(MapExplorerController.class);
+			final String reference = adaptedText.substring(1);
+			final NodeModel dest = explorer.getNodeAt(node, reference);
 			if (dest != null) {
 				return TextController.getController().getShortPlainText(dest);
 			}
-			return TextUtils.getText("link_not_available_any_more");
+			return TextUtils.format(reference.startsWith("ID") ? "link_not_available_any_more" : "invalid_or_ambiguous_reference", reference);
 		}
 		return adaptedText;
 	}
 
-	public Collection<NodeLinkModel> getLinksFrom(NodeModel node) {
+	public boolean hasNodeLinks(MapModel map, JComponent component) {
+		return null != component.getClientProperty(Connectors.class) ||  MapLinks.hasLinks(map);
+	}
+
+	public Collection<? extends NodeLinkModel> getLinksTo(NodeModel node, Configurable component) {
+		Connectors connectors = (Connectors) component.getClientProperty(Connectors.class);
+		if(connectors != null)
+			return connectors.getLinksTo(node);
+		else {
+			return getLinksTo(node);
+		}
+	}
+
+	public Collection<? extends NodeLinkModel> getLinksFrom(NodeModel node, Configurable component) {
+		Connectors connectors = (Connectors) component.getClientProperty(Connectors.class);
+		if(connectors != null)
+			return connectors.getLinksFrom(node);
+		else {
+			return getLinksFrom(node);
+		}
+	}
+
+	private Collection<NodeLinkModel> getLinksFrom(NodeModel node) {
 		return NodeLinks.getLinks(node);
 	}
-	
-	public Collection<NodeLinkModel> getLinksTo(final NodeModel target) {
+
+	private Collection<NodeLinkModel> getLinksTo(final NodeModel target) {
 		if (target.hasID() == false) {
 			return Collections.emptySet();
 		}
@@ -399,7 +367,7 @@ public class LinkController extends SelectionController implements IExtension {
 		if (links == null) {
 			return Collections.emptySet();
 		}
-		
+
 		ArrayList<NodeLinkModel> clonedLinks = null;
 		for(NodeModel targetClone : target.subtreeClones()){
 			final Set<NodeLinkModel> set = links.get(targetClone.createID());
@@ -526,7 +494,7 @@ public class LinkController extends SelectionController implements IExtension {
 				}
 			}
 			else {
-				loadURI(link);
+				loadURI(selectedNode, link);
 			}
 			final IMapSelection selection = modeController.getController().getSelection();
 			if(selection != null)
@@ -801,7 +769,7 @@ public class LinkController extends SelectionController implements IExtension {
 		final ConnectorArrows arrows = ConnectorArrows.valueOf(standard);
 		return arrows;
 	}
-	
+
 	public DashVariant getStandardDashVariant() {
 		final String standard = ResourceController.getResourceController().getProperty(RESOURCES_DASH_VARIANT);
 		final DashVariant variant = DashVariant.valueOf(standard);
@@ -874,7 +842,7 @@ public class LinkController extends SelectionController implements IExtension {
 	    final String linkText = link.toString();
 	    if (linkText.startsWith("#")) {
 	    	final String id = linkText.substring(1);
-	    	if (model == null || model.getMap().getNodeForID(id) == null) {
+	    	if (model == null || linkText.startsWith("#ID") && model.getMap().getNodeForID(id) == null) {
 	    		return null;
 	    	}
 	    	else{
@@ -927,6 +895,11 @@ public class LinkController extends SelectionController implements IExtension {
 	}
 
 	public void loadURI(NodeModel node, URI uri) {
-		loadURI(uri);
+		final String uriString = uri.toString();
+		if (uriString.startsWith("#")) {
+			UrlManager.getController().selectNode(node, uriString.substring(1));
+		}
+		else
+			loadURI(uri);
 	}
 }

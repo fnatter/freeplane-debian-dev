@@ -20,7 +20,6 @@
 package org.freeplane.features.map;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -56,8 +55,9 @@ public class MapModel {
 	private boolean readOnly = false;
 	private NodeModel root;
 	private URL url;
+	private NodeChangeAnnouncer nodeChangeAnnouncer;
 
-	public MapModel(IconRegistry iconRegistry) {
+	public MapModel(IconRegistry iconRegistry, NodeChangeAnnouncer nodeChangeAnnouncer) {
 		extensionContainer = new ExtensionContainer(new HashMap<Class<? extends IExtension>, IExtension>());
 		this.root = null;
 		listeners = new LinkedList<IMapChangeListener>();
@@ -67,12 +67,15 @@ public class MapModel {
 			filter = filterController.createTransparentFilter();
 		}
 		this.iconRegistry = iconRegistry;
+		this.nodeChangeAnnouncer = nodeChangeAnnouncer;
 	}
 
 	public MapModel() {
-		this(null);
+		this(null, null);
 		final ModeController modeController = Controller.getCurrentModeController();
-		iconRegistry = new IconRegistry(modeController.getMapController(), this);
+		final MapController mapController = modeController.getMapController();
+		iconRegistry = new IconRegistry(mapController, this);
+		this.nodeChangeAnnouncer = mapController;
 	}
 
 	public void createNewRoot() {
@@ -104,7 +107,7 @@ public class MapModel {
 		listeners.add(listener);
 	}
 
-	public void destroy() {
+	public void releaseResources() {
 	}
 
 	public void fireMapChangeEvent(final MapChangeEvent event) {
@@ -141,12 +144,7 @@ public class MapModel {
 	 * Change this to always return null if your model doesn't support files.
 	 */
 	public File getFile() {
-		try {
 			return url != null && url.getProtocol().equals("file") ? Compat.urlToFile(url) : null;
-		}
-		catch (URISyntaxException e) {
-			return null;
-		}
 	}
 
 	public Filter getFilter() {
@@ -193,7 +191,11 @@ public class MapModel {
 	}
 
 	public boolean isReadOnly() {
-		return readOnly || containsExtension(DocuMapAttribute.class);
+		return readOnly || isDocumentation();
+	}
+
+	public boolean isDocumentation() {
+		return containsExtension(DocuMapAttribute.class);
 	}
 
 	public boolean isSaved() {
@@ -300,6 +302,11 @@ public class MapModel {
 		if (id != null) {
 			nodes.put(id, null);
 		}
+	}
+
+
+	public NodeChangeAnnouncer getNodeChangeAnnouncer() {
+		return nodeChangeAnnouncer;
 	}
 
 	public boolean close() {

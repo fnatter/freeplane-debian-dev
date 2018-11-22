@@ -1,17 +1,5 @@
 package org.freeplane.features.export.mindmapmode;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
-
-import javax.swing.filechooser.FileFilter;
-
 import org.freeplane.core.extension.IExtension;
 import org.freeplane.core.io.xml.XMLLocalParserFactory;
 import org.freeplane.core.resources.ResourceController;
@@ -27,6 +15,11 @@ import org.freeplane.n3.nanoxml.IXMLReader;
 import org.freeplane.n3.nanoxml.StdXMLReader;
 import org.freeplane.n3.nanoxml.XMLElement;
 
+import javax.swing.filechooser.FileFilter;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.*;
+
 /**
  * A registry of all XSLT scripts that are available to transform a .mm file into another format.
  * The XSLT file directories are scanned anew by each instance of this class to account for changes during uptime.
@@ -35,8 +28,12 @@ import org.freeplane.n3.nanoxml.XMLElement;
 public class ExportController implements IExtension{
 	/** a hash where the key is the file extension and the value the filename of
 	 * the corresponding XSLT sheet. */
-	final private HashMap<FileFilter, IExportEngine> filterMap = new HashMap<FileFilter, IExportEngine>();
-	final private ArrayList<FileFilter> fileFilters = new ArrayList<FileFilter>();
+	final private HashMap<FileFilter, IExportEngine> mapExportEngines = new HashMap<FileFilter, IExportEngine>();
+	final private ArrayList<FileFilter> mapExportFileFilters = new ArrayList<FileFilter>();
+
+	final private HashMap<FileFilter, IExportEngine> branchExportEngines = new HashMap<FileFilter, IExportEngine>();
+	final private ArrayList<FileFilter> branchExportFileFilters = new ArrayList<FileFilter>();
+	private boolean fileFiltersSorted;
 
 	public static void install(ExportController exportController) {
 	    Controller.getCurrentModeController().addExtension(ExportController.class, exportController);
@@ -44,32 +41,42 @@ public class ExportController implements IExtension{
 	
 	public ExportController(final String xmlDescriptorFile) {
 		final ModeController modeController = Controller.getCurrentModeController();
-		final ExportAction action = new ExportAction();
-		modeController.addAction(action);
+		modeController.addAction(new ExportAction());
+		modeController.addAction(new ExportBranchesAction());
 
-		final ExportToHTMLAction exportToHTMLAction = new ExportToHTMLAction();
-		addExportEngine(exportToHTMLAction.getFileFilter(), exportToHTMLAction);
-		final ExportBranchToHTMLAction exportBranchToHTMLAction = new ExportBranchToHTMLAction();
-		addExportEngine(exportBranchToHTMLAction.getFileFilter(), exportBranchToHTMLAction);
+		final ExportToHTML exportToHTML = new ExportToHTML();
+		addMapExportEngine(exportToHTML.getFileFilter(), exportToHTML);
+		final ExportBranchesToHTML exportBranchesToHTML = new ExportBranchesToHTML();
+		addBranchExportEngine(exportBranchesToHTML.getFileFilter(), exportBranchesToHTML);
 		
 		final ExportToOoWriter exportToOoWriter = new ExportToOoWriter();
-		
-		addExportEngine(exportToOoWriter.getFileFilter(), exportToOoWriter);
+
+		addMapExportEngine(exportToOoWriter.getFileFilter(), exportToOoWriter);
+		addBranchExportEngine(exportToOoWriter.getFileFilter(), exportToOoWriter);
 		createImageExporters();
 		createXSLTExportActions(xmlDescriptorFile);
 		new XsltExportEngineFactory().gatherXsltScripts(this);
-		Collections.sort(fileFilters, new Comparator<FileFilter>() {
-			public int compare(FileFilter f1, FileFilter f2) {
-	            return f1.getDescription().compareToIgnoreCase(f2.getDescription());
-            }
-		});
+		fileFiltersSorted = false;
+	}
+
+	private void sortFileFilters() {
+		if (! fileFiltersSorted) {
+			fileFiltersSorted = true;
+			Comparator<FileFilter> fileFilterComparator = new Comparator<FileFilter>() {
+				public int compare(FileFilter f1, FileFilter f2) {
+					return f1.getDescription().compareToIgnoreCase(f2.getDescription());
+				}
+			};
+			Collections.sort(mapExportFileFilters, fileFilterComparator);
+			Collections.sort(branchExportFileFilters, fileFilterComparator);
+		}
 	}
 
 	public void createImageExporters() {
 		final ExportToImage pngExport = new ExportToImage("png","Portable Network Graphic (PNG)");
-		addExportEngine(pngExport.getFileFilter(), pngExport);
+		addMapExportEngine(pngExport.getFileFilter(), pngExport);
 		final ExportToImage jpgExport = new ExportToImage("jpg","Compressed image (JPEG)");
-		addExportEngine(jpgExport.getFileFilter(), jpgExport);
+		addMapExportEngine(jpgExport.getFileFilter(), jpgExport);
 	}
 	
 	private void createXSLTExportActions( final String xmlDescriptorFile) {
@@ -88,7 +95,10 @@ public class ExportController implements IExtension{
 				final XMLElement xmlProperties = descriptor.getFirstChildNamed("properties");
 				final Properties properties = xmlProperties.getAttributes();
 				final ExportWithXSLT action = new ExportWithXSLT(name, properties);
-				addExportEngine(action.getFileFilter(), action);
+				FileFilter fileFilter = action.getFileFilter();
+				addMapExportEngine(fileFilter, action);
+				if(Boolean.parseBoolean(properties.getProperty("branch_export")))
+					addBranchExportEngine(fileFilter, action);
 			}
 		}
 		catch (final Exception e) {
@@ -99,27 +109,39 @@ public class ExportController implements IExtension{
 		}
 	}
 
-	public void addExportEngine(final FileFilter filter, final IExportEngine exporter) {
-		for (final IExportEngine existingExporter : filterMap.values())
+	public void addMapExportEngine(final FileFilter filter, final IExportEngine exporter) {
+		if (! mapExportEngines.values().contains(exporter))
 		{
-			if (existingExporter.equals(exporter))
-			{
-				return;
-			}
+			mapExportFileFilters.add(filter);
+			mapExportEngines.put(filter, exporter);
+			fileFiltersSorted = false;
 		}
-	    fileFilters.add(filter);
-		filterMap.put(filter, exporter);
     }
 
-	/** returns a Map(description -> xsltFile). */
-	public HashMap<FileFilter, IExportEngine> getFilterMap() {
-    	return filterMap;
-    }
+	public void addBranchExportEngine(final FileFilter filter, final IExportEngine exporter) {
+		if (! branchExportEngines.values().contains(exporter))
+		{
+			branchExportFileFilters.add(filter);
+			branchExportEngines.put(filter, exporter);
+			fileFiltersSorted = false;
+		}
+	}
+	public HashMap<FileFilter, IExportEngine> getMapExportEngines() {
+		return mapExportEngines;
+	}
+	public HashMap<FileFilter, IExportEngine> getBranchExportEngines() {
+		return branchExportEngines;
+	}
 
-	/** returns a list of all appropriate FileFilters for a FileChooser. */
-	public List<FileFilter> getFileFilters() {
-    	return fileFilters;
-    }
+	public List<FileFilter> getMapExportFileFilters() {
+		sortFileFilters();
+		return mapExportFileFilters;
+	}
+
+	public List<FileFilter> getBranchExportFileFilters() {
+		sortFileFilters();
+		return branchExportFileFilters;
+	}
 
 	public static ExportController getContoller() {
 		return getController(Controller.getCurrentModeController());
@@ -137,4 +159,11 @@ public class ExportController implements IExtension{
 	    return false;
     }
 
+    ExportDialog createMapExportDialog() {
+        return new ExportDialog(getMapExportFileFilters(), getMapExportEngines(), ExportDialog.EXPORT_MAP_TITLE);
+    }
+
+	ExportDialog createBranchExportDialog() {
+		return new ExportDialog(getBranchExportFileFilters(), getBranchExportEngines(), ExportDialog.EXPORT_BRANCHES_TITLE);
+	}
 }

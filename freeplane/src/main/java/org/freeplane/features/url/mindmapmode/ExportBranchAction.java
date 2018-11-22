@@ -144,7 +144,7 @@ class ExportBranchAction extends AFreeplaneAction {
 				};
 				Controller.getCurrentModeController().execute(actor, parentMap);
 			}
-			mMapController.newModel(existingNode);
+			mMapController.createModel(existingNode);
 			final MapModel newMap = existingNode.getMap();
 			IExtension[] oldExtensions = newMap.getRootNode().getSharedExtensions().values().toArray(new IExtension[]{});
 			for(final IExtension extension : oldExtensions){
@@ -166,7 +166,7 @@ class ExportBranchAction extends AFreeplaneAction {
 			modeController.undoableCopyExtensions(LogicalStyleKeys.NODE_STYLE, existingNode, newNode);
 			newMap.getFile();
 			((MLinkController) LinkController.getController()).setLink(newNode, newUri, LinkController.LINK_ABSOLUTE);
-			newMap.destroy();
+			newMap.releaseResources();
 			existingNode.setParent(null);
 			mMapController.select(newNode);
 		}

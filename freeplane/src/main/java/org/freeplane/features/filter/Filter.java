@@ -28,6 +28,7 @@ import org.freeplane.core.resources.ResourceController;
 import org.freeplane.features.filter.condition.ICondition;
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.MapChangeEvent;
+import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
@@ -40,25 +41,25 @@ public class Filter {
 		final ResourceController resourceController = ResourceController.getResourceController();
 		return new Filter(null, resourceController.getBooleanProperty("filter.showAncestors"), resourceController.getBooleanProperty("filter.showDescendants"), false);
 	}
-	
+
 	public interface FilterInfoAccessor{
 		public FilterInfo getFilterInfo(NodeModel node);
 	}
-	
+
 	static public FilterInfoAccessor DEFAULT_FILTER_INFO_ACCESSOR = new FilterInfoAccessor() {
-		
+
 		@Override
 		public FilterInfo getFilterInfo(NodeModel node) {
 			return node.getFilterInfo();
 		}
 	};
-	
+
 	static public Filter createOneTimeFilter(final ICondition condition, final boolean areAncestorsShown,
             final boolean areDescendantsShown, final boolean applyToVisibleNodesOnly) {
-		
+
 		FilterInfoAccessor oneTimeFilterAccessor = new FilterInfoAccessor() {
 			HashMap<NodeModel, FilterInfo> filterInfos = new HashMap<>();
-			
+
 			@Override
 			public FilterInfo getFilterInfo(NodeModel node) {
 				FilterInfo filterInfo = filterInfos.get(node);
@@ -211,7 +212,7 @@ public class Filter {
 		}
 		return condition.checkNode(node);
 	}
-	
+
 	private boolean shouldRemainInvisible(final NodeModel node) {
 		return condition != null && appliesToVisibleNodesOnly && !node.hasVisibleContent();
 	}
@@ -219,7 +220,8 @@ public class Filter {
 	private boolean filterChildren(final NodeModel node,
 	                               final boolean isAncestorSelected, final boolean isAncestorEclipsed) {
 		boolean isDescendantSelected = false;
-		for (final NodeModel child : Controller.getCurrentModeController().getMapController().childrenUnfolded(node)) {
+		MapController r = Controller.getCurrentModeController().getMapController();
+		for (final NodeModel child : node.getChildren()) {
 			isDescendantSelected = applyFilter(child, isAncestorSelected, isAncestorEclipsed,
 			    isDescendantSelected);
 		}
@@ -248,7 +250,7 @@ public class Filter {
 		return getFilterInfo(node).isVisible(this.options);
 	}
 	private void refreshMap(Object source, MapModel map) {
-		Controller.getCurrentModeController().getMapController().fireMapChanged(new MapChangeEvent(source, map, Filter.class, null, this));
+		Controller.getCurrentModeController().getMapController().fireMapChanged(new MapChangeEvent(source, map, Filter.class, null, this, false));
 	}
 
 	private void resetFilter(final NodeModel node) {

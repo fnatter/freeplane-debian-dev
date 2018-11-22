@@ -1,25 +1,25 @@
 package org.freeplane.core.undo;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SelectionActor implements IActor {
 	private final String[] nodeIDs;
 	final private MapModel map;
 	static private SelectionActor lastSelectionActor = null;
-	
+
 	static SelectionActor create(IMapSelection selection){
 		final SelectionActor selectionActor = new SelectionActor(selection);
 		if(!selectionActor.equals(lastSelectionActor))
 			lastSelectionActor = selectionActor;
 		return lastSelectionActor;
 	}
-	
+
 	private SelectionActor(IMapSelection selection) {
 		super();
 		map = selection.getSelected().getMap();
@@ -29,8 +29,8 @@ public class SelectionActor implements IActor {
 		for(NodeModel node : nodes)
 			nodeIDs[index++] = node.createID();
 	}
-	
-	
+
+
 
 	@Override
 	public int hashCode() {
@@ -66,7 +66,7 @@ public class SelectionActor implements IActor {
 		final Controller controller = Controller.getCurrentController();
 		if(! map.equals(controller.getMap()))
 			return;
-		
+
 		final IMapSelection selection = controller.getSelection();
 		if(this.equals(new SelectionActor(selection)))
 			return;

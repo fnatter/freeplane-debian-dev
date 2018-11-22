@@ -28,15 +28,17 @@ import org.freeplane.features.map.NodeModel;
  * 17.12.2012
  */
 public interface IScript {
-    public IScript setErrorHandler(IFreeplaneScriptErrorHandler pErrorHandler);
+//    public IScript setErrorHandler(IFreeplaneScriptErrorHandler pErrorHandler);
+//
+//	public IScript setOutStream(PrintStream outStream);
+//
+//	public IScript setScriptContext(ScriptContext scriptContext);
+//
+//	public Object getScript();
 
-	public IScript setOutStream(PrintStream outStream);
+	public Object execute(final NodeModel node, PrintStream outStream, IFreeplaneScriptErrorHandler pErrorHandler, ScriptContext scriptContext);
 
-	public IScript setScriptContext(ScriptContext scriptContext);
+	public boolean hasPermissions(ScriptingPermissions permissions);
 
-	public Object getScript();
-
-	public Object execute(final NodeModel node);
-
-    public boolean permissionsEquals(ScriptingPermissions permissions);
+//    public boolean permissionsEquals(ScriptingPermissions permissions);
 }

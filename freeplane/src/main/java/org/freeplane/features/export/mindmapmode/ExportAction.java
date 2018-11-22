@@ -17,12 +17,13 @@
  */
 package org.freeplane.features.export.mindmapmode;
 
-import java.awt.event.ActionEvent;
-
 import org.freeplane.core.ui.AFreeplaneAction;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.mode.Controller;
+
+import java.awt.event.ActionEvent;
+import java.util.Collections;
 
 /**
  * @author foltin To change the template for this generated type comment go to
@@ -41,16 +42,14 @@ class ExportAction extends AFreeplaneAction {
 
 	public void actionPerformed(final ActionEvent e) {
 		if(exp == null){
-			exp = new ExportDialog();
+			final ExportController exportController = ExportController.getContoller();
+			exp = exportController.createMapExportDialog();
 		}
-		final MapModel model = Controller.getCurrentController().getMap();
-		if (model == null) {
+		final MapModel map = Controller.getCurrentController().getMap();
+		if (map == null) {
 			return;
 		}
-		export(model);
+		exp.export(UITools.getCurrentRootComponent(), Collections.singletonList(map.getRootNode()));
 	}
 
-	private void export(final MapModel model) {
-		exp.export(UITools.getCurrentRootComponent(), model);
-	}
 }

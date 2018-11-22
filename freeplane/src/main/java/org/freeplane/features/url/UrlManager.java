@@ -54,11 +54,11 @@ import org.freeplane.core.util.Compat;
 import org.freeplane.core.util.FileUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
+import org.freeplane.features.explorer.MapExplorerController;
 import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.MapWriter.Mode;
 import org.freeplane.features.map.NodeModel;
-import org.freeplane.features.mapio.MapIO;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
 import org.freeplane.n3.nanoxml.XMLException;
@@ -133,7 +133,8 @@ public class UrlManager implements IExtension {
 	            ActionMap aMap = dialog.getRootPane().getActionMap();
 	            aMap.put("escape", new AbstractAction()
 	            		{
-	            		public void actionPerformed (ActionEvent e)
+	            		@Override
+						public void actionPerformed (ActionEvent e)
 	            		{
 	            			dialog.dispose();
 	            		}
@@ -195,12 +196,9 @@ public class UrlManager implements IExtension {
 		}
 	}
 
-	/**@deprecated -- use {@link MapIO#loadCatchExceptions(URL url, MapModel map)} */
-	@Deprecated
 	public boolean loadCatchExceptions(final URL url, final MapModel map){
-		InputStreamReader urlStreamReader = null;
 		try {
-			urlStreamReader = load(url, map);
+			load(url, map);
 			return true;
 		}
 		catch (final XMLException ex) {
@@ -217,25 +215,19 @@ public class UrlManager implements IExtension {
 				LogUtils.severe("Can not load url", ex);
 			}
 		}
-		finally {
-			FileUtils.silentlyClose(urlStreamReader);
-		}
 		UITools.errorMessage(TextUtils.format("url_open_error", url.toString()));
 		return false;
 	}
 
 
-	/**@deprecated -- use {@link MapIO#load(URL url, MapModel map)} */
-	@Deprecated
-	public InputStreamReader load(final URL url, final MapModel map)
+	public void load(final URL url, final MapModel map)
 			throws IOException, XMLException {
-		InputStreamReader urlStreamReader;
 		setURL(map, url);
 		InputStream inputStream = getLocation(url).openStream();
-		urlStreamReader = new InputStreamReader(inputStream);
-		final ModeController modeController = Controller.getCurrentModeController();
-		modeController.getMapController().getMapReader().createNodeTreeFromXml(map, urlStreamReader, Mode.FILE);
-		return urlStreamReader;
+		try (InputStreamReader urlStreamReader = new InputStreamReader(inputStream)) {
+			final ModeController modeController = Controller.getCurrentModeController();
+			modeController.getMapController().getMapReader().createNodeTreeFromXml(map, urlStreamReader, Mode.FILE);
+		}
 	}
 
 	private URL getLocation(final URL url) throws IOException {
@@ -251,12 +243,6 @@ public class UrlManager implements IExtension {
 		}
 		return url;
 	}
-
-    /**@deprecated -- use {@link MapIO#load(URL url, MapModel map)} */
-    @Deprecated
-    public boolean loadImpl(final URL url, final MapModel map){
-        return loadCatchExceptions(url, map);
-    }
 
     /**@deprecated -- use LinkController*/
 	@Deprecated
@@ -278,30 +264,31 @@ public class UrlManager implements IExtension {
 
 	private void loadLocalLinkURI(final String uriString) {
 		final String target = uriString.substring(1);
-		selectNode(target);
+		selectNode(null, target);
 	}
 
-	private void selectNode(final String target) {
+	public void selectNode(NodeModel start, final String localReference) {
 		try {
-			final MapController mapController = getMapController();
-			final NodeModel node = mapController.getNodeFromID(target);
+			final NodeModel node = Controller.getCurrentModeController().getExtension(MapExplorerController.class).getNodeAt(start, localReference);
 			if (node != null) {
+				final MapController mapController = getMapController();
 				mapController.select(node);
 			}
 			else {
-				final String errorMessage = TextUtils.format("link_not_found", target);
+				final String errorMessage = TextUtils.format("link_not_found", localReference);
 				Controller.getCurrentController().getViewController().err(errorMessage);
 			}
 		}
 		catch (final Exception e) {
-			LogUtils.severe("link " + target + " not found", e);
+			LogUtils.severe("link " + localReference + " not found", e);
 		}
 	}
 
 	private void loadNodeReferenceURI(final NodeAndMapReference nodeAndMapReference) {
 		try {
 			loadURL(new URI(nodeAndMapReference.getMapReference()));
-			selectNode(nodeAndMapReference.getNodeReference());
+			final MapModel map = Controller.getCurrentController().getMap();
+			selectNode(map.getRootNode(), nodeAndMapReference.getNodeReference());
 		} catch (URISyntaxException e) {
 			LogUtils.severe(e);
 		}
@@ -335,7 +322,7 @@ public class UrlManager implements IExtension {
 					FreeplaneUriConverter freeplaneUriConverter = new FreeplaneUriConverter();
 					final URL url = freeplaneUriConverter.freeplaneUrl(uri);
 					final ModeController modeController = Controller.getCurrentModeController();
-					modeController.getMapController().newMap(url);
+					modeController.getMapController().openMap(url);
 					return;
 				}
 				Controller.getCurrentController().getViewController().openDocument(uri);
@@ -366,7 +353,7 @@ public class UrlManager implements IExtension {
 			loadURL(new URI(fixedUri));
 			return;
 		}
-		
+
 		if(map.startsWith("http://") || map.startsWith("https://")|| map.startsWith("file:")) {
 			loadURL(new URI(map));
 		}
@@ -380,7 +367,7 @@ public class UrlManager implements IExtension {
 			loadURL(uriWithNodeReference);
 		}
 	}
-	
+
 	private URI getAbsoluteUri(final URI uri) throws MalformedURLException {
 		if (uri.isAbsolute()) {
 			return uri;
