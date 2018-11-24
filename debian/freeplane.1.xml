@@ -192,8 +192,53 @@
         </listitem>
       </varlistentry>
 
+      <varlistentry>
+        <term>FREEPLANE_JAVA_HOME</term>
+        <listitem>
+          <para>Prefix of Java(&gt;=8) installation to use (Freeplane only)</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>JAVA_HOME</term>
+        <listitem>
+          <para>Prefix of Java(&gt;=8) installation to use (many Java applications)</para>
+        </listitem>
+      </varlistentry>
+      
     </variablelist>
 
+  </refsect1>
+
+    <refsect1>
+    <title>NEW FEATURES IN 1.7.x</title>
+    <variablelist>
+      <varlistentry>
+        <term>Full Java11 support, requires Java8</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Freeplane API</term>
+        <listitem>
+          <para>There is a comprehensive API layer for manipulation
+	  of Freeplane files (supports headless mode)</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>References to other mind maps from formulas and scripts</term>
+        <listitem>
+	  <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Node aliases, global nodes, export for selected branches only, URLs like #at(:~someNodeAlias), ...</term>
+        <listitem>
+	  <para></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1>

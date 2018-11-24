@@ -5,7 +5,8 @@ freeplane (1.7.2-1) unstable; urgency=medium
   * Drop secure groovy patch (securegroovy no longer used upstream;
     upstream updated to groovy 2.5.x, Debian also has patched groovy)
   * Update all patches (major build system update)
-  * bump standards-version to 4.2.1 (no changes)
+  * Bump standards-version to 4.2.1 (no changes)
+  * Update man page
 
  -- Felix Natter <fnatter@gmx.net>  Thu, 22 Nov 2018 20:06:14 +0100
 
