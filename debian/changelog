@@ -8,7 +8,7 @@ freeplane (1.7.2-1) unstable; urgency=medium
   * Bump standards-version to 4.2.1 (no changes)
   * Update man page
 
- -- Felix Natter <fnatter@gmx.net>  Thu, 22 Nov 2018 20:06:14 +0100
+ -- Felix Natter <fnatter@gmx.net>  Sat, 24 Nov 2018 19:07:20 +0100
 
 freeplane (1.6.15-1) unstable; urgency=medium
 
