@@ -36,10 +36,13 @@ public class AllMapsNodeListAction extends AFreeplaneAction {
 
 	public AllMapsNodeListAction() {
 		super("AllMapsNodeListAction");
-		nodeList = new NodeList(true, true, "allmapsnodelistwindow.configuration");
+		nodeList = new NodeListWithReplacement(NodeList.REMINDER_TEXT_WINDOW_TITLE_ALL_NODES,
+			true,
+			"allmapsnodelistwindow.configuration");
 	}
 
+	@Override
 	public void actionPerformed(final ActionEvent e) {
-		nodeList.startup();
+		nodeList.startup((node, reminder) -> node.hasVisibleContent());
 	}
 }

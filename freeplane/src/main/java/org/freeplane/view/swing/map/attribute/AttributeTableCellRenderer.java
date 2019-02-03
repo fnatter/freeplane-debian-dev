@@ -19,11 +19,16 @@
  */
 package org.freeplane.view.swing.map.attribute;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.net.URI;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.freeplane.core.ui.LengthUnits;
@@ -34,8 +39,10 @@ import org.freeplane.features.attribute.Attribute;
 import org.freeplane.features.attribute.NodeAttributeTableModel;
 import org.freeplane.features.filter.FilterController;
 import org.freeplane.features.icon.factory.IconFactory;
+import org.freeplane.features.mode.Controller;
 import org.freeplane.features.text.HighlightedTransformedObject;
 import org.freeplane.features.text.TextController;
+import org.freeplane.view.swing.features.filepreview.ViewerController;
 import org.freeplane.view.swing.map.MapView;
 
 class AttributeTableCellRenderer extends DefaultTableCellRenderer {
@@ -78,6 +85,7 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 		String text = originalText;
 		Icon icon;
 		Color color = null;
+		URI uri = null;
 		if (column == 1 && isAttributeHighlighted(attributeTable, row))
 			color = FilterController.HIGHLIGHT_COLOR;
 		if (column == 1 && value != null) {
@@ -94,8 +102,9 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 				text = TextUtils.format("MainView.errorUpdateText", originalText, e.getLocalizedMessage());
 				color = HighlightedTransformedObject.FAILURE_COLOR;
 			}
-			if(value instanceof URI){
-	                icon = ((AttributeTable)table).getLinkIcon((URI) value);
+			uri = attributeTable.toUri(value);
+			if(uri != null){
+	                icon = (attributeTable).getLinkIcon(uri);
 			}
 			else{
 				icon = null;
@@ -117,21 +126,26 @@ class AttributeTableCellRenderer extends DefaultTableCellRenderer {
 			setIcon(scaledIcon);
 		}
 		setText(text);
-		if(text != originalText){
-			final String toolTip = HtmlUtils.isHtmlNode(originalText) ? text : HtmlUtils.plainToHTML(originalText);
-			setToolTipText(toolTip);
+		String toolTip = null;
+		if(uri != null) {
+			final ViewerController viewerController = Controller.getCurrentModeController().getExtension(ViewerController.class);
+			if (viewerController != null && viewerController.getViewerFactory().accept(uri)) {
+				toolTip = uri.toString();
+}
 		}
-		else{
-			final int prefWidth = getPreferredSize().width;
-			final int width = table.getColumnModel().getColumn(column).getWidth();
-			if (prefWidth > width) {
-				final String toolTip = HtmlUtils.isHtmlNode(text) ? text : HtmlUtils.plainToHTML(text);
-				setToolTipText(toolTip);
+		if(toolTip == null) {
+			if (text != originalText) {
+				toolTip = HtmlUtils.plainToHTML(originalText);
 			}
 			else {
-				setToolTipText(null);
+				final int prefWidth = getPreferredSize().width;
+				final int width = table.getColumnModel().getColumn(column).getWidth();
+				if (prefWidth > width) {
+					toolTip = HtmlUtils.plainToHTML(text);
+				}
 			}
 		}
+		setToolTipText(toolTip);
 		setOpaque(isSelected);
 		return rendererComponent;
 	}

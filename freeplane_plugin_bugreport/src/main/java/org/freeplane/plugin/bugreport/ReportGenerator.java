@@ -31,12 +31,12 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.ui.components.resizer.UIComponentVisibilityDispatcher;
 import org.freeplane.core.util.FreeplaneVersion;
 import org.freeplane.core.util.HtmlUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.mode.Controller;
-import org.freeplane.features.ui.UIComponentVisibilityDispatcher;
 import org.freeplane.features.ui.ViewController;
 
 public class ReportGenerator extends StreamHandler {
@@ -61,7 +61,7 @@ public class ReportGenerator extends StreamHandler {
 		}
 	}
 
-	private final static String BUG_TRACKER_REFERENCE_URL = "http://freeplane.sourceforge.net/info/bugtracker.ref.txt";
+	private final static String BUG_TRACKER_REFERENCE_URL = "https://www.freeplane.org/info/bugtracker.ref.txt";
 	private static String BUG_TRACKER_URL = null;
 	static boolean isDisabled = false;
 	private static int errorCounter = 0;
@@ -257,7 +257,7 @@ public class ReportGenerator extends StreamHandler {
 							logButton.setText(TextUtils.format("errornumber", errorCounter));
 							final JComponent statusBar = viewController.getStatusBar();
 							if (!statusBar.isVisible())
-								UIComponentVisibilityDispatcher.dispatcher(statusBar).setVisible(true);
+								UIComponentVisibilityDispatcher.of(statusBar).setVisible(true);
 						}
 					}
 					catch (Exception e) {
@@ -345,7 +345,7 @@ public class ReportGenerator extends StreamHandler {
 		final ResourceController resourceController = ResourceController.getResourceController();
 		String option = resourceController.getProperty(OPTION, BugReportDialogManager.ASK);
 		if (option.equals(BugReportDialogManager.ASK)) {
-			if (resourceController.getBooleanProperty("org.freeplane.plugin.bugreport.dialog.disabled"))
+			if (resourceController.getBooleanProperty("org.freeplane.plugin.bugreport.dialog.disabled") || isHeadlessMode())
 				return BugReportDialogManager.DENIED;
 			String question = TextUtils.getText("org.freeplane.plugin.bugreport.question");
 			if (!question.startsWith("<html>")) {
@@ -382,6 +382,10 @@ public class ReportGenerator extends StreamHandler {
 		return option;
 	}
 
+	private boolean isHeadlessMode() {
+		return Controller.getCurrentController().getViewController().isHeadless();
+	}
+
 	private String sendReport(final Map<String, String> reportFields) {
 		try {
 			// Construct data
@@ -399,7 +403,8 @@ public class ReportGenerator extends StreamHandler {
 			final URLConnection conn = url.openConnection();
 			conn.setDoOutput(true);
 			final OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-			wr.write(data.toString());
+			final String report = data.toString();
+			wr.write(report);
 			wr.flush();
 			// Get the response
 			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));

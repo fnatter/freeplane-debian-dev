@@ -65,14 +65,11 @@ import org.freeplane.features.map.EncryptionModel;
 import org.freeplane.features.map.FreeNode;
 import org.freeplane.features.map.HistoryInformationModel;
 import org.freeplane.features.map.INodeView;
-import org.freeplane.features.map.MapChangeEvent;
-import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeChangeEvent;
 import org.freeplane.features.map.NodeDeletionEvent;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.map.NodeModel.NodeChangeType;
-import org.freeplane.features.map.NodeMoveEvent;
 import org.freeplane.features.map.SummaryNode;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
@@ -800,7 +797,6 @@ public class NodeView extends JComponent implements INodeView {
 		if(isFolded)
 			return;
 		int index = 0;
-		MapController r = getMap().getModeController().getMapController();
 		for (NodeModel child : getModel().getChildren()) {
 			if(isChildHidden(child))
 				return;
@@ -860,10 +856,6 @@ public class NodeView extends JComponent implements INodeView {
 	/* fc, 25.1.2004: Refactoring necessary: should call the model. */
 	public boolean isSiblingOf(final NodeView myNodeView) {
 		return getParentView() == myNodeView.getParentView();
-	}
-
-	@Override
-	public void mapChanged(final MapChangeEvent event) {
 	}
 
 	@Override
@@ -979,14 +971,6 @@ public class NodeView extends JComponent implements INodeView {
 		addChildView(child, index);
 		numberingChanged(index + 1);
 		revalidate();
-	}
-
-	@Override
-	public void onNodeMoved(NodeMoveEvent nodeMoveEvent) {
-	}
-
-	@Override
-	public void onPreNodeDelete(NodeDeletionEvent nodeDeletionEvent) {
 	}
 
 	// updates children, starting from firstChangedIndex, if necessary.
@@ -1273,7 +1257,7 @@ public class NodeView extends JComponent implements INodeView {
 		if (mainView == null) {
 			return false;
 		}
-		if (super.requestFocusInWindow() && mainView.requestFocusInWindow()) {
+		if (mainView.requestFocusInWindow()) {
 			getMap().scrollNodeToVisible(this);
 			Controller.getCurrentController().getViewController().addObjectTypeInfo(getModel().getUserObject());
 			return true;
@@ -1288,7 +1272,6 @@ public class NodeView extends JComponent implements INodeView {
 		}
 		getMap().scrollNodeToVisible(this);
 		Controller.getCurrentController().getViewController().addObjectTypeInfo(getModel().getUserObject());
-		super.requestFocus();
 		mainView.requestFocus();
 	}
 
@@ -1572,10 +1555,6 @@ public class NodeView extends JComponent implements INodeView {
 
 	boolean useSelectionColors() {
 		return isSelected() && !MapView.standardDrawRectangleForSelection && !map.isPrinting();
-	}
-
-	@Override
-	public void onPreNodeMoved(NodeMoveEvent nodeMoveEvent) {
 	}
 
 	@Override

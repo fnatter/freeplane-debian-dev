@@ -18,7 +18,11 @@ public class ScriptContext implements AccessedNodes{
 
 	public ScriptContext(NodeScript nodeScript) {
 		this.nodeScript = nodeScript;
-		this.relatedElements = new RelatedElements(nodeScript.node);
+		this.relatedElements = nodeScript != null ? new RelatedElements(nodeScript.node) : null;
+	}
+
+	public NodeScript getNodeScript() {
+		return nodeScript;
 	}
 
 	public URL getBaseUrl() {
@@ -53,7 +57,7 @@ public class ScriptContext implements AccessedNodes{
 					return new URL(baseUrl, path);
 				}
 				else
-					throw new IllegalStateException("Can not use relative URL without base URL");
+					return file.getAbsoluteFile().toURL();
 			}
 		}
 		catch (MalformedURLException e) {

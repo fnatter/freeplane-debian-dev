@@ -1,15 +1,19 @@
 package org.freeplane.core.util;
 
-import org.freeplane.core.resources.ResourceBundles;
-import org.freeplane.core.resources.ResourceController;
-import org.freeplane.core.resources.TranslatedObject;
-import org.freeplane.features.clipboard.ClipboardController;
-import org.freeplane.features.format.FormatController;
-
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.regex.Pattern;
+
+import org.freeplane.core.resources.ResourceBundles;
+import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.resources.TranslatedObject;
+import org.freeplane.features.clipboard.ClipboardAccessor;
+import org.freeplane.features.format.FormatController;
 
 /** utilities for translations, conversions to/from number and dates etc.
  * In scripts available as "global variable" <code>textUtils</code>. */
@@ -63,7 +67,7 @@ public class TextUtils {
 		sb.append(rawLabel.subSequence(0, pos));
 		sb.append(rawLabel.subSequence(pos + 1, length));
 		return sb.toString();
-		
+
 	}
 
 	/** Removes the "TranslateMe" sign from the end of not translated texts. */
@@ -158,8 +162,8 @@ public class TextUtils {
 	}
 
 	/** in opposite to the URI make scheme mandatory. */
-	public static boolean matchUriPattern(String text) {
-        return text.length() > 0 && uriPattern.matcher(text).matches();
+	public static boolean matchesUriPattern(String text) {
+        return text.length() > 0 && (text.startsWith("file:") || uriPattern.matcher(text).matches());
     }
 
     public static String getShortText(String text, int maximumCharacters, String continuationMark) {
@@ -173,12 +177,12 @@ public class TextUtils {
 	public DecimalFormat getDefaultNumberFormat() {
 		return FormatController.getController().getDefaultNumberFormat();
 	}
-	
+
 	/** accessor for scripts. */
 	public SimpleDateFormat getDefaultDateFormat() {
 		return FormatController.getController().getDefaultDateFormat();
 	}
-	
+
 	/** accessor for scripts. */
 	public SimpleDateFormat getDefaultDateTimeFormat() {
 		return FormatController.getController().getDefaultDateTimeFormat();
@@ -186,11 +190,94 @@ public class TextUtils {
 
 	/** Shortcut for scripting: Copies <code>string</code> to the system clipboard. */
 	public static void copyToClipboard(String string) {
-	    ClipboardController.getController().setClipboardContents(string);
+	    ClipboardAccessor.getController().setClipboardContents(string);
     }
-	
+
 	/** Shortcut for scripting: Copies <code>html</code> with mimetype text/html to the system clipboard. */
 	public static void copyHtmlToClipboard(String html) {
-		ClipboardController.getController().setClipboardContentsToHtml(html);
+		ClipboardAccessor.getController().setClipboardContentsToHtml(html);
+	}
+
+	/**
+	 * The escapeUtf8 method is a stripped down version of the
+	 * StringEscapeUtils.escapeJava method in Commons Lang 2.6
+	 *
+	 * It escapes the UTF-8 non-ASCII characters in a <code>String</code>.
+	 * <p>
+	 * Such a character becomes <code>'\\'</code> and <code>'u'</code> followed by
+	 * a 4 digit hex code.
+	 * <p>
+	 * Any ASCII character will stay intact
+	 * <p>
+	 * Example:
+	 * <pre>
+	 * input string: jalapeño
+	 * output string: jalape\u005cu00F1o
+	 * </pre>
+	 *
+	 * @param str  String to escape values in, may be null
+	 * @return String with escaped values, <code>null</code> if null string input
+	 */
+	public static String escapeUtf8(String str) {
+		return escapeUtf8StyleString(str);
+	}
+
+	/**
+	 * Escapes the UTF-8 non-ASCII characters in a <code>String</code> to
+	 * a <code>Writer</code>.
+	 * <p>
+	 * A <code>null</code> string input has no effect.
+	 *
+	 * @see #escapeUtf8(java.lang.String)
+	 * @param out  Writer to write escaped string into
+	 * @param str  String to escape values in, may be null
+	 * @throws IllegalArgumentException if the Writer is <code>null</code>
+	 * @throws IOException if error occurs on underlying Writer
+	 */
+	public static void escapeUtf8(Writer out, String str) throws IOException {
+		escapeUtf8StyleString(out, str);
+	}
+
+	private static String escapeUtf8StyleString(String str) {
+		if (str == null) {
+			return null;
+		}
+		try {
+			StringWriter writer = new StringWriter(str.length() * 2);
+			escapeUtf8StyleString(writer, str);
+			return writer.toString();
+		} catch (IOException ioe) {
+			// this should never ever happen while writing to a StringWriter
+			throw new RuntimeException(ioe);
+		}
+	}
+
+	private static void escapeUtf8StyleString(Writer out, String str) throws IOException {
+		if (out == null) {
+			throw new IllegalArgumentException("The Writer must not be null");
+		}
+		if (str == null) {
+			return;
+		}
+		int sz;
+		sz = str.length();
+		for (int i = 0; i < sz; i++) {
+			char ch = str.charAt(i);
+
+			// handle unicode
+			if (ch > 0xfff) {
+				out.write("\\u" + hex(ch));
+			} else if (ch > 0xff) {
+				out.write("\\u0" + hex(ch));
+			} else if (ch > 0x7f) {
+				out.write("\\u00" + hex(ch));
+			} else {
+				out.write(ch);
+			}
+		}
+	}
+
+	private static String hex(char ch) {
+		return Integer.toHexString(ch).toUpperCase(Locale.ENGLISH);
 	}
 }

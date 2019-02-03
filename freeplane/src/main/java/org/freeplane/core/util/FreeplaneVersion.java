@@ -24,8 +24,10 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import org.freeplane.core.resources.ResourceController;
+
 /** provides access to the current Freeplane version. In scripts use <code>c.freeplaneVersion</code>.
- * For usage instructions see {@link #compareTo(FreeplaneVersion)}. */
+ * For usage instructions see {@link #compareTo(org.freeplane.api.FreeplaneVersion)}. */
 public class FreeplaneVersion implements org.freeplane.api.FreeplaneVersion {
 	private static final FreeplaneVersion VERSION = FreeplaneVersion.loadVersion();
 	public static final String VERSION_KEY = "freeplane_version";
@@ -217,7 +219,7 @@ public class FreeplaneVersion implements org.freeplane.api.FreeplaneVersion {
 	}
 
 	private static String loadRevision() {
-		final URL gitInfo = FreeplaneVersion.class.getResource("/gitinfo.properties");
+		final URL gitInfo = ResourceController.getResourceController().getResource("/gitinfo.properties");
 		final String revision;
 		if(gitInfo != null){
 			Properties gitProps = new Properties();

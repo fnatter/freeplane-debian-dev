@@ -74,6 +74,7 @@ import org.freeplane.core.ui.LengthUnits;
 import org.freeplane.core.ui.components.ContainerComboBoxEditor;
 import org.freeplane.core.ui.components.FreeplaneMenuBar;
 import org.freeplane.core.ui.components.UITools;
+import org.freeplane.core.ui.components.resizer.UIComponentVisibilityDispatcher;
 import org.freeplane.core.util.ClassLoaderFactory;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.Quantity;
@@ -169,7 +170,7 @@ abstract public class FrameController implements ViewController {
 		this.mapViewManager = mapViewManager;
 		this.propertyKeyPrefix = propertyKeyPrefix;
 		statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 3, 0));
-		UIComponentVisibilityDispatcher.install(this, statusPanel, "toolbarVisible");
+		UIComponentVisibilityDispatcher.install(statusPanel, propertyKeyPrefix + "toolbarVisible");
 		status = new JLabel();
 		status.setBorder(BorderFactory.createEtchedBorder());
 		statusPanel.add(status);
@@ -263,7 +264,7 @@ abstract public class FrameController implements ViewController {
 			property = component + "Visible";
 		}
 		final boolean booleanProperty = ResourceController.getResourceController().getBooleanProperty(
-		    getPropertyKeyPrefix() + property);
+		    propertyKeyPrefix + property);
 		return booleanProperty;
 	}
 
@@ -383,7 +384,7 @@ abstract public class FrameController implements ViewController {
 			if (newToolBars != null) {
 				int i = 0;
 				for (final JComponent toolBar : newToolBars) {
-					UIComponentVisibilityDispatcher dispatcher = UIComponentVisibilityDispatcher.dispatcher(toolBar);
+					UIComponentVisibilityDispatcher dispatcher = UIComponentVisibilityDispatcher.of(toolBar);
 					if (dispatcher != null) {
 						dispatcher.resetVisible();
 						toolbarPanel[j].add(toolBar, i++);
@@ -423,7 +424,7 @@ abstract public class FrameController implements ViewController {
 		else {
 			property = componentName + "Visible";
 		}
-		ResourceController.getResourceController().setProperty(getPropertyKeyPrefix() + property, visible);
+		ResourceController.getResourceController().setProperty(propertyKeyPrefix + property, visible);
 	}
 
 	/**
@@ -480,7 +481,7 @@ abstract public class FrameController implements ViewController {
 				final Iterable<JComponent> toolBars = controller.getModeController().getUserInputListenerFactory()
 				    .getToolBars(j);
 				for (final JComponent toolBar : toolBars) {
-					UIComponentVisibilityDispatcher.dispatcher(toolBar).resetVisible();
+					UIComponentVisibilityDispatcher.of(toolBar).resetVisible();
 				}
 			}
 			showWindows(visibleFrames);
@@ -497,7 +498,7 @@ abstract public class FrameController implements ViewController {
 				final Iterable<JComponent> toolBars = controller.getModeController().getUserInputListenerFactory()
 				    .getToolBars(j);
 				for (final JComponent toolBar : toolBars) {
-					UIComponentVisibilityDispatcher.dispatcher(toolBar).resetVisible();
+					UIComponentVisibilityDispatcher.of(toolBar).resetVisible();
 				}
 			}
 			showWindows(visibleFrames);
@@ -522,18 +523,6 @@ abstract public class FrameController implements ViewController {
 	protected void showWindows(final Iterable<Window> windows) {
 		for (Window child : windows)
 			child.setVisible(true);
-	}
-
-	@Override
-	public String completeVisiblePropertyKey(final JComponent toolBar) {
-		if (toolBar == null) {
-			return null;
-		}
-		return UIComponentVisibilityDispatcher.dispatcher(toolBar).completeVisiblePropertyKey();
-	}
-
-	protected String getPropertyKeyPrefix() {
-		return propertyKeyPrefix;
 	}
 
 	public static void setLookAndFeel(final String lookAndFeel, boolean supportHidpi) {

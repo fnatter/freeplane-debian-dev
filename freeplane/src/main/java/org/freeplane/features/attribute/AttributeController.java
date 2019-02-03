@@ -32,6 +32,8 @@ import org.freeplane.core.util.HtmlUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.Quantity;
 import org.freeplane.core.util.TextUtils;
+import org.freeplane.features.attribute.clipboard.AttributeClipboardController;
+import org.freeplane.features.clipboard.ClipboardControllers;
 import org.freeplane.features.icon.IStateIconProvider;
 import org.freeplane.features.icon.IconController;
 import org.freeplane.features.icon.UIIcon;
@@ -56,10 +58,10 @@ public class AttributeController implements IExtension {
 	public static final String SHOW_ICON_FOR_ATTRIBUTES = "show_icon_for_attributes";
 	private static final Integer ATTRIBUTE_TOOLTIP = 7;
 	static private UIIcon attributeIcon = null;
-	static private AttributeSelection attributeSelection;
+	static private AttributeSelection attributeSelection = AttributeSelection.EMPTY;
 
 	public static void setAttributeSelection(AttributeSelection attributeSelection) {
-		if(AttributeController.attributeSelection != null)
+		if(AttributeController.attributeSelection != AttributeSelection.EMPTY)
 			throw new IllegalStateException();
 		AttributeController.attributeSelection = attributeSelection;
 	}
@@ -89,6 +91,11 @@ public class AttributeController implements IExtension {
 		modeController.addAction(new SetBooleanMapPropertyAction(SHOW_ICON_FOR_ATTRIBUTES));
 		registerTooltipProvider();
 		registerStateIconProvider();
+		registerAttributeClipboardController(modeController);
+	}
+
+	protected void registerAttributeClipboardController(final ModeController modeController) {
+		modeController.getExtension(ClipboardControllers.class).add(new AttributeClipboardController());
 	}
 
 	public NodeAttributeTableModel createAttributeTableModel(final NodeModel node) {
@@ -97,7 +104,7 @@ public class AttributeController implements IExtension {
 		if (attributeModel != null) {
 			return attributeModel;
 		}
-		attributeModel = new NodeAttributeTableModel(node);
+		attributeModel = new NodeAttributeTableModel();
 		node.addExtension(attributeModel);
 		if (node.areViewsEmpty()) {
 			return attributeModel;
@@ -265,7 +272,7 @@ public class AttributeController implements IExtension {
 	    return false;
     }
 
-	public static NodeAttribute getSelectedAttribute() {
-		return attributeSelection != null ? attributeSelection.getSelectedAttribute() : null;
+	public static AttributeSelection getAttributeSelection() {
+		return attributeSelection;
 	}
 }

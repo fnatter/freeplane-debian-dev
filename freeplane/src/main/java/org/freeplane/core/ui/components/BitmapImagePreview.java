@@ -19,10 +19,6 @@
  */
 package org.freeplane.core.ui.components;
 
-/**
- * @author Dimitry Polivaev
- * 22.08.2009
- */
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -40,9 +36,13 @@ import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.view.swing.features.filepreview.BitmapViewerComponent;
 
+/**
+ * @author Dimitry Polivaev
+ * 22.08.2009
+ */
 public class BitmapImagePreview extends JComponent implements PropertyChangeListener {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	protected static final int BORDER_WIDTH = 2;
@@ -57,6 +57,7 @@ public class BitmapImagePreview extends JComponent implements PropertyChangeList
 		fc.addPropertyChangeListener(this);
 	}
 
+	@Override
 	public void propertyChange(final PropertyChangeEvent e) {
 		final String prop = e.getPropertyName();
 		//If the directory changed, don't show an image.

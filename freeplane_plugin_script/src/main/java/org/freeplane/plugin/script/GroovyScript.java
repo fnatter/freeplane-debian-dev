@@ -33,6 +33,7 @@ import javax.swing.SwingUtilities;
 import org.codehaus.groovy.ast.ASTNode;
 import org.codehaus.groovy.ast.ModuleNode;
 import org.codehaus.groovy.control.CompilerConfiguration;
+import org.codehaus.groovy.control.customizers.ImportCustomizer;
 import org.codehaus.groovy.runtime.InvokerHelper;
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.NodeModel;
@@ -42,6 +43,7 @@ import org.freeplane.plugin.script.proxy.ProxyFactory;
 import groovy.lang.Binding;
 import groovy.lang.GroovyRuntimeException;
 import groovy.lang.Script;
+import org.freeplane.plugin.script.proxy.ScriptUtils;
 
 /**
  * Special scripting implementation for Groovy.
@@ -140,12 +142,12 @@ public class GroovyScript implements IScript {
     }
 
     private void trustedCompileAndCache(PrintStream outStream) throws Throwable {
-    	final ScriptingSecurityManager scriptingSecurityManager = createScriptingSecurityManager(outStream);
-    	AccessController.doPrivileged(new PrivilegedExceptionAction<Void>() {
+		AccessController.doPrivileged(new PrivilegedExceptionAction<Void>() {
 
 			@Override
 			public Void run() throws PrivilegedActionException {
 				try {
+					final ScriptingSecurityManager scriptingSecurityManager = createScriptingSecurityManager(outStream);
 					compileAndCache(scriptingSecurityManager);
 				} catch (Exception e) {
 					throw new PrivilegedActionException(e);
@@ -221,7 +223,7 @@ public class GroovyScript implements IScript {
 	    for (Entry<String, Object> entry : ScriptingConfiguration.getStaticProperties().entrySet()) {
             binding.setProperty(entry.getKey(), entry.getValue());
         }
-        compiledScript.updateBoundVariables();
+		compiledScript.setBinding(binding);
     }
 
     private Binding createBindingForCompilation() {
@@ -253,6 +255,9 @@ public class GroovyScript implements IScript {
         if (!(ScriptResources.getClasspath() == null || ScriptResources.getClasspath().isEmpty())) {
             config.setClasspathList(ScriptResources.getClasspath());
         }
+		final ImportCustomizer importCustomizer = new ImportCustomizer();
+        importCustomizer.addStaticImport(ScriptUtils.class.getName(), "ignoreCycles");
+		config.addCompilationCustomizers(importCustomizer);
         return config;
     }
 

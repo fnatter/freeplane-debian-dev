@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.security.AccessController;
+import java.security.AllPermission;
 import java.security.Permission;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
@@ -13,10 +14,12 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import groovy.lang.GroovyClassLoader;
 import org.freeplane.api.Script;
 import org.freeplane.core.util.ClassLoaderFactory;
 
-public final class ScriptClassLoader extends URLClassLoader {
+public final class ScriptClassLoader extends GroovyClassLoader {
+	private static final Permission ALL_PERMISSION = new AllPermission();
 	private ScriptingSecurityManager securityManager = null;
 
 	public static ScriptClassLoader createClassLoader() {
@@ -40,13 +43,15 @@ public final class ScriptClassLoader extends URLClassLoader {
     }
 
 	private ScriptClassLoader(URL[] urls, ClassLoader parent) {
-		super(urls, parent);
+		super(parent);
+		for(URL url :urls)
+			addURL(url);
 	}
+
 
 	@Override
 	public URL getResource(final String name) {
-		return AccessController.doPrivileged(
-				new PrivilegedAction<URL>() {
+		return AccessController.doPrivileged(new PrivilegedAction<URL>() {
 					@Override
 					public URL run(){
 						return superGetResource(name);
@@ -82,8 +87,7 @@ public final class ScriptClassLoader extends URLClassLoader {
 	@Override
 	protected Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
 		try {
-			return AccessController.doPrivileged(
-			        new PrivilegedExceptionAction<Class<?>>() {
+			return AccessController.doPrivileged(new PrivilegedExceptionAction<Class<?>>() {
 			            @Override
 						public Class<?> run() throws ClassNotFoundException{
 			        		return superLoadClass(name, resolve);
@@ -100,8 +104,8 @@ public final class ScriptClassLoader extends URLClassLoader {
 	}
 
 	public void setSecurityManager(ScriptingSecurityManager securityManager) {
-		if(this.securityManager != null && ! this.securityManager.equals(securityManager))
-			throw new IllegalStateException("Security manager is already set");
+		if(System.getSecurityManager() != null)
+			AccessController.checkPermission(ALL_PERMISSION);
 		this.securityManager = securityManager;
 	}
 

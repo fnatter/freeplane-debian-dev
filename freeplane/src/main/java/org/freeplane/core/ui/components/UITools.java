@@ -57,6 +57,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -327,20 +328,26 @@ public class UITools {
 		if (c == null || ! c.isShowing()) {
 			return;
 		}
-		final Point compLocation = c.getLocationOnScreen();
-		final int cw = c.getWidth();
-		final int ch = c.getHeight();
-		final Container parent = dialog.getParent();
-		final Point parentLocation = parent.getLocationOnScreen();
-		final int pw = parent.getWidth();
-		final int ph = parent.getHeight();
-		final int dw = dialog.getWidth();
-		final int dh = dialog.getHeight();
-		final Rectangle desktopBounds = getAvailableScreenBounds(c);
+		final Point location = findBestLocation(dialog, c);
+		dialog.setLocation(location);
+	}
+
+	public static Point findBestLocation(final Component placedComponent, final Component displayedComponent) {
+		final Point compLocation = displayedComponent.getLocationOnScreen();
+		final int cw = displayedComponent.getWidth();
+		final int ch = displayedComponent.getHeight();
+		final Window window =  displayedComponent instanceof Window ? (Window) displayedComponent : SwingUtilities.getWindowAncestor(displayedComponent);
+		final Point parentLocation = window.getLocationOnScreen();
+		final int pw = window.getWidth();
+		final int ph = window.getHeight();
+		final Rectangle desktopBounds = getAvailableScreenBounds(displayedComponent);
 		final int minX = Math.max(parentLocation.x, desktopBounds.x);
 		final int minY = Math.max(parentLocation.y, desktopBounds.y);
 		final int maxX = Math.min(parentLocation.x + pw, desktopBounds.x + desktopBounds.width);
 		final int maxY = Math.min(parentLocation.y + ph, desktopBounds.y + desktopBounds.height);
+		final Dimension preferredSize = placedComponent.getPreferredSize();
+		final int dw = preferredSize.width;
+		int dh = preferredSize.height;
 		int dx, dy;
 		if (compLocation.x + cw < minX) {
 			dx = minX;
@@ -354,6 +361,7 @@ public class UITools {
 			if (leftSpace > rightSpace) {
 				if (leftSpace > dw) {
 					dx = compLocation.x - dw;
+					dh = 0;
 				}
 				else {
 					dx = minX;
@@ -362,6 +370,7 @@ public class UITools {
 			else {
 				if (rightSpace > dw) {
 					dx = compLocation.x + cw;
+					dh = 0;
 				}
 				else {
 					dx = maxX - dw;
@@ -394,7 +403,8 @@ public class UITools {
 				}
 			}
 		}
-		dialog.setLocation(dx, dy);
+		final Point location = new Point(dx, dy);
+		return location;
 	}
 
 	public static void setDialogLocationRelativeTo(final JDialog dialog,
@@ -742,7 +752,9 @@ public class UITools {
 				@Override
 				public void focusGained(FocusEvent e) {
 					selectedComponent.removeFocusListener(this);
-					runnable.run();
+					final Timer timer = new Timer(100, evt -> runnable.run());
+					timer.setRepeats(false);
+					timer.start();
 				}
 			});
 			selectedComponent.requestFocusInWindow();

@@ -33,7 +33,7 @@ public interface Convertible {
 	public String getText();
 
 	/** Removes HTML markup if necessary.
-	 * @return The result of {@link HtmlUtils#htmlToPlain(String)} */
+	 * @return The result of {@link org.freeplane.core.util.HtmlUtils#htmlToPlain(String)} */
 	public String getPlain();
 
 	/** Converts to Date if possible. The valid date patterns are "yyyy-MM-dd HH:dd:ss.SSSZ"
@@ -62,6 +62,13 @@ public interface Convertible {
 	 * </ol>
 	 * @return Object - the type that fits best. */
 	public Object getObject();
+
+	/**
+	 * Returns original object
+	 * @return the original object
+	 * @since 1.7.4
+	 */
+	public Object getRaw();
 
 
 	/** Type check.

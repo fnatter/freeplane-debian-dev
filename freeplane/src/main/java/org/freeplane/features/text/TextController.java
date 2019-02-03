@@ -22,6 +22,9 @@ package org.freeplane.features.text;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,7 +41,9 @@ import org.freeplane.core.util.HtmlUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.filter.FilterController;
+import org.freeplane.features.format.IFormattedObject;
 import org.freeplane.features.format.PatternFormat;
+import org.freeplane.features.link.LinkController;
 import org.freeplane.features.map.ITooltipProvider;
 import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.NodeChangeEvent;
@@ -65,6 +70,7 @@ public class TextController implements IExtension {
 	private final List<IContentTransformer> textTransformers;
 	protected final ModeController modeController;
 	private boolean nodeNumberingEnabled = true;
+	private static final String FILE_PROTOCOL = "file:";
 	public static final String MARK_TRANSFORMED_TEXT = "highlight_formulas";
 
 	public static boolean isMarkTransformedTextSet() {
@@ -188,11 +194,12 @@ public class TextController implements IExtension {
 	/** returns an error message instead of a normal result if something goes wrong. */
 	public Object getTransformedObjectNoFormattingNoThrow(Object data, final NodeModel node, Object extension) {
 		try {
-			final Object transformedObject = getTransformedObject(data, node, extension);
+			Object transformedObject = getTransformedObject(data, node, extension);
 			if (transformedObject instanceof HighlightedTransformedObject)
-				return ((HighlightedTransformedObject) transformedObject).getObject();
-			else
-				return transformedObject;
+				transformedObject =  ((HighlightedTransformedObject) transformedObject).getObject();
+			if (transformedObject instanceof IFormattedObject)
+				transformedObject =  ((IFormattedObject) transformedObject).getObject();
+			return transformedObject;
 		}
 		catch (Throwable e) {
 			LogUtils.warn(e.getMessage());
@@ -414,5 +421,28 @@ public class TextController implements IExtension {
 
 	public boolean canEdit() {
 		return false;
+	}
+
+	public URI toUri(final Object value, final NodeModel node, Object extension) {
+		final Object transformedObject = getTransformedObjectNoFormattingNoThrow(value, node, extension);
+		if (transformedObject instanceof URI)
+			return (URI)transformedObject;
+		final String objectAsFileReference;
+		if(transformedObject instanceof File) {
+			objectAsFileReference = TextController.FILE_PROTOCOL + ((File)transformedObject).getPath();
+		}
+		else if (transformedObject instanceof String) {
+			objectAsFileReference = (String) transformedObject;
+			if(!objectAsFileReference.startsWith(TextController.FILE_PROTOCOL))
+				return null;
+		}
+		else
+			return null;
+		try {
+			return LinkController.createURI(objectAsFileReference);
+		}
+		catch (URISyntaxException e) {
+			return null;
+		}
 	}
 }

@@ -60,7 +60,7 @@ public interface Controller extends ControllerRO, HeadlessMapCreator {
 	 *   println("all available icon keys: " + FreeplaneIconUtils.listStandardIconKeys())
 	 *   c.setStatusInfo("standard", "hi there!", "button_ok");
 	 * </pre>
-	 * @see FreeplaneIconFactory
+	 * @see org.freeplane.core.ui.svgicons.FreeplaneIconFactory
 	 * @since 1.2 */
 	void setStatusInfo(String infoPanelKey, String info, String iconKey);
 
@@ -68,29 +68,44 @@ public interface Controller extends ControllerRO, HeadlessMapCreator {
 	@Deprecated
 	void setStatusInfo(String infoPanelKey, Icon icon);
 
-	/**
-	 * Returns {@link Loader} for accessing or loading map from file.
-	 *
-	 * @since 1.7.1
-	 */
+	/** @deprecated since 1.7.5 - use {@link #mapLoader(File)} */
 	@Override
+	@Deprecated
 	Loader load(File file);
 
-	/**
-	 * Returns {@link Loader} for accessing or loading map from URL.
-	 *
-	 * @since 1.7.1
-	 */
+	/** @deprecated since 1.7.5 - use {@link #mapLoader(URL)} */
 	@Override
-	Loader load(URL file);
+	@Deprecated
+	Loader load(URL url);
+
+	/** @deprecated since 1.7.5 - use {@link #mapLoader(String)} */
+	@Override
+	@Deprecated
+	Loader load(String input);
 
 	/**
-	 * Returns {@link Loader} for accessing or loading map from file.
+	 * Returns {@link Loader} for accessing or loading mind map from file.
 	 *
-	 * @since 1.7.1
+	 * @since 1.7.5
 	 */
 	@Override
-	Loader load(String file);
+	Loader mapLoader(File file);
+
+	/**
+	 * Returns {@link Loader} for accessing or loading mind map from URL.
+	 *
+	 * @since 1.7.5
+	 */
+	@Override
+	Loader mapLoader(URL file);
+
+	/**
+	 * Returns {@link Loader} for accessing or loading mind map from file.
+	 *
+	 * @since 1.7.5
+	 */
+	@Override
+	Loader mapLoader(String file);
 
 
 	/**
@@ -98,12 +113,12 @@ public interface Controller extends ControllerRO, HeadlessMapCreator {
 	 * @since 1.2 */
 	Map newMap();
 
-	/** @deprecated since 1.6.16 - use {@link #load(URL)}
+	/** @deprecated since 1.6.16 - use {@link #mapLoader(URL)}
 	 * @since 1.2 */
 	@Deprecated
 	Map newMap(URL url);
 
-	/**  @deprecated since 1.6.16 - use {@link #load(file)}
+	/**  @deprecated since 1.6.16 - use {@link #mapLoader(File)}
 	 * @since 1.5 */
 	@Deprecated
 	public Map newMapFromTemplate(File templateFile);

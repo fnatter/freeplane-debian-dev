@@ -23,7 +23,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
 
 import org.freeplane.core.ui.components.FreeplaneToolBar;
-import org.freeplane.features.clipboard.ClipboardController;
+import org.freeplane.core.ui.components.resizer.UIComponentVisibilityDispatcher;
+import org.freeplane.features.clipboard.ClipboardControllers;
 import org.freeplane.features.cloud.CloudController;
 import org.freeplane.features.edge.EdgeController;
 import org.freeplane.features.filter.FilterController;
@@ -44,7 +45,6 @@ import org.freeplane.features.styles.LogicalStyleController;
 import org.freeplane.features.styles.MapStyle;
 import org.freeplane.features.text.TextController;
 import org.freeplane.features.ui.FrameController;
-import org.freeplane.features.ui.UIComponentVisibilityDispatcher;
 import org.freeplane.features.ui.ViewController;
 import org.freeplane.features.url.UrlManager;
 import org.freeplane.view.swing.features.nodehistory.NodeHistory;
@@ -63,6 +63,7 @@ public class FModeControllerFactory {
 		modeController.setUserInputListenerFactory(userInputListenerFactory);
 		controller.addModeController(modeController);
 		controller.selectModeForBuild(modeController);
+		ClipboardControllers.install(new ClipboardControllers());
 		new FMapController(modeController);
 		UrlManager.install(new UrlManager());
 		MapIO.install(modeController);
@@ -72,13 +73,13 @@ public class FModeControllerFactory {
 		new TextController(modeController).install(modeController);
 		LinkController.install(new LinkController(modeController));
 		CloudController.install(new CloudController(modeController));
-		ClipboardController.install(new ClipboardController());
 		LocationController.install(new LocationController());
 		LogicalStyleController.install(new LogicalStyleController(modeController));
 		MapStyle.install(true);
 		NodeStyleController.getController().addShapeGetter(new Integer(0),
 		    new IPropertyHandler<ShapeConfigurationModel, NodeModel>() {
-			    public ShapeConfigurationModel getProperty(final NodeModel node, final ShapeConfigurationModel currentValue) {
+			    @Override
+				public ShapeConfigurationModel getProperty(final NodeModel node, final ShapeConfigurationModel currentValue) {
 				    return ShapeConfigurationModel.FORK;
 			    }
 		    });
@@ -87,7 +88,7 @@ public class FModeControllerFactory {
 		userInputListenerFactory.setNodePopupMenu(new JPopupMenu());
 		final FreeplaneToolBar toolBar = new FreeplaneToolBar("main_toolbar", SwingConstants.HORIZONTAL);
 		FrameController frameController = (FrameController) controller.getViewController();
-		UIComponentVisibilityDispatcher.install(frameController, toolBar, "toolbarVisible");
+		UIComponentVisibilityDispatcher.install(toolBar, "toolbarVisible");
 		userInputListenerFactory.addToolBar("/main_toolbar", ViewController.TOP, toolBar);
 		userInputListenerFactory.addToolBar("/filter_toolbar", FilterController.TOOLBAR_SIDE, FilterController.getCurrentFilterController().getFilterToolbar());
 		userInputListenerFactory.addToolBar("/status", ViewController.BOTTOM, controller.getViewController().getStatusBar());

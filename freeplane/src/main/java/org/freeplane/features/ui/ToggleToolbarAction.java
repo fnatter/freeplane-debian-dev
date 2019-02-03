@@ -25,6 +25,7 @@ import javax.swing.JComponent;
 
 import org.freeplane.core.ui.AFreeplaneAction;
 import org.freeplane.core.ui.SelectableAction;
+import org.freeplane.core.ui.components.resizer.UIComponentVisibilityDispatcher;
 import org.freeplane.features.mode.Controller;
 
 @SelectableAction(checkOnPopup = true)
@@ -51,7 +52,7 @@ public class ToggleToolbarAction extends AFreeplaneAction {
 	public void actionPerformed(final ActionEvent event) {
 		final JComponent toolBar = getToolbar();
 		if(toolBar != null)
-			UIComponentVisibilityDispatcher.dispatcher(toolBar).toggleVisibility();
+			UIComponentVisibilityDispatcher.of(toolBar).toggleVisibility();
 	}
 
 
@@ -67,6 +68,6 @@ public class ToggleToolbarAction extends AFreeplaneAction {
 
 	public boolean isVisible() {
 		final JComponent toolBar = getToolbar();
-		return toolBar != null && UIComponentVisibilityDispatcher.dispatcher(toolBar).isVisible();
+		return toolBar != null && UIComponentVisibilityDispatcher.of(toolBar).isVisible();
 	}
 }
