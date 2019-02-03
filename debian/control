@@ -35,8 +35,9 @@ Build-Depends-Indep: javahelp2,
                      libidw-java,
                      jmapviewer (>= 1.11),
                      libmnemonicsetter-java (>= 0.5),
-                     gradle-debian-helper
-Standards-Version: 4.2.1
+                     gradle-debian-helper,
+                     ivy
+Standards-Version: 4.3.0
 Vcs-Git: https://salsa.debian.org/java-team/freeplane.git
 Vcs-Browser: https://salsa.debian.org/java-team/freeplane
 Homepage: http://freeplane.org/
@@ -67,7 +68,8 @@ Depends: ${misc:Depends},
          libcommons-codec-java (>= 1.7),
          libidw-java,
          jmapviewer (>= 1.11),
-         libmnemonicsetter-java (>= 0.5)
+         libmnemonicsetter-java (>= 0.5),
+         ivy
 Recommends: xdg-utils,
             java-wrappers
 Provides: libjortho-freeplane-java
