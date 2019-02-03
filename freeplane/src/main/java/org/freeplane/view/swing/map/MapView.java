@@ -1043,7 +1043,7 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 	/**
 	 * @param differentSubtrees
 	 * @return an ArrayList of MindMapNode objects. If both ancestor and
-	 *         descandant node are selected, only the ancestor ist returned
+	 *         descendant node are selected, only the ancestor ist returned
 	 */
 	ArrayList<NodeModel> getSelectedNodesSortedByY(final boolean differentSubtrees) {
 		validateSelecteds();
@@ -1306,7 +1306,7 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 		if (uriString != null) {
 			final URI uri = assignAbsoluteURI(uriString);
 			final ViewerController vc = getModeController().getExtension(ViewerController.class);
-			final IViewerFactory factory = vc.getCombiFactory();
+			final IViewerFactory factory = vc.getViewerFactory();
 			if (uri != null) {
 				assignViewerToBackgroundComponent(factory, uri);
 			}
@@ -1346,7 +1346,6 @@ public class MapView extends JPanel implements Printable, Autoscroll, IMapChange
 				LogUtils.warn("no viewer created for " + uri);
 				return;
 			}
-			((ScalableComponent) backgroundComponent).setCenter(true);
 		}
 		catch (final FileNotFoundException e1) {
 			LogUtils.warn(e1);

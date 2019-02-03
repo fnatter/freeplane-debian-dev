@@ -28,7 +28,6 @@ import org.freeplane.core.resources.ResourceController;
 import org.freeplane.features.filter.condition.ICondition;
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.MapChangeEvent;
-import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
@@ -151,12 +150,17 @@ public class Filter {
 			Controller.getCurrentController().getViewController().setWaitingCursor(false);
 		}
 	}
+
 	public void calculateFilterResults(final MapModel map) {
 		final NodeModel root = map.getRootNode();
 		resetFilter(root);
 		if (filterChildren(root, checkNode(root), false)) {
 			addFilterResult(root, FilterInfo.FILTER_SHOW_ANCESTOR);
 		}
+	}
+
+	public void calculateFilterResults(final NodeModel root) {
+		applyFilter(root, false, false, false);
 	}
 
 	private boolean applyFilter(final NodeModel node,
@@ -220,7 +224,6 @@ public class Filter {
 	private boolean filterChildren(final NodeModel node,
 	                               final boolean isAncestorSelected, final boolean isAncestorEclipsed) {
 		boolean isDescendantSelected = false;
-		MapController r = Controller.getCurrentModeController().getMapController();
 		for (final NodeModel child : node.getChildren()) {
 			isDescendantSelected = applyFilter(child, isAncestorSelected, isAncestorEclipsed,
 			    isDescendantSelected);

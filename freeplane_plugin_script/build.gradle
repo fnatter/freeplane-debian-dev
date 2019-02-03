@@ -15,6 +15,7 @@ dependencies {
 		exclude group:'org.codehaus.groovy', module:'groovy-cli-picocli'
 	}
 	runtime 'org.codehaus.groovy:groovy-dateutil:2.5.4'
+	runtime 'org.apache.ivy:ivy:2.4.0'
 
 }
 
@@ -71,6 +72,8 @@ task copyScripts(type: Copy) {
 
 javadoc {
     enabled = true
+    
+    title = "Freeplane API ${project.version}"
 
     source = fileTree(dir: 'src/main/java')
       .include('**/Proxy.java')

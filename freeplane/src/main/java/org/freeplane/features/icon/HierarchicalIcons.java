@@ -21,12 +21,12 @@
 package org.freeplane.features.icon;
 
 import java.util.Map;
+
 import org.freeplane.core.extension.IExtension;
 import org.freeplane.core.io.IReadCompletionListener;
 import org.freeplane.features.map.IMapChangeListener;
 import org.freeplane.features.map.INodeChangeListener;
 import org.freeplane.features.map.MapChangeEvent;
-import org.freeplane.features.map.MapController;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeChangeEvent;
 import org.freeplane.features.map.NodeDeletionEvent;
@@ -53,6 +53,7 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		this(Mode.OR);
 		final ModeController modeController = Controller.getCurrentModeController();
 		IconController.getController(modeController).addStateIconProvider(new IStateIconProvider() {
+			@Override
 			public UIIcon getStateIcon(NodeModel node) {
 				AccumulatedIcons iconSet = node.getExtension(AccumulatedIcons.class);
 				if(iconSet != null)
@@ -77,6 +78,8 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		modeController.getMapController().addMapChangeListener(this);
 	}
 
+
+
 	@Override
 	protected void add(final NodeModel node, final IExtension extension) {
 		if(MapStyleModel.getExtension(node.getMap()) != null){
@@ -87,6 +90,17 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 	}
 
 
+	@Override
+	public void undoableToggleHook(NodeModel node, IExtension extension) {
+		removeAnotherMode(node);
+		super.undoableToggleHook(node, extension);
+	}
+
+	protected void removeAnotherMode(NodeModel node) {
+		final HierarchicalIcons2 extension = node.getExtension(HierarchicalIcons2.class);
+		if(extension != null)
+			extension.undoableDeactivateHook(node);
+	}
 	@Override
 	protected IExtension createExtension(final NodeModel node, final XMLElement element) {
 		return this;
@@ -101,7 +115,6 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 			}
 			return;
 		}
-		MapController r = Controller.getCurrentModeController().getMapController();
 		for (final NodeModel child : node.getChildren()) {
 			gatherLeavesAndSetParentsStyle(child);
 		}
@@ -115,12 +128,12 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 			AccumulatedIcons.setStyleCheckForChange(node, mode);
 			return;
 		}
-		MapController r = Controller.getCurrentModeController().getMapController();
 		for (final NodeModel child : node.getChildren()) {
 			gatherLeavesAndSetStyle(child);
 		}
 	}
 
+	@Override
 	public void mapChanged(final MapChangeEvent event) {
 		final MapModel map = event.getMap();
 		if(map == null){
@@ -138,6 +151,7 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		gatherLeavesAndSetParentsStyle(rootNode);
 	}
 
+	@Override
 	public void nodeChanged(final NodeChangeEvent event) {
 		final NodeModel node = event.getNode();
 		if (!isActive(node)) {
@@ -146,6 +160,7 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		setStyleRecursive(node);
 	}
 
+	@Override
 	public void onNodeDeleted(NodeDeletionEvent nodeDeletionEvent) {
 		if (!isActive(nodeDeletionEvent.parent)) {
 			return;
@@ -153,6 +168,7 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		setStyleRecursive(nodeDeletionEvent.parent);
 	}
 
+	@Override
 	public void onNodeInserted(final NodeModel parent, final NodeModel child, final int newIndex) {
 		if (!isActive(parent)) {
 			return;
@@ -160,6 +176,7 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		setStyleRecursive(child);
 	}
 
+	@Override
 	public void onNodeMoved(NodeMoveEvent nodeMoveEvent) {
 		if (!isActive(nodeMoveEvent.newParent)) {
 			return;
@@ -168,9 +185,11 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		setStyleRecursive(nodeMoveEvent.child);
 	}
 
+	@Override
 	public void onPreNodeDelete(NodeDeletionEvent nodeDeletionEvent) {
 	}
 
+	@Override
 	public void readingCompleted(final NodeModel topNode, final Map<String, String> newIds) {
 		if (!topNode.containsExtension(getClass()) && !topNode.getMap().getRootNode().containsExtension(getClass())) {
 			return;
@@ -196,7 +215,6 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		AccumulatedIcons icons = node.removeExtension(AccumulatedIcons.class);
 		if(icons != null){
 			Controller.getCurrentModeController().getMapController().delayedNodeRefresh(node, HierarchicalIcons.ICONS, null, null);
-			MapController r = Controller.getCurrentModeController().getMapController();
 			for (final NodeModel child : node.getChildren()) {
 				removeIcons(child);
 			}
@@ -214,10 +232,11 @@ public class HierarchicalIcons extends PersistentNodeHook implements INodeChange
 		}
 	}
 
+	@Override
 	public void onPreNodeMoved(NodeMoveEvent nodeMoveEvent) {
 	}
-	
-	
+
+
 }
 
 @NodeHookDescriptor(hookName = "accessories/plugins/HierarchicalIcons2.properties")
@@ -225,4 +244,10 @@ class HierarchicalIcons2 extends HierarchicalIcons{
 	public HierarchicalIcons2() {
 	    super(Mode.AND);
     }
+	@Override
+	protected void removeAnotherMode(NodeModel node) {
+		final HierarchicalIcons extension = node.getExtension(HierarchicalIcons.class);
+		if(extension != null)
+			extension.undoableDeactivateHook(node);
+	}
 }

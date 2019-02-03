@@ -62,8 +62,8 @@ final class NoteManager implements INodeSelectionListener, IMapSelectionListener
 	}
 
 	@Override
-	public void onSelect(final NodeModel nodeView) {
-		node = nodeView;
+	public void onSelect(final NodeModel node) {
+		this.node = node;
 		updateEditor();
 	}
 
@@ -154,10 +154,6 @@ final class NoteManager implements INodeSelectionListener, IMapSelectionListener
 			if(noteViewerComponent != null)
 				noteViewerComponent.setCurrentDocumentContent("");
 		}
-	}
-
-	@Override
-	public void beforeMapChange(MapModel oldMap, MapModel newMap) {
 	}
 
 	NodeModel getNode() {

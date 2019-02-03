@@ -8,14 +8,20 @@ import org.freeplane.plugin.script.FormulaUtils;
 class PrecedentsSearchStrategy implements DependencySearchStrategy {
 	@Override
 	public RelatedElements find(final NodeModel node) {
-		return FormulaUtils.getRelatedElements(node, node.getUserObject());
+		final Object object = node.getUserObject();
+		return getRelatedElements(node, object);
 	}
 
 	@Override
 	public RelatedElements find(final NodeModel node, final Attribute attribute) {
-		return FormulaUtils.getRelatedElements(node, attribute.getValue());
+		final Object object = attribute.getValue();
+		return getRelatedElements(node, object);
 	}
 
+	private RelatedElements getRelatedElements(NodeModel node, Object maybeFormula) {
+		FormulaUtils.cacheIfFormula(node, maybeFormula);
+		return FormulaUtils.getRelatedElements(node, maybeFormula);
+	}
 
 	@Override
 	public Pair<NodeModel, NodeModel> inConnectionOrder(Pair<NodeModel, NodeModel> nodePair) {

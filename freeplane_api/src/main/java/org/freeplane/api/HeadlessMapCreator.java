@@ -9,21 +9,33 @@ import java.net.URL;
  */
 public interface HeadlessMapCreator {
 	/**
-	 * Load mind map from file.
-	 * @since 1.7.1
+	 * Returns {@link HeadlessLoader} for accessing or loading mind map from file.
+	 * @since 1.7.5
 	 */
+	HeadlessLoader mapLoader(File file);
+
+	/**
+	 * Returns {@link HeadlessLoader} for accessing or loading mind map from URL.
+	 * @since 1.7.5
+	 */
+	HeadlessLoader mapLoader(URL url);
+
+	/**
+	 * Returns {@link HeadlessLoader} for accessing or loading mind map from string input.
+	 * @since 1.7.5
+	 */
+	HeadlessLoader mapLoader(String input);
+
+	/** @deprecated since 1.7.5 - use {@link #mapLoader(File)} */
+	@Deprecated
 	HeadlessLoader load(File file);
 
-	/**
-	 * Load mind map from URL.
-	 * @since 1.7.1
-	 */
+	/** @deprecated since 1.7.5 - use {@link #mapLoader(URL)} */
+	@Deprecated
 	HeadlessLoader load(URL url);
 
-	/**
-	 * Load mind map from string input.
-	 * @since 1.7.1
-	 */
+	/** @deprecated since 1.7.5 - use {@link #mapLoader(String)} */
+	@Deprecated
 	HeadlessLoader load(String input);
 
 	/**

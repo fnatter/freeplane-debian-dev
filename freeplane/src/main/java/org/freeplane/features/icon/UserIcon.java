@@ -27,6 +27,7 @@ import java.net.URL;
 
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.util.LogUtils;
+import org.freeplane.core.util.TextUtils;
 
 /**
  *
@@ -66,8 +67,9 @@ public class UserIcon extends MindIcon {
 	}
 
 	@Override
-	public String getTranslationValueLabel() {
-		return getTranslationKeyLabel();
+	public String getTranslatedDescription() {
+		String key = getDescriptionTranslationKey();
+		return TextUtils.getOptionalText(MindIcon.nameToTranslationKey(key), key);
 	}
 
 	@Override

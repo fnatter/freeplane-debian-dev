@@ -213,6 +213,12 @@ class ControllerProxy implements Proxy.Controller {
 		return ProxyUtils.find(condition, currentMapRootNode(), scriptContext);
 	}
 
+	@Override
+	public List<? extends Node> find(boolean withAncestors, boolean withDescendants, NodeCondition condition) {
+		reportArbitraryNodeAccess();
+		return ProxyUtils.find(withAncestors, withDescendants, condition, currentMapRootNode(), scriptContext);
+	}
+
 	private NodeModel currentMapRootNode() {
 		return Controller.getCurrentController().getMap().getRootNode();
 	}
@@ -220,6 +226,11 @@ class ControllerProxy implements Proxy.Controller {
 	public List<? extends Node> find(final Closure<Boolean> closure) {
 		reportArbitraryNodeAccess();
 		return ProxyUtils.find(closure, currentMapRootNode(), scriptContext);
+	}
+	@Override
+	public List<? extends Node> find(boolean withAncestors, boolean withDescendants, final Closure<Boolean> closure) {
+		reportArbitraryNodeAccess();
+		return ProxyUtils.find(withAncestors, withDescendants, closure, currentMapRootNode(), scriptContext);
 	}
 
 	// NodeRO: R
@@ -305,13 +316,23 @@ class ControllerProxy implements Proxy.Controller {
     }
 
 	@Override
-	public Proxy.Loader load(File file) {
+	public Proxy.Loader mapLoader(File file) {
 		return LoaderProxy.of(file, scriptContext);
 	}
 
 	@Override
-	public Proxy.Loader load(URL url) {
+	public Proxy.Loader load(File file) {
+		return mapLoader(file);
+	}
+
+	@Override
+	public Proxy.Loader mapLoader(URL url) {
 		return LoaderProxy.of(url, scriptContext);
+	}
+
+	@Override
+	public Proxy.Loader load(URL url) {
+		return mapLoader(url);
 	}
 
 	@Override
@@ -320,13 +341,18 @@ class ControllerProxy implements Proxy.Controller {
 	}
 
 	@Override
+	public Proxy.Loader mapLoader(String file) {
+		return mapLoader(file);
+	}
+
+	@Override
 	public Map newMap(URL url) {
-		return load(url).withView().getMap();
+		return mapLoader(url).withView().load();
 	}
 
 	@Override
 	public Map newMapFromTemplate(File templateFile) {
-		return load(templateFile).withView().saveAfterLoading().getMap();
+		return mapLoader(templateFile).withView().saveAfterLoading().load();
 	}
 
 	@Override

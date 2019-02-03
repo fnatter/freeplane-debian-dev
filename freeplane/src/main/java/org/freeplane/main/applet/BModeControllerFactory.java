@@ -19,16 +19,14 @@
  */
 package org.freeplane.main.applet;
 
-import java.security.AccessControlException;
-
 import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
 
 import org.freeplane.core.ui.components.FreeplaneToolBar;
+import org.freeplane.core.ui.components.resizer.UIComponentVisibilityDispatcher;
 import org.freeplane.core.ui.menubuilders.generic.PhaseProcessor.Phase;
-import org.freeplane.core.util.LogUtils;
 import org.freeplane.features.attribute.AttributeController;
-import org.freeplane.features.clipboard.ClipboardController;
+import org.freeplane.features.clipboard.ClipboardControllers;
 import org.freeplane.features.cloud.CloudController;
 import org.freeplane.features.edge.EdgeController;
 import org.freeplane.features.encrypt.EncryptionController;
@@ -50,7 +48,6 @@ import org.freeplane.features.styles.LogicalStyleController;
 import org.freeplane.features.styles.MapStyle;
 import org.freeplane.features.text.TextController;
 import org.freeplane.features.ui.FrameController;
-import org.freeplane.features.ui.UIComponentVisibilityDispatcher;
 import org.freeplane.features.ui.ViewController;
 import org.freeplane.features.url.UrlManager;
 import org.freeplane.view.swing.features.filepreview.ViewerController;
@@ -69,6 +66,7 @@ public class BModeControllerFactory {
 		modeController.setUserInputListenerFactory(userInputListenerFactory);
 		controller.addModeController(modeController);
 		controller.selectModeForBuild(modeController);
+		ClipboardControllers.install(new ClipboardControllers());
 		new MapController(modeController);
 		new IconController(modeController).install(modeController);
 		UrlManager.install(new UrlManager());
@@ -82,12 +80,6 @@ public class BModeControllerFactory {
 		MapExplorerController.install(modeController);
 		LinkController.install(new LinkController(modeController));
 		LogicalStyleController.install(new LogicalStyleController(modeController));
-		try {
-			ClipboardController.install(new ClipboardController());
-		}
-		catch (final AccessControlException e) {
-			LogUtils.warn("can not access system clipboard, clipboard controller disabled");
-		}
 		LocationController.install(new LocationController());
 		SummaryNode.install();
 		FreeNode.install();
@@ -98,7 +90,7 @@ public class BModeControllerFactory {
 		userInputListenerFactory.setNodePopupMenu(new JPopupMenu());
 		final FreeplaneToolBar toolBar = new FreeplaneToolBar("main_toolbar", SwingConstants.HORIZONTAL);
 		FrameController frameController = (FrameController) controller.getViewController();
-		UIComponentVisibilityDispatcher.install(frameController, toolBar, "toolbarVisible");
+		UIComponentVisibilityDispatcher.install(toolBar, "toolbarVisible");
 		userInputListenerFactory.addToolBar("/main_toolbar", ViewController.TOP, toolBar);
 		userInputListenerFactory.addToolBar("/filter_toolbar", FilterController.TOOLBAR_SIDE, FilterController.getController(
 		    controller).getFilterToolbar());

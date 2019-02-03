@@ -31,7 +31,9 @@ import org.freeplane.features.attribute.AttributeController;
 import org.freeplane.features.attribute.AttributeRegistry;
 import org.freeplane.features.attribute.AttributeRegistryElement;
 import org.freeplane.features.attribute.NodeAttributeTableModel;
-import org.freeplane.features.map.MapController;
+import org.freeplane.features.attribute.mindmapmode.clipboard.MAttributeClipboardController;
+import org.freeplane.features.clipboard.ClipboardControllers;
+import org.freeplane.features.clipboard.mindmapmode.MClipboardControllers;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
@@ -201,7 +203,6 @@ public class MAttributeController extends AttributeController {
 		 */
 		void iterate(final NodeModel node) {
 			visitor.visit(node, NodeAttributeTableModel.getModel(node));
-			MapController r = Controller.getCurrentModeController().getMapController();
 			for (final NodeModel child : node.getChildren()) {
 				iterate(child);
 			}
@@ -580,6 +581,13 @@ public class MAttributeController extends AttributeController {
 		return rowCount;
 	}
 
+	@Override
+	protected void registerAttributeClipboardController(final ModeController modeController) {
+		final MClipboardControllers controllers = (MClipboardControllers) modeController.getExtension(ClipboardControllers.class);
+		controllers.add(new MAttributeClipboardController(this));
+	}
+
+
 	/**
 	 *
 	 */
@@ -694,7 +702,6 @@ public class MAttributeController extends AttributeController {
 			final String value = nodeAttributeTableModel.getValueAt(i, 1).toString();
 			performRegistryAttributeValue(node.getMap(), name, value, false);
 		}
-		MapController r = Controller.getCurrentModeController().getMapController();
 		for (final NodeModel child : node.getChildren()) {
 			performRegistrySubtreeAttributes(child);
 		}

@@ -33,7 +33,7 @@ import org.freeplane.core.resources.ResourceController;
 class TimerBlinkTask extends TimerTask {
 	private final ReminderHook reminderController;
 	/**
-	 * 
+	 *
 	 */
 	private final ReminderExtension reminderExtension;
 	private boolean stateAdded = false;
@@ -41,7 +41,7 @@ class TimerBlinkTask extends TimerTask {
 	private boolean alreadyExecuted;
 
 	/**
-	 * @param b 
+	 * @param b
 	 */
 	public TimerBlinkTask(final ReminderHook reminderController, final ReminderExtension reminderExtension,
 	                      final boolean stateAdded, boolean runScript) {
@@ -57,20 +57,21 @@ class TimerBlinkTask extends TimerTask {
 	public void run() {
 		SwingUtilities.invokeLater(new Runnable() {
 
+			@Override
 			public void run() {
 				if(runScript){
 					runScript = false;
 					reminderController.runScript(reminderExtension);
 				}
 				if(! alreadyExecuted){
-					if(ResourceController.getResourceController().getBooleanProperty("remindersShowNotifications"))
+					if(runScript && ResourceController.getResourceController().getBooleanProperty("remindersShowNotifications"))
 						SwingUtilities.invokeLater(new Runnable() {
 							@Override
 							public void run() {
 								reminderController.showNotificationPopup(reminderExtension);
 							}
 						});
-						
+
 					alreadyExecuted = true;
 				}
 				stateAdded = !stateAdded;
@@ -78,8 +79,8 @@ class TimerBlinkTask extends TimerTask {
 			}
 		});
 	}
-	
+
 	public boolean alreadyExecuted(){
-		return alreadyExecuted; 
+		return alreadyExecuted;
 	}
 }

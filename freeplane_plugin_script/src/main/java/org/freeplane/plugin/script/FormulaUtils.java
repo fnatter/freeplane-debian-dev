@@ -24,7 +24,7 @@ public class FormulaUtils {
 	public static Object evalIfScript(final NodeModel nodeModel, final String text){
 		if (textContainsFormula(text)) {
 			final String script = scriptOf(text);
-			return eval(nodeModel, script);
+			return executeScript(nodeModel, script);
 		}
 		else {
 			return text;
@@ -74,7 +74,7 @@ public class FormulaUtils {
 	/** evaluate text as a script.
 	 * @return the evaluation result.
 	 * @throws ExecuteScriptException */
-	private static Object eval(final NodeModel nodeModel, final String script) {
+	public static Object executeScript(final NodeModel nodeModel, final String script) {
 		final NodeScript nodeScript = new NodeScript(nodeModel, script);
 		final ScriptContext scriptContext = new ScriptContext(nodeScript);
 		final ScriptingPermissions restrictedPermissions = ScriptingPermissions.getFormulaPermissions();
@@ -83,7 +83,7 @@ public class FormulaUtils {
 			Object value = formulaCache.getOrThrowCachedResult(nodeScript);
 			if (value == null) {
 				try {
-					value = evaluateLoggingExceptions(nodeScript, scriptContext, restrictedPermissions);
+					value = evaluateLoggingExceptions(scriptContext, restrictedPermissions);
 					formulaCache.put(nodeScript, new CachedResult(value, scriptContext.getRelatedElements()));
 				}
 				catch (final ExecuteScriptException e) {
@@ -94,16 +94,17 @@ public class FormulaUtils {
 			return value;
 		}
 		else {
-			return evaluateLoggingExceptions(nodeScript, scriptContext, restrictedPermissions);
+			return evaluateLoggingExceptions(scriptContext, restrictedPermissions);
 		}
 	}
 
-	private static Object evaluateLoggingExceptions(final NodeScript nodeScript, final ScriptContext scriptContext,
-	                           final ScriptingPermissions restrictedPermissions) {
+	private static Object evaluateLoggingExceptions(final ScriptContext scriptContext,
+													final ScriptingPermissions restrictedPermissions) {
 		try {
-			return evaluateCheckingForCyclesAndNonNullResult(nodeScript, scriptContext, restrictedPermissions);
+			return evaluateCheckingForCyclesAndNonNullResult(scriptContext, restrictedPermissions);
 		}
 		catch (final ExecuteScriptException e) {
+			final NodeScript nodeScript = scriptContext.getNodeScript();
 			final NodeModel node = nodeScript.node;
 			final URL url = node.getMap().getURL();
 			String nodeLocation = url != null ? url.toString() : "Unsaved map ";
@@ -114,14 +115,17 @@ public class FormulaUtils {
 		}
 	}
 
-	private static Object evaluateCheckingForCyclesAndNonNullResult(final NodeScript nodeScript,
-																	final ScriptContext scriptContext,
+	private static Object evaluateCheckingForCyclesAndNonNullResult(final ScriptContext scriptContext,
 																	final ScriptingPermissions restrictedPermissions) {
-		if (!FormulaThreadLocalStack.INSTANCE.push(nodeScript)) {
+		final NodeScript nodeScript = scriptContext.getNodeScript();
+		if (!FormulaThreadLocalStacks.INSTANCE.push(scriptContext)) {
+			if(FormulaThreadLocalStacks.INSTANCE.ignoresCycles())
+				return 0;
 			showCyclicDependency(nodeScript);
 			final String message = TextUtils.format("formula.error.circularReference",
+				nodeScript.node.getID(),
 				HtmlUtils.htmlToPlain(nodeScript.script));
-			Controller.getCurrentController().getViewController().out(message);
+			Controller.getCurrentController().getViewController().out(TextUtils.getShortText(message, 80, "..."));
 			throw new ExecuteScriptException(new CyclicScriptReferenceException(message));
 		}
 		try {
@@ -132,7 +136,7 @@ public class FormulaUtils {
 			return value;
 		}
 		finally {
-			FormulaThreadLocalStack.INSTANCE.pop();
+			FormulaThreadLocalStacks.INSTANCE.pop();
 		}
 	}
 
@@ -140,7 +144,7 @@ public class FormulaUtils {
 		final Controller controller = Controller.getCurrentController();
 		if (controller.getMap() != nodeScript.node.getMap())
 			return;
-		final List<NodeScript> cycle = FormulaThreadLocalStack.INSTANCE.findCycle(nodeScript);
+		final List<NodeScript> cycle = FormulaThreadLocalStacks.INSTANCE.findCycle(nodeScript);
 		final Configurable configurable = controller.getMapViewManager().getMapViewConfiguration();
 		final DependencyHighlighter dependencyHighlighter = new DependencyHighlighter(LinkController.getController(),
 			configurable);
@@ -149,7 +153,7 @@ public class FormulaUtils {
 	}
 
 	public static RelatedElements getRelatedElements(final NodeModel node, final Object object) {
-		if (FormulaUtils.containsFormula(object)) {
+		if (FormulaCache.ENABLE_CACHING && FormulaUtils.containsFormula(object)) {
 			final RelatedElements accessedValues = FormulaCache.of(node.getMap()).getAccessedValues(node,
 				scriptOf((String) object));
 			if (accessedValues != null)
@@ -172,23 +176,24 @@ public class FormulaUtils {
 	}
 
 	public static void evaluateOutdatedFormulas(MapModel map) {
-		evaluateAllRecursively(map.getRootNode());
+		cacheAllRecursively(map.getRootNode());
 	}
 
-	static private void evaluateAllRecursively(NodeModel node) {
-		evaluateObject(node, node.getUserObject());
+	static private void cacheAllRecursively(NodeModel node) {
+		cacheIfFormula(node, node.getUserObject());
 		NodeAttributeTableModel attributeTableModel = node.getExtension(NodeAttributeTableModel.class);
 		if(attributeTableModel != null)
-			attributeTableModel.getAttributes().stream().forEach(a -> evaluateObject(node, a.getValue()));
-		node.getChildren().stream().forEach(FormulaUtils::evaluateAllRecursively);
+			attributeTableModel.getAttributes().stream().forEach(a -> cacheIfFormula(node, a.getValue()));
+		node.getChildren().stream().forEach(FormulaUtils::cacheAllRecursively);
 	}
 
-	static private void evaluateObject(NodeModel node, Object userObject) {
+	public static void cacheIfFormula(NodeModel node, Object maybeFormula) {
 		try {
-			if (FormulaUtils.containsFormula(userObject)){
-				FormulaUtils.evalIfScript(node, (String) userObject);
+			if (maybeFormula instanceof String){
+				FormulaUtils.evalIfScript(node, (String) maybeFormula);
 			}
 		} catch (Exception e) {
 		}
 	}
+
 }
