@@ -17,9 +17,9 @@ Last-Update: 2016-02-04
 +//  id "nebula.ospackage" version "5.0.4"
 +//}
  
- allprojects {
-     // in a multi-project setup, all projects must have the same version number!
-@@ -19,26 +19,45 @@
+ Properties props = new Properties()
+ props.load(new FileInputStream(rootDir.path + '/freeplane/src/viewer/resources/version.properties'))
+@@ -26,26 +26,45 @@
  
          // this is necessary to grab both binary and source jars
          // for local (git) dependencies
@@ -73,7 +73,7 @@ Last-Update: 2016-02-04
  }
  
  def filterAndExternalizePluginDependencies(runtime_files) {
-@@ -72,12 +91,6 @@
+@@ -81,12 +100,6 @@
        failOnError = false
      }
  
@@ -86,7 +86,7 @@ Last-Update: 2016-02-04
      dependencies {
  		testCompile 'junit:junit:4.12',
  				'org.hamcrest:hamcrest-all:1.3',
-@@ -112,7 +125,8 @@
+@@ -121,7 +134,8 @@
  // and freeplane_framework needs to copy it to BUILD/framework.jar
  configure(subprojects.findAll {it.name =~ /plugin/ || it.name =~ /^freeplane$/ || it.name =~ /^freeplane_framework$/}){
      dependencies {
@@ -96,7 +96,7 @@ Last-Update: 2016-02-04
      }
  }
  
-@@ -130,21 +144,9 @@
+@@ -139,21 +153,9 @@
  configure(subprojects.findAll {it.name =~ /plugin/ }) {
  
      task copyOSGiJars(type: Copy) {
@@ -155,7 +155,7 @@ Last-Update: 2016-02-04
  }
  
  sourceSets {
-@@ -186,21 +189,26 @@
+@@ -189,21 +192,26 @@
  }
  
  task copyOSGiJars(type: Copy) {
@@ -221,7 +221,7 @@ Last-Update: 2016-02-04
  jar {
 --- a/dist.gradle
 +++ b/dist.gradle
-@@ -33,7 +33,7 @@
+@@ -25,7 +25,7 @@
  apply from: './win.dist.gradle'
  apply from: './mac.dist.gradle'
  apply from: './src.dist.gradle'
@@ -230,7 +230,7 @@ Last-Update: 2016-02-04
  
  // meta task
  task dist {
-@@ -44,7 +44,7 @@
+@@ -36,7 +36,7 @@
      dependsOn windowsPortableInstaller
      dependsOn gitinfoDist
      dependsOn historyDist
@@ -241,14 +241,13 @@ Last-Update: 2016-02-04
  // clean
 --- a/freeplane_plugin_script/build.gradle
 +++ b/freeplane_plugin_script/build.gradle
-@@ -14,7 +14,9 @@
+@@ -14,7 +14,8 @@
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-commons'
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-picocli'
  	}
 -	runtime 'org.codehaus.groovy:groovy-dateutil:2.5.4'
-+	// this is not available in Debian 10's groovy 2.4.x
-+	// (maybe it is included in groovy-all?)
++	// this is not available in Debian 10's groovy 2.4.x:
 +	//runtime 'org.codehaus.groovy:groovy-dateutil:2.5.4'
+ 	runtime 'org.apache.ivy:ivy:2.4.0'
  
  }
- 

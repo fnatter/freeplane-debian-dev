@@ -5,19 +5,20 @@ Forwarded: not-needed
 Last-Update: 2016-05-05
 --- a/freeplane_framework/script/freeplane.policy
 +++ b/freeplane_framework/script/freeplane.policy
-@@ -14,3 +14,15 @@
+@@ -23,3 +23,16 @@
  		permission java.io.FilePermission "${org.freeplane.basedirectory}/-", "read";
          permission java.lang.RuntimePermission "getClassLoader";
  };
 +
-+grant codeBase "file:/usr/share/knopflerfish/*" {
-+        permission java.security.AllPermission;
-+};
-+
-+grant codeBase "file:/usr/share/java/*" {
-+        permission java.security.AllPermission;
-+};
-+
-+grant codeBase "file:/usr/share/maven-repo/-" {
-+        permission java.security.AllPermission;
-+};
++grant codeBase "file:/usr/share/knopflerfish/*" {
++        permission java.security.AllPermission;
++};
++
++grant codeBase "file:/usr/share/java/*" {
++        permission java.security.AllPermission;
++};
++
++grant codeBase "file:/usr/share/maven-repo/-" {
++        permission java.security.AllPermission;
++};
++
