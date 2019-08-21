@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
@@ -70,6 +71,7 @@ import org.freeplane.features.export.mindmapmode.ExportController;
 import org.freeplane.features.export.mindmapmode.ImportMindmanagerFiles;
 import org.freeplane.features.export.mindmapmode.ImportXmlFile;
 import org.freeplane.features.filter.FilterController;
+import org.freeplane.features.filter.hidden.HiddenNodeContoller;
 import org.freeplane.features.icon.HierarchicalIcons;
 import org.freeplane.features.icon.IconController;
 import org.freeplane.features.icon.mindmapmode.IconSelectionPlugin;
@@ -127,6 +129,7 @@ import org.freeplane.view.swing.features.nodehistory.NodeHistory;
 import org.freeplane.view.swing.features.progress.mindmapmode.ProgressFactory;
 import org.freeplane.view.swing.features.time.mindmapmode.ReminderHook;
 import org.freeplane.view.swing.map.ShowNotesInMapAction;
+import org.freeplane.view.swing.map.attribute.AttributePanelManager;
 import org.freeplane.view.swing.map.attribute.EditAttributesAction;
 import org.freeplane.view.swing.ui.DefaultNodeKeyListener;
 import org.freeplane.view.swing.ui.UserInputListenerFactory;
@@ -164,6 +167,7 @@ public class MModeControllerFactory {
 		UITools.setScrollbarIncrement(styleScrollPane);
 		final JComponent tabs = (JComponent) modeController.getUserInputListenerFactory().getToolBar("/format").getComponent(1);
 		tabs.add(TextUtils.getText("format_panel"), styleScrollPane);
+		tabs.add(TextUtils.getText("attributes_attribute"), createAttributesPanel());
 		new HierarchicalIcons();
 		new AutomaticLayoutController();
 		new BlinkingNodeHook();
@@ -201,6 +205,13 @@ public class MModeControllerFactory {
 		modeController.addAction(new ImportMindmanagerFiles());
 	}
 
+	private JComponent createAttributesPanel() {
+		final JPanel tablePanel = new AttributePanelManager(modeController).getTablePanel();
+		final JScrollPane attributeScrollPane = new JScrollPane(tablePanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		    JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		UITools.setScrollbarIncrement(attributeScrollPane);
+		return attributeScrollPane;
+	}
 	private MModeController createModeControllerImpl() {
 //		this.controller = controller;
 		createStandardControllers();
@@ -333,29 +344,7 @@ public class MModeControllerFactory {
 			    }
 		    }));
 
-
-//		IconController.getController(modeController).addStateIconProvider(new IStateIconProvider() {
-//			public UIIcon getStateIcon(NodeModel node) {
-//				final URI link = NodeLinks.getLink(node);
-//				return wrapIcon(LinkController.getLinkIcon(link, node));
-//			}
-//
-//			private UIIcon wrapIcon(final Icon linkIcon) {
-//				UIIcon icon = null;
-//				if(linkIcon != null) {
-//					if(linkIcon instanceof UIIcon) {
-//						icon = (UIIcon) linkIcon;
-//					}
-//					else {
-//    					icon = new UIIcon("ownIcon", null) {
-//    						public Icon getIcon() {
-//    							return linkIcon;
-//    						}
-//    					};
-//					}
-//				}
-//				return icon;
-//			}
-//		});
+		HiddenNodeContoller.registerModeSpecificActions(modeController);
+		HiddenNodeContoller.install(modeController);
 	}
 }

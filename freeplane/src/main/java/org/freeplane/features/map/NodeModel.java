@@ -133,6 +133,10 @@ public class NodeModel{
 		return getExtensionContainer().putExtension(extension);
 	}
 
+	public IExtension putExtension(final Class<? extends IExtension> clazz, final IExtension extension) {
+		return getExtensionContainer().putExtension(clazz, extension);
+	}
+
 	public void addIcon(final MindIcon icon) {
 		getIconModel().addIcon(icon);
 		if (map != null) {
@@ -471,7 +475,7 @@ public class NodeModel{
 	public void setFolded(boolean folded) {
 		boolean wasFolded = isFolded();
 		if (wasFolded != folded && isAccessible()) {
-			sharedData.setFolded(folded && ! AlwaysUnfoldedNode.isConnectorNode(this));
+			sharedData.setFolded(folded && ! AlwaysUnfoldedNode.isAlwaysUnfolded(this));
 		}
 		fireNodeChanged(new NodeChangeEvent(this, NodeChangeType.FOLDING, Boolean.valueOf(wasFolded), Boolean.valueOf(folded), false, false));
 	}

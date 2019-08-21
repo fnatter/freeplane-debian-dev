@@ -1,14 +1,20 @@
 package groovy.runtime.metaclass.groovy.grape;
 
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.util.Map;
-
 import groovy.lang.DelegatingMetaClass;
+import groovy.lang.GroovyClassLoader;
 import groovy.lang.MetaClass;
 import org.codehaus.groovy.reflection.ReflectionUtils;
 
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
+
 public class GrapeMetaClass extends DelegatingMetaClass {
+	static final private Collection<String> EXTRA_IGNORED_PACKAGES = Arrays.asList(
+			GrapeMetaClass.class.getPackage().getName(),
+			AccessController.class.getPackage().getName());
 	public GrapeMetaClass(MetaClass delegate) {
 		super(delegate);
 	}
@@ -23,8 +29,10 @@ public class GrapeMetaClass extends DelegatingMetaClass {
 				public Object run() {
 					final Map map = (Map) arguments[0];
 					if (map.get("refObject") == null && map.get("classLoader") == null) {
-						final Class callingClass = ReflectionUtils.getCallingClass(2);
+						final Class callingClass = ReflectionUtils.getCallingClass(0, EXTRA_IGNORED_PACKAGES);
 						final ClassLoader classLoader = callingClass.getClassLoader();
+						if(! (classLoader instanceof GroovyClassLoader))
+							return null;
 						map.put("classLoader", classLoader);
 					}
 					return GrapeMetaClass.super.invokeStaticMethod(object, methodName, arguments);
