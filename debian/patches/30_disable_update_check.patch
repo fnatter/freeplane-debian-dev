@@ -15,7 +15,7 @@ Last-Update: 2018-09-15
  connector_shape=CUBIC_CURVE
 --- a/freeplane/src/external/resources/xml/mindmapmodemenu.xml
 +++ b/freeplane/src/external/resources/xml/mindmapmodemenu.xml
-@@ -502,7 +502,7 @@
+@@ -507,7 +507,7 @@
  			<Entry builder="separator" />
  		</Entry>
  		<Entry name="help">

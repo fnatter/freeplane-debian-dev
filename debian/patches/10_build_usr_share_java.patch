@@ -155,12 +155,12 @@ Last-Update: 2016-02-04
  }
  
  sourceSets {
-@@ -189,21 +192,26 @@
+@@ -189,25 +192,24 @@
  }
  
  task copyOSGiJars(type: Copy) {
 -        from ("$buildDir/libs") {
-+    from ("$buildDir/libs") {
++     from ("$buildDir/libs") {
            include("*.jar")
 -		  exclude('freeplane-*.jar')
 -        }
@@ -170,31 +170,30 @@ Last-Update: 2016-02-04
 -		  exclude('freeplane_api*.jar')
 -		  exclude('mnemonicsetter-*.jar')
 -		  
--     }
--     from ('lib') {
--          include("*.jar")
--          exclude('*-sources.jar')
 +	  exclude('framework-*.jar')
 +	  exclude('freeplane-*.jar')
       }
+-     from ('lib') {
+-          include("*.jar")
+-          exclude('*-sources.jar')
++
 +     from (configurations.runtime.files) {
-+         //include("*.jar")
-+	 // do not copy debian jars!
-+         exclude {
-+             FileTreeElement jarFileTreeElement ->
-+	       isDebianJar(jarFileTreeElement.file)
-+         }
-+         exclude('freeplane_api*.jar')
-+      }
-+     //from (configurations.runtime) {
-+     //     include("*.jar")
-+     //		  exclude('framework-*.jar')
-+     //		  exclude('freeplane_api*.jar')
-+     //		  exclude('mnemonicsetter-*.jar')
-+     //}
++          //include("*.jar")
++          // do not copy debian jars!
++          exclude {
++            FileTreeElement jarFileTreeElement ->
++               isDebianJar(jarFileTreeElement.file)
++          }
++        exclude('freeplane_api*.jar')
+      }
+-	 from (project(':freeplane_mac').jar.outputs.files)
       into(globalBin + '/core/' + pluginid + '/lib/')
  }
+-copyOSGiJars.dependsOn project(':freeplane_mac').jar
++//copyOSGiJars.dependsOn project(':freeplane_mac').jar
  
+ task copyOSGiManifest(type: Copy) {
+      from ("$buildDir/tmp/jar/") {
 --- a/freeplane_plugin_jsyntaxpane/build.gradle
 +++ b/freeplane_plugin_jsyntaxpane/build.gradle
 @@ -5,7 +5,8 @@
@@ -241,7 +240,7 @@ Last-Update: 2016-02-04
  // clean
 --- a/freeplane_plugin_script/build.gradle
 +++ b/freeplane_plugin_script/build.gradle
-@@ -14,7 +14,8 @@
+@@ -13,7 +13,8 @@
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-commons'
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-picocli'
  	}
@@ -251,3 +250,13 @@ Last-Update: 2016-02-04
  	runtime 'org.apache.ivy:ivy:2.4.0'
  
  }
+--- a/settings.gradle
++++ b/settings.gradle
+@@ -3,7 +3,6 @@
+         'freeplane_api',
+         'freeplane_ant',
+         'freeplane_framework',
+-        'freeplane_mac',
+         'freeplane_plugin_bugreport',
+         'freeplane_plugin_formula',
+         'freeplane_plugin_latex',
