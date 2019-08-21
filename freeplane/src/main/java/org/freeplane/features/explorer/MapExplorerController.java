@@ -1,10 +1,20 @@
 package org.freeplane.features.explorer;
 
+import org.freeplane.api.NodeNotFoundException;
 import org.freeplane.core.extension.IExtension;
-import org.freeplane.core.io.*;
+import org.freeplane.core.io.IAttributeHandler;
+import org.freeplane.core.io.IAttributeWriter;
+import org.freeplane.core.io.ITreeWriter;
+import org.freeplane.core.io.ReadManager;
+import org.freeplane.core.io.WriteManager;
 import org.freeplane.core.util.HtmlUtils;
+import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
-import org.freeplane.features.map.*;
+import org.freeplane.features.map.MapController;
+import org.freeplane.features.map.MapModel;
+import org.freeplane.features.map.MapReader;
+import org.freeplane.features.map.NodeBuilder;
+import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.ModeController;
 
 public class MapExplorerController  implements IExtension{
@@ -90,12 +100,14 @@ public class MapExplorerController  implements IExtension{
 			try {
 				return new MapExplorer(start, path, accessedNodes).getNode();
 			}
-			catch (IllegalStateException|IllegalArgumentException e) {
+			catch (NodeNotFoundException e) {
 				return null;
 			}
 		}
-		else
-			throw new IllegalArgumentException("Invalid reference format in" + reference);
+		else {
+			LogUtils.warn("Invalid reference format in" + reference);
+			return null;
+		}
 	}
 
 

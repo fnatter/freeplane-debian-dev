@@ -56,6 +56,7 @@ import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
 import org.freeplane.view.swing.map.MainView;
+import org.freeplane.view.swing.map.NodeView;
 
 /**
  * @author Dimitry Polivaev
@@ -93,7 +94,13 @@ public class AttributePanelManager{
             if (mainView == null)
                 return;
             AttributeController.getController(modeController).createAttributeTableModel(node);
-            attributeView = new AttributeView(mainView.getNodeView(), false);
+            final NodeView nodeView = mainView.getNodeView();
+            // it is actually impossible but it happens
+            if(nodeView == null)  {
+            	LogUtils.severe(new RuntimeException("Node view null for mainView" + String.valueOf(mainView) + " and node " + String.valueOf(node)));
+            	return;
+            }
+			attributeView = new AttributeView(nodeView, false);
             Box buttonBox = new Box(axis);
             buttonBox.setAlignmentX(0.5f);
             tablePanel.add(buttonBox);
@@ -187,7 +194,7 @@ public class AttributePanelManager{
                 @Override
 				public void valueChanged(final ListSelectionEvent event) {
                     // update format chooser
-                    if (!event.getValueIsAdjusting()) {
+                    if (attributeView != null && !event.getValueIsAdjusting()) {
                         setSelectedFormatItem();
                     }
                 }

@@ -58,6 +58,8 @@ import org.freeplane.features.cloud.CloudModel;
 import org.freeplane.features.edge.EdgeController;
 import org.freeplane.features.edge.EdgeController.Rules;
 import org.freeplane.features.edge.EdgeStyle;
+import org.freeplane.features.filter.hidden.NodeVisibility;
+import org.freeplane.features.filter.hidden.NodeVisibilityConfiguration;
 import org.freeplane.features.highlight.HighlightController;
 import org.freeplane.features.highlight.NodeHighlighter;
 import org.freeplane.features.icon.HierarchicalIcons;
@@ -78,7 +80,6 @@ import org.freeplane.features.nodelocation.LocationModel;
 import org.freeplane.features.nodestyle.NodeStyleController;
 import org.freeplane.features.nodestyle.NodeStyleModel;
 import org.freeplane.features.nodestyle.NodeStyleModel.Shape;
-import org.freeplane.features.nodestyle.ShapeConfigurationModel;
 import org.freeplane.features.styles.MapViewLayout;
 import org.freeplane.features.text.TextController;
 import org.freeplane.view.swing.map.attribute.AttributeView;
@@ -218,10 +219,11 @@ public class NodeView extends JComponent implements INodeView {
 		if (cloudColor != null) {
 			return cloudColor;
 		}
-		if (isRoot()) {
+		final NodeView parentView = getParentView();
+		if (parentView == null) {
 			return getMap().getBackground();
 		}
-		return getParentView().getBackgroundColor();
+		return parentView.getBackgroundColor();
 	}
 
 	public Color getCloudColor() {
@@ -875,6 +877,18 @@ public class NodeView extends JComponent implements INodeView {
 			if(property != EncryptionModel.class)
 				return;
 		}
+		if(property == NodeVisibilityConfiguration.class) {
+			updateAll();
+			return;
+		}
+
+		if(property == NodeVisibility.class
+				&& node.getMap().getRootNode().getExtension(NodeVisibilityConfiguration.class) != NodeVisibilityConfiguration.SHOW_HIDDEN_NODES) {
+			final NodeView parentView = getParentView();
+			parentView.setFolded(parentView.isFolded, true);
+			return;
+		}
+
 		// is node is not fully initialized, skip the rest.
 		if (mainView == null) {
 			return;
@@ -1536,20 +1550,15 @@ public class NodeView extends JComponent implements INodeView {
 	}
 
 	private void updateShape() {
-		final ShapeConfigurationModel newShape = NodeStyleController.getController(getMap().getModeController()).getShapeConfiguration(model);
-		final ShapeConfigurationModel oldShape;
-		if(mainView != null)
-			oldShape = mainView.getShapeConfiguration();
-		else
-			oldShape = null;
-		if (mainView != null && oldShape.equals(newShape))
-			return;
-		final MainView newMainView = NodeViewFactory.getInstance().newMainView(this);
-		if(newMainView.getShapeConfiguration().equals(oldShape))
-			return;
-		setMainView(newMainView);
-		if (map.getSelected() == this) {
-			requestFocusInWindow();
+		if(mainView != null) {
+			NodeViewFactory.getInstance().updateViewPainter(this);
+		}
+		else {
+			final MainView newMainView = NodeViewFactory.getInstance().newMainView(this);
+			setMainView(newMainView);
+			if (map.getSelected() == this) {
+				requestFocusInWindow();
+			}
 		}
 	}
 

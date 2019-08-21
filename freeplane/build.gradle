@@ -204,8 +204,10 @@ task copyOSGiJars(type: Copy) {
           include("*.jar")
           exclude('*-sources.jar')
      }
+	 from (project(':freeplane_mac').jar.outputs.files)
      into(globalBin + '/core/' + pluginid + '/lib/')
 }
+copyOSGiJars.dependsOn project(':freeplane_mac').jar
 
 task copyOSGiManifest(type: Copy) {
      from ("$buildDir/tmp/jar/") {
