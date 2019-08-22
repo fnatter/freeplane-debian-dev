@@ -19,6 +19,10 @@ Files: ./freeplane/src/editor/resources/fonts/intuitive-subset.ttf
 Copyright: 2011 Bruno de Souza Leão
 License: OFL-1.1
 
+Files: ./freeplane/src/editor/resources/fonts/listcontrols.ttf
+Copyright: 2019 Daniel Bruce
+License: CC-BY-SA-4.0
+
 Files: ./freeplane_framework/script/freeplane.svg
        ./freeplane_framework/script/freeplane.png
        ./freeplane/resources/images/Freeplane_splash.png
