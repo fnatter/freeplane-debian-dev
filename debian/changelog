@@ -1,10 +1,15 @@
 freeplane (1.7.9-1) unstable; urgency=medium
 
+  [ Felix Natter ]
   * New upstream release
   * Update/refresh patches
   * Do not try to build freeplane_mac
   * Bump standards-version to 4.4.0 (no changes)
   * Update version in man page
+
+  [ tony mancill ]
+  * Update debian/copyright
+  * Remove get-orig-source target from debian/rules
 
  -- Felix Natter <fnatter@gmx.net>  Wed, 17 Jul 2019 17:42:39 +0200
 
