@@ -14,7 +14,8 @@ Copyright: 2010-2012 Eric Lavarde <deb@zorglub.s.bawue.de>
            2013-2017 Felix Natter <fnatter@gmx.net>
 License: GPL-2+
 
-Files: ./freeplane/resources/fonts/intuitive-subset.ttf
+
+Files: ./freeplane/src/editor/resources/fonts/intuitive-subset.ttf
 Copyright: 2011 Bruno de Souza Leão
 License: OFL-1.1
 
