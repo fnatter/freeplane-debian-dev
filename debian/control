@@ -37,7 +37,7 @@ Build-Depends-Indep: javahelp2,
                      libmnemonicsetter-java (>= 0.5),
                      gradle-debian-helper,
                      ivy
-Standards-Version: 4.3.0
+Standards-Version: 4.4.0
 Vcs-Git: https://salsa.debian.org/java-team/freeplane.git
 Vcs-Browser: https://salsa.debian.org/java-team/freeplane
 Homepage: http://freeplane.org/
