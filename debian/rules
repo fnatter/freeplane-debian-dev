@@ -37,6 +37,3 @@ override_dh_clean:
 	if [ -d 64x64 ]; then rmdir 64x64; fi
 	if [ -d 128x128 ]; then rmdir 128x128; fi
 
-
-get-orig-source:
-	uscan --force-download --rename --repack
