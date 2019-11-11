@@ -4,7 +4,7 @@ Forwarded: not-needed
 Last-Update: 2018-09-15
 --- a/freeplane/src/viewer/resources/freeplane.properties
 +++ b/freeplane/src/viewer/resources/freeplane.properties
-@@ -178,7 +178,7 @@
+@@ -179,7 +179,7 @@
  browsemode_initial_map=map.mm
  bugTrackerLocation=http\://www.freeplane.org/bugs
  center_selected_node=false
@@ -15,7 +15,7 @@ Last-Update: 2018-09-15
  connector_shape=CUBIC_CURVE
 --- a/freeplane/src/external/resources/xml/mindmapmodemenu.xml
 +++ b/freeplane/src/external/resources/xml/mindmapmodemenu.xml
-@@ -507,7 +507,7 @@
+@@ -508,7 +508,7 @@
  			<Entry builder="separator" />
  		</Entry>
  		<Entry name="help">

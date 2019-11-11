@@ -19,7 +19,7 @@ Last-Update: 2016-02-04
  
  Properties props = new Properties()
  props.load(new FileInputStream(rootDir.path + '/freeplane/src/viewer/resources/version.properties'))
-@@ -26,26 +26,45 @@
+@@ -36,26 +36,45 @@
  
          // this is necessary to grab both binary and source jars
          // for local (git) dependencies
@@ -73,7 +73,7 @@ Last-Update: 2016-02-04
  }
  
  def filterAndExternalizePluginDependencies(runtime_files) {
-@@ -81,12 +100,6 @@
+@@ -91,12 +110,6 @@
        failOnError = false
      }
  
@@ -83,10 +83,10 @@ Last-Update: 2016-02-04
 -       }
 -    }
 -
-     dependencies {
- 		testCompile 'junit:junit:4.12',
- 				'org.hamcrest:hamcrest-all:1.3',
-@@ -121,7 +134,8 @@
+     configurations {
+         lib
+         compile.extendsFrom(lib)
+@@ -136,7 +149,8 @@
  // and freeplane_framework needs to copy it to BUILD/framework.jar
  configure(subprojects.findAll {it.name =~ /plugin/ || it.name =~ /^freeplane$/ || it.name =~ /^freeplane_framework$/}){
      dependencies {
@@ -96,26 +96,21 @@ Last-Update: 2016-02-04
      }
  }
  
-@@ -139,21 +153,9 @@
- configure(subprojects.findAll {it.name =~ /plugin/ }) {
+@@ -200,17 +214,8 @@
  
      task copyOSGiJars(type: Copy) {
--        from ("$buildDir/libs") {
+         from ("$buildDir/libs") {
 -            include("*.jar")
 -            exclude('freeplane-' + project.version + '.jar')
 -            exclude('freeplane_plugin_*-' + project.version + '.jar')
 -        }
--        from (configurations.runtime) {
+-        from (configurations.lib) {
 -            include("*.jar")
--            // TODO: this is redundant with regard to 'filterPluginDeps' (see above)!
--            exclude('framework-*.jar')
--            exclude('knopflerfish-framework*.jar')
 -        }
 -        from ('lib') {
 -            include("*.jar")
 -            exclude('*-sources.jar')
 -        }
-+	from ("$buildDir/libs") {
 +	    include("plugin-${project.version}.jar")
 +	}
          into(globalBin + '/plugins/' + pluginid + '/lib/')
@@ -128,15 +123,15 @@ Last-Update: 2016-02-04
  dependencies {
  	
 -	mergedViewerDependencies 'org.dpolivaev.mnemonicsetter:mnemonicsetter:0.6'
--	compile ':kitfox-svg-salamander-1.1.1-p1'
+-	lib ':kitfox-svg-salamander-1.1.1-p1'
 +	//mergedViewerDependencies 'org.dpolivaev.mnemonicsetter:mnemonicsetter:0.6'
-+	//compile ':kitfox-svg-salamander-1.1.1-p1'
-+	compile 'org.dpolivaev.mnemonicsetter:mnemonicsetter:0.5'
-+	compile ':svgSalamander'
- 	
-     compile project(':JOrtho_0.4_freeplane')
- 	compile project(':freeplane_api')
-@@ -15,7 +17,8 @@
++	lib 'org.dpolivaev.mnemonicsetter:mnemonicsetter:0.5'
++	//lib ':kitfox-svg-salamander-1.1.1-p1'
++	lib ':svgSalamander'
+ 	lib 'com.github.robtimus:data-url:1.0.1'
+ 	lib 'com.bulenkov:darcula:2018.2'
+ 
+@@ -17,7 +19,8 @@
              'commons-io:commons-io:2.4',
              'commons-codec:commons-codec:1.8',
              'com.jgoodies:jgoodies-forms:1.9.0',
@@ -144,19 +139,19 @@ Last-Update: 2016-02-04
 +            //'com.jgoodies:jgoodies-common:1.8.1'
 +	    ':idw'
  
- 	compile  ('com.lightdev.app.shtm.simplyhtml:SimplyHTML:0.17.3') {
+ 	lib  ('com.lightdev.app.shtm.simplyhtml:SimplyHTML:0.17.3') {
  		exclude module: 'javahelp'
-@@ -25,7 +28,7 @@
+@@ -27,7 +30,7 @@
   	testRuntime files('src/viewer/resources', 'src/editor/resources', 'src/external/resources')
  
      // from flatDir "localGitDepsRepository":
--    compile ':idw-gpl-1.6.1'
-+    //compile ':idw-gpl-1.6.1'
+-    lib ':idw-gpl-1.6.1'
++    //lib ':idw-gpl-1.6.1'
  }
  
  sourceSets {
-@@ -189,25 +192,24 @@
- }
+@@ -171,22 +174,23 @@
+ ext.bundleActivator = 'org.freeplane.main.osgi.Activator'
  
  task copyOSGiJars(type: Copy) {
 -        from ("$buildDir/libs") {
@@ -164,19 +159,17 @@ Last-Update: 2016-02-04
            include("*.jar")
 -		  exclude('freeplane-*.jar')
 -        }
--     from (configurations.runtime) {
+-     from (configurations.lib) {
 -          include("*.jar")
--		  exclude('framework-*.jar')
--		  exclude('freeplane_api*.jar')
--		  exclude('mnemonicsetter-*.jar')
 -		  
-+	  exclude('framework-*.jar')
-+	  exclude('freeplane-*.jar')
-      }
+-     }
 -     from ('lib') {
 -          include("*.jar")
 -          exclude('*-sources.jar')
-+
++	  exclude('framework-*.jar')
++	  exclude('freeplane-*.jar')
+      }
+-	 from (project(':freeplane_mac').jar.outputs.files)
 +     from (configurations.runtime.files) {
 +          //include("*.jar")
 +          // do not copy debian jars!
@@ -185,8 +178,7 @@ Last-Update: 2016-02-04
 +               isDebianJar(jarFileTreeElement.file)
 +          }
 +        exclude('freeplane_api*.jar')
-      }
--	 from (project(':freeplane_mac').jar.outputs.files)
++      }
       into(globalBin + '/core/' + pluginid + '/lib/')
  }
 -copyOSGiJars.dependsOn project(':freeplane_mac').jar
@@ -196,28 +188,26 @@ Last-Update: 2016-02-04
       from ("$buildDir/tmp/jar/") {
 --- a/freeplane_plugin_jsyntaxpane/build.gradle
 +++ b/freeplane_plugin_jsyntaxpane/build.gradle
-@@ -5,7 +5,8 @@
+@@ -4,7 +4,8 @@
      // from flatDir "localGitDepsRepository":
      // from the Debian "libjsyntaxpane-java" package:
      // https://anonscm.debian.org/cgit/pkg-java/libjsyntaxpane-java.git
--    compile ':jsyntaxpane-0.9.6~r156-7' 
-+    //compile ':jsyntaxpane-0.9.6~r156-7'
-+    compile ':jsyntaxpane'
+-    lib ':jsyntaxpane-0.9.6~r156-7' 
++    //lib ':jsyntaxpane-0.9.6~r156-7'
++    lib ':jsyntaxpane'
  }
  
- jar {
+ ext.bundleExports = """\
 --- a/freeplane_plugin_openmaps/build.gradle
 +++ b/freeplane_plugin_openmaps/build.gradle
-@@ -8,7 +8,8 @@
+@@ -8,5 +8,6 @@
  dependencies {
-     compileOnly project(':freeplane')
+     compile project(':freeplane')
  
--    compile 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
-+    //compile 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
-+    compile ':jmapviewer'
+-    lib 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
++    //lib 'org.openstreetmap.jmapviewer:jmapviewer:1.14'
++    lib ':jmapviewer'
  }
- 
- jar {
 --- a/dist.gradle
 +++ b/dist.gradle
 @@ -25,7 +25,7 @@
@@ -240,14 +230,14 @@ Last-Update: 2016-02-04
  // clean
 --- a/freeplane_plugin_script/build.gradle
 +++ b/freeplane_plugin_script/build.gradle
-@@ -13,7 +13,8 @@
+@@ -11,7 +11,8 @@
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-commons'
  		exclude group:'org.codehaus.groovy', module:'groovy-cli-picocli'
  	}
--	runtime 'org.codehaus.groovy:groovy-dateutil:2.5.4'
+-	lib 'org.codehaus.groovy:groovy-dateutil:2.5.4'
 +	// this is not available in Debian 10's groovy 2.4.x:
-+	//runtime 'org.codehaus.groovy:groovy-dateutil:2.5.4'
- 	runtime 'org.apache.ivy:ivy:2.4.0'
++	//lib 'org.codehaus.groovy:groovy-dateutil:2.5.4'
+ 	lib 'org.apache.ivy:ivy:2.4.0'
  
  }
 --- a/settings.gradle
