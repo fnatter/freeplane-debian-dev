@@ -19,9 +19,12 @@
  */
 package org.freeplane.launcher;
 
-import java.awt.Toolkit;
+import java.awt.GraphicsEnvironment;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JDialog;
@@ -65,8 +68,10 @@ import org.osgi.framework.launch.Framework;
  *
  */
 public class Launcher {
+	private static final String FREEPLANE_JAVA_OPTION_FILE = "FREEPLANE_JAVA_OPTION_FILE";
+	private static final String DEFAULT_FREEPLANE_OPTION_FILE_NAME = "system.properties";
 	private static final String DISABLE_SECURITY_MANAGER_PROPERTY = "org.freeplane.main.application.FreeplaneSecurityManager.disable";
-	private static final String HEADLESS_PROPERTY = "org.freeplane.main.application.FreeplaneStarter.headless";
+	private static final String JAVA_HEADLESS_PROPERTY = "java.awt.headless";
 	private static final String BASEDIRECTORY_PROPERTY = "org.freeplane.basedirectory";
 	private static final String JAVA_VERSION = System.getProperty("java.version");
 	private final File freeplaneInstallationDirectory;
@@ -77,7 +82,6 @@ public class Launcher {
 	private Framework framework;
 
 	public static void main(String[] args) {
-		fixX11AppName();
 		checkForCompatibleJavaVersion();
 		workAroundForDataFlavorComparator_JDK8130242();
 		new Launcher().launchWithoutUICheck(args);
@@ -136,7 +140,7 @@ public class Launcher {
 	 *
 	 */
 	public HeadlessMapCreator launchHeadless() {
-		System.setProperty(HEADLESS_PROPERTY, "true");
+		System.setProperty(JAVA_HEADLESS_PROPERTY, "true");
 		return launchWithoutUICheck(new String[] {});
 	}
 
@@ -149,7 +153,8 @@ public class Launcher {
 	 *
 	 */
 	public Controller launchWithUI(String[] args) {
-		System.setProperty(HEADLESS_PROPERTY, "false");
+		if(GraphicsEnvironment.isHeadless())
+			throw new RuntimeException("UI can not run in a headless graphics environment");
 		final Controller controller = launchWithoutUICheck(args);
 		waitUntilUIStarts();
 		return controller;
@@ -176,7 +181,7 @@ public class Launcher {
 
     /**
      * The method should be call on application exit to shutdown embedded Freeplane instance.
-     * 
+     *
      * No Freeplane objects may be used after the shutdown is called.
      * It destroys some class loaders and invalidates all related classes and objects.
      */
@@ -218,8 +223,24 @@ public class Launcher {
 	private Launcher(final File freeplaneInstallationDirectory) {
 		ensureSingleInstance();
 		this.freeplaneInstallationDirectory = freeplaneInstallationDirectory;
+		loadJavaSystemProperties();
 		argCount = 0;
 		disableSecurityManager = Boolean.getBoolean(DISABLE_SECURITY_MANAGER_PROPERTY);
+	}
+
+	private void loadJavaSystemProperties() {
+		String optionFileFromEnvironment = System.getenv(FREEPLANE_JAVA_OPTION_FILE);
+		File propertyFile = optionFileFromEnvironment != null ? new File(optionFileFromEnvironment) //
+				: new File(freeplaneInstallationDirectory, DEFAULT_FREEPLANE_OPTION_FILE_NAME);
+		if(propertyFile.canRead()) {
+			System.out.println("Load system properties from installation specific file " + propertyFile.getAbsolutePath());
+			try(InputStream input = new BufferedInputStream(new FileInputStream(propertyFile))){
+				System.getProperties().load(input);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	static private void ensureSingleInstance() {
@@ -241,23 +262,6 @@ public class Launcher {
 			}
 		}
 		return frameworkDir;
-	}
-
-	private static void fixX11AppName() {
-		if(! JAVA_VERSION.startsWith("1."))
-			return;
-		try {
-			Toolkit xToolkit = Toolkit.getDefaultToolkit();
-			if (xToolkit.getClass().getName().equals("sun.awt.X11.XToolkit"))
-			{
-				java.lang.reflect.Field awtAppClassNameField = xToolkit.getClass().getDeclaredField("awtAppClassName");
-				awtAppClassNameField.setAccessible(true);
-				awtAppClassNameField.set(xToolkit, "Freeplane");
-			}
-		} catch (NoSuchFieldException | SecurityException
-				| IllegalArgumentException | IllegalAccessException e) {
-			System.err.format("Couldn't set awtAppClassName: %s%n", e.getClass().getSimpleName() + ": " + e.getMessage());
-		}
 	}
 
 	private static void workAroundForDataFlavorComparator_JDK8130242() {

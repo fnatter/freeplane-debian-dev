@@ -19,7 +19,7 @@
  */
 package org.freeplane.features.map.mindmapmode;
 
-import java.awt.EventQueue;
+import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.net.URL;
 import java.util.Timer;
@@ -53,13 +53,19 @@ public class MMapModel extends MapModel {
 	public MMapModel() {
 		super();
 		this.autosaveEnabled = false;
-		addExtension(IUndoHandler.class, new UndoHandler(this));
 		this.lockManager = ResourceController.getResourceController().getBooleanProperty(
 		"experimental_file_locking_on") ? new LockManager() : new DummyLockManager();
 	}
 
+
+	@Override
+	public void beforeViewCreated() {
+		if(! containsExtension(IUndoHandler.class))
+			addExtension(IUndoHandler.class, new UndoHandler(MMapModel.this));
+	}
+
 	public void enableAutosave() {
-		EventQueue.invokeLater(new Runnable() {
+		Controller.getCurrentController().getViewController().invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				if(! autosaveEnabled) {
@@ -116,7 +122,7 @@ public class MMapModel extends MapModel {
 
 	public void scheduleTimerForAutomaticSaving() {
 		if (!(UrlManager.getController() instanceof MFileManager)
-				|| Controller.getCurrentController().getMapViewManager().isHeadless()
+				|| GraphicsEnvironment.isHeadless()
 				|| ! autosaveEnabled) {
 			return;
 		}
@@ -147,5 +153,11 @@ public class MMapModel extends MapModel {
 		final ModeController modeController = controller.getModeController(MModeController.MODENAME);
 		final MMapController mapController = (MMapController) modeController.getMapController();
 		return mapController.close(this);
+	}
+
+	@Override
+	public boolean isUndoActionRunning() {
+		IUndoHandler undoHandler = getExtension(IUndoHandler.class);
+		return undoHandler != null && undoHandler.isUndoActionRunning();
 	}
 }

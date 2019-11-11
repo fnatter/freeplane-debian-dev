@@ -17,8 +17,8 @@ import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
 import org.freeplane.features.styles.LogicalStyleModel;
 import org.freeplane.features.text.DetailTextModel;
-import org.freeplane.features.text.IContentTransformer;
 import org.freeplane.features.url.UrlManager;
+import org.freeplane.plugin.script.FormulaCache;
 import org.freeplane.plugin.script.FormulaDependencies;
 import org.freeplane.plugin.script.FormulaUtils;
 
@@ -71,7 +71,7 @@ public class FormulaUpdateChangeListener implements INodeChangeListener, IMapCha
 	private void refresh(final List<NodeModel> dependencies) {
 		final ModeController modeController = Controller.getCurrentModeController();
 		for (NodeModel dependentNode : dependencies) {
-			modeController.getMapController().delayedNodeRefresh(dependentNode, IContentTransformer.class,
+			modeController.getMapController().delayedNodeRefresh(dependentNode, FormulaCache.class,
 			    null, null);
 		}
 	}
@@ -80,10 +80,6 @@ public class FormulaUpdateChangeListener implements INodeChangeListener, IMapCha
 	 * So there won't be any updates on the parent, even if it has formula that needs an update due to the
 	 * changed children count. */
 	private void nodeChangedImpl(boolean includeChanged, NodeModel... nodes) {
-		//FIXME: needed???
-		//		if (modeController == null || modeController.isUndoAction()) {
-		//			return;
-		//		}
 		final List<NodeModel> dependencies = FormulaDependencies.manageChangeAndReturnDependencies(includeChanged, nodes);
 		refresh(dependencies);
 	}

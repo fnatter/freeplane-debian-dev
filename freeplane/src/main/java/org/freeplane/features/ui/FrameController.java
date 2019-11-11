@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -63,8 +64,10 @@ import javax.swing.ToolTipManager;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.metal.MetalFileChooserUI;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.resources.TranslatedObject;
@@ -72,10 +75,12 @@ import org.freeplane.core.ui.FixedBasicComboBoxEditor;
 import org.freeplane.core.ui.IUserInputListenerFactory;
 import org.freeplane.core.ui.LengthUnits;
 import org.freeplane.core.ui.components.ContainerComboBoxEditor;
+import org.freeplane.core.ui.components.FixDarculaToggleButtonUI;
 import org.freeplane.core.ui.components.FreeplaneMenuBar;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.ui.components.resizer.UIComponentVisibilityDispatcher;
 import org.freeplane.core.util.ClassLoaderFactory;
+import org.freeplane.core.util.ColorUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.Quantity;
 import org.freeplane.features.format.FormattedDate;
@@ -91,6 +96,7 @@ import org.freeplane.features.time.TimeComboBoxEditor;
  * @author Dimitry Polivaev
  */
 abstract public class FrameController implements ViewController {
+	private static final String DARCULA_LAF_NAME = "com.bulenkov.darcula.DarculaLaf";
 	private static final double DEFAULT_SCALING_FACTOR = 0.8;
 	private static final Quantity<LengthUnits> ICON_SIZE = new Quantity<LengthUnits>(12, LengthUnits.pt);
 
@@ -148,18 +154,22 @@ abstract public class FrameController implements ViewController {
 	final private JPanel statusPanel;
 	final private JComponent toolbarPanel[];
 	final private String propertyKeyPrefix;
+	private static boolean uiResourcesInitialized = false;
 	private static Icon textIcon;
 	private static Icon numberIcon;
 	private static Icon dateIcon;
 	private static Icon dateTimeIcon;
 	private static Icon linkIcon;
-	static {
-		final ResourceController resourceController = ResourceController.getResourceController();
-		textIcon = resourceController.getIcon("text_icon");
-		numberIcon = resourceController.getIcon("number_icon");
-		dateIcon = resourceController.getIcon("date_icon");
-		dateTimeIcon = resourceController.getIcon("date_time_icon");
-		linkIcon = resourceController.getIcon("link_icon");
+	static private void initializeUiResources(){
+		if(uiResourcesInitialized == false) {
+			uiResourcesInitialized = true;
+			final ResourceController resourceController = ResourceController.getResourceController();
+			textIcon = resourceController.getIcon("text_icon");
+			numberIcon = resourceController.getIcon("number_icon");
+			dateIcon = resourceController.getIcon("date_icon");
+			dateTimeIcon = resourceController.getIcon("date_time_icon");
+			linkIcon = resourceController.getIcon("link_icon");
+		}
 	}
 	private final IMapViewManager mapViewManager;
 
@@ -225,6 +235,7 @@ abstract public class FrameController implements ViewController {
 
 	@Override
 	public void init(Controller controller) {
+		initializeUiResources();
 		final JComponent mainContentPane = getMainContentPane();
 		mainContentPane.add(toolbarPanel[TOP], BorderLayout.NORTH);
 		mainContentPane.add(toolbarPanel[LEFT], BorderLayout.WEST);
@@ -528,14 +539,20 @@ abstract public class FrameController implements ViewController {
 	public static void setLookAndFeel(final String lookAndFeel, boolean supportHidpi) {
 		try {
 			if (lookAndFeel.equals("default")) {
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				String lookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();
+				fixDarculaNPE(lookAndFeelClassName);
+				UIManager.setLookAndFeel(lookAndFeelClassName);
+				fixDarculaButtonUI();
 			}
 			else {
 				LookAndFeelInfo[] lafInfos = UIManager.getInstalledLookAndFeels();
 				boolean setLnF = false;
 				for (LookAndFeelInfo lafInfo : lafInfos) {
 					if (lafInfo.getName().equalsIgnoreCase(lookAndFeel)) {
-						UIManager.setLookAndFeel(lafInfo.getClassName());
+						String lookAndFeelClassName = lafInfo.getClassName();
+						fixDarculaNPE(lookAndFeelClassName);
+						UIManager.setLookAndFeel(lookAndFeelClassName);
+						fixDarculaButtonUI();
 						setLnF = true;
 						break;
 					}
@@ -544,13 +561,16 @@ abstract public class FrameController implements ViewController {
 					final URLClassLoader userLibClassLoader = ClassLoaderFactory.getClassLoaderForUserLib();
 					try {
 						final Class<?> lookAndFeelClass = userLibClassLoader.loadClass(lookAndFeel);
+						fixDarculaNPE(lookAndFeelClass.getName());
 						UIManager.setLookAndFeel((LookAndFeel) lookAndFeelClass.newInstance());
+						fixDarculaButtonUI();
 						final ClassLoader uiClassLoader = lookAndFeelClass.getClassLoader();
 						if (userLibClassLoader != uiClassLoader)
 							userLibClassLoader.close();
 						UIManager.getDefaults().put("ClassLoader", uiClassLoader);
 					}
 					catch (ClassNotFoundException | ClassCastException | InstantiationException e) {
+						LogUtils.warn("Error while setting Look&Feel" + lookAndFeel + ", reverted to default");
 						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 						Controller.getCurrentController().getResourceController().setProperty("lookandfeel", "default");
 					}
@@ -600,6 +620,19 @@ abstract public class FrameController implements ViewController {
 		final Color color = UIManager.getColor("control");
 		if (color != null && color.getAlpha() < 255)
 			UIManager.getDefaults().put("control", Color.LIGHT_GRAY);
+	}
+
+	private static void fixDarculaNPE(String lookAndFeelClassName) throws UnsupportedLookAndFeelException {
+		if(lookAndFeelClassName.equals(DARCULA_LAF_NAME))
+			UIManager.setLookAndFeel(new MetalLookAndFeel());
+	}
+
+	private static void fixDarculaButtonUI(){
+		if(UIManager.getLookAndFeel().getClass().getName().equals(DARCULA_LAF_NAME)) {
+			UIManager.put("ToggleButtonUI", FixDarculaToggleButtonUI.class.getName());
+			UIManager.put("Button.darcula.selection.color1", ColorUtils.rgbStringToColor("#687f88"));
+			UIManager.put("Button.darcula.selection.color2", ColorUtils.rgbStringToColor("#436188"));
+		}
 	}
 
 	private static int getLookAndFeelDefaultMenuItemFontSize() {
@@ -752,18 +785,21 @@ abstract public class FrameController implements ViewController {
 	}
 
 	@Override
+	public ExecutorService getMainThreadExecutorService() {
+		return EventQueueExecutorServiceAdapter.INSTANCE;
+	}
+
+	@Override
 	public void invokeLater(Runnable runnable) {
 		EventQueue.invokeLater(runnable);
 	}
 
 	@Override
 	public void invokeAndWait(Runnable runnable) throws InterruptedException, InvocationTargetException {
-		EventQueue.invokeAndWait(runnable);
-	}
-
-	@Override
-	public boolean isHeadless() {
-		return false;
+		if(isDispatchThread())
+			runnable.run();
+		else
+			EventQueue.invokeAndWait(runnable);
 	}
 
 	@Override

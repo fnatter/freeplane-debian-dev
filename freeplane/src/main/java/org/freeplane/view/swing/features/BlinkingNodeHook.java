@@ -60,7 +60,7 @@ public class BlinkingNodeHook extends PersistentNodeHook {
 		TimerColorChanger(final NodeModel node) {
 			this.node = node;
 			final MapController mapController = Controller.getCurrentModeController().getMapController();
-			mapController.addMapChangeListener(this);
+			mapController.addUIMapChangeListener(this);
 			mapController.addMapLifeCycleListener(this);
 			timer = SysUtils.createTimer(getClass().getSimpleName());
 			timer.schedule(this, 500, 500);
@@ -123,7 +123,9 @@ public class BlinkingNodeHook extends PersistentNodeHook {
 
 		@Override
 		public void onNodeDeleted(NodeDeletionEvent nodeDeletionEvent) {
-			if (Controller.getCurrentModeController().isUndoAction() || !(node.equals(nodeDeletionEvent.node) || node.isDescendantOf(nodeDeletionEvent.node))) {
+			if (node.getMap().isUndoActionRunning()
+					|| !(node.equals(nodeDeletionEvent.node)
+							|| node.isDescendantOf(nodeDeletionEvent.node))) {
 				return;
 			}
 			final IActor actor = new IActor() {

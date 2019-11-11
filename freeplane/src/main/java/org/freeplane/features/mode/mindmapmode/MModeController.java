@@ -19,6 +19,7 @@
  */
 package org.freeplane.features.mode.mindmapmode;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Vector;
 
@@ -40,6 +41,8 @@ import org.freeplane.features.note.NoteController;
 import org.freeplane.features.note.mindmapmode.MNoteController;
 import org.freeplane.features.url.UrlManager;
 import org.freeplane.features.url.mindmapmode.MFileManager;
+
+import com.bulenkov.darcula.DarculaLaf;
 
 public class MModeController extends ModeController {
 	private static final String LOOKANDFEEL_PROPERTY = "lookandfeel";
@@ -63,31 +66,36 @@ public class MModeController extends ModeController {
 
 	private void addUndoableActor(final IActor actor, final MapModel map) {
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.addActor(actor);
+		if(undoHandler != null)
+			undoHandler.addActor(actor);
 	}
 
 	public void deactivateUndo(final MMapModel map) {
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.deactivate();
+		if(undoHandler != null)
+			undoHandler.deactivate();
 	}
 
 	@Override
 	public void commit() {
 		final MapModel map = getController().getMap();
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.commit();
+		if(undoHandler != null)
+			undoHandler.commit();
 	}
 
 	public void delayedCommit() {
 		final MMapModel map = (MMapModel) getController().getMap();
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.delayedCommit();
+		if(undoHandler != null)
+			undoHandler.delayedCommit();
 	}
 
 	public void delayedRollback() {
 		final MMapModel map = (MMapModel) getController().getMap();
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.delayedRollback();
+		if(undoHandler != null)
+			undoHandler.delayedRollback();
 	}
 
 	private void createActions() {
@@ -112,8 +120,8 @@ public class MModeController extends ModeController {
 
 	public static ShowPreferencesAction createShowPreferencesAction(OptionPanelBuilder optionPanelBuilder) {
 	    final LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
-		final Vector<String> lafNames = new Vector<String>(lafInfo.length + 1);
-		final Vector<String> translatedLafNames = new Vector<String>(lafInfo.length + 1);
+		final Vector<String> lafNames = new Vector<String>(lafInfo.length + 2);
+		final Vector<String> translatedLafNames = new Vector<String>(lafInfo.length + 2);
 		lafNames.add("default");
 		translatedLafNames.add(TextUtils.getOptionalText("OptionPanel.default"));
 		for (int i = 0; i < lafInfo.length; i++) {
@@ -122,6 +130,8 @@ public class MModeController extends ModeController {
 			lafNames.add(className);
 			translatedLafNames.add(info.getName());
 		}
+		lafNames.add(DarculaLaf.class.getName());
+		translatedLafNames.add("Darcula");
 		addCurrentLookAndFeelIfNecessary(lafNames, translatedLafNames);
 		optionPanelBuilder.addEditableComboProperty("Appearance/look_and_feel/lookandfeel", LOOKANDFEEL_PROPERTY, lafNames,
 		    translatedLafNames, IndexedTree.AS_CHILD);
@@ -138,8 +148,14 @@ public class MModeController extends ModeController {
 
 	@Override
 	public void execute(final IActor actor, final MapModel map) {
-		addUndoableActor(actor, map);
-		actor.act();
+		try {
+			Controller.getCurrentController().getViewController().invokeAndWait(() -> {
+				addUndoableActor(actor, map);
+				actor.act();
+			});
+		} catch (InvocationTargetException | InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -152,19 +168,11 @@ public class MModeController extends ModeController {
 	}
 
 	@Override
-	public boolean isUndoAction() {
-		final MapModel model = getController().getMap();
-		if (!(model instanceof MMapModel)) {
-			return false;
-		}
-		return ((MMapModel) model).getExtension(IUndoHandler.class).isUndoActionRunning();
-	}
-
-	@Override
 	public void rollback() {
 		final MapModel map = getController().getMap();
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.rollback();
+		if(undoHandler != null)
+			undoHandler.rollback();
 	}
 
 	/**
@@ -187,14 +195,16 @@ public class MModeController extends ModeController {
 	public void startTransaction() {
 		final MapModel map = getController().getMap();
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.startTransaction();
+		if(undoHandler != null)
+			undoHandler.startTransaction();
 	}
 
 	@Override
 	public void forceNewTransaction() {
 		final MapModel map = getController().getMap();
 		final IUndoHandler undoHandler = map.getExtension(IUndoHandler.class);
-		undoHandler.forceNewTransaction();
+		if(undoHandler != null)
+			undoHandler.forceNewTransaction();
     }
 
 	/**
@@ -222,12 +232,13 @@ public class MModeController extends ModeController {
 	public boolean canEdit() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean supportsHookActions() {
 		return true;
 	}
 
+	@Override
 	public boolean shouldCenterCompactMaps() {
 		return ResourceController.getResourceController().getBooleanProperty("shouldCenterSmallMaps");
 	}

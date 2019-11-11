@@ -20,12 +20,14 @@
 package org.freeplane.features.ui;
 
 import java.awt.Component;
+import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
@@ -112,11 +114,12 @@ public interface ViewController {
 	public boolean quit();
 
 	public boolean isDispatchThread();
+	
 	public void invokeLater(Runnable runnable);
+	
+	public ExecutorService getMainThreadExecutorService();
 
-	public void invokeAndWait(Runnable runnable) throws InterruptedException, InvocationTargetException, ExecutionException;
-
-	public boolean isHeadless();
+	public void invokeAndWait(Runnable runnable) throws InterruptedException, InvocationTargetException;
 
 	public boolean areScrollbarsVisible();
 

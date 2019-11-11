@@ -9,8 +9,6 @@ import org.freeplane.core.ui.components.FreeplaneMenuBar;
 import org.freeplane.core.ui.menubuilders.generic.Entry;
 import org.freeplane.core.ui.menubuilders.generic.EntryAccessor;
 import org.freeplane.core.ui.menubuilders.generic.EntryVisitor;
-import org.freeplane.features.filter.FilterController;
-import org.freeplane.features.mode.Controller;
 
 public class JMenubarBuilder implements EntryVisitor {
 	private final IUserInputListenerFactory userInputListenerFactory;
@@ -32,19 +30,13 @@ public class JMenubarBuilder implements EntryVisitor {
 			@Override
 			public void hierarchyChanged(HierarchyEvent e) {
 				menuBar.removeHierarchyListener(this);
-				final FilterController filterController = Controller.getCurrentController().getExtension(FilterController.class);
-				if(filterController != null)
-					MnemonicSetter.INSTANCE.setComponentMnemonics(menuBar,
-						filterController.getQuickEditor());
-				else
-					MnemonicSetter.INSTANCE.setComponentMnemonics(menuBar);
+				MnemonicSetter.INSTANCE.setComponentMnemonics(menuBar);
 			}
 		});
 	}
 
 	@Override
 	public boolean shouldSkipChildren(Entry entry) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

@@ -3,7 +3,9 @@
  */
 package org.freeplane.plugin.script.proxy;
 
+import java.awt.GraphicsEnvironment;
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,11 +13,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import javax.swing.Icon;
 import javax.swing.filechooser.FileFilter;
 
-import org.freeplane.api.Map;
+import org.freeplane.api.AttributeValueSerializer;
+import org.freeplane.api.MindMap;
 import org.freeplane.api.Node;
 import org.freeplane.api.NodeCondition;
 import org.freeplane.api.Script;
@@ -248,7 +252,7 @@ class ControllerProxy implements Proxy.Controller {
     }
 
 	@Override
-	public Map newMap() {
+	public MindMap newMindMap() {
 		final MMapIO mapIO = MMapIO.getInstance();
 		final MapModel newMap = mapIO.newMapFromDefaultTemplate();
 		return new MapProxy(newMap, scriptContext);
@@ -267,7 +271,7 @@ class ControllerProxy implements Proxy.Controller {
 
     @Override
 	public boolean isInteractive() {
-        return !Boolean.parseBoolean(System.getProperty("nonInteractive"));
+        return !GraphicsEnvironment.isHeadless();
     }
 
     @Override
@@ -280,7 +284,7 @@ class ControllerProxy implements Proxy.Controller {
     }
 
     @Override
-	public void export(Map map, File destFile, String exportTypeDescription, boolean overwriteExisting) {
+	public void export(MindMap map, File destFile, String exportTypeDescription, boolean overwriteExisting) {
 		List<FileFilter> fileFilters = ExportController.getContoller().getMapExportFileFilters();
 		final FileFilter filter = findExportFileFilterByDescription(fileFilters, exportTypeDescription);
         if (filter == null) {
@@ -306,9 +310,9 @@ class ControllerProxy implements Proxy.Controller {
     }
 
     @Override
-	public List<Map> getOpenMaps() {
+	public List<MindMap> getOpenMindMaps() {
     	Collection<MapModel> mapModels = getMapViewManager().getMaps().values();
-    	ArrayList<Map> mapProxies = new ArrayList<Map>(mapModels.size());
+    	ArrayList<MindMap> mapProxies = new ArrayList<MindMap>(mapModels.size());
     	for (MapModel mapModel : mapModels) {
 	        mapProxies.add(new MapProxy(mapModel, scriptContext));
         }
@@ -341,18 +345,13 @@ class ControllerProxy implements Proxy.Controller {
 	}
 
 	@Override
-	public Proxy.Loader mapLoader(String file) {
-		return LoaderProxy.of(file, scriptContext);
+	public Proxy.Loader mapLoader(String fileOrContent) {
+		return LoaderProxy.of(fileOrContent, scriptContext);
 	}
 
 	@Override
-	public Map newMap(URL url) {
-		return mapLoader(url).withView().load();
-	}
-
-	@Override
-	public Map newMapFromTemplate(File templateFile) {
-		return mapLoader(templateFile).withView().saveAfterLoading().load();
+	public Proxy.Loader mapLoader(InputStream inputStream) {
+		return LoaderProxy.of(inputStream, scriptContext);
 	}
 
 	@Override
@@ -363,6 +362,16 @@ class ControllerProxy implements Proxy.Controller {
 	@Override
 	public Script script(String script, String type) {
 		return new StringScriptProxy(script, type, scriptContext);
+	}
+
+	@Override
+	public AttributeValueSerializer getAttributeValueSerializer() {
+		return StaticAttributeValueSerializer.INSTANCE;
+	}
+
+	@Override
+	public ExecutorService getMainThreadExecutorService() {
+		return Controller.getCurrentController().getMainThreadExecutorService();
 	}
 
 }

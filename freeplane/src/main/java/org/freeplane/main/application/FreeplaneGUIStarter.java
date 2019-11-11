@@ -26,7 +26,6 @@ import java.awt.Frame;
 import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
@@ -42,7 +41,6 @@ import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.ui.menubuilders.generic.ChildActionEntryRemover;
 import org.freeplane.core.ui.menubuilders.generic.PhaseProcessor.Phase;
 import org.freeplane.core.util.Compat;
-import org.freeplane.core.util.FreeplaneVersion;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.MenuUtils;
 import org.freeplane.core.util.logging.internal.LogInitializer;
@@ -86,52 +84,12 @@ import org.freeplane.view.swing.map.ViewLayoutTypeAction;
 import org.freeplane.view.swing.map.mindmapmode.MMapViewController;
 
 public class FreeplaneGUIStarter implements FreeplaneStarter {
-
-	private static String RESOURCE_BASE_DIRECTORY;
-	private static String INSTALLATION_BASE_DIRECTORY;
-	static {
-		try {
-			RESOURCE_BASE_DIRECTORY = new File(System.getProperty(ApplicationResourceController.FREEPLANE_GLOBALRESOURCEDIR_PROPERTY,
-			ApplicationResourceController.DEFAULT_FREEPLANE_GLOBALRESOURCEDIR)).getCanonicalPath();
-			INSTALLATION_BASE_DIRECTORY = new File(System.getProperty(ApplicationResourceController.FREEPLANE_BASEDIRECTORY_PROPERTY, RESOURCE_BASE_DIRECTORY + "/..")).getCanonicalPath();
-		} catch (IOException e) {
-		}
-	}
-
+	private static final String JAVA_HEADLESS_PROPERTY = "java.awt.headless";
 
 	static{
 		Compat.fixMousePointerForLinux();
 	}
 
-	public static String getResourceBaseDir() {
-		return RESOURCE_BASE_DIRECTORY;
-	}
-
-	public static String getInstallationBaseDir() {
-		return INSTALLATION_BASE_DIRECTORY;
-	}
-
-	public static void showSysInfo() {
-		final StringBuilder info = new StringBuilder();
-		info.append("freeplane_version = ");
-		final FreeplaneVersion freeplaneVersion = FreeplaneVersion.getVersion();
-		info.append(freeplaneVersion);
-		String revision = freeplaneVersion.getRevision();
-
-		info.append("; freeplane_xml_version = ");
-		info.append(FreeplaneVersion.XML_VERSION);
-		if(! revision.equals("")){
-			info.append("\ngit revision = ");
-			info.append(revision);
-		}
-		info.append("\njava_version = ");
-		info.append(System.getProperty("java.version"));
-		info.append("; os_name = ");
-		info.append(System.getProperty("os.name"));
-		info.append("; os_version = ");
-		info.append(System.getProperty("os.version"));
-		LogUtils.info(info.toString());
-	}
 
 	private final ApplicationResourceController applicationResourceController;
 // // 	private Controller controller;
@@ -145,9 +103,9 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 	private static final String LOAD_LAST_MAP = "load_last_map";
 	final private Options options;
 
-	public FreeplaneGUIStarter(String[] args) {
+	public FreeplaneGUIStarter(Options options) {
 		super();
-		options = CommandLineParser.parse(args, true);
+		this.options = options;
 		final File userPreferencesFile = ApplicationResourceController.getUserPreferencesFile();
 		firstRun = !userPreferencesFile.exists();
 		new UserPropertiesUpdater().importOldProperties();
@@ -169,7 +127,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 			controller.addAction(new QuitAction());
 			applicationResourceController.init();
 			LogInitializer.createLogger();
-			FreeplaneGUIStarter.showSysInfo();
+			ApplicationResourceController.showSysInfo();
 			final String lookandfeel = System.getProperty("lookandfeel", applicationResourceController
 			    .getProperty("lookandfeel"));
 			final boolean supportHidpi = UITools.shouldScaleUIFonts();
@@ -241,7 +199,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 		MModeControllerFactory.createModeController();
 		final ModeController mindMapModeController = controller.getModeController(MModeController.MODENAME);
 		LastOpenedList lastOpenedList = applicationResourceController.getLastOpenedList();
-		mindMapModeController.getMapController().addMapChangeListener(lastOpenedList);
+		mindMapModeController.getMapController().addUIMapChangeListener(lastOpenedList);
 		lastOpenedList.registerMenuContributor(mindMapModeController);
 		mindMapModeController.addUiBuilder(Phase.ACTIONS, "filterConditions", FilterController
 		    .getController(controller)
@@ -265,7 +223,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 	}
 
 	@Override
-	public void createFrame(final String[] args) {
+	public void createFrame() {
 		Controller controller = Controller.getCurrentController();
 		ModeController modeController = controller.getModeController(MModeController.MODENAME);
 		controller.selectModeForBuild(modeController);
@@ -280,7 +238,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 				EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						loadMaps(CommandLineParser.parse(args, false).getFilesToOpenAsArray());
+						loadMaps();
 						finishStartup();
 					}
 				});
@@ -307,7 +265,6 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 				contentPane.setVisible(true);
 				frame.toFront();
 				startupFinished = true;
-				System.setProperty("nonInteractive", Boolean.toString(options.isNonInteractive()));
 				try {
 					Thread.sleep(1000);
 				}
@@ -340,7 +297,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 		Controller.getCurrentController().fireStartupFinished();
 	}
 
-	private void loadMaps( final String[] args) {
+	private void loadMaps() {
 		final Controller controller = Controller.getCurrentController();
 		final boolean alwaysLoadLastMaps = ResourceController.getResourceController().getBooleanProperty(
 		    "always_load_last_maps");
@@ -348,7 +305,7 @@ public class FreeplaneGUIStarter implements FreeplaneStarter {
 		if (alwaysLoadLastMaps && !dontLoadLastMaps) {
 			loadLastMaps();
 		}
-		loadMaps(controller, args);
+		loadMaps(controller, options.getFilesToOpenAsArray());
 		if (controller.getMap() == null && !alwaysLoadLastMaps && !dontLoadLastMaps) {
 			final AddOnsController addonsController = AddOnsController.getController();
 			addonsController.setAutoInstallEnabled(false);

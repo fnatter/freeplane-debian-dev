@@ -171,7 +171,7 @@ public class UITools {
 			myMessage = TextUtils.getText("undefined_error");
 		}
 		LogUtils.warn(myMessage);
-		if(! errorMessageQueued.getAndSet(true))
+		if(! GraphicsEnvironment.isHeadless() && ! errorMessageQueued.getAndSet(true))
 			EventQueue.invokeLater(new Runnable() {
 				@Override
 				public void run() {
@@ -765,6 +765,10 @@ public class UITools {
 
 	public static float getUIFontSize(double scalingFactor) {
 		return (int)Math.round(FONT_SCALE_FACTOR*scalingFactor * ResourceController.getResourceController().getIntProperty(MENU_ITEM_FONT_SIZE_PROPERTY, 10));
+	}
+	
+	public static Font getDefaultLabelFont() {
+		return UIManager.getDefaults().getFont("Label.font");
 	}
 
 	public static boolean shouldScaleUIFonts() {

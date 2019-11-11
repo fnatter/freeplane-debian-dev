@@ -19,7 +19,7 @@
  */
 package org.freeplane.features.map;
 
-import java.awt.EventQueue;
+import java.awt.GraphicsEnvironment;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Writer;
@@ -344,11 +344,11 @@ implements IExtension, NodeChangeAnnouncer{
 		actionEnablerOnChange = new ActionEnablerOnChange(modeController);
 		actionSelectorOnChange = new ActionSelectorOnChange(modeController);
 		addNodeSelectionListener(actionEnablerOnChange);
-		addNodeChangeListener(actionEnablerOnChange);
-		addMapChangeListener(actionEnablerOnChange);
+		addUINodeChangeListener(actionEnablerOnChange);
+		addUIMapChangeListener(actionEnablerOnChange);
 		addNodeSelectionListener(actionSelectorOnChange);
-		addNodeChangeListener(actionSelectorOnChange);
-		addMapChangeListener(actionSelectorOnChange);
+		addUINodeChangeListener(actionSelectorOnChange);
+		addUIMapChangeListener(actionSelectorOnChange);
 		final MapClipboardController mapClipboardController = createMapClipboardController();
 		modeController.addExtension(MapClipboardController.class, mapClipboardController);
 		createActions(modeController);
@@ -519,17 +519,28 @@ implements IExtension, NodeChangeAnnouncer{
 
 	}
 
+	public void addUIMapChangeListener(final IMapChangeListener listener) {
+		if(!GraphicsEnvironment.isHeadless())
+			mapChangeListeners.add(listener);
+	}
+
 	public void addMapChangeListener(final IMapChangeListener listener) {
 		mapChangeListeners.add(listener);
+	}
+
+	public void addUINodeChangeListener(final INodeChangeListener listener) {
+		if(!GraphicsEnvironment.isHeadless())
+			nodeChangeListeners.add(listener);
+	}
+
+	public void addNodeChangeListener(final INodeChangeListener listener) {
+		nodeChangeListeners.add(listener);
 	}
 
 	public void addMapLifeCycleListener(final IMapLifeCycleListener listener) {
 		mapLifeCycleListeners.add(listener);
 	}
 
-	public void addNodeChangeListener(final INodeChangeListener listener) {
-		nodeChangeListeners.add(listener);
-	}
 
 	public void centerNode(final NodeModel node) {
 		Controller.getCurrentController().getSelection().centerNode(node);
@@ -803,6 +814,7 @@ implements IExtension, NodeChangeAnnouncer{
 	}
 
 	public void createMapView(final MapModel mapModel) {
+		mapModel.beforeViewCreated();
 		Controller.getCurrentController().getMapViewManager().newMapView(mapModel, Controller.getCurrentModeController());
 	}
 
@@ -846,9 +858,10 @@ implements IExtension, NodeChangeAnnouncer{
 			return;
 		}
 		final NodeModel node = nodeChangeEvent.getNode();
+		final MapModel map = node.getMap();
 		if(nodeChangeEvent.setsDirtyFlag())
-			setSaved(node.getMap(), false);
-		if (nodeChangeEvent.updatesModificationTime() && !Controller.getCurrentModeController().isUndoAction()) {
+			setSaved(map, false);
+		if (nodeChangeEvent.updatesModificationTime() && !map.isUndoActionRunning()) {
 			final HistoryInformationModel historyInformation = node.getHistoryInformation();
 			if (historyInformation != null) {
 				final IActor historyActor = new IActor() {
@@ -878,7 +891,7 @@ implements IExtension, NodeChangeAnnouncer{
 						setDate(historyInformation, now);
 					}
 				};
-				Controller.getCurrentModeController().execute(historyActor, node.getMap());
+				Controller.getCurrentModeController().execute(historyActor, map);
 			}
 		}
 		fireNodeChanged(node, nodeChangeEvent);
@@ -966,13 +979,16 @@ implements IExtension, NodeChangeAnnouncer{
 						}
 					}
 				};
-				EventQueue.invokeLater(refresher);
+				Controller.getCurrentController().getViewController().invokeLater(refresher);
 			}
 		}
 	}
 	public void delayedNodeRefresh(final NodeModel node, final Object property, final Object oldValue,
 			final Object newValue){
-		refresher.delayedNodeRefresh(node, property, oldValue, newValue);
+		if(Controller.getCurrentController().getViewController().isDispatchThread())
+			refresher.delayedNodeRefresh(node, property, oldValue, newValue);
+		else
+			nodeRefresh(node, property, oldValue, newValue);
 	}
 
 

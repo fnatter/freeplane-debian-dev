@@ -1,9 +1,7 @@
 package org.freeplane.plugin.script.proxy;
 
-import java.awt.Color;
-import java.io.File;
-import java.util.Map.Entry;
-
+import groovy.lang.Closure;
+import org.freeplane.api.NodeChangeListener;
 import org.freeplane.api.NodeCondition;
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.util.ColorUtils;
@@ -20,11 +18,14 @@ import org.freeplane.features.url.mindmapmode.MFileManager;
 import org.freeplane.plugin.script.FormulaUtils;
 import org.freeplane.plugin.script.ScriptContext;
 import org.freeplane.plugin.script.proxy.Proxy.Map;
+import org.freeplane.plugin.script.proxy.Proxy.MindMap;
 import org.freeplane.plugin.script.proxy.Proxy.Node;
 
-import groovy.lang.Closure;
+import java.awt.*;
+import java.io.File;
+import java.util.Map.Entry;
 
-public class MapProxy extends AbstractProxy<MapModel> implements Map {
+public class MapProxy extends AbstractProxy<MapModel> implements MindMap, Map {
 	public MapProxy(final MapModel map, final ScriptContext scriptContext) {
 		super(map, scriptContext);
 	}
@@ -111,7 +112,7 @@ public class MapProxy extends AbstractProxy<MapModel> implements Map {
 	}
 
 	private void changeToThisMap(final IMapViewManager mapViewManager) {
-		if (! mapViewManager.isHeadless()) {
+		if (! GraphicsEnvironment.isHeadless()) {
 			String mapKey = findMapViewKey(mapViewManager);
 			if (mapKey == null)
 				throw new RuntimeException("map " + getDelegate() + " does not seem to be opened");
@@ -264,5 +265,13 @@ public class MapProxy extends AbstractProxy<MapModel> implements Map {
 		FormulaUtils.evaluateOutdatedFormulas(getDelegate());
 	}
 
+	@Override
+	public void addListener(NodeChangeListener listener) {
+		NodeChangeListeners.of(Controller.getCurrentModeController(), getDelegate()).add(getScriptContext(), listener);
+	}
 
+	@Override
+	public void removeListener(NodeChangeListener listener) {
+		NodeChangeListeners.of(Controller.getCurrentModeController(), getDelegate()).remove(listener);
+	}
 }

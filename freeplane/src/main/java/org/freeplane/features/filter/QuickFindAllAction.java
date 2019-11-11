@@ -33,7 +33,7 @@ import org.freeplane.features.mode.Controller;
  * @author Dimitry Polivaev
  * Mar 30, 2009
  */
-final class QuickFindAllAction extends AFreeplaneAction {
+class QuickFindAllAction extends AFreeplaneAction {
 	/**
 	 * 
 	 */
