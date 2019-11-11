@@ -1,3 +1,13 @@
+freeplane (1.7.10-1) unstable; urgency=medium
+
+  * New upstrean release
+  * Update/refresh patches
+  * New dependency darcula with transitive dependency libiconloader-java
+  * New dependency libdata-url-java
+  * Bump standards-version to 4.4.1
+
+ -- Felix Natter <fnatter@gmx.net>  Mon, 11 Nov 2019 20:28:44 +0100
+
 freeplane (1.7.9-1) unstable; urgency=medium
 
   [ Felix Natter ]
