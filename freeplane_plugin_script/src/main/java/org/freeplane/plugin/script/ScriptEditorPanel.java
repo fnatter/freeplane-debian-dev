@@ -21,6 +21,7 @@
 package org.freeplane.plugin.script;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -51,7 +52,6 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import jsyntaxpane.actions.ActionUtils;
@@ -63,7 +63,6 @@ import org.freeplane.core.ui.components.BlindIcon;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
-import org.freeplane.features.mode.Controller;
 import org.freeplane.plugin.script.IFreeplaneScriptErrorHandler;
 
 /**
@@ -339,6 +338,9 @@ class ScriptEditorPanel extends JDialog {
 		});
 		final JEditorPane editorPane = new JEditorPane();
 		editorPane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, true);
+		editorPane.setBackground(Color.WHITE);
+		editorPane.setForeground(Color.BLACK);
+		editorPane.setSelectedTextColor(Color.BLUE);
 		mScriptTextField = editorPane;
 		mScriptTextField.setEnabled(false);
 		mCentralUpperPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mScriptList, new JScrollPane(mScriptTextField));
@@ -347,7 +349,8 @@ class ScriptEditorPanel extends JDialog {
 
 			final String fontName = ResourceController.getResourceController().getProperty(GROOVY_EDITOR_FONT);
 			final int fontSize = ResourceController.getResourceController().getIntProperty(GROOVY_EDITOR_FONT_SIZE);
-			editorPane.setFont(new Font(fontName, Font.PLAIN, fontSize));
+			final Font font = UITools.scaleUI(new Font(fontName, Font.PLAIN, fontSize));
+			editorPane.setFont(font);
 
 		} catch (Exception e) {
 			LogUtils.warn(e);

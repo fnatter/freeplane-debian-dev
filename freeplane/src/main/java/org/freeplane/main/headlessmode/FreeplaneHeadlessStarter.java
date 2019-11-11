@@ -40,7 +40,6 @@ import org.freeplane.features.styles.LogicalStyleFilterController;
 import org.freeplane.features.text.TextController;
 import org.freeplane.features.time.TimeController;
 import org.freeplane.main.application.ApplicationResourceController;
-import org.freeplane.main.application.FreeplaneGUIStarter;
 import org.freeplane.main.application.FreeplaneStarter;
 import org.freeplane.view.swing.features.nodehistory.NodeHistory;
 
@@ -66,7 +65,7 @@ public class FreeplaneHeadlessStarter implements FreeplaneStarter {
 			Controller.setCurrentController(controller);
 			applicationResourceController.init();
 			LogInitializer.createLogger();
-			FreeplaneGUIStarter.showSysInfo();
+			ApplicationResourceController.showSysInfo();
 			final HeadlessMapViewController mapViewController = new HeadlessMapViewController();
 			controller.setMapViewManager(mapViewController);
 			viewController = new HeadlessUIController(controller, mapViewController, "");
@@ -99,8 +98,6 @@ public class FreeplaneHeadlessStarter implements FreeplaneStarter {
 	@Override
 	public void createModeControllers(final Controller controller) {
 		HeadlessMModeControllerFactory.createModeController();
-		controller.getModeController(MModeController.MODENAME).getMapController().addMapChangeListener(
-			applicationResourceController.getLastOpenedList());
     }
 
 	@Override
@@ -109,7 +106,7 @@ public class FreeplaneHeadlessStarter implements FreeplaneStarter {
 
 
 	@Override
-	public void createFrame(final String[] args) {
+	public void createFrame() {
 		Controller controller = Controller.getCurrentController();
 		ModeController modeController = controller.getModeController(MModeController.MODENAME);
 		controller.selectModeForBuild(modeController);
@@ -129,7 +126,6 @@ public class FreeplaneHeadlessStarter implements FreeplaneStarter {
 
 	@Override
 	public void loadMapsLater(String[] args) {
-	    // TODO Auto-generated method stub
 
     }
 }

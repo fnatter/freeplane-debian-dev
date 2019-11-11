@@ -364,6 +364,7 @@ class NodeList {
 		textRenderer = new TextRenderer();
 		iconsRenderer = new IconsRenderer();
 		tableView = new FlatNodeTable();
+		tableView.setRowHeight(UITools.getDefaultLabelFont().getSize() * 5 / 4);
 		mNodePath = new JTextField();
 
 	}
@@ -676,8 +677,8 @@ class NodeList {
 			matchCase.isSelected(), useRegexInFind.isSelected());
 		final ModeController modeController = Controller.getCurrentModeController();
 		final MapController mapController = modeController.getMapController();
-		mapController.addMapChangeListener(mapChangeListener);
-		mapController.addNodeChangeListener(mapChangeListener);
+		mapController.addUIMapChangeListener(mapChangeListener);
+		mapController.addUINodeChangeListener(mapChangeListener);
 		Controller.getCurrentController().getMapViewManager().addMapSelectionListener(mapChangeListener);
 		dialog.setVisible(true);
 	}

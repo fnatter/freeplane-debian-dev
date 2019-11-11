@@ -21,15 +21,14 @@
 package org.freeplane.features.styles;
 
 import java.util.Collection;
+
 import org.freeplane.core.extension.IExtension;
 import org.freeplane.core.resources.TranslatedObject;
 import org.freeplane.features.map.MapModel;
 import org.freeplane.features.map.NodeModel;
-import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.IPropertyHandler;
 import org.freeplane.features.mode.NodeHookDescriptor;
 import org.freeplane.features.mode.PersistentNodeHook;
-import org.freeplane.features.mode.mindmapmode.MModeController;
 import org.freeplane.n3.nanoxml.XMLElement;
 
 @NodeHookDescriptor(hookName = "accessories/plugins/AutomaticLayout.properties")
@@ -43,6 +42,7 @@ public class AutomaticLayoutController extends PersistentNodeHook implements IEx
 	public AutomaticLayoutController() {
 		super();
 		LogicalStyleController.getController().addStyleGetter(IPropertyHandler.AUTO, new IPropertyHandler<Collection<IStyle>, NodeModel>() {
+			@Override
 			public Collection<IStyle> getProperty(NodeModel model, Collection<IStyle> currentValue) {
 				AutomaticLayout layout = model.getMap().getRootNode().getExtension(AutomaticLayout.class);
 				final IStyle autoStyle = getStyle(model, layout);
@@ -79,7 +79,7 @@ public class AutomaticLayoutController extends PersistentNodeHook implements IEx
 		else
 			return null;
 	}
-	
+
 	public NodeModel getStyleNode(MapModel map, int depth) {
 		IStyle style = getStyle(map, depth);
 		if(style != null){
@@ -88,7 +88,7 @@ public class AutomaticLayoutController extends PersistentNodeHook implements IEx
 		}
 		return null;
 	}
-	
+
 
 
 	@Override
@@ -99,11 +99,11 @@ public class AutomaticLayoutController extends PersistentNodeHook implements IEx
 	@Override
     protected IExtension toggle(NodeModel node, IExtension extension) {
 		extension = super.toggle(node, extension);
-	    final MModeController modeController = (MModeController) Controller.getCurrentModeController();
-	    if(modeController.isUndoAction()){
+	    final MapModel map = node.getMap();
+	    if(map.isUndoActionRunning()){
 	    	return extension;
 	    }
-	    LogicalStyleController.getController().refreshMap(node.getMap());
+		LogicalStyleController.getController().refreshMap(map);
     	return extension;
     }
 

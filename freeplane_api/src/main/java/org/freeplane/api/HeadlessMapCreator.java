@@ -1,6 +1,7 @@
 package org.freeplane.api;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -25,6 +26,12 @@ public interface HeadlessMapCreator {
 	 * @since 1.7.5
 	 */
 	HeadlessLoader mapLoader(String input);
+
+	/**
+	 * Returns {@link HeadlessLoader} for accessing or loading mind map from string input.
+	 * @since 1.7.10
+	 */
+	HeadlessLoader mapLoader(InputStream inputStream);
 
 	/** @deprecated since 1.7.5 - use {@link #mapLoader(File)} */
 	@Deprecated
@@ -52,5 +59,11 @@ public interface HeadlessMapCreator {
 	 * @since 1.7.2
 	 */
 	Script script(String script, String type);
+	
+	/**
+	 * 
+	 * @since 1.7.10
+	 */
+	AttributeValueSerializer getAttributeValueSerializer();
 
 }

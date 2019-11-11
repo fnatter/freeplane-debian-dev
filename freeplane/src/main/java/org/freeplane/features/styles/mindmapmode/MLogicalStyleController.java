@@ -19,6 +19,7 @@
  */
 package org.freeplane.features.styles.mindmapmode;
 
+import java.awt.GraphicsEnvironment;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -140,14 +141,14 @@ public class MLogicalStyleController extends LogicalStyleController {
 		@Override
 		public void nodeChanged(final NodeChangeEvent event) {
 			final ModeController modeController = Controller.getCurrentModeController();
-			if (modeController == null || modeController.isUndoAction()) {
+			final NodeModel node = event.getNode();
+			final MapModel map = node.getMap();
+			if (modeController == null || map.isUndoActionRunning()) {
 				return;
 			}
 			if (!event.getProperty().equals(LogicalStyleModel.class)) {
 				return;
 			}
-			final NodeModel node = event.getNode();
-			final MapModel map = node.getMap();
 			final IStyle styleKey = (IStyle) event.getNewValue();
 			final MapStyleModel mapStyles = MapStyleModel.getExtension(map);
 			final NodeModel styleNode = mapStyles.getStyleNode(styleKey);
@@ -220,7 +221,7 @@ public class MLogicalStyleController extends LogicalStyleController {
 	}
 	public void initM() {
 	    final ModeController modeController = Controller.getCurrentModeController();
-		modeController.getMapController().addNodeChangeListener(new StyleRemover());
+		modeController.getMapController().addUINodeChangeListener(new StyleRemover());
 		modeController.registerExtensionCopier(new ExtensionCopier());
 		modeController.addAction(new RedefineStyleAction());
 		modeController.addAction(new NewUserStyleAction());
@@ -234,7 +235,7 @@ public class MLogicalStyleController extends LogicalStyleController {
 			modeController.addAction(new SetBooleanMapPropertyAction(MapStyle.FIT_TO_VIEWPORT));
 			modeController.addAction(new CopyMapStylesAction());
 		}
-		if(! modeController.getController().getViewController().isHeadless()){
+		if(! GraphicsEnvironment.isHeadless()){
 			modeController.addUiBuilder(Phase.ACTIONS, "style_actions", new StyleMenuBuilder(modeController),
 			    new ChildActionEntryRemover(modeController));
 			final IUserInputListenerFactory userInputListenerFactory = modeController.getUserInputListenerFactory();
@@ -245,7 +246,7 @@ public class MLogicalStyleController extends LogicalStyleController {
 				}
 			});
 			final MapController mapController = modeController.getMapController();
-			mapController.addMapChangeListener(new IMapChangeListener() {
+			mapController.addUIMapChangeListener(new IMapChangeListener() {
 				@Override
 				public void onPreNodeMoved(NodeMoveEvent nodeMoveEvent) {
 				}
