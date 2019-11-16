@@ -25,10 +25,10 @@ Comment: http://www.entypo.com/
 
 Files: ./freeplane_framework/script/freeplane.svg
        ./freeplane_framework/script/freeplane.png
-       ./freeplane/resources/images/Freeplane_splash.png
-       ./freeplane/resources/images/Freeplane_frame_icon_32x32.png
-       ./freeplane/resources/images/Freeplane_frame_icon.png
-       ./freeplane/resources/images/freeplane_app_128x128.png
+       ./freeplane/src/editor/resources/images/Freeplane_splash.png
+       ./freeplane/src/editor/resources/images/Freeplane_frame_icon_32x32.png
+       ./freeplane/src/editor/resources/images/Freeplane_frame_icon.png
+       ./freeplane/src/editor/resources/images/freeplane_app_128x128.png
        ./freeplane_framework/windows-icons/Freeplane_doc.ico
        ./freeplane_framework/mac-appbundler/freeplane.icns
        ./freeplane_framework/mac-appbundler/freeplanedoc.icns
