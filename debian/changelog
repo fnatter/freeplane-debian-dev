@@ -1,6 +1,6 @@
 freeplane (1.7.10-1) unstable; urgency=medium
 
-  * New upstrean release
+  * New upstream release
   * Update/refresh patches
   * New dependency darcula with transitive dependency libiconloader-java
   * New dependency libdata-url-java
@@ -8,7 +8,7 @@ freeplane (1.7.10-1) unstable; urgency=medium
   * Use debhelper-compat 12
   * Fix some image paths in debian/copyright
 
- -- Felix Natter <fnatter@gmx.net>  Mon, 11 Nov 2019 20:28:44 +0100
+ -- Felix Natter <fnatter@gmx.net>  Sat, 16 Nov 2019 09:53:33 +0100
 
 freeplane (1.7.9-1) unstable; urgency=medium
 
