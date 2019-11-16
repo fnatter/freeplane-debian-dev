@@ -5,6 +5,8 @@ freeplane (1.7.10-1) unstable; urgency=medium
   * New dependency darcula with transitive dependency libiconloader-java
   * New dependency libdata-url-java
   * Bump standards-version to 4.4.1
+  * Use debhelper-compat 12
+  * Fix some image paths in debian/copyright
 
  -- Felix Natter <fnatter@gmx.net>  Mon, 11 Nov 2019 20:28:44 +0100
 
